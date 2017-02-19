@@ -1,6 +1,8 @@
 package com.SOEN6441_DND.Model;
 
-public class ItemModel {
+import java.awt.Image;
+
+public abstract class ItemModel {
 	
 	private String name;
 	
@@ -12,8 +14,9 @@ public class ItemModel {
 		this.name = name;
 	}
 
-	private String image;
+	private Image image;
 	
-	private String type;
+	private ItemModel type;
+	
 
 }
