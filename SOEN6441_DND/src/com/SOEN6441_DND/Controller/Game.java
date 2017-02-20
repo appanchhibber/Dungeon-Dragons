@@ -7,11 +7,20 @@ import javax.swing.JFrame;
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
 import com.SOEN6441_DND.Views.Windows;
 
+/**
+ * @author Appan Chhibber
+ * @author Ehab Amar
+ */
 public class Game {
-
+	/**
+	 * Method main.
+	 * 
+	 * @param args
+	 *            String[]
+	 */
 	public static void main(String[] args) {
 		System.out.println("Hello");
-		Windows window=new Windows();
+		Windows window = new Windows();
 		int width = ApplicationStatics.WINDOW_WIDTH;
 		int height = ApplicationStatics.WINDOW_HEIGHT;
 		window.setVisible(true);
