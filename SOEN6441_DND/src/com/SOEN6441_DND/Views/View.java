@@ -11,6 +11,7 @@ import javax.swing.JPanel;
  * @author Ehab Amar
  * @version 1.0
  */
+@SuppressWarnings("serial")
 public class View extends JPanel {
 	/**
 	 * Create the panel.

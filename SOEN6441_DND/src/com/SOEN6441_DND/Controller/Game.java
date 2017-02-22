@@ -1,6 +1,7 @@
 package com.SOEN6441_DND.Controller;
 
 import java.awt.Dimension;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 
@@ -12,6 +13,8 @@ import com.SOEN6441_DND.Views.Windows;
  * @author Ehab Amar
  */
 public class Game {
+	
+	private static 	Windows window;
 	/**
 	 * Method main.
 	 * 
@@ -19,8 +22,7 @@ public class Game {
 	 *            String[]
 	 */
 	public static void main(String[] args) {
-		System.out.println("Hello");
-		Windows window = new Windows();
+	 window = new Windows();
 		int width = ApplicationStatics.WINDOW_WIDTH;
 		int height = ApplicationStatics.WINDOW_HEIGHT;
 		window.setVisible(true);
@@ -30,6 +32,13 @@ public class Game {
 		window.setResizable(false);
 		window.setLocationRelativeTo(null); // center window on the screen
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public static Windows getInstance(){
+		if(window==null){
+			window=new Windows();
+		}
+		return window;
 	}
 
 }

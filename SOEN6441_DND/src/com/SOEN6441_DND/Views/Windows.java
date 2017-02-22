@@ -8,9 +8,11 @@ import javax.swing.JFrame;
  * @author Appan Chhibber
  * @version 1.0
  */
+@SuppressWarnings("serial")
 public class Windows extends JFrame {
 
-	static Container container;
+ public	static Container container;
+
 
 	/**
 	 * Create the frame.

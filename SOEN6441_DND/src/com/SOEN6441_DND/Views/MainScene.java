@@ -1,9 +1,12 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Button;
+import java.awt.Frame;
+
 import javax.swing.*;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Controller.MainSceneController;
 
 /**
  * This class defines the mainscene. On the Main interface of our game, there
@@ -14,40 +17,50 @@ import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
  * @version 1.0
  * @see
  */
+@SuppressWarnings("serial")
 public class MainScene extends View {
-	private Button startGameButton;
-
-	private Button exitGameButton;
+	public static Button startGameButton, exitGameButton;
+	public static JMenuItem characterCreation, editCharacter, itemCreation,
+			editItem, mapCreator, mapEditor;
+	private MainSceneController msController;
 
 	@Override
 	protected void initSubviews() {
 		super.initSubviews();
+
+		msController = new MainSceneController();
 		JMenuBar menuBar = new JMenuBar();
 		JMenu mnCharacter = new JMenu("Character");
 		menuBar.add(mnCharacter);
 
-		JMenuItem characterCreation = new JMenuItem("Character Creation");
+		characterCreation = new JMenuItem("Character Creation");
+		characterCreation.addActionListener(msController);
 		mnCharacter.add(characterCreation);
 
-		JMenuItem editCharacter = new JMenuItem("Edit Character");
+		editCharacter = new JMenuItem("Edit Character");
+		editCharacter.addActionListener(msController);
 		mnCharacter.add(editCharacter);
 
 		JMenu mnItem = new JMenu("Item");
 		menuBar.add(mnItem);
 
-		JMenuItem itemCreation = new JMenuItem("Item Creation");
+		itemCreation = new JMenuItem("Item Creation");
+		itemCreation.addActionListener(msController);
 		mnItem.add(itemCreation);
 
-		JMenuItem editItem = new JMenuItem("Edit Item");
+		editItem = new JMenuItem("Edit Item");
+		editItem.addActionListener(msController);
 		mnItem.add(editItem);
 
 		JMenu mnMap = new JMenu("Map");
 		menuBar.add(mnMap);
 
-		JMenuItem mapCreator = new JMenuItem("Map Creator");
+		mapCreator = new JMenuItem("Map Creator");
+		mapCreator.addActionListener(msController);
 		mnMap.add(mapCreator);
 
-		JMenuItem mapEditor = new JMenuItem("Map Editor");
+		mapEditor = new JMenuItem("Map Editor");
+		mapEditor.addActionListener(msController);
 		mnMap.add(mapEditor);
 		menuBar.setLocation(0, 0);
 		menuBar.setSize(860, 25);
@@ -73,6 +86,7 @@ public class MainScene extends View {
 		startGameButton.setLabel("Start Game");
 		startGameButton.setLocation(330, 5);
 		startGameButton.setSize(200, 40);
+		startGameButton.addActionListener(msController);
 		buttonView.add(startGameButton);
 
 		// add a exitGameButton in the mainscene
@@ -80,6 +94,7 @@ public class MainScene extends View {
 		exitGameButton.setLabel("Exit Game");
 		exitGameButton.setLocation(330, 80);
 		exitGameButton.setSize(200, 40);
+		exitGameButton.addActionListener(msController);
 		buttonView.add(exitGameButton);
 		this.add(buttonView);
 		// for the increasing the zindex of buttonView
