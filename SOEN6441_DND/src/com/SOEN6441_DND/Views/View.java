@@ -1,7 +1,8 @@
 package com.SOEN6441_DND.Views;
 
 import javax.swing.JPanel;
-
+import java.awt.Button;
+import javax.swing.JLabel;
 /**
  * This class consist of creating JPanel that every other view is going to
  * inherit and override the class methods.The methods include:
@@ -30,7 +31,7 @@ public class View extends JPanel {
 
 	protected void init() {
 
-		this.setSize(800, 600);
+		this.setSize(860, 645);
 	}
 
 	protected void initSubviews() {

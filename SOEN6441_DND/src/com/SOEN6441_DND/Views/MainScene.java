@@ -6,6 +6,7 @@ import java.awt.Frame;
 import javax.swing.*;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Controller.GameController;
 import com.SOEN6441_DND.Controller.MainSceneController;
 
 /**
@@ -19,18 +20,18 @@ import com.SOEN6441_DND.Controller.MainSceneController;
  */
 @SuppressWarnings("serial")
 public class MainScene extends View {
-	public static Button startGameButton, exitGameButton;
-	public static JMenuItem characterCreation, editCharacter, itemCreation,
+	public Button startGameButton, exitGameButton;
+	public JMenuItem characterCreation, editCharacter, itemCreation,
 			editItem, mapCreator, mapEditor;
 	private MainSceneController msController;
 
 	@Override
 	protected void initSubviews() {
 		super.initSubviews();
-
-		msController = new MainSceneController();
+		msController = new MainSceneController(this);
 		JMenuBar menuBar = new JMenuBar();
 		JMenu mnCharacter = new JMenu("Character");
+		
 		menuBar.add(mnCharacter);
 
 		characterCreation = new JMenuItem("Character Creation");

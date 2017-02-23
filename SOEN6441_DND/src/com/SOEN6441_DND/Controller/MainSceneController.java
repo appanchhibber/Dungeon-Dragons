@@ -1,53 +1,38 @@
 package com.SOEN6441_DND.Controller;
-
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Views.CharacterMainScene;
 import com.SOEN6441_DND.Views.MainScene;
-import com.SOEN6441_DND.Views.Windows;
-/**
- * This Class is the controller class of Main Scene and intercepts actions generated on view. 
- * @author Ehab Amar
- *@version 1.0.0
- */
-public class MainSceneController implements ActionListener {
+public class MainSceneController implements ActionListener{
 
-	// To Open Dialog Box
-	public File openMapFile() {
-		JFileChooser fileChooser = new JFileChooser(new File("maps/"));
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
-				"xml");
-		fileChooser.setFileFilter(filter);
-		int option = fileChooser.showOpenDialog(Game.getInstance());
-
-		if (option == JFileChooser.APPROVE_OPTION) {
-			File file = fileChooser.getSelectedFile();
-			return file;
-		} else {
-			return null;
-		}
+	
+	private MainScene homeScreen;
+	private GameController gameController;
+	public MainSceneController(MainScene view)
+	{
+		this.homeScreen=view;
+		gameController=GameController.getInstance();
 	}
-
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == MainScene.exitGameButton) {
+		if (e.getSource() == homeScreen.exitGameButton) {
 			System.out.println("Exit Game button fired");
 			System.exit(0);
 		}
-		if (e.getSource() == MainScene.startGameButton) {
+		if (e.getSource() == homeScreen.startGameButton) {
 			System.out.println("Start Game button pressed");
 		}
-		if (e.getSource() == MainScene.mapCreator) {
+		if (e.getSource() == homeScreen.mapCreator) {
 			System.out.println("map creator fired ");
 			final JTextField txtX = new JTextField();
 			final JTextField txtY = new JTextField();
@@ -85,24 +70,42 @@ public class MainSceneController implements ActionListener {
 				
 			}
 		}
-			if (e.getSource() == MainScene.mapEditor) {
+			if (e.getSource() == homeScreen.mapEditor) {
 				System.out.println("map editor fired");
 				File file = openMapFile();
 			}
-			if (e.getSource() == MainScene.itemCreation) {
+			if (e.getSource() == homeScreen.itemCreation) {
 				System.out.println("item creator fired");
 			}
-			if (e.getSource() == MainScene.editItem) {
+			if (e.getSource() == homeScreen.editItem) {
 				System.out.println("item editor fired");
 			}
-			if (e.getSource() == MainScene.characterCreation) {
-				System.out.println("CHaracter creator fired");
+			if (e.getSource() == homeScreen.characterCreation) {
+				CharacterMainScene characterScreen = new CharacterMainScene();
+				gameController.mainFrame.setView(characterScreen);
 			}
-			if (e.getSource() == MainScene.editCharacter) {
+			if (e.getSource() == homeScreen.editCharacter) {
 				System.out.println("character editor fired");
 			}
 
 		}
 
+
+
+	// To Open Dialog Box
+	public File openMapFile() {
+		JFileChooser fileChooser = new JFileChooser(new File("maps/"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
+				"xml");
+		fileChooser.setFileFilter(filter);
+		int option = fileChooser.showOpenDialog(gameController.mainFrame);
+
+		if (option == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			return file;
+		} else {
+			return null;
+		}
 	}
 
+}

@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class Windows extends JFrame {
 
- public	static Container container;
+ public Container container;
 
 
 	/**
@@ -19,14 +19,19 @@ public class Windows extends JFrame {
 	 */
 	public Windows() {
 		container = getContentPane();
-		MainScene mainScene = new MainScene();
-		container.add(mainScene);
 		setResizable(false);
 		setSize(860, 645);
 		setLocationRelativeTo(null); // center window on the screen
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		container.setVisible(true);
 
+	}
+	public void setView(View view )
+	{
+		container.removeAll();
+		container.add(view);
+		view.setVisible(true); 
+		setVisible(true);
+		this.pack();
 	}
 
 }
