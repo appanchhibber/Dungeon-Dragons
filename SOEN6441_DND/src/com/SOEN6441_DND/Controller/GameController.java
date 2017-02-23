@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
-import com.SOEN6441_DND.Views.CharacterMainScene;
+import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.View;
 import com.SOEN6441_DND.Views.Windows;
@@ -26,9 +26,8 @@ import com.SOEN6441_DND.Views.Windows;
 public class GameController {
 	public 
 	Windows mainFrame;
-	CharacterMainScene character;
+	CharacterScene character;
 	MainScene homeScreen;
-	String hello;
 	
 	private static GameController gameController;
 	public static GameController getInstance()
@@ -54,7 +53,7 @@ public class GameController {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		homeScreen = new MainScene();
 		mainFrame.setView(homeScreen);
-		hello="Hello";
+		
 	}
 	
 }

@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
-import com.SOEN6441_DND.Views.CharacterMainScene;
+import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.MainScene;
 public class MainSceneController implements ActionListener{
 
@@ -81,7 +81,7 @@ public class MainSceneController implements ActionListener{
 				System.out.println("item editor fired");
 			}
 			if (e.getSource() == homeScreen.characterCreation) {
-				CharacterMainScene characterScreen = new CharacterMainScene();
+				CharacterScene characterScreen = new CharacterScene();
 				gameController.mainFrame.setView(characterScreen);
 			}
 			if (e.getSource() == homeScreen.editCharacter) {
