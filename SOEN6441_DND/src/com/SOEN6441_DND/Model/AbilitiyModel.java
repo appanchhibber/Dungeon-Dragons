@@ -1,5 +1,12 @@
 package com.SOEN6441_DND.Model;
 
+/**
+ * This Class Defines all the characteristics and property of the character.
+ * @author Amirbabak Rahgozar
+ * @author Paras Malik.
+ *
+ */
+
 public class AbilitiyModel {
 	
 	private int strength;

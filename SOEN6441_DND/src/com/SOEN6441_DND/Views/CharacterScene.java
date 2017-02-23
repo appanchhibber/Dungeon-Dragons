@@ -14,8 +14,13 @@ import javax.swing.*;
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
 import com.SOEN6441_DND.Controller.CharacterSceneController;
 import com.SOEN6441_DND.Controller.GameController;
+import com.SOEN6441_DND.Model.AbilitiyModel;
 import com.SOEN6441_DND.Model.CharacterModel;
-
+/**
+ * <b>This Class is View for Character Creation and Editior.</b>
+ * @author Punit Trivedi
+ *
+ */
 public class CharacterScene extends View implements Observer {
 
 	public CharacterSceneController characterController;
@@ -24,11 +29,12 @@ public class CharacterScene extends View implements Observer {
 	View navMenuPanel;
 	View abilityPanel;
 	// Buttons
-	JButton homeButton;
-	JButton newButton;
-	JButton saveButton;
-	JButton loadButton;
-	JButton nextButton;
+	public JButton homeButton;
+	public JButton newButton;
+	public JButton saveButton;
+	public JButton loadButton;
+	public JButton nextButton;
+	public JButton calculateButton;
 	// Labels
 	JLabel strengthLabel;
 	JLabel dexterityLabel;
@@ -39,24 +45,30 @@ public class CharacterScene extends View implements Observer {
 	JLabel nameLabel;
 	JLabel imageLabel;
 	// TextField
-	JTextField strengthText;
-	JTextField dexterityText;
-	JTextField constitutionText;
-	JTextField intelligencText;
-	JTextField wisdomText;
-	JTextField charismaText;
-	JTextField nameText;
+	public JTextField strengthText;
+	public JTextField dexterityText;
+	public JTextField constitutionText;
+	public JTextField intelligenceText;
+	public JTextField wisdomText;
+	public JTextField charismaText;
+	public JTextField nameText;
 	// Image
 	ImageIcon characterImage;
 	// Radio buttons.
 	public JRadioButton characterTypeRadio;
 	ButtonGroup charactertypeGroup;
-
+	//Character View Model
+	public CharacterModel characterViewModel;
+	public AbilitiyModel abilityViewModel;
 	@Override
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
 		super.initSubviews();
+		characterViewModel= new CharacterModel();
+		abilityViewModel=new AbilitiyModel();
 		characterController = new CharacterSceneController(this);
+		
+		// Navigation Panel
 		homeButton = new JButton("Home");
 		homeButton.setLocation(20, 30);
 		homeButton.setSize(160, 50);
@@ -86,7 +98,20 @@ public class CharacterScene extends View implements Observer {
 		nextButton.setSize(160, 50);
 		nextButton.setBackground(Color.GREEN);
 		nextButton.setOpaque(true);
+		
+		navMenuPanel = new View();
+		navMenuPanel.setBackground(Color.BLACK);
+		navMenuPanel.setSize(200, 500);
+		navMenuPanel.setLocation(650, 70);
+		navMenuPanel.setVisible(true);
 
+		navMenuPanel.add(homeButton);
+		navMenuPanel.add(newButton);
+		navMenuPanel.add(saveButton);
+		navMenuPanel.add(loadButton);
+		navMenuPanel.add(nextButton);
+		//End Navigation
+		//Character Selection
 		charactertypeGroup = new ButtonGroup();
 		characterTypeRadio = new JRadioButton("Human", true);
 		characterTypeRadio.setSize(100, 20);
@@ -115,57 +140,132 @@ public class CharacterScene extends View implements Observer {
 		characterTypeRadio.addActionListener(characterController);
 		charactertypeGroup.add(characterTypeRadio);
 		this.add(characterTypeRadio);
-
-		characterController.characterModel.setImage("Human");
-		characterImage = new ImageIcon(characterController.characterModel.getImage());
-		characterController.characterModel.addObserver(this);
+		//End Character Selection
+		//Configure Model attach with Observer.
 		
+		characterViewModel.setImage("Human");
+		characterViewModel.addObserver(this);
+		characterImage = new ImageIcon(characterViewModel.getImage());
+		
+		//Image Panel
 		imagePanel = new View();
-		//imagePanel.setBackground(Color.BLACK);
-		imagePanel.setSize(300, 300);
+		imagePanel.setSize(300, 500);
 		imagePanel.setLocation(20, 70);
 		
 		imageLabel = new JLabel(
-				new ImageIcon(((characterImage.getImage().getScaledInstance(300, 300, java.awt.Image.SCALE_SMOOTH)))));
-		imageLabel.setSize(300, 300);
+				new ImageIcon(((characterImage.getImage().getScaledInstance(imagePanel.getWidth(), imagePanel.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+		imageLabel.setSize(imagePanel.getWidth(), imagePanel.getHeight());
 		imageLabel.setLocation(0, 0);
 		imagePanel.add(imageLabel);
-
-		navMenuPanel = new View();
-		navMenuPanel.setBackground(Color.BLACK);
-		navMenuPanel.setSize(200, 500);
-		navMenuPanel.setLocation(650, 70);
-		navMenuPanel.setVisible(true);
-
-		navMenuPanel.add(homeButton);
-		navMenuPanel.add(newButton);
-		navMenuPanel.add(saveButton);
-		navMenuPanel.add(loadButton);
-		navMenuPanel.add(nextButton);
-
+		//End Image Panel.
+		//Ability Panel.
 		abilityPanel = new View();
 		abilityPanel.setBackground(Color.BLACK);
-		abilityPanel.setSize(250, 500);
-		abilityPanel.setLocation(350, 70);
+		abilityPanel.setSize(300, 500);
+		abilityPanel.setLocation(335, 70);
 		abilityPanel.setVisible(true);
+		// Labels
+		strengthLabel= new JLabel("Strength :");
+		dexterityLabel= new JLabel("Dexterity :");
+		constitutionLabel= new JLabel("Constitution :");
+		intelligenceLabel= new JLabel("Intelligence :");
+		wisdomLabel= new JLabel("Wisdom :");
+		charismaLabel= new JLabel("Charisma :");
+		// TextField
+		strengthText= new JTextField();
+		dexterityText=new JTextField();
+		constitutionText=new JTextField();
+		intelligenceText=new JTextField();
+		wisdomText=new JTextField();
+		charismaText=new JTextField();
+		
+		calculateButton = new JButton("Calculate Ability");
+		
+		strengthLabel.setLocation(30,20);
+		strengthLabel.setForeground(Color.WHITE);
+		strengthLabel.setSize(80, 20);
+		strengthText.setLocation(150, 10);
+		strengthText.setSize(140, 40);
+		strengthText.setEditable(false);
+		
+		dexterityLabel.setLocation(30,90);
+		dexterityLabel.setForeground(Color.WHITE);
+		dexterityLabel.setSize(80, 20);
+		dexterityText.setLocation(150, 80);
+		dexterityText.setSize(140, 40);
+		dexterityText.setEditable(false);
+		
+		constitutionLabel.setLocation(30,160);
+		constitutionLabel.setForeground(Color.WHITE);
+		constitutionLabel.setSize(120, 20);
+		constitutionText.setLocation(150, 150);
+		constitutionText.setSize(140, 40);
+		constitutionText.setEditable(false);
+		
+		intelligenceLabel.setLocation(30,230);
+		intelligenceLabel.setForeground(Color.WHITE);
+		intelligenceLabel.setSize(120, 20);
+		intelligenceText.setLocation(150, 220);
+		intelligenceText.setSize(140, 40);
+		intelligenceText.setEditable(false);
+		
+		wisdomLabel.setLocation(30,300);
+		wisdomLabel.setForeground(Color.WHITE);
+		wisdomLabel.setSize(80, 20);
+		wisdomText.setLocation(150, 290);
+		wisdomText.setSize(140, 40);
+		wisdomText.setEditable(false);
+		
+		charismaLabel.setLocation(30,370);
+		charismaLabel.setForeground(Color.WHITE);
+		charismaLabel.setSize(80, 20);
+		charismaText.setLocation(150, 360);
+		charismaText.setSize(140, 40);
+		charismaText.setEditable(false);
+		
+		calculateButton.setLocation(50,425);
+		calculateButton.setSize(200, 40);	
+		calculateButton.addActionListener(characterController);
+		
+		abilityPanel.add(strengthText);
+		abilityPanel.add(strengthLabel);
+		abilityPanel.add(dexterityLabel);
+		abilityPanel.add(dexterityText);
+		abilityPanel.add(constitutionLabel);
+		abilityPanel.add(constitutionText);
+		abilityPanel.add(intelligenceLabel);
+		abilityPanel.add(intelligenceText);
+		abilityPanel.add(wisdomLabel);
+		abilityPanel.add(wisdomText);
+		abilityPanel.add(charismaLabel);
+		abilityPanel.add(charismaText);
+		abilityPanel.add(calculateButton);
+		
+		
 
-		this.setSize(600, 600);
 		this.setVisible(true);
 		this.add(navMenuPanel);
 		this.add(imagePanel);
 		this.add(abilityPanel);
+		
 
 	}
-
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		characterImage.getImage().flush();
-		characterImage= new ImageIcon(new ImageIcon(((CharacterModel) o).getImage()).getImage().getScaledInstance(300, 300,java.awt.Image.SCALE_SMOOTH ));
+		characterImage= new ImageIcon(new ImageIcon(characterViewModel.getImage()).getImage().getScaledInstance(imagePanel.getWidth(), imagePanel.getHeight(),java.awt.Image.SCALE_SMOOTH ));
+		//abilityModel;
 		imageLabel.setIcon(characterImage);
-		imagePanel.revalidate();
-		imagePanel.repaint();
+		imageLabel.revalidate();
+		imageLabel.repaint();	
 		
+		strengthText.setText(String.valueOf(abilityViewModel.getStrength()));
+		constitutionText.setText(String.valueOf(abilityViewModel.getConstitution()));
+		dexterityText.setText(String.valueOf(abilityViewModel.getDexterity()));
+		intelligenceText.setText(String.valueOf(abilityViewModel.getIntelligence()));
+		wisdomText.setText(String.valueOf(abilityViewModel.getWisdom()));
+		charismaText.setText(String.valueOf(abilityViewModel.getCharisma()));
 	}
 
 }

@@ -21,8 +21,6 @@ public class MainSceneController implements ActionListener{
 		this.homeScreen=view;
 		gameController=GameController.getInstance();
 	}
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == homeScreen.exitGameButton) {

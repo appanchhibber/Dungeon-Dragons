@@ -3,7 +3,13 @@ package com.SOEN6441_DND.Model;
 import java.util.Observable;
 
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
+/**
+ * This Class Defines all the characteristics and property of the character.
+ * This class extends Observable.
+ * @author Amirbabak Rahgozar 
+ * @author Paras Malik
+ *
+ */
 public class CharacterModel extends Observable{
 	
 	//Get or set character name
@@ -17,7 +23,7 @@ public class CharacterModel extends Observable{
 	
 	private int level;
 	
-	private int abilityScore;
+	private AbilitiyModel abilityModel;
 	
 	private int speed;
 
@@ -59,12 +65,15 @@ public class CharacterModel extends Observable{
 		this.level = level;
 	}
 
-	public int getAbilityScore() {
-		return abilityScore;
+	
+
+	public AbilitiyModel getAbilityModel() {
+		return abilityModel;
 	}
 
-	public void setAbilityScore(int abilityScore) {
-		this.abilityScore = abilityScore;
+	public void setAbilityModel(AbilitiyModel abilityModel) {
+		this.abilityModel = abilityModel;
+		notifyCharacterView();
 	}
 
 	public int getSpeed() {
