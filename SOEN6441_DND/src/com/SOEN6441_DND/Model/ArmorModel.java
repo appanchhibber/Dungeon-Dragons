@@ -2,7 +2,7 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Image;
 
-public class Armor extends ItemModel{
+public class ArmorModel extends ItemModel{
 
 	private String type;
 	private String name;

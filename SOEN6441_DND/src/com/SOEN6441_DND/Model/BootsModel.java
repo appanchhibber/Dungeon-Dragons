@@ -2,7 +2,7 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Image;
 
-public class Boots {
+public class BootsModel {
 	
 	private String type;
 	private String name;

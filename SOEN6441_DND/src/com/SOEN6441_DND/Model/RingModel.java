@@ -2,7 +2,7 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Image;
 
-public class Belt extends ItemModel {
+public class RingModel extends ItemModel{
 	
 	private String type;
 	private String name;
@@ -26,5 +26,4 @@ public class Belt extends ItemModel {
 		this.img = img;
 	}
 }
-
 

@@ -1,6 +1,6 @@
 package com.SOEN6441_DND.Model;
 
-public class Helmet extends ItemModel{
+public class HelmetModel extends ItemModel{
 
 	public String name;
 	public String image;
