@@ -7,6 +7,7 @@ import javax.swing.JRadioButton;
 
 import com.SOEN6441_DND.Model.AbilitiyModel;
 import com.SOEN6441_DND.Model.CharacterModel;
+import com.SOEN6441_DND.Views.AbilityPanelView;
 import com.SOEN6441_DND.Views.CharacterScene;
 /**
  * This Class is responsible for handle all the view Events.
@@ -19,11 +20,13 @@ public class CharacterSceneController implements ActionListener {
 	public CharacterScene characterScreen;
 	public DiecRollController diceRoll;
 	public AbilitiyModel abilityModel;
+	public AbilityPanelView abilityPanel;
 
 	public CharacterSceneController(CharacterScene view) {
 		this.characterScreen = view;
 		this.characterModel = view.characterViewModel;
 		this.abilityModel=view.abilityViewModel;
+		this.abilityPanel=view.abilityPanel;
 		diceRoll=new DiecRollController(4, 6); //Dice type 4d6
 	}
 
@@ -50,14 +53,14 @@ public class CharacterSceneController implements ActionListener {
 			}
 
 			}
-		} else if (e.getSource() == characterScreen.calculateButton) {
+		} else if (e.getSource() == abilityPanel.calculateButton) {
 			abilityModel.setStrength(diceRoll.getDiceRollResult());
 			abilityModel.setDexterity(diceRoll.getDiceRollResult());
 			abilityModel.setConstitution(diceRoll.getDiceRollResult());
 			abilityModel.setIntelligence(diceRoll.getDiceRollResult());
 			abilityModel.setWisdom(diceRoll.getDiceRollResult());
 			abilityModel.setCharisma(diceRoll.getDiceRollResult());
-			characterModel.setAbilityModel(abilityModel);
+			abilityModel.setAbilities(abilityModel);
 		}
 	}
 

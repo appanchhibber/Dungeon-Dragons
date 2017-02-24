@@ -72,7 +72,7 @@ public class CharacterModel extends Observable{
 	}
 
 	public void setAbilityModel(AbilitiyModel abilityModel) {
-		this.abilityModel = abilityModel;
+		this.abilityModel=abilityModel;
 		notifyCharacterView();
 	}
 
