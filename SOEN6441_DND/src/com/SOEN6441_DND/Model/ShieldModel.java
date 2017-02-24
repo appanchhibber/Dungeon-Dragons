@@ -2,11 +2,18 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Image;
 
-public class Shield extends ItemModel{
+/**
+ * This class defines properties of the shield.
+ * This class extends ItemModel.
+ * @author Amirbabak Rahgozar 
+ * @author Ehab Amar
+ */
+public class ShieldModel extends ItemModel{
 
 	private String type;
 	private String name;
 	private Image img;
+	
 	public String getType() {
 		return type;
 	}
