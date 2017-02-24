@@ -2,13 +2,9 @@ package com.SOEN6441_DND.Model;
 
 public class Helmet extends ItemModel{
 
-	private AbilitiyModel abilitiyModel;
+	public String name;
+	public String image;
 	
-	public void enchantIntelligence(int value){
-		abilitiyModel = new AbilitiyModel();
-		abilitiyModel.setIntelligence(abilitiyModel.getIntelligence()+ value);
-	}
-
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub

@@ -10,6 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
 import com.SOEN6441_DND.Views.CharacterScene;
+import com.SOEN6441_DND.Views.ItemScene;
 import com.SOEN6441_DND.Views.MainScene;
 public class MainSceneController implements ActionListener{
 
@@ -73,7 +74,8 @@ public class MainSceneController implements ActionListener{
 				File file = openMapFile();
 			}
 			if (e.getSource() == homeScreen.itemCreation) {
-				System.out.println("item creator fired");
+				ItemScene itemScreen = new ItemScene();
+				gameController.mainFrame.setView(itemScreen);
 			}
 			if (e.getSource() == homeScreen.editItem) {
 				System.out.println("item editor fired");

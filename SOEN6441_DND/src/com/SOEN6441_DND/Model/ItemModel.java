@@ -2,9 +2,12 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Image;
 
-public abstract class ItemModel {
+public class ItemModel {
 	
-	private String name;
+	public String name;
+    public Image image;
+	public enum itemTypeList{Helmet,Armor,Shield,Ring,Belt,Boots,Weapon};
+	public itemTypeList itemtype;
 	
 	public String getName() {
 		return name;
@@ -12,11 +15,6 @@ public abstract class ItemModel {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	private Image image;
-	
-	private ItemModel type;
-	
+	}	
 
 }

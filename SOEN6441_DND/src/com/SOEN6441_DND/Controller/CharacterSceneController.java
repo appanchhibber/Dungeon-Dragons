@@ -18,7 +18,7 @@ import com.SOEN6441_DND.Views.CharacterScene;
 public class CharacterSceneController implements ActionListener {
 	public CharacterModel characterModel;
 	public CharacterScene characterScreen;
-	public DiecRollController diceRoll;
+	public DiceRollController diceRoll;
 	public AbilitiyModel abilityModel;
 	public AbilityPanelView abilityPanel;
 
@@ -27,7 +27,7 @@ public class CharacterSceneController implements ActionListener {
 		this.characterModel = view.characterViewModel;
 		this.abilityModel=view.abilityViewModel;
 		this.abilityPanel=view.abilityPanel;
-		diceRoll=new DiecRollController(4, 6); //Dice type 4d6
+		diceRoll=new DiceRollController(4, 6); //Dice type 4d6
 	}
 
 	@Override

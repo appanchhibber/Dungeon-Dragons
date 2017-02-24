@@ -5,7 +5,7 @@ package com.SOEN6441_DND.Controller;
  * @author Appan Chhibber
  *
  */
-public class DiecRollController {
+public class DiceRollController {
 	
 	public int counter;//No of times Dice should roll. Ex. 4d6  Counter = 4;
 	public int maxDiceValue; //Maximum value of Single Dice. Ex. 4d6  maxDiceValue = 6;
@@ -13,7 +13,7 @@ public class DiecRollController {
 	public int minTotal;
 	public int diceResult;
 
-	public DiecRollController(int counter,int maxDiceValue) {
+	public DiceRollController(int counter,int maxDiceValue) {
 		this.counter=counter;
 		this.maxDiceValue=maxDiceValue;
 		this.maxTotal=counter*maxDiceValue;
@@ -22,9 +22,9 @@ public class DiecRollController {
 	}
 	public int getDiceRollResult(){
 		
-		diceResult=minTotal+(int)(Math.random() * maxTotal); 
-		if(diceResult>24){
-			diceResult-=minTotal;
+		diceResult=(int)(Math.random() * (maxTotal+1)); 
+		if(diceResult<4){
+			diceResult+=minTotal;
 		}
 		return diceResult;
 	}

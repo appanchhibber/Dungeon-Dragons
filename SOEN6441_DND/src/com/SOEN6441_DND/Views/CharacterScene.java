@@ -17,7 +17,7 @@ import com.SOEN6441_DND.Controller.GameController;
 import com.SOEN6441_DND.Model.AbilitiyModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 /**
- * <b>This Class is View for Character Creation and Editior.</b>
+ * <b>This Class is View for Character Creation and Editor.</b>
  * @author Punit Trivedi
  *
  */
@@ -32,6 +32,7 @@ public class CharacterScene extends View implements Observer {
 	// Labels
 	JLabel nameLabel;
 	JLabel imageLabel;
+	JLabel charType;
 	// TextField
 	public JTextField nameText;
 	// Image
@@ -56,32 +57,48 @@ public class CharacterScene extends View implements Observer {
 		navMenuPanel = new NavigationPanelView();
 		characterController = new CharacterSceneController(this);
 		
+		//Name Character
+		  nameLabel= new JLabel("Name :");
+		  nameText = new JTextField();
+		  nameLabel.setLocation(20,40);
+		  nameText.setLocation(70,35);
+		  nameLabel.setSize(80, 20);
+		  nameText.setSize(250,30);
+		  this.add(nameLabel);
+		  this.add(nameText);
+		  
+		
 		//Character Selection
+		charType=new JLabel("Select Your Character");
+		charType.setLocation(550,10);
+		charType.setSize(200,20);
+		this.add(charType);
+		
 		charactertypeGroup = new ButtonGroup();
 		characterTypeRadio = new JRadioButton("Human", true);
 		characterTypeRadio.setSize(100, 20);
-		characterTypeRadio.setLocation(160, 40);
+		characterTypeRadio.setLocation(360, 40);
 		characterTypeRadio.addActionListener(characterController);
 		charactertypeGroup.add(characterTypeRadio);
 		this.add(characterTypeRadio);
 
 		characterTypeRadio = new JRadioButton("Dwarf");
 		characterTypeRadio.setSize(100, 20);
-		characterTypeRadio.setLocation(280, 40);
+		characterTypeRadio.setLocation(480, 40);
 		characterTypeRadio.addActionListener(characterController);
 		charactertypeGroup.add(characterTypeRadio);
 		this.add(characterTypeRadio);
 
 		characterTypeRadio = new JRadioButton("Elf");
 		characterTypeRadio.setSize(100, 20);
-		characterTypeRadio.setLocation(400, 40);
+		characterTypeRadio.setLocation(600, 40);
 		characterTypeRadio.addActionListener(characterController);
 		charactertypeGroup.add(characterTypeRadio);
 		this.add(characterTypeRadio);
 
 		characterTypeRadio = new JRadioButton("Orc");
 		characterTypeRadio.setSize(100, 20);
-		characterTypeRadio.setLocation(520, 40);
+		characterTypeRadio.setLocation(720, 40);
 		characterTypeRadio.addActionListener(characterController);
 		charactertypeGroup.add(characterTypeRadio);
 		this.add(characterTypeRadio);
@@ -94,7 +111,8 @@ public class CharacterScene extends View implements Observer {
 		
 		//Image Panel
 		imagePanel = new View();
-		imagePanel.setSize(300, 500);
+		imagePanel.setBackground(Color.WHITE);
+		imagePanel.setSize(300, 475);
 		imagePanel.setLocation(20, 70);
 		
 		imageLabel = new JLabel(

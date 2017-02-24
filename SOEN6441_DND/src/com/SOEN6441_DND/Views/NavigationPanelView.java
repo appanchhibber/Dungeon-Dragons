@@ -2,6 +2,7 @@ package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class NavigationPanelView extends View{
@@ -17,39 +18,51 @@ public class NavigationPanelView extends View{
 		// TODO Auto-generated method stub
 		super.initSubviews();
 		// Navigation Panel
-				homeButton = new JButton("Home");
-				homeButton.setLocation(20, 30);
-				homeButton.setSize(160, 50);
-				homeButton.setBackground(Color.BLUE);
-				homeButton.setOpaque(true);
+				homeButton = new JButton();
+				homeButton.setLocation(50, 10);
+				homeButton.setSize(50, 50);
+				homeButton.setOpaque(false);
+				homeButton.setIcon(new ImageIcon(new ImageIcon("image/Home.jpg").getImage().getScaledInstance(homeButton.getWidth(), homeButton.getHeight(),java.awt.Image.SCALE_SMOOTH )));
+				homeButton.setContentAreaFilled(false);
+				homeButton.setBorderPainted(false);
+				
+				newButton = new JButton();
+				newButton.setLocation(200, 10);
+				newButton.setOpaque(false);
+				newButton.setContentAreaFilled(false);
+				newButton.setBorderPainted(false);
+				newButton.setSize(50, 50);
+				newButton.setIcon(new ImageIcon(new ImageIcon("image/New.jpg").getImage().getScaledInstance(newButton.getWidth(), newButton.getHeight(),java.awt.Image.SCALE_SMOOTH )));
+				
+				saveButton = new JButton();
+				saveButton.setLocation(350, 10);
+				saveButton.setSize(50, 50);
+				saveButton.setOpaque(false);
+				saveButton.setContentAreaFilled(false);
+				saveButton.setBorderPainted(false);
+				saveButton.setIcon(new ImageIcon(new ImageIcon("image/Save.jpg").getImage().getScaledInstance(saveButton.getWidth(), saveButton.getHeight(),java.awt.Image.SCALE_SMOOTH )));
+				
+				loadButton = new JButton();
+				loadButton.setLocation(500, 10);
+				loadButton.setSize(50, 50);
+				loadButton.setOpaque(false);
+				loadButton.setContentAreaFilled(false);
+				loadButton.setBorderPainted(false);
+				loadButton.setIcon(new ImageIcon(new ImageIcon("image/Load.jpg").getImage().getScaledInstance(loadButton.getWidth(), loadButton.getHeight(),java.awt.Image.SCALE_SMOOTH )));
+				
 
-				newButton = new JButton("New");
-				newButton.setLocation(20, 130);
-				newButton.setSize(160, 50);
-				newButton.setBackground(Color.orange);
-				newButton.setOpaque(true);
-
-				saveButton = new JButton("Save");
-				saveButton.setLocation(20, 230);
-				saveButton.setSize(160, 50);
-				saveButton.setBackground(Color.CYAN);
-				saveButton.setOpaque(true);
-
-				loadButton = new JButton("Load");
-				loadButton.setLocation(20, 330);
-				loadButton.setSize(160, 50);
-				loadButton.setBackground(Color.RED);
-				loadButton.setOpaque(true);
-
-				nextButton = new JButton("Next");
-				nextButton.setLocation(20, 430);
-				nextButton.setSize(160, 50);
-				nextButton.setBackground(Color.GREEN);
-				nextButton.setOpaque(true);
+				nextButton = new JButton();
+				nextButton.setLocation(650, 10);
+				nextButton.setSize(50, 50);
+				nextButton.setOpaque(false);
+				nextButton.setContentAreaFilled(false);
+				nextButton.setBorderPainted(false);
+				nextButton.setIcon(new ImageIcon(new ImageIcon("image/Next.jpg").getImage().getScaledInstance(nextButton.getWidth(), nextButton.getHeight(),java.awt.Image.SCALE_SMOOTH )));
+				
 				
 				setBackground(Color.BLACK);
-				setSize(200, 500);
-				setLocation(650, 70);
+				setSize(860, 75);
+				setLocation(0,550);
 				setVisible(true);
 
 				add(homeButton);
