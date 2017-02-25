@@ -5,6 +5,8 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import com.SOEN6441_DND.Controller.NavigationPanelController;
+
 public class NavigationPanelView extends View{
  //Navigation Buttons
 	public JButton homeButton;
@@ -12,22 +14,25 @@ public class NavigationPanelView extends View{
 	public JButton saveButton;
 	public JButton loadButton;
 	public JButton nextButton;
-	
+  //Navigation Controller
+	public NavigationPanelController navigationController;
 	@Override
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
 		super.initSubviews();
+		navigationController= new NavigationPanelController(this);
 		// Navigation Panel
 				homeButton = new JButton();
-				homeButton.setLocation(50, 10);
+				homeButton.setLocation(100, 10);
 				homeButton.setSize(50, 50);
 				homeButton.setOpaque(false);
 				homeButton.setIcon(new ImageIcon(new ImageIcon("image/Home.jpg").getImage().getScaledInstance(homeButton.getWidth(), homeButton.getHeight(),java.awt.Image.SCALE_SMOOTH )));
 				homeButton.setContentAreaFilled(false);
 				homeButton.setBorderPainted(false);
+				homeButton.addActionListener(navigationController);
 				
 				newButton = new JButton();
-				newButton.setLocation(200, 10);
+				newButton.setLocation(250, 10);
 				newButton.setOpaque(false);
 				newButton.setContentAreaFilled(false);
 				newButton.setBorderPainted(false);
@@ -35,7 +40,7 @@ public class NavigationPanelView extends View{
 				newButton.setIcon(new ImageIcon(new ImageIcon("image/New.jpg").getImage().getScaledInstance(newButton.getWidth(), newButton.getHeight(),java.awt.Image.SCALE_SMOOTH )));
 				
 				saveButton = new JButton();
-				saveButton.setLocation(350, 10);
+				saveButton.setLocation(400, 10);
 				saveButton.setSize(50, 50);
 				saveButton.setOpaque(false);
 				saveButton.setContentAreaFilled(false);
@@ -43,7 +48,7 @@ public class NavigationPanelView extends View{
 				saveButton.setIcon(new ImageIcon(new ImageIcon("image/Save.jpg").getImage().getScaledInstance(saveButton.getWidth(), saveButton.getHeight(),java.awt.Image.SCALE_SMOOTH )));
 				
 				loadButton = new JButton();
-				loadButton.setLocation(500, 10);
+				loadButton.setLocation(550, 10);
 				loadButton.setSize(50, 50);
 				loadButton.setOpaque(false);
 				loadButton.setContentAreaFilled(false);
@@ -52,7 +57,7 @@ public class NavigationPanelView extends View{
 				
 
 				nextButton = new JButton();
-				nextButton.setLocation(650, 10);
+				nextButton.setLocation(750, 10);
 				nextButton.setSize(50, 50);
 				nextButton.setOpaque(false);
 				nextButton.setContentAreaFilled(false);

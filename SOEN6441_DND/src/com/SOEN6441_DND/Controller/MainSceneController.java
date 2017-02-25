@@ -74,15 +74,13 @@ public class MainSceneController implements ActionListener{
 				File file = openMapFile();
 			}
 			if (e.getSource() == homeScreen.itemCreation) {
-				ItemScene itemScreen = new ItemScene();
-				gameController.mainFrame.setView(itemScreen);
+				gameController.mainFrame.setView(new ItemScene());
 			}
 			if (e.getSource() == homeScreen.editItem) {
 				System.out.println("item editor fired");
 			}
 			if (e.getSource() == homeScreen.characterCreation) {
-				CharacterScene characterScreen = new CharacterScene();
-				gameController.mainFrame.setView(characterScreen);
+				gameController.mainFrame.setView(new CharacterScene());
 			}
 			if (e.getSource() == homeScreen.editCharacter) {
 				System.out.println("character editor fired");
