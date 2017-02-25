@@ -17,7 +17,8 @@ public class FileOperationModel {
 	DocumentBuilderFactory dbFactory;
 	DocumentBuilder dBuilder;
 	Document doc;
-	ArrayList items;
+	private ArrayList<String> itemsName;
+	private ArrayList<String> itemsImage;
 	
 	public File setFile(String fileName) {
 		fileName = "items/" + fileName+".xml";
@@ -25,24 +26,34 @@ public class FileOperationModel {
 		return file;
 	}
 
-	public ArrayList readFile(File file) {
+	public ArrayList<String> getItemsName() {
+		return itemsName;
+	}
+
+	public ArrayList<String> getItemsImage() {
+		return itemsImage;
+	}
+
+	public void readFile(File file) {
 		this.file=file;
-		items= new ArrayList();
+		itemsName= new ArrayList<String>();
+		itemsImage= new ArrayList<String>();
 		try {
 			dbFactory = DocumentBuilderFactory.newInstance();
 			dBuilder = dbFactory.newDocumentBuilder();
 			doc=dBuilder.parse(file);
 			doc.getDocumentElement().normalize();
-			NodeList nList = doc.getElementsByTagName("name");
+			NodeList nList = doc.getElementsByTagName("type");
 			for(int i=0;i<nList.getLength();i++){
 				Element eElement = (Element) nList.item(i);
-				items.add(eElement.getTextContent());
+				itemsName.add(eElement.getElementsByTagName("name").item(0).getTextContent());
+				itemsImage.add(eElement.getElementsByTagName("image").item(0).getTextContent());
+				//items.add(eElement.getTextContent());
 			}
 			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return items;
 	}
 }

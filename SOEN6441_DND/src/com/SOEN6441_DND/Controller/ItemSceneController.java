@@ -3,6 +3,7 @@ package com.SOEN6441_DND.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JRadioButton;
 
@@ -19,7 +20,7 @@ public class ItemSceneController implements ActionListener {
 	public ItemSceneController(ItemScene view) {
 		itemScreen = view;
 		itemModel = view.itemViewModel;
-		fileModel = new FileOperationModel();
+		fileModel = view.fileModel;
 	}
 
 	@Override
@@ -27,35 +28,56 @@ public class ItemSceneController implements ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getSource() == itemScreen.itemType) {
 			switch (itemScreen.itemType.getSelectedItem().toString()) {
-			case "Helmet": {	
+			case "Helmet": {
 				fileModel.readFile(fileModel.setFile("Helmet"));
+				itemModel.setSubItemList(fileModel.getItemsName());
+				/*
+				 * System.out.println(fileModel.getItemsImage().get(
+				 * itemScreen.subItemType.getSelectedIndex()));
+				 * itemModel.setImage(fileModel.getItemsImage().get(
+				 * itemScreen.subItemType.getSelectedIndex()));
+				 */
 				break;
 			}
 			case "Armor": {
+				fileModel.readFile(fileModel.setFile("Armor"));
 
+				itemModel.setSubItemList(fileModel.getItemsName());
+				System.out.println(itemModel.getSubItemList());
 				break;
 			}
 			case "Shield": {
-
+				fileModel.readFile(fileModel.setFile("Shield"));
+				itemModel.setSubItemList(fileModel.getItemsName());
 				break;
 			}
 			case "Ring": {
-
+				fileModel.readFile(fileModel.setFile("Ring"));
+				itemModel.setSubItemList(fileModel.getItemsName());
 				break;
 			}
 			case "Belt": {
-
+				fileModel.readFile(fileModel.setFile("Belt"));
+				itemModel.setSubItemList(fileModel.getItemsName());
 				break;
 			}
 			case "Boots": {
-
+				fileModel.readFile(fileModel.setFile("Boots"));
+				itemModel.setSubItemList(fileModel.getItemsName());
 				break;
 			}
 			case "Weapon": {
-
+				fileModel.readFile(fileModel.setFile("Weapon"));
+				itemModel.setSubItemList(fileModel.getItemsName());
 				break;
 			}
 			}
+
+		} else if (e.getSource() == itemScreen.subItemType) {
+			System.out.println("FIrst:"+itemScreen.subItemType.getSelectedIndex());
+			itemModel.setImage(fileModel.getItemsImage().get(
+					itemScreen.subItemType.getSelectedIndex()));
+
 		}
 	}
 

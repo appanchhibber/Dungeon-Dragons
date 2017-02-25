@@ -1,22 +1,22 @@
 <helmet>
 	<type id ="1">
 		<name>Light Helm</name>
-		<image></image>
+		<image>image/LightHelm.jpg</image>
 	</type>
 	<type id ="2">
 		<name>Kendo Mask</name>
-		<image></image>
+		<image>image/KendoMask.jpg</image>
 	</type>
 	<type id ="3">
 		<name>Close Helm</name>
-		<image></image>
+		<image>image/ClosedHelm.jpg</image>
 	</type>
 	<type id ="4">
 		<name>Longhorn</name>
-		<image></image>
+		<image>image/LongHorn.jpg</image>
 	</type>
 	<type id ="5">
 		<name>Snake Mask</name>
-		<image></image>
+		<image>image/SnakeMask.jpg</image>
 	</type>	
 </helmet>
