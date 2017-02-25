@@ -32,19 +32,12 @@ public class ItemSceneController implements ActionListener {
 			case "Helmet": {
 				fileModel.readFile(fileModel.setFile("Helmet"));
 				itemModel.setSubItemList(fileModel.getItemsName());
-				/*
-				 * System.out.println(fileModel.getItemsImage().get(
-				 * itemScreen.subItemType.getSelectedIndex()));
-				 * itemModel.setImage(fileModel.getItemsImage().get(
-				 * itemScreen.subItemType.getSelectedIndex()));
-				 */
 				break;
 			}
 			case "Armor": {
 				fileModel.readFile(fileModel.setFile("Armor"));
 
 				itemModel.setSubItemList(fileModel.getItemsName());
-				//System.out.println(itemModel.getSubItemList());
 				break;
 			}
 			case "Shield": {
@@ -74,13 +67,14 @@ public class ItemSceneController implements ActionListener {
 			}
 			}
 
-//		} else if (e.getSource() == itemScreen.subItemType) {
-//	
-//			System.out.println("FIrst:"+itemScreen.subItemType.getSelectedIndex());
-//			itemModel.setImage(fileModel.getItemsImage().get(
-//					itemScreen.subItemType.getSelectedIndex()));
-//
-//		}
-	}
+		} else if (e.getSource() == itemScreen.subItemType) {
+			if (itemScreen.subItemType.getSelectedIndex() != -1) {
+				itemModel.setImage(fileModel.getItemsImage().get(
+						itemScreen.subItemType.getSelectedIndex()));
+			} else {
+				itemModel.setImage(fileModel.getItemsImage().get(0));
+			}
+
+		}
 	}
 }

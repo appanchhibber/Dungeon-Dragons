@@ -124,11 +124,10 @@ public class ItemScene extends View implements Observer {
 			subItemType.removeAllItems();
 			
 			String[] list = (String[]) itemViewModel.getSubItemList().toArray(new String[itemViewModel.getSubItemList().size()]);
-			for(String str : list){
-				subItemType.addItem(str);
-			}
-			
-		
+		//	for(String str : list){
+			//	subItemType.addItem(str);
+		//	}
+			subItemType.setModel(new DefaultComboBoxModel(list));
 			itemViewPanel.revalidate();
 			itemViewPanel.repaint();
 		} else if (itemViewModel.message == "ImageChanged") {
