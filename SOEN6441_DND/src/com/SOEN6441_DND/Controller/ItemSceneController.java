@@ -26,6 +26,7 @@ public class ItemSceneController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+
 		if (e.getSource() == itemScreen.itemType) {
 			switch (itemScreen.itemType.getSelectedItem().toString()) {
 			case "Helmet": {
@@ -43,7 +44,7 @@ public class ItemSceneController implements ActionListener {
 				fileModel.readFile(fileModel.setFile("Armor"));
 
 				itemModel.setSubItemList(fileModel.getItemsName());
-				System.out.println(itemModel.getSubItemList());
+				//System.out.println(itemModel.getSubItemList());
 				break;
 			}
 			case "Shield": {
@@ -73,12 +74,13 @@ public class ItemSceneController implements ActionListener {
 			}
 			}
 
-		} else if (e.getSource() == itemScreen.subItemType) {
-			System.out.println("FIrst:"+itemScreen.subItemType.getSelectedIndex());
-			itemModel.setImage(fileModel.getItemsImage().get(
-					itemScreen.subItemType.getSelectedIndex()));
-
-		}
+//		} else if (e.getSource() == itemScreen.subItemType) {
+//	
+//			System.out.println("FIrst:"+itemScreen.subItemType.getSelectedIndex());
+//			itemModel.setImage(fileModel.getItemsImage().get(
+//					itemScreen.subItemType.getSelectedIndex()));
+//
+//		}
 	}
-
+	}
 }
