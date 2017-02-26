@@ -4,6 +4,13 @@ import javax.swing.JPanel;
 
 public class MapModel {
 	int mapWidth;
+
+	int mapHeight;
+	public int mapGridSelection[][];
+	
+	public JPanel MapView;
+	
+	
 	public int getMapWidth() {
 		return mapWidth;
 	}
@@ -36,9 +43,5 @@ public class MapModel {
 		MapView = mapView;
 	}
 
-	int mapHeight;
-	public int mapGridSelection[][];
-	
-	public JPanel MapView;
 
 }
