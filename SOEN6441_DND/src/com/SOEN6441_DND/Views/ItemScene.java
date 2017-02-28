@@ -131,7 +131,6 @@ public class ItemScene extends View implements Observer {
 			itemViewPanel.revalidate();
 			itemViewPanel.repaint();
 		} else if (itemViewModel.message == "ImageChanged") {
-			System.out.println("ImageChanged");
 			itemImage.getImage().flush();
 			itemImage = new ImageIcon(
 					new ImageIcon(itemViewModel.getImage()).getImage()

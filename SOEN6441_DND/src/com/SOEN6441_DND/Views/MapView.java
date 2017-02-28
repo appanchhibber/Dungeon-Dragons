@@ -52,9 +52,15 @@ public	int mapHeight;
 
 		//
 		inventView = new InventoryPanelView();
+		inventView.entryDoorLabel.addMouseMotionListener(mapController);
+		inventView.wallLabel.addMouseMotionListener(mapController);
+		inventView.chestLabel.addMouseMotionListener(mapController);
+		inventView.exitDoorLabel.addMouseMotionListener(mapController);
+		inventView.validateButton.addActionListener(mapController);
 		this.add(inventView);
 
 		navPanel = new NavigationPanelView();
+		navPanel.saveButton.setEnabled(false);
 		this.add(navPanel);
 	}
 

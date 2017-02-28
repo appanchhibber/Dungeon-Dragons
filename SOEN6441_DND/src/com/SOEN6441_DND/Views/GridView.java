@@ -3,14 +3,21 @@ package com.SOEN6441_DND.Views;
 import java.awt.Color;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.TransferHandler;
+
+import com.SOEN6441_DND.Controller.TransferHandlerController;
 
 public class GridView extends JPanel {
 	private int mapWidth;
 	private int mapHeight;
-	private JButton mapButtonsGrid[][];
+	public JButton mapButtonsGrid[][];
 	public int mapGridSelection[][];
+	
+	
+	public TransferHandlerController transferHandler;
 	public GridView(int mapWidth, int mapHeight) {
 		this.mapHeight = mapHeight;
 		this.mapWidth = mapWidth;
@@ -26,11 +33,10 @@ public class GridView extends JPanel {
 	}
 
 	public void createGridView() {
-		
+
 		mapButtonsGrid = new JButton[mapHeight][mapWidth];
 		for (int i = 0; i < mapHeight; i++) {
 			for (int j = 0; j < mapWidth; j++) {
-				System.out.println("i:"+i+"j:"+j);
 				mapButtonsGrid[i][j] = new JButton();
 				int value = 0;
 				int multiple = 0;
@@ -42,10 +48,12 @@ public class GridView extends JPanel {
 					value = 0;
 				else
 					value = 1 + j + (i * multiple);
+				mapButtonsGrid[i][j].setName( i + ":" + j);
 				mapButtonsGrid[i][j].setBackground(Color.WHITE); 
 				mapButtonsGrid[i][j].setOpaque(true);
 				mapButtonsGrid[i][j].setBorderPainted(false);
 				mapButtonsGrid[i][j].setSize(40,40);
+				mapButtonsGrid[i][j].setTransferHandler(new TransferHandlerController().valueImportCreator());
 				this.add(mapButtonsGrid[i][j]);
 			}
 		}
