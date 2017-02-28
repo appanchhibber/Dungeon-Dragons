@@ -38,7 +38,6 @@ public MapModel mapModel;
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==mapView.inventView.validateButton){
-			System.out.println("Validation button fired");
 			ValidatorController validate=new ValidatorController();
 			String result=validate.validator(mapView);
 			if(result!="Map Validated")

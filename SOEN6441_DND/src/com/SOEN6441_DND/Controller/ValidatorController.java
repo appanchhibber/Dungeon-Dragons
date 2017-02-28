@@ -30,7 +30,6 @@ list=new ArrayList();
 		entryDoorCount=Collections.frequency(list, "EntryDoor");
         characterCount=Collections.frequency(list, "Character");
         chestCount=Collections.frequency(list,"Chest");
-        System.out.println(chestCount);
        if(exitDoorCount>=2){
     	   
     	   result="There can only be one Exit Door";

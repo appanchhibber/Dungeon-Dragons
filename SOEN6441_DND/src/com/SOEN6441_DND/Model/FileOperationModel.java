@@ -19,6 +19,7 @@ public class FileOperationModel {
 	Document doc;
 	private ArrayList<String> itemsName;
 	private ArrayList<String> itemsImage;
+	private ArrayList<String> mapList; 
 	
 	public File setFile(String fileName) {
 		fileName = "items/" + fileName+".xml";
@@ -55,5 +56,19 @@ public class FileOperationModel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public ArrayList<String> getAllMaps()
+	{
+		mapList=new ArrayList<String>();
+		File folder=new File("maps/");
+		File[] files=folder.listFiles();
+		for(File file:files){
+			if(file.isFile()){
+				mapList.add(file.getName());
+			}
+		}
+		return mapList;
 	}
 }

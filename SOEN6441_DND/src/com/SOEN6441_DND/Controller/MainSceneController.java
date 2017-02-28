@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Views.CampaignView;
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
 import com.SOEN6441_DND.Views.MainScene;
@@ -51,6 +52,12 @@ public class MainSceneController implements ActionListener{
 			}
 			if (e.getSource() == homeScreen.editCharacter) {
 				System.out.println("character editor fired");
+			}
+			if(e.getSource()==homeScreen.campaignCreator){
+				gameController.mainFrame.setView(new CampaignView());
+			}
+			if(e.getSource()==homeScreen.campaignEditor){
+				
 			}
 
 		}

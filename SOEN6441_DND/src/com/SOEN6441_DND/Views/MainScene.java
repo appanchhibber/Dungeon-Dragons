@@ -22,7 +22,7 @@ import com.SOEN6441_DND.Controller.MainSceneController;
 public class MainScene extends View {
 	public Button startGameButton, exitGameButton;
 	public JMenuItem characterCreation, editCharacter, itemCreation,
-			editItem, mapCreator, mapEditor;
+			editItem, mapCreator, mapEditor,campaignCreator,campaignEditor;
 	private MainSceneController msController;
 
 	@Override
@@ -63,6 +63,15 @@ public class MainScene extends View {
 		mapEditor = new JMenuItem("Map Editor");
 		mapEditor.addActionListener(msController);
 		mnMap.add(mapEditor);
+		
+		JMenu mnCampaign=new JMenu("Campaign");
+		menuBar.add(mnCampaign);
+		campaignCreator=new JMenuItem("Campaign Creator");
+		campaignCreator.addActionListener(msController);
+		mnCampaign.add(campaignCreator);
+		campaignEditor=new JMenuItem("Campaign Editor");
+		campaignEditor.addActionListener(msController);
+		mnCampaign.add(campaignEditor);
 		menuBar.setLocation(0, 0);
 		menuBar.setSize(860, 25);
 		this.add(menuBar);
