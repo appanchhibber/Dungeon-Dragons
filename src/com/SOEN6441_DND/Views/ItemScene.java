@@ -181,7 +181,7 @@ public class ItemScene extends View implements Observer {
 		itemInfoPanel.add(itemInfoLabel);
 		//itemInfoPanel.add(itemDescription);
 		
-		
+		//paras	
 		navMenuPanel = new NavigationPanelView();
 		this.add(navMenuPanel);
 		this.add(itemViewPanel);

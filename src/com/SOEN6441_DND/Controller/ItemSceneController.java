@@ -26,7 +26,7 @@ public class ItemSceneController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-
+//paras
 		if (e.getSource() == itemScreen.itemType) {
 			switch (itemScreen.itemType.getSelectedItem().toString()) {
 			case "Helmet": {

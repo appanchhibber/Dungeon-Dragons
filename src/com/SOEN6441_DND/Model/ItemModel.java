@@ -13,7 +13,7 @@ public class ItemModel extends Observable{
 	public ArrayList subItemList;
 	public String itemDecsription;
 	
-	
+	//paras
 	public String getItemDecsription() {
 		return itemDecsription;
 	}
