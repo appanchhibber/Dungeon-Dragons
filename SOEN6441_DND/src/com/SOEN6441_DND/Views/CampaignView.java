@@ -1,6 +1,7 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -120,7 +121,6 @@ public JButton removeAllMaps;
 	@Override
 	public void update(Observable o, Object arg) {
 		
-		// TODO Auto-generated method stub
 		this.campaignModel=(CampaignModel)o;
 		
 		if(campaignModel.message.equals("AddAll")){
@@ -128,13 +128,29 @@ public JButton removeAllMaps;
 			removeAllMaps.setEnabled(true);
 			removeMap.setEnabled(true);
 		}
-		if(campaignModel.message=="RemoveAll")
+		else if(campaignModel.message=="RemoveAll")
 		{
 			campMaps.removeAll();
 			campMaps.setModel(new DefaultListModel());
 			removeAllMaps.setEnabled(false);
 			removeMap.setEnabled(false);
 		}
+		else if(campaignModel.message=="selectedMapList")
+		{
+			campMaps.setModel(campaignModel.getSelectedMapList());
+			maps.setModel(campaignModel.getMapList());
+			removeAllMaps.setEnabled(true);
+			removeMap.setEnabled(true);
+		}
+		else if(campaignModel.message=="setMapList"){
+			campMaps.setModel(campaignModel.getSelectedMapList());
+			maps.setModel(campaignModel.getMapList());
+			if(campMaps.getSize()==null){
+				removeAllMaps.setEnabled(false);
+				removeMap.setEnabled(false);
+			}
+		}
+		
 		
 	}
 	
