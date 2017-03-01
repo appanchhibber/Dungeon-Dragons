@@ -1,0 +1,55 @@
+<shield>
+	<type id ="1">
+		<name>Dragon Scale Shield</name>
+		<image>image/DragonscaleShield.jpg</image>
+		<description>A Dragonscale Shield is a piece of light armor.
+ It can be crafted at a blacksmith's forge with the following components: 
+2 × Leather Strips 
+4 × Dragon Scale 
+2 × Iron Ingot
+Base Armor : 29, Weight : 6, Base Value : 750
+</description>
+	</type>
+	<type id ="2">
+		<name>Iron shield</name>
+		<image>image/IronShield.jpg</image>
+		<description>The Iron Shield is a piece of heavy armor.
+It can be crafted at a blacksmith's forge with the following components: 
+1 × Leather Strips 
+4 × Iron Ingot
+Base Armor : 20, Weight : 12, Base Value : 60
+</description>
+	</type>
+	<type id ="3">
+		<name>Glass shield</name>
+		<image>image/Glassshield.jpg</image>
+		<description>The Glass Shield is a piece of light armor.
+It can be forged at a blacksmith's forge with the following components: 
+4 × Refined Malachite 
+1 × Refined Moonstone 
+2 × Leather Strips
+Base Armor : 27, Weight : 6, Base Value : 450
+</description>
+	</type>
+	<type id ="4">
+		<name>Aetherial Shield</name>
+		<image>image/AetherialShield.jpg</image>
+		<description>The Aetherial Shield is a unique Dwarven Shield.
+It requires the following components: 
+1 x Aetherium Crest 
+4 x Dwarven Metal Ingot 
+2 x Refined Malachite
+Base Armor : 26, Weight : 12, Base Value : 2000
+</description>
+	</type>
+	<type id ="5">
+		<name>Stalhrim Shield</name>
+		<image>image/Stalhrim.jpg</image>
+		<description>A Stalhrim Shield is a light armor shield.
+ It can be forged at a blacksmith's forge with the following components: 
+4 × Stalhrim 
+1 × Steel Ingot 
+1 × Leather Strips
+Base Armor : 29.5, Weight : 10, Base Value : 600</description>
+	</type>	
+</shield>

@@ -1,0 +1,50 @@
+<weapon>
+	<type id ="1">
+		<name>Steel Sword</name>
+		<image>image/steelsword.jpg</image>
+		<description>The Steel Sword is a one-handed weapon.
+The sword has a steel blade as to be expected, with some rugged designs on the bottom edges.
+The hilt appears to be made of a fine wood, with metal woven into it, while the base of the blade has complex line patterns, with some dark gray areas.
+It can be forged at a blacksmith's forge with the following components: 
+1 x Leather Strip 
+2 x Steel Ingot 
+1 x Iron Ingot
+Base Damage : 8, Weight : 10, Baase Value : 45</description>
+	</type>
+	<type id ="2">
+		<name>Crossbow</name>
+		<image>image/Crossbow.jpg</image>
+		<description>Crossbows are projectile weapons in Dungeons and Dragons.
+Crossbows differ from bows in a number of ways. They use different ammunition, projectiles are loaded instead of nocked, and they provide a number of advantages and disadvantages compared to the standard bow.
+Two types of crossbow bolts are available — steel bolts and dwarven bolts.
+Crossbows have a built-in 50% chance to stagger opponents.
+</description>
+	</type>
+	<type id ="3">
+		<name>Thane Steel Battle Axe</name>
+		<image>image/ThaneSteelBattleaxe.jpg</image>
+		<description>Axe of Whiterun is one of a unique group of weapons found in Dungeons and Dragons.
+an identical version can be crafted with the generic material and a matching enchantment applied. The weapon may also be titled with the same name during enchanting. 
+The upgrade material is dependent on the material that the weapon was generated with.
+This item also benefits from whichever Smithing perk is related to the material of the axe. </description>
+	</type>
+	<type id ="4">
+		<name>Dwarven Bow Skinned</name>
+		<image>image/Dwarvenbowskinned.jpg</image>
+		<description>Dwrven Bow is very powerful with a decent base damage and nice fire rate
+
+Base damage: 13
+Shots per second: 0.75
+Skin: Dwarven Bow coloured black</description>
+	</type>
+	<type id ="5">
+		<name>Dragon Battle Axe</name>
+		<image>image/Dragonbattleaxe.jpg</image>
+		<description>The Dragonbone Battleaxe is a two-handed weapon.
+ It can be forged at a blacksmith's forge with the following components: 
+3 x Dragon Bones 
+2 x Ebony Ingots 
+2 x Leather Strips
+Base Damage : 26, Weight : 30, Base Value : 3000</description>
+	</type>	
+</weapon>
