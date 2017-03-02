@@ -1,5 +1,7 @@
 package com.SOEN6441_DND.Controller;
 import java.awt.event.ActionEvent;
+
+
 import java.awt.event.ActionListener;
 import java.io.File;
 
@@ -46,6 +48,7 @@ public class MainSceneController implements ActionListener{
 			}
 			if (e.getSource() == homeScreen.editItem) {
 				System.out.println("item editor fired");
+				File file = openItemFile();
 			}
 			if (e.getSource() == homeScreen.characterCreation) {
 				gameController.mainFrame.setView(new CharacterScene());
@@ -80,4 +83,22 @@ public class MainSceneController implements ActionListener{
 		}
 	}
 
+	/**to open file for editing map
+	 * 
+	 * @return File type
+	 */
+	public File openItemFile() {
+		JFileChooser fileChooser = new JFileChooser(new File("itemSave/"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
+				"xml");
+		fileChooser.setFileFilter(filter);
+		int option = fileChooser.showOpenDialog(gameController.mainFrame);
+
+		if (option == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			return file;
+		} else {
+			return null;
+		}
+	}
 }

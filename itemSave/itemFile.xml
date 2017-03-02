@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Helmet>
+<item id="1">
+<itemtype>Light Helm</itemtype>
+<name>my helmet</name>
+<enchantValue>3</enchantValue>
+</item>
+</Helmet>
