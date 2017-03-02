@@ -1,5 +1,6 @@
 package com.SOEN6441_DND.Model;
 
+
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -13,7 +14,14 @@ public class ItemModel extends Observable{
 	public ArrayList subItemList;
 	public String itemDecsription;
 	
-	//paras
+	public itemTypeList getItemtype() {
+		return itemtype;
+	}
+
+	public void setItemtype(itemTypeList itemtype) {
+		this.itemtype = itemtype;
+	}
+
 	public String getItemDecsription() {
 		return itemDecsription;
 	}
