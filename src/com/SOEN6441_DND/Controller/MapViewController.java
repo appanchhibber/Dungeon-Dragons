@@ -48,6 +48,9 @@ public MapModel mapModel;
 				mapView.navPanel.saveButton.setEnabled(true);
 			}
 		}
+		else if(e.getSource()==mapView.inventView.removeButton){
+			System.out.println("Remove Button Event FIred");
+		}
 		
 	}
 

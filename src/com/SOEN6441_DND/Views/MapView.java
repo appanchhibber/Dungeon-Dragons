@@ -44,7 +44,7 @@ public	int mapHeight;
 			
 			
 			
-			gridView=new GridView(mapWidth, mapHeight);
+			gridView=new GridView(mapWidth, mapHeight,this);
 			this.add(gridView);
 			
 
@@ -57,6 +57,7 @@ public	int mapHeight;
 		inventView.chestLabel.addMouseMotionListener(mapController);
 		inventView.exitDoorLabel.addMouseMotionListener(mapController);
 		inventView.validateButton.addActionListener(mapController);
+		inventView.removeButton.addActionListener(mapController);
 		this.add(inventView);
 
 		navPanel = new NavigationPanelView();

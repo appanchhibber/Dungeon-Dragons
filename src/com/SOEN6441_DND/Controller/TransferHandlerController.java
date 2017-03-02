@@ -1,6 +1,7 @@
 package com.SOEN6441_DND.Controller;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -80,8 +81,11 @@ public class TransferHandlerController {
 						if (component instanceof JButton) {
 						ImageIcon	image= new ImageIcon(new ImageIcon(value.toString()).getImage().getScaledInstance(component.getWidth(), component.getHeight(),java.awt.Image.SCALE_SMOOTH ));
 						((JButton) component).setIcon(image);
+						((JButton) component).setText(((JButton) component).getName());
+						((JButton) component).setFont(new Font("Calibri", Font.PLAIN,0));
 						String[] name=value.toString().split("/");
 						((JButton) component).setName(name[1].replaceAll(".jpg","").trim());
+						
 							accept = true;
 						}
 					}
