@@ -3,6 +3,8 @@ package com.SOEN6441_DND.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
+
 import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Views.CampaignView;
@@ -28,9 +30,33 @@ public class CampaignViewController implements ActionListener {
 		else if(e.getSource()==campaignView.removeAllMaps){
 			campaignModel.notifyCampaignView("RemoveAll");
 		}
+        else if(e.getSource()==campaignView.removeAllMaps){
+            campaignModel.notifyCampaignView("RemoveAll");
+        }
+        else if(e.getSource()==campaignView.removeAllMaps){
+            campaignModel.notifyCampaignView("RemoveAll");
+        }
+        else if(e.getSource()==campaignView.addMap){
+             DefaultListModel model=new DefaultListModel();
+             for (Object selectedValue : campaignView.maps.getSelectedValuesList()) {
+                    model.addElement(selectedValue);
+                    campaignModel.mapList.removeElement(selectedValue);
+                }
+             campaignModel.setSelectedMapList(model);
+             
+            }
+        else if(e.getSource()==campaignView.removeMap){
+            DefaultListModel model =(DefaultListModel)campaignView.maps.getModel();
+            for(Object selectedValue: campaignView.campMaps.getSelectedValuesList()){
+                model.addElement(selectedValue);
+                campaignModel.selectedMapList.removeElement(selectedValue);
+            }
+
+            campaignModel.setMapList(model);
+        }
+        }
+
+
 		
 	}
-	
-	
 
-}

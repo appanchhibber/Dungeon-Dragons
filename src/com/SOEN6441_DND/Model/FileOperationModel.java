@@ -3,6 +3,7 @@ package com.SOEN6441_DND.Model;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -20,7 +21,7 @@ public class FileOperationModel {
 	private ArrayList<String> itemsName;
 	private ArrayList<String> itemsImage;
 	private ArrayList<String> itemDesription;
-	private ArrayList<String> mapList; 
+	private DefaultListModel mapList; 
 
 	
 	public File setFile(String fileName) {
@@ -69,14 +70,14 @@ public class FileOperationModel {
 	}
 	
 	
-	public ArrayList<String> getAllMaps()
+	public DefaultListModel getAllMaps()
 	{
-		mapList=new ArrayList<String>();
+		mapList=new DefaultListModel();
 		File folder=new File("maps/");
 		File[] files=folder.listFiles();
 		for(File file:files){
 			if(file.isFile()){
-				mapList.add(file.getName());
+				mapList.addElement(file.getName());
 			}
 		}
 		return mapList;

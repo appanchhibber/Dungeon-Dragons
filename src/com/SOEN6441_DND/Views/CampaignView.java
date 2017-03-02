@@ -128,13 +128,29 @@ public JButton removeAllMaps;
 			removeAllMaps.setEnabled(true);
 			removeMap.setEnabled(true);
 		}
-		if(campaignModel.message=="RemoveAll")
+		else if(campaignModel.message=="RemoveAll")
 		{
 			campMaps.removeAll();
 			campMaps.setModel(new DefaultListModel());
 			removeAllMaps.setEnabled(false);
 			removeMap.setEnabled(false);
 		}
+        else if(campaignModel.message=="selectedMapList")
+        {
+            campMaps.setModel(campaignModel.getSelectedMapList());
+            maps.setModel(campaignModel.getMapList());
+            removeAllMaps.setEnabled(true);
+            removeMap.setEnabled(true);
+        }
+        else if(campaignModel.message=="setMapList"){
+            campMaps.setModel(campaignModel.getSelectedMapList());
+            maps.setModel(campaignModel.getMapList());
+            if(campMaps.getSize()==null){
+                removeAllMaps.setEnabled(false);
+                removeMap.setEnabled(false);
+            }
+        }
+
 		
 	}
 	
