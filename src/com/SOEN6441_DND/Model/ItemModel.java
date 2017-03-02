@@ -4,12 +4,27 @@ package com.SOEN6441_DND.Model;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Observable;
-
+/**
+ * This Class is a view for Item Creation and Manipulation. This class is
+ * observe by Item Model.	
+ * 
+ * @author Paras Malik
+ * @author Amirbabak Rahgozar
+ *
+ */
 public class ItemModel extends Observable{
 	
 	public String name;
     public String image;
+	public String[] getEnchanListValues() {
+		return enchanListValues;
+	}
+
+	public void setEnchanListValues(String[] enchanListValues) {
+		this.enchanListValues = enchanListValues;
+	}
 	public enum itemTypeList{Helmet,Armor,Shield,Ring,Belt,Boots,Weapon};
+	public String[] enchanListValues = {"1","2","3","4","5"};
 	public itemTypeList itemtype;
 	public ArrayList subItemList;
 	public String itemDecsription;
