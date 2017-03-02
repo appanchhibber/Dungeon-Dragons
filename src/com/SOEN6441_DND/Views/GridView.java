@@ -61,14 +61,14 @@ public class GridView extends JPanel {
 				mapButtonsGrid[i][j].setTransferHandler(new TransferHandlerController().valueImportCreator());
 				mapButtonsGrid[i][j].addMouseListener(new MouseAdapter() {
 					 public void mousePressed(MouseEvent e) {
-						 System.out.println(e.getButton());
+						// System.out.println(e.getButton());
 						 if(e.getButton()==MouseEvent.BUTTON3)
 						 {
 	                            JButton button=(JButton)e.getSource();
 	                            if(!button.getName().contains(",")){
 	                            	 button.setSelected(true);
-	                            	 System.out.println(button.getName());
-	                            	 button.setIcon(new ImageIcon());
+	                            	 //System.out.println(button.getName());
+	                            	 button.setIcon(null);
 	                            	 button.setName(button.getText());
 
 	                            }

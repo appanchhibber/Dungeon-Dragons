@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -34,7 +36,22 @@ public class MainSceneController implements ActionListener{
 			System.out.println("Start Game button pressed");
 		}
 		if (e.getSource() == homeScreen.mapCreator) {
-			gameController.mainFrame.setView(new MapView());
+			String[] mapValue={"10","11","12","13","14","15"};
+			JComboBox txtX = new JComboBox();
+			txtX.setModel(new DefaultComboBoxModel(mapValue));
+			JComboBox txtY = new JComboBox();
+			txtY.setModel(new DefaultComboBoxModel(mapValue));
+			Object[] message = { "Size of X:", txtX, "Size of Y:", txtY };
+			int option = JOptionPane.showConfirmDialog(null, message,
+					"SET SIZE OF MAP", JOptionPane.CANCEL_OPTION);
+			if (option == JOptionPane.OK_OPTION) {
+				//mapModel.setMapWidth(Integer.parseInt(txtX.getText().trim()));
+				//mapModel.setMapHeight(Integer.parseInt(txtY.getText().trim()));
+				
+				gameController.mainFrame.setView(new MapView(txtX.getSelectedItem().toString(),txtY.getSelectedItem().toString()));
+
+			}
+			
 
 		}
 			if (e.getSource() == homeScreen.mapEditor) {
