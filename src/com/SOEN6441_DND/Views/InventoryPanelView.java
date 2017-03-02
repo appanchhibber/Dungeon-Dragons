@@ -25,6 +25,7 @@ public class InventoryPanelView extends View {
 	public ImageIcon exitDoorImage;
 	
 public JButton validateButton;
+public JButton removeButton;
 	public TransferHandlerController transferHandler;
 
 	@Override
@@ -78,12 +79,18 @@ public JButton validateButton;
 		validateButton.setSize(100,30);
 		validateButton.setLocation(50,495);
 		//------------//
-		
+		//Remove Button//
+		removeButton=new JButton("Remove");
+		removeButton.setSize(100,30);
+		removeButton.setLocation(50, 445);
+		removeButton.setVisible(false);
+		//-------------//
 		this.add(chestLabel);
 		this.add(entryDoorLabel);
 		this.add(wallLabel);
 		this.add(exitDoorLabel);
 		this.add(validateButton);
+		this.add(removeButton);
 		this.setVisible(true);
 	}
 

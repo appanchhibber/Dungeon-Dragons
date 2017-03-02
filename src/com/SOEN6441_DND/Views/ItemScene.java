@@ -1,24 +1,17 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import sun.text.normalizer.UBiDiProps;
 
 import com.SOEN6441_DND.Controller.ItemSceneController;
 import com.SOEN6441_DND.Model.FileOperationModel;

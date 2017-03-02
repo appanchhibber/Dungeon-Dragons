@@ -2,7 +2,6 @@ package com.SOEN6441_DND.Model;
 
 import java.util.Observable;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 /**
  * This Class Defines all the characteristics and property of the character.
  * This class extends Observable.
