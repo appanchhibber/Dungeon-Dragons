@@ -136,7 +136,7 @@ public class PathValidatorController {
     int[][] blocked = array containing inaccessible cell coordinates
     */
     public static String test(int tCase, int x, int y, int si, int sj, int ei, int ej, ArrayList<Dimension> blocked){
-           System.out.println("\n\nTest Case #"+tCase);
+           //System.out.println("\n\nTest Case #"+tCase);
             //Reset
            grid = new Cell[x][y];
            closed = new boolean[x][y];
@@ -173,37 +173,37 @@ public class PathValidatorController {
            }
            
            //Display initial map
-           System.out.println("Grid: ");
+          /* System.out.println("Grid: ");
             for(int i=0;i<x;++i){
                 for(int j=0;j<y;++j){
                    if(i==si&&j==sj)System.out.print("SO  "); //Source
                    else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
                    else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
-                   else System.out.print("BL  "); 
+                   else// System.out.print("BL  "); 
                 }
                 System.out.println();
             } 
-            System.out.println();
+            System.out.println();*/
            
            AStar(); 
-           System.out.println("\nScores for cells: ");
-           for(int i=0;i<x;++i){
+           //System.out.println("\nScores for cells: ");
+       /*    for(int i=0;i<x;++i){
                for(int j=0;j<x;++j){
                    if(grid[i][j]!=null)System.out.printf("%-3d ", grid[i][j].finalCost);
                    else System.out.print("BL  ");
                }
                System.out.println();
            }
-           System.out.println();
+           System.out.println();*/
             
            if(closed[endI][endJ]){
                //Trace back the path 
-                System.out.println("Path: ");
+               // System.out.println("Path: ");
                 Cell current = grid[endI][endJ];
-                System.out.print(current);
+               // System.out.print(current);
                 while(current.parent!=null){
                 	mapCell[current.parent.i][current.parent.j].setBackground(Color.BLUE);
-                    System.out.print(" -> "+current.parent);
+                 //   System.out.print(" -> "+current.parent);
                     current = current.parent;
                     
                     

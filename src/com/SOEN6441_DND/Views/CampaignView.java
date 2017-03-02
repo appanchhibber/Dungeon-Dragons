@@ -102,7 +102,7 @@ public JButton removeAllMaps;
 		campaignMap.setSize(130,20);
 		campaignMap.setLocation(585,50);
 		
-		campMaps=new JList();
+		campMaps=new JList(new DefaultListModel());
 		JScrollPane scrollPane2=new JScrollPane(campMaps);
 		scrollPane2.setBounds(585, 70, 270, 475);
 		navPanel=new NavigationPanelView();
@@ -123,14 +123,15 @@ public JButton removeAllMaps;
 		// TODO Auto-generated method stub
 		this.campaignModel=(CampaignModel)o;
 		
-		if(campaignModel.message.equals("AddAll")){
-			campMaps.setModel(maps.getModel());
+		if(campaignModel.message.equals("setCampMapList")){
+			campMaps.setModel(campaignModel.getCampMapList());
+			maps.setModel(new DefaultListModel());
 			removeAllMaps.setEnabled(true);
 			removeMap.setEnabled(true);
 		}
 		else if(campaignModel.message=="RemoveAll")
 		{
-			campMaps.removeAll();
+			maps.setModel(ioModel.getAllMaps());
 			campMaps.setModel(new DefaultListModel());
 			removeAllMaps.setEnabled(false);
 			removeMap.setEnabled(false);
