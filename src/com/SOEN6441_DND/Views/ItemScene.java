@@ -160,14 +160,16 @@ public class ItemScene extends View implements Observer {
 		
 		itemInfoPanel.setVisible(true);
 		
-		itemInfoLabel = new JLabel("<html><b><u>ITEM DESCRIPTION : </u></b></html>");
+		itemInfoLabel = new JLabel("ITEM DESCRIPTION :");
 		itemInfoLabel.setSize(210, 30);
-		itemInfoLabel.setLocation(30, 10);
+		itemInfoLabel.setLocation(10, 10);
 		itemInfoLabel.setForeground(Color.CYAN);
 		itemInfoLabel.setBackground(Color.BLACK);
 		itemInfoLabel.setFont(new Font("Calibri", Font.PLAIN, 20));
-		itemDescription = new JTextArea(fileModel.getItemDesription().get(0));
-		itemDescription.setSize(220,500);
+		
+		itemDescription = new JTextArea();
+		itemDescription.setText(fileModel.getItemDesription().get(0));
+		itemDescription.setSize(210,500);
 		itemDescription.setLocation(10, 70);
 		itemDescription.setForeground(Color.WHITE);
 		itemDescription.setBackground(Color.BLACK);
