@@ -1,24 +1,17 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import sun.text.normalizer.UBiDiProps;
 
 import com.SOEN6441_DND.Controller.ItemSceneController;
 import com.SOEN6441_DND.Model.FileOperationModel;
@@ -47,6 +40,7 @@ public class ItemScene extends View implements Observer {
 	// ComboBox
 	public JComboBox<itemTypeList> itemType;
 	public JComboBox subItemType;
+	public JComboBox enchantList;
 
 	// Label
 	public JLabel itemTypeLabel;
@@ -59,7 +53,7 @@ public class ItemScene extends View implements Observer {
 	
 	// TextField
 	public JTextField nameField;
-	public JTextField enchantField;
+
 	// Controllers
 	public ItemSceneController itemController;
 
@@ -120,10 +114,9 @@ public class ItemScene extends View implements Observer {
 		enchantLabel.setLocation(30, 250);
 		enchantLabel.setForeground(Color.WHITE);
 		
-		enchantField = new JTextField();
-		enchantField.setSize(40, 25);
-		enchantField.setLocation(250, 250);
-		
+		enchantList = new JComboBox(itemViewModel.getEnchanListValues());
+		enchantList.setSize(40, 20);
+		enchantList.setLocation(250, 250);
 		
 		
 		itemViewPanel.add(itemTypeLabel);
@@ -133,7 +126,7 @@ public class ItemScene extends View implements Observer {
 		itemViewPanel.add(nameLabel);
 		itemViewPanel.add(enchantLabel);
 		itemViewPanel.add(nameField);
-		itemViewPanel.add(enchantField);
+		itemViewPanel.add(enchantList);
 		
 		
 
@@ -183,6 +176,7 @@ public class ItemScene extends View implements Observer {
 		itemInfoPanel.add(itemInfoLabel);
 		
 		navMenuPanel = new NavigationPanelView();
+		navMenuPanel.saveButton.addActionListener(itemController);
 		this.add(navMenuPanel);
 		this.add(itemViewPanel);
 		this.add(imagePanel);

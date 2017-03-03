@@ -1,8 +1,12 @@
 package com.SOEN6441_DND.Controller;
 import java.awt.event.ActionEvent;
+
+
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -34,7 +38,22 @@ public class MainSceneController implements ActionListener{
 			System.out.println("Start Game button pressed");
 		}
 		if (e.getSource() == homeScreen.mapCreator) {
-			gameController.mainFrame.setView(new MapView());
+			String[] mapValue={"10","11","12","13","14","15"};
+			JComboBox txtX = new JComboBox();
+			txtX.setModel(new DefaultComboBoxModel(mapValue));
+			JComboBox txtY = new JComboBox();
+			txtY.setModel(new DefaultComboBoxModel(mapValue));
+			Object[] message = { "Size of X:", txtX, "Size of Y:", txtY };
+			int option = JOptionPane.showConfirmDialog(null, message,
+					"SET SIZE OF MAP", JOptionPane.CANCEL_OPTION);
+			if (option == JOptionPane.OK_OPTION) {
+				//mapModel.setMapWidth(Integer.parseInt(txtX.getText().trim()));
+				//mapModel.setMapHeight(Integer.parseInt(txtY.getText().trim()));
+				
+				gameController.mainFrame.setView(new MapView(txtX.getSelectedItem().toString(),txtY.getSelectedItem().toString()));
+
+			}
+			
 
 		}
 			if (e.getSource() == homeScreen.mapEditor) {
@@ -46,6 +65,7 @@ public class MainSceneController implements ActionListener{
 			}
 			if (e.getSource() == homeScreen.editItem) {
 				System.out.println("item editor fired");
+				File file = openItemFile();
 			}
 			if (e.getSource() == homeScreen.characterCreation) {
 				gameController.mainFrame.setView(new CharacterScene());
@@ -80,4 +100,22 @@ public class MainSceneController implements ActionListener{
 		}
 	}
 
+	/**to open file for editing map
+	 * 
+	 * @return File type
+	 */
+	public File openItemFile() {
+		JFileChooser fileChooser = new JFileChooser(new File("itemSave/"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
+				"xml");
+		fileChooser.setFileFilter(filter);
+		int option = fileChooser.showOpenDialog(gameController.mainFrame);
+
+		if (option == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			return file;
+		} else {
+			return null;
+		}
+	}
 }

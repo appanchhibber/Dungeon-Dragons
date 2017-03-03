@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Controller.GameController;
 import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Model.MapModel;
 
@@ -14,49 +15,38 @@ public class MapView extends View {
 	public NavigationPanelView navPanel;
 	public InventoryPanelView inventView;
 	public GridView gridView;
-	
+	public GameController gameController;
 	public MapModel mapModel;
 	public MapViewController mapController;
 
 	// Global Variables
 public	int mapWidth;
 public	int mapHeight;
+	
+	public MapView(String textX,String textY) {
+		// TODO Auto-generated constructor stub
+		mapWidth = Integer.parseInt(textX);
+		mapHeight = Integer.parseInt(textY);
+	
+		gridView=new GridView(mapWidth, mapHeight,this);
+		this.add(gridView);
+	}
 
 	@Override
 	protected void initSubviews() {
 		super.initSubviews();
-		String[] mapValue={"10","11","12","13","14","15"};
+		
 		mapModel = new MapModel();
 		mapController = new MapViewController(this);
 		// The Dialog Box for dimensions
-		JComboBox txtX = new JComboBox();
-		txtX.setModel(new DefaultComboBoxModel(mapValue));
-		JComboBox txtY = new JComboBox();
-		txtY.setModel(new DefaultComboBoxModel(mapValue));
-		Object[] message = { "Size of X:", txtX, "Size of Y:", txtY };
-		int option = JOptionPane.showConfirmDialog(null, message,
-				"SET SIZE OF MAP", JOptionPane.OK_CANCEL_OPTION);
-		if (option == JOptionPane.OK_OPTION) {
-			//mapModel.setMapWidth(Integer.parseInt(txtX.getText().trim()));
-			//mapModel.setMapHeight(Integer.parseInt(txtY.getText().trim()));
-			mapWidth = Integer.parseInt(txtX.getSelectedItem().toString());
-			mapHeight = Integer.parseInt(txtY.getSelectedItem().toString());
-			
-			
-			
-			gridView=new GridView(mapWidth, mapHeight);
-			this.add(gridView);
-			
-
-		}
-
-		//
+		
 		inventView = new InventoryPanelView();
 		inventView.entryDoorLabel.addMouseMotionListener(mapController);
 		inventView.wallLabel.addMouseMotionListener(mapController);
 		inventView.chestLabel.addMouseMotionListener(mapController);
 		inventView.exitDoorLabel.addMouseMotionListener(mapController);
 		inventView.validateButton.addActionListener(mapController);
+		inventView.removeButton.addActionListener(mapController);
 		this.add(inventView);
 
 		navPanel = new NavigationPanelView();

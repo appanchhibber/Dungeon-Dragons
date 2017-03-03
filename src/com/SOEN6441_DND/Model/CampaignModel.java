@@ -10,6 +10,7 @@ public class CampaignModel extends Observable {
 	public String campaignName;
 	public DefaultListModel mapList;
 	public DefaultListModel selectedMapList;
+	public DefaultListModel campMapList;
 	public String message;
 	public String getCampaignName() {
 		return campaignName;
@@ -18,6 +19,14 @@ public class CampaignModel extends Observable {
 		this.campaignName = campaignName;
 	}
 	
+	public DefaultListModel getCampMapList() {
+		return campMapList;
+	}
+	public void setCampMapList(DefaultListModel campMapList) {
+		this.campMapList = campMapList;
+		message="setCampMapList";
+		notifyCampaignView(message);
+	}
 	public DefaultListModel getSelectedMapList() {
 		return selectedMapList;
 	}

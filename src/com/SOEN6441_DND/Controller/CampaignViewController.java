@@ -25,19 +25,14 @@ public class CampaignViewController implements ActionListener {
 		
 		// TODO Auto-generated method stub
 		if(e.getSource()==campaignView.addAllMaps){
-			campaignModel.notifyCampaignView("AddAll");
+			campaignModel.setCampMapList(campaignModel.getMapList());
+
 		}
 		else if(e.getSource()==campaignView.removeAllMaps){
 			campaignModel.notifyCampaignView("RemoveAll");
 		}
-        else if(e.getSource()==campaignView.removeAllMaps){
-            campaignModel.notifyCampaignView("RemoveAll");
-        }
-        else if(e.getSource()==campaignView.removeAllMaps){
-            campaignModel.notifyCampaignView("RemoveAll");
-        }
         else if(e.getSource()==campaignView.addMap){
-             DefaultListModel model=new DefaultListModel();
+             DefaultListModel model=(DefaultListModel)campaignView.campMaps.getModel();
              for (Object selectedValue : campaignView.maps.getSelectedValuesList()) {
                     model.addElement(selectedValue);
                     campaignModel.mapList.removeElement(selectedValue);
@@ -47,9 +42,10 @@ public class CampaignViewController implements ActionListener {
             }
         else if(e.getSource()==campaignView.removeMap){
             DefaultListModel model =(DefaultListModel)campaignView.maps.getModel();
+            campaignModel.campMapList=(DefaultListModel)campaignView.campMaps.getModel();
             for(Object selectedValue: campaignView.campMaps.getSelectedValuesList()){
                 model.addElement(selectedValue);
-                campaignModel.selectedMapList.removeElement(selectedValue);
+                campaignModel.campMapList.removeElement(selectedValue);
             }
 
             campaignModel.setMapList(model);

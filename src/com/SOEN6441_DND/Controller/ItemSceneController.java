@@ -10,7 +10,14 @@ import javax.swing.JRadioButton;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.ItemModel;
 import com.SOEN6441_DND.Views.ItemScene;
-
+/**
+ * This Class is a view for Item Creation and Manipulation. This class is
+ * observe by Item Model.	
+ * 
+ * @author Paras Malik
+ * 
+ *
+ */
 public class ItemSceneController implements ActionListener {
 
 	public ItemScene itemScreen;
@@ -78,6 +85,11 @@ public class ItemSceneController implements ActionListener {
 				itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
 			}
 
+		}
+	
+		else if(e.getSource() == itemScreen.navMenuPanel.saveButton){
+			
+			fileModel.writeItemData(itemScreen);
 		}
 	}
 }
