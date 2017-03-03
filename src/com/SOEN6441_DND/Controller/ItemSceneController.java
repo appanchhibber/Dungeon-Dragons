@@ -3,16 +3,19 @@ package com.SOEN6441_DND.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.ItemModel;
 import com.SOEN6441_DND.Views.ItemScene;
+
 /**
  * This Class is a view for Item Creation and Manipulation. This class is
- * observe by Item Model.	
+ * observe by Item Model.
  * 
  * @author Paras Malik
  * 
@@ -81,21 +84,29 @@ public class ItemSceneController implements ActionListener {
 
 		} else if (e.getSource() == itemScreen.subItemType) {
 			if (itemScreen.subItemType.getSelectedIndex() != -1) {
-				itemModel.setImage(fileModel.getItemsImage().get(
-						itemScreen.subItemType.getSelectedIndex()));
-			
-				itemModel.setItemDecsription(fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
+				itemModel.setImage(fileModel.getItemsImage().get(itemScreen.subItemType.getSelectedIndex()));
+
+				itemModel.setItemDecsription(
+						fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
 			} else {
-				
+
 				itemModel.setImage(fileModel.getItemsImage().get(0));
 				itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
 			}
 
 		}
-	
-		else if(e.getSource() == itemScreen.navMenuPanel.saveButton){
-			
-			fileModel.writeItemData(itemScreen);
+
+		else if (e.getSource() == itemScreen.navMenuPanel.saveButton) {
+			if (itemScreen.nameField.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Please enter Item name.");
+			} else {
+				try {
+					JOptionPane.showMessageDialog(null, fileModel.writeItemData(itemScreen));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		}
 	}
 }

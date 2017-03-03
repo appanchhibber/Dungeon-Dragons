@@ -26,9 +26,9 @@ public class CharacterScene extends View implements Observer {
 	public CharacterSceneController characterController;
 	// Panels
     View imagePanel;
-	NavigationPanelView navMenuPanel;
+	public NavigationPanelView navMenuPanel;
 	public AbilityPanelView abilityPanel;
-	
+	public ItemAssignView itemAssignView;
 	// Labels
 	JLabel nameLabel;
 	JLabel imageLabel;
@@ -51,11 +51,13 @@ public class CharacterScene extends View implements Observer {
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
 		super.initSubviews();
+		
 		//Model Initialization
 		characterViewModel= new CharacterModel();
 		abilityViewModel=new AbilitiyModel();
 		abilityModifier= new AbilitiyModel();
 		abilityScore= new AbilitiyModel();
+		itemAssignView=new ItemAssignView();
 		characterViewModel.setAbilityScore(abilityScore);
 		characterViewModel.setAbilityModifier(abilityModifier);
 	
@@ -142,6 +144,8 @@ public class CharacterScene extends View implements Observer {
 		setAbilityScore();
 		this.setVisible(true);
 		this.add(navMenuPanel);
+		navMenuPanel.nextButton.addActionListener(characterController);
+		navMenuPanel.saveButton.addActionListener(characterController);
 		this.add(imagePanel);
 		this.add(abilityPanel);
 		

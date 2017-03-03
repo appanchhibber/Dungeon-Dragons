@@ -52,12 +52,7 @@ public class MainScene extends View {
 
 		mapCreator = new JMenuItem("Map Creator");
 		mapCreator.addActionListener(msController);
-		mnMap.add(mapCreator);
-
-		mapEditor = new JMenuItem("Map Editor");
-		mapEditor.addActionListener(msController);
-		mnMap.add(mapEditor);
-		
+		mnMap.add(mapCreator);		
 		JMenu mnCampaign=new JMenu("Campaign");
 		menuBar.add(mnCampaign);
 		campaignCreator=new JMenuItem("Campaign Creator");
