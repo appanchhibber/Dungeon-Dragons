@@ -1,36 +1,38 @@
 <ring>
-	<type id ="1">
+	<type id="1">
 		<name>Magic Clutch</name>
 		<image>image/MagicClutchRing.jpg</image>
 		<description>Magic Clutch Ring is a Ring in Dungeons and Dragons.
-Increases magic attack by 15%
-Increases incoming physical damage 10%
-Weight: 0.8
-</description>
+			Increases magic attack by 15%
+			Increases incoming physical damage 10%
+			Weight: 0.8
+		</description>
 	</type>
-	<type id ="2">
+	<type id="2">
 		<name>Hornet Ring</name>
 		<image>image/HornetRing.jpg</image>
 		<description>Hornet Ring is a Ring in Dungeons and Dragons.
-The % of critical damage increased now depends on infusion, weapon upgrade level, wether you back stab or riposte, and the weapon itself.
-Weight: 1.1</description>
+			The % of critical damage increased now depends on infusion, weapon
+			upgrade level, wether you back stab or riposte, and the weapon
+			itself.
+			Weight: 1.1</description>
 	</type>
-	<type id ="3">
+	<type id="3">
 		<name>Young Dragon Ring</name>
 		<image>image/YoungDragonRing.jpg</image>
 		<description>Young Dragon is Ring in Dungeons and Dragons.
-Boosts damage by 12%
-Weight: 0.7</description>
+			Boosts damage by 12%
+			Weight: 0.7</description>
 	</type>
-	<type id ="4">
+	<type id="4">
 		<name>Red Tearstone Ring</name>
 		<image>image/RedTearstoneRing.jpg</image>
 		<description></description>
 	</type>
-	<type id ="5">
+	<type id="5">
 		<name>Shield Ring</name>
 		<image>image/ShieldRing.jpg</image>
 		<description>Shield Ring is a Ring Dungeons and Dragons.
-Boosts all damage absorption by +25% when HP is 99%+ full.</description>
-	</type>	
+			Boosts all damage absorption by +25% when HP is 99%+ full.</description>
+	</type>
 </ring>

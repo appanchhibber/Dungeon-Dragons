@@ -63,10 +63,10 @@ public FileOperationModel ioModel;
 		else if(e.getSource()==mapView.navPanel.saveButton){
 			JFileChooser fileChooser = new JFileChooser(new File("maps/"));
 			fileChooser.addChoosableFileFilter(new FileNameExtensionFilter(
-					"Dungeon and DragonsS Map", "xml"));
+					"XML", "xml"));
 			int result = fileChooser.showSaveDialog(null);
 			if (result == JFileChooser.APPROVE_OPTION) {
-				File file = fileChooser.getSelectedFile();
+				File file = new File(fileChooser.getSelectedFile()+".xml");
 				String saveResult=ioModel.writeMapData(file,mapModel);
 			}
 		

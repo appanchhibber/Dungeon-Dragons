@@ -1,56 +1,59 @@
 <boots>
-	<type id ="1">
+	<type id="1">
 		<name>Predator's Grace</name>
 		<image>image/PredatorsGrace.jpg</image>
-		<description>Predator's Grace is a unique pair of hide boots found in Dungeons and Dragons.
-The boots can be upgraded at a workbench with an iron ingot 
-Base Armor :5, Weight : 1lbs, Base Value : 117
-</description>
+		<description>Predator's Grace is a unique pair of hide boots found in
+			Dungeons and Dragons.
+			The boots can be upgraded at a workbench with an iron ingot
+			Base Armor :5, Weight : 1lbs, Base Value : 117
+		</description>
 	</type>
-	<type id ="2">
+	<type id="2">
 		<name>Bonemold Boots</name>
 		<image>image/BonemoldBoots.jpg</image>
-		<description>Bonemold Boots are a piece of heavy armor and part of the Bonemold armor set.
-They can be forged at a blacksmith's forge with the following components: 
-1 × Iron Ingot 
-6 × Bone Meal 
-1 × Netch Leather
-Base Armor : 12, Weight : 7, Base Value : 60
-</description>
+		<description>Bonemold Boots are a piece of heavy armor and part of the
+			Bonemold armor set.
+			They can be forged at a blacksmith's forge with the following components:
+			1 × Iron Ingot
+			6 × Bone Meal
+			1 × Netch Leather
+			Base Armor : 12, Weight : 7, Base Value : 60
+		</description>
 	</type>
-	<type id ="3">
+	<type id="3">
 		<name>Dwarven Boots</name>
 		<image>image/DwarvenBoots.jpg</image>
 		<description>Dwarven Boots are a piece of heavy armor.
-They can be crafted at a blacksmith's forge with the following components: 
-2 × Dwarven Metal Ingot 
-2 × Leather Strips 
-1 × Iron Ingot 
-1 × Steel Ingot
-Base Armor : 13, Weight : 10, Base Value : 85
-</description>
+			They can be crafted at a blacksmith's forge with the following
+			components:
+			2 × Dwarven Metal Ingot
+			2 × Leather Strips
+			1 × Iron Ingot
+			1 × Steel Ingot
+			Base Armor : 13, Weight : 10, Base Value : 85
+		</description>
 	</type>
-	<type id ="4">
+	<type id="4">
 		<name>Glass Boots</name>
 		<image>image/GlassBoots.jpg</image>
 		<description>Glass Boots are a piece of light armor.
- It can be forged at a blacksmith's forge with the following components: 
-2 × Refined Malachite 
-1 × Refined Moonstone 
-2 × Leather Strips 
-1 × Leather
-Base Armor : 11, Weight : 2, Base Value : 190</description>
+			It can be forged at a blacksmith's forge with the following components:
+			2 × Refined Malachite
+			1 × Refined Moonstone
+			2 × Leather Strips
+			1 × Leather
+			Base Armor : 11, Weight : 2, Base Value : 190</description>
 	</type>
-	<type id ="5">
+	<type id="5">
 		<name>Steel Plate Boots</name>
 		<image>image/SteelPlateBoots.jpg</image>
 		<description>Steel Plate Boots are a piece of heavy armor.
-They can be forged at a blacksmith's forge with the following components: 
-1 × Corundum Ingot 
-2 × Steel Ingots 
-1 × Iron Ingot 
-2 × Leather Strips
-Base Armor : 14, Weight : 9, Base Value : 125
-</description>
-	</type>	
+			They can be forged at a blacksmith's forge with the following components:
+			1 × Corundum Ingot
+			2 × Steel Ingots
+			1 × Iron Ingot
+			2 × Leather Strips
+			Base Armor : 14, Weight : 9, Base Value : 125
+		</description>
+	</type>
 </boots>

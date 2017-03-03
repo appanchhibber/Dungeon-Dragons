@@ -1,15 +1,9 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.TransferHandler;
-
 import com.SOEN6441_DND.Controller.TransferHandlerController;
 
 public class InventoryPanelView extends View {
