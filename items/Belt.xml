@@ -34,7 +34,9 @@
 			increases its wearer's resistances.
 			+1 armor
 			+138 fire resistance
-			+138 nature resistance</description>
+			+138
+			nature resistance
+		</description>
 	</type>
 	<type id="5">
 		<name>Evra's Trophy Belt</name>
@@ -43,6 +45,8 @@
 			This grisly belt is filled with monstrous teeth, chipped blades,
 			scraps of fur, and armor fragments.
 			+2 health regeneration
-			+3% physical damage </description>
+			+3% physical
+			damage
+		</description>
 	</type>
 </belt>

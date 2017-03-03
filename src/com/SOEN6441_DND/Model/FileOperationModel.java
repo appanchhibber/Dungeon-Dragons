@@ -79,12 +79,9 @@ public class FileOperationModel {
 			NodeList nList = doc.getElementsByTagName("type");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Element eElement = (Element) nList.item(i);
-				itemsName.add(eElement.getElementsByTagName("name").item(0)
-						.getTextContent());
-				itemsImage.add(eElement.getElementsByTagName("image").item(0)
-						.getTextContent());
-				itemDesription.add(eElement.getElementsByTagName("description")
-						.item(0).getTextContent());
+				itemsName.add(eElement.getElementsByTagName("name").item(0).getTextContent());
+				itemsImage.add(eElement.getElementsByTagName("image").item(0).getTextContent());
+				itemDesription.add(eElement.getElementsByTagName("description").item(0).getTextContent());
 
 				// items.add(eElement.getTextContent());
 			}
@@ -109,112 +106,85 @@ public class FileOperationModel {
 	/**
 	 * This method is reponsible for saving the item created.
 	 * 
-	 * @param currentScene ItemScene
+	 * @param currentScene
+	 *            ItemScene
 	 * @author Paras Malik
+	 * @throws IOException 
 	 */
-	public void writeItemData(ItemScene currentScene) {
+	public String writeItemData(ItemScene currentScene) throws IOException {
+		File file = new File("itemSave/" + currentScene.itemType.getSelectedItem().toString() + ".xml");
 		
-		File file = new File("itemSave/"+currentScene.itemType.getSelectedItem().toString()+".xml");
-		if(file.exists()){
-		
-			SAXReader reader = new SAXReader();
-			
-				org.dom4j.Document document;
-				try {
-					document = reader.read(file);
-					
-					if(document.getRootElement().getName() == currentScene.itemType.getSelectedItem().toString())
-					{
-						
-					
-					org.dom4j.Element rootElement = document.getRootElement();
-					Node helmet=rootElement.selectSingleNode("type");
-					org.dom4j.Element type=rootElement.element("type");
-					List abc=type.elements();
-					System.out.println(abc);
-					
-				
-					
-					
-					}
-				} catch (DocumentException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-					
-			
-		}
-		else{
+		if (file.exists()) {
 
-		org.dom4j.Document document = DocumentHelper.createDocument();
-		org.dom4j.Element root = document.addElement(currentScene.itemType.getSelectedItem().toString());
-		
-		org.dom4j.Element typeId = root.addElement("type").addAttribute("Id", "1");
-		typeId.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
-		
-		typeId.addElement("name").addText(currentScene.nameField.getText());
-		
-		typeId.addElement("enchantValue").addText(currentScene.enchantList.getSelectedItem().toString());
-		
-		
-		try {
-			OutputFormat outputFormat = OutputFormat.createPrettyPrint();
-			FileOutputStream fos = new FileOutputStream(new File("itemSave/"+currentScene.itemType.getSelectedItem().toString()+".xml"));
+			SAXReader reader = new SAXReader();
+			org.dom4j.Document document;
 			try {
-				XMLWriter xmlWriter = new XMLWriter(fos, outputFormat);
-				try {
-					xmlWriter.write(document);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} catch (UnsupportedEncodingException e) {
+				document = reader.read(file);
+				org.dom4j.Element root= document.getRootElement();
+				org.dom4j.Element typeElement= root.element("type");
+				
+				List<Element> list = root.elements();
+				int total=list.size()+1;
+				org.dom4j.Element typeId = root.addElement("type").addAttribute("id", String.valueOf(total));
+				typeId.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
+				typeId.addElement("name").addText(currentScene.nameField.getText());
+				typeId.addElement("enchantValue").addText(currentScene.enchantList.getSelectedItem().toString());
+				write(document,file);
+			} catch (DocumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		  
+		} else {
+
+			org.dom4j.Document document = DocumentHelper.createDocument();
+			org.dom4j.Element root = document.addElement(currentScene.itemType.getSelectedItem().toString());
+			org.dom4j.Element typeId = root.addElement("type").addAttribute("id", "1");
+			typeId.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
+			typeId.addElement("name").addText(currentScene.nameField.getText());
+			typeId.addElement("enchantValue").addText(currentScene.enchantList.getSelectedItem().toString());
+			write(document,file);
 		}
+		return "File Saved!!";
 		
-		
-		
+
 	}
+    public void write(org.dom4j.Document document,File file) throws IOException {
+    	OutputFormat format = OutputFormat.createPrettyPrint();
+	        // lets write to a file
+	        XMLWriter writer = new XMLWriter(
+	            new FileWriter(file),format
+	        );
+	        writer.write( document);
+	        writer.close();
+	    }
 
 	/**
 	 * This method is responsible for saving the map created
 	 * 
-	 * @param mapModel  MapModel
+	 * @param mapModel
+	 *            MapModel
 	 * @author Appan Chhibber
 	 */
-	public String writeMapData(File file,MapModel mapModel) {
+	public String writeMapData(File file, MapModel mapModel) {
 		message = "Map Saved Successfully!";
-		org.dom4j.Document document=DocumentHelper.createDocument();
-		org.dom4j.Element rootElement=document.addElement("Map");
-		
-		
-	//	rootElement.add(play.encode());
-		
-		XMLWriter writer=null;
-		try{
-			writer=new XMLWriter(new FileWriter(file));
+		org.dom4j.Document document = DocumentHelper.createDocument();
+		org.dom4j.Element rootElement = document.addElement("Map");
+
+		// rootElement.add(play.encode());
+
+		XMLWriter writer = null;
+		try {
+			writer = new XMLWriter(new FileWriter(file));
 			writer.write(document);
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally{
-			if(writer!=null)
-			{
-				try{
-				writer.close();
-				}catch(Exception e)
-				{
-					
+		} finally {
+			if (writer != null) {
+				try {
+					writer.close();
+				} catch (Exception e) {
+
 				}
 			}
 		}

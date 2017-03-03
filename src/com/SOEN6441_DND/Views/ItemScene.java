@@ -110,14 +110,14 @@ public class ItemScene extends View implements Observer {
 		
 		
 		
-		enchantLabel = new JLabel("Enter Enchantment Value (+1 - +5) :");
+		enchantLabel = new JLabel("Enchantment Value:");
 		enchantLabel.setSize(210, 20);
 		enchantLabel.setLocation(30, 250);
 		enchantLabel.setForeground(Color.WHITE);
 		
 		enchantList = new JComboBox(itemViewModel.getEnchanListValues());
-		enchantList.setSize(40, 20);
-		enchantList.setLocation(250, 250);
+		enchantList.setSize(60, 20);
+		enchantList.setLocation(180, 250);
 		
 		
 		itemViewPanel.add(itemTypeLabel);
