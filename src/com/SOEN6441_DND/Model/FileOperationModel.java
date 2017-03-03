@@ -129,7 +129,7 @@ public class FileOperationModel {
 					
 					org.dom4j.Element rootElement = document.getRootElement();
 					Node helmet=rootElement.selectSingleNode("type");
-					org.dom4j.Element type=rootElement.element("ty");
+					org.dom4j.Element type=rootElement.element("type");
 					List abc=type.elements();
 					System.out.println(abc);
 					
