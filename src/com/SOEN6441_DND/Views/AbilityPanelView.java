@@ -39,6 +39,14 @@ public class AbilityPanelView extends View implements Observer{
 	public JTextField intelligenceModifierText;
 	public JTextField wisdomModifierText;
 	public JTextField charismaModifierText;
+
+	//Ability Score
+	public JTextField strengthScoreText;
+	public JTextField dexterityScoreText;
+	public JTextField constitutionScoreText;
+	public JTextField intelligenceScoreText;
+	public JTextField wisdomScoreText;
+	public JTextField charismaScoreText;
 	//Buttons
 	public JButton calculateButton;
 
@@ -90,20 +98,31 @@ public class AbilityPanelView extends View implements Observer{
 				wisdomModifierText=new JTextField();
 				charismaModifierText= new JTextField();
 				
+				strengthScoreText= new JTextField();
+				dexterityScoreText= new JTextField();
+				constitutionScoreText= new JTextField();
+				intelligenceScoreText=new JTextField();
+				wisdomScoreText=new JTextField();
+				charismaScoreText= new JTextField();
+				
+				
 				
 				calculateButton = new JButton("Calculate Ability");
-				scoreLabel.setLocation(170,5);
 				
 				
 				strengthLabel.setLocation(30,40);
 				strengthLabel.setForeground(Color.WHITE);
 				strengthLabel.setSize(80, 20);
 				strengthText.setLocation(150, 30);
-				strengthModifierText.setLocation(250,30);
 				strengthText.setSize(50, 40);
-				strengthModifierText.setSize(50,40);
 				strengthText.setEditable(false);
+				strengthModifierText.setLocation(250,30);
+				strengthModifierText.setSize(50,40);
 				strengthModifierText.setEditable(false);
+				strengthScoreText.setLocation(350,30);
+				strengthScoreText.setSize(50,40);
+				strengthScoreText.setEditable(false);
+				
 				
 				dexterityLabel.setLocation(30,110);
 				dexterityLabel.setForeground(Color.WHITE);
@@ -114,6 +133,9 @@ public class AbilityPanelView extends View implements Observer{
 				dexterityModifierText.setLocation(250, 100);
 				dexterityModifierText.setSize(50, 40);
 				dexterityModifierText.setEditable(false);
+				dexterityScoreText.setLocation(350, 100);
+				dexterityScoreText.setSize(50, 40);
+				dexterityScoreText.setEditable(false);
 				
 				constitutionLabel.setLocation(30,180);
 				constitutionLabel.setForeground(Color.WHITE);
@@ -124,6 +146,9 @@ public class AbilityPanelView extends View implements Observer{
 				constitutionModifierText.setLocation(250, 170);
 				constitutionModifierText.setSize(50, 40);
 				constitutionModifierText.setEditable(false);
+				constitutionScoreText.setLocation(350, 170);
+				constitutionScoreText.setSize(50, 40);
+				constitutionScoreText.setEditable(false);
 				
 				intelligenceLabel.setLocation(30,250);
 				intelligenceLabel.setForeground(Color.WHITE);
@@ -134,6 +159,9 @@ public class AbilityPanelView extends View implements Observer{
 				intelligenceModifierText.setLocation(250, 240);
 				intelligenceModifierText.setSize(50, 40);
 				intelligenceModifierText.setEditable(false);
+				intelligenceScoreText.setLocation(350, 240);
+				intelligenceScoreText.setSize(50, 40);
+				intelligenceScoreText.setEditable(false);
 				
 				wisdomLabel.setLocation(30,320);
 				wisdomLabel.setForeground(Color.WHITE);
@@ -144,6 +172,9 @@ public class AbilityPanelView extends View implements Observer{
 				wisdomModifierText.setLocation(250, 310);
 				wisdomModifierText.setSize(50, 40);
 				wisdomModifierText.setEditable(false);
+				wisdomScoreText.setLocation(350, 310);
+				wisdomScoreText.setSize(50, 40);
+				wisdomScoreText.setEditable(false);
 				
 				charismaLabel.setLocation(30,390);
 				charismaLabel.setForeground(Color.WHITE);
@@ -154,6 +185,9 @@ public class AbilityPanelView extends View implements Observer{
 				charismaModifierText.setLocation(250, 380);
 				charismaModifierText.setSize(50, 40);
 				charismaModifierText.setEditable(false);
+				charismaScoreText.setLocation(350, 380);
+				charismaScoreText.setSize(50, 40);
+				charismaScoreText.setEditable(false);
 				
 				calculateButton.setLocation(50,425);
 				calculateButton.setSize(200, 40);	
@@ -180,6 +214,12 @@ public class AbilityPanelView extends View implements Observer{
 				add(intelligenceModifierText);
 				add(wisdomModifierText);
 				add(charismaModifierText);
+				add(strengthScoreText);
+				add(dexterityScoreText);
+				add(constitutionScoreText);
+				add(intelligenceScoreText);
+				add(wisdomScoreText);
+				add(charismaScoreText);
 				
 	}
 	AbilityPanelView(AbilitiyModel model){

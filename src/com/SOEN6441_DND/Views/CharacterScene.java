@@ -45,6 +45,7 @@ public class CharacterScene extends View implements Observer {
 	
 	public AbilitiyModel abilityViewModel;
 	public AbilitiyModel abilityModifier;
+	public AbilitiyModel abilityScore;
 	
 	@Override
 	protected void initSubviews() {
@@ -54,7 +55,10 @@ public class CharacterScene extends View implements Observer {
 		characterViewModel= new CharacterModel();
 		abilityViewModel=new AbilitiyModel();
 		abilityModifier= new AbilitiyModel();
+		abilityScore= new AbilitiyModel();
+		characterViewModel.setAbilityScore(abilityScore);
 		characterViewModel.setAbilityModifier(abilityModifier);
+	
 		
 		//Panel Initialization
 		abilityPanel = new AbilityPanelView(abilityViewModel);
@@ -135,6 +139,7 @@ public class CharacterScene extends View implements Observer {
 		//Add Action Listener
 		abilityPanel.calculateButton.addActionListener(characterController);
 		setModifier();
+		setAbilityScore();
 		this.setVisible(true);
 		this.add(navMenuPanel);
 		this.add(imagePanel);
@@ -147,6 +152,7 @@ public class CharacterScene extends View implements Observer {
 		// TODO Auto-generated method stub
 		setImagePanel();
 		setModifier();
+		setAbilityScore();
 	}
 	
 	
@@ -168,6 +174,16 @@ public class CharacterScene extends View implements Observer {
 		abilityPanel.intelligenceModifierText.setText(String.valueOf(abilityModifier.getIntelligence()));
 		abilityPanel.wisdomModifierText.setText(String.valueOf(abilityModifier.getWisdom()));
 		abilityPanel.charismaModifierText.setText(String.valueOf(abilityModifier.getCharisma()));
+	}
+	
+	public void setAbilityScore()
+	{	
+		abilityPanel.strengthScoreText.setText(String.valueOf(abilityScore.getStrength()));
+		abilityPanel.constitutionScoreText.setText(String.valueOf(abilityScore.getConstitution()));
+		abilityPanel.dexterityScoreText.setText(String.valueOf(abilityScore.getDexterity()));
+		abilityPanel.intelligenceScoreText.setText(String.valueOf(abilityScore.getIntelligence()));
+		abilityPanel.wisdomScoreText.setText(String.valueOf(abilityScore.getWisdom()));
+		abilityPanel.charismaScoreText.setText(String.valueOf(abilityScore.getCharisma()));
 	}
 
 }
