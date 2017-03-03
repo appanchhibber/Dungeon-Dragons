@@ -5,15 +5,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.TransferHandler;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.MapView;
 
 public class MapViewController implements ActionListener,MouseMotionListener {
+
+	
 @Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -29,10 +35,13 @@ public class MapViewController implements ActionListener,MouseMotionListener {
 	}
 public MapView mapView;
 public MapModel mapModel;
+public FileOperationModel ioModel;
+
 	public MapViewController(MapView view)
 	{
 		this.mapView=view;
 		this.mapModel=view.mapModel;
+		ioModel=new FileOperationModel();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -52,7 +61,15 @@ public MapModel mapModel;
 			System.out.println("Remove Button Event FIred");
 		}
 		else if(e.getSource()==mapView.navPanel.saveButton){
-		System.out.println(mapModel.entry);
+			JFileChooser fileChooser = new JFileChooser(new File("maps/"));
+			fileChooser.addChoosableFileFilter(new FileNameExtensionFilter(
+					"Dungeon and DragonsS Map", "xml"));
+			int result = fileChooser.showSaveDialog(null);
+			if (result == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				String saveResult=ioModel.writeMapData(file,mapModel);
+			}
+		
 		}
 		
 	}
