@@ -22,7 +22,9 @@ public class CharacterModel extends Observable{
 	
 	private int level;
 	
-	private AbilitiyModel abilityModel;
+	private AbilitiyModel abilityScore;
+	
+	private AbilitiyModel abilityModifier;
 	
 	private int speed;
 
@@ -66,12 +68,21 @@ public class CharacterModel extends Observable{
 
 	
 
-	public AbilitiyModel getAbilityModel() {
-		return abilityModel;
+	public AbilitiyModel getAbilityScore() {
+		return abilityScore;
 	}
 
-	public void setAbilityModel(AbilitiyModel abilityModel) {
-		this.abilityModel=abilityModel;
+	public void setAbilityScore(AbilitiyModel abilityModel) {
+		this.abilityScore=abilityModel;
+		notifyCharacterView();
+	}
+
+	public AbilitiyModel getAbilityModifier() {
+		return abilityModifier;
+	}
+
+	public void setAbilityModifier(AbilitiyModel abilitiyModifier) {
+		this.abilityModifier = abilitiyModifier;
 		notifyCharacterView();
 	}
 
