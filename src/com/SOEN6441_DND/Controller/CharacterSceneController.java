@@ -3,12 +3,14 @@ package com.SOEN6441_DND.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import com.SOEN6441_DND.Model.AbilitiyModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Views.AbilityPanelView;
 import com.SOEN6441_DND.Views.CharacterScene;
+import com.SOEN6441_DND.Views.ItemAssignView;
 /**
  * This Class is responsible for handle all the view Events.
  * @author Punit Trivedi
@@ -23,7 +25,7 @@ public class CharacterSceneController implements ActionListener {
 	public AbilitiyModel abilityModifier;
 	public AbilitiyModel abilityScore;
 	public AbilityPanelView abilityPanel;
-
+    public ItemAssignView itemAssignView;
 	public CharacterSceneController(CharacterScene view) {
 		this.characterScreen = view;
 		this.characterModel = view.characterViewModel;
@@ -32,6 +34,7 @@ public class CharacterSceneController implements ActionListener {
 		abilityModifier=view.characterViewModel.getAbilityModifier();
 		abilityScore=view.characterViewModel.getAbilityScore();
 		diceRoll=new DiceRollController(4, 6); //Dice type 4d6
+		itemAssignView=new ItemAssignView();
 	}
 
 	@Override
@@ -47,12 +50,14 @@ public class CharacterSceneController implements ActionListener {
 			switch (((JRadioButton) e.getSource()).getText()) {
 			case "Human": {
 				characterModel.setImage("Human");
+				characterModel.setType("Human");
 				break;
 			}
 			case "Dwarf": {
 				characterModel.setImage("Dwarf");
 				abilityModifier.setConstitution(2);
 				abilityModifier.setIntelligence(-2);
+				characterModel.setType("Dwarf");
 				
 				break;
 			}
@@ -60,6 +65,7 @@ public class CharacterSceneController implements ActionListener {
 				characterModel.setImage("Elf");
 				abilityModifier.setDexterity(2);
 				abilityModifier.setConstitution(-2);
+				characterModel.setType("Elf");
 				break;
 			}
 			case "Orc": {
@@ -67,6 +73,7 @@ public class CharacterSceneController implements ActionListener {
 				abilityModifier.setStrength(2);
 				abilityModifier.setIntelligence(-2);
 				abilityModifier.setCharisma(-2);
+				characterModel.setType("Orc");
 				break;
 			}
 			
@@ -87,6 +94,23 @@ public class CharacterSceneController implements ActionListener {
 			abilityModifier.setWisdom(abilityModifier.getWisdom()+modifierCalculator(score.getWisdom()));
 			abilityModifier.setCharisma(abilityModifier.getCharisma()+modifierCalculator(score.getCharisma()));	
 		}
+		
+		else if(e.getSource()==characterScreen.navMenuPanel.nextButton)
+		{
+			GameController.getInstance().mainFrame.setView(itemAssignView);
+		}
+		else if(e.getSource()== characterScreen.navMenuPanel.saveButton)
+		{
+			if(characterScreen.nameText.getText().equals(null))
+			{
+				
+				JOptionPane.showMessageDialog(null, "Please enter the name of the character");
+			}
+			else
+			{
+				characterModel.setName(characterScreen.nameText.getText());
+			}
+		}
 		characterModel.setAbilityModifier(abilityModifier);
 		abilityScore.setStrength(score.getStrength()+abilityModifier.getStrength());
 		abilityScore.setDexterity(score.getDexterity()+abilityModifier.getDexterity());
@@ -95,6 +119,7 @@ public class CharacterSceneController implements ActionListener {
 		abilityScore.setCharisma(score.getCharisma()+abilityModifier.getCharisma());
 		abilityScore.setWisdom(score.getWisdom()+abilityModifier.getWisdom());
 		characterModel.setAbilityScore(abilityScore);
+
 		
 	}
 	public void resetScore(){
