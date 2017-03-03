@@ -66,6 +66,9 @@ public class MainSceneController implements ActionListener{
 			if (e.getSource() == homeScreen.editItem) {
 				System.out.println("item editor fired");
 				File file = openItemFile();
+				System.out.println(file);
+				
+				//gameController.mainFrame.setView(new ItemScene());
 			}
 			if (e.getSource() == homeScreen.characterCreation) {
 				gameController.mainFrame.setView(new CharacterScene());
