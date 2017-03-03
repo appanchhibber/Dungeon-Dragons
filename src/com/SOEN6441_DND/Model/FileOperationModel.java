@@ -1,6 +1,7 @@
 package com.SOEN6441_DND.Model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -20,6 +21,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import com.SOEN6441_DND.Views.ItemScene;
 /**
@@ -101,48 +103,69 @@ public class FileOperationModel {
 		return mapList;
 	}
 
-
+/**
+ * 
+ * @param currentScene
+ * @author Paras Malik
+ */
 	public void writeItemData(ItemScene currentScene){
 		
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();
 			
+			File file = new File("itemSave/"+currentScene.itemType.getSelectedItem().toString()+".xml");
+			if(file.exists()){
+				try {
+					documentBuilder.parse(file);
+					System.out.println(doc.getElementsByTagName("item"));
+				} catch (SAXException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			else{
+				System.out.println("nop exist");
+			}
 			//root elements
-			Document doc = documentBuilder.newDocument();
-			Element rootElement = doc.createElement(currentScene.itemType.getSelectedItem().toString());
-			doc.appendChild(rootElement);
-			
-			//item id element
-			Element itemType = doc.createElement("item");
-			rootElement.appendChild(itemType);
-			
-			//set attribute to item element
-			Attr attr = doc.createAttribute("id");
-			attr.setValue("1");
-			itemType.setAttributeNode(attr);
-			
-			//item elements
-			Element itemSubType = doc.createElement("itemtype");
-			itemSubType.appendChild(doc.createTextNode(currentScene.subItemType.getSelectedItem().toString()));
-			itemType.appendChild(itemSubType);
-			
-			//second element
-			Element name = doc.createElement("name");
-			name.appendChild(doc.createTextNode(currentScene.nameField.getText()));
-			itemType.appendChild(name);
-			
-			//third element
-			Element enchantValue = doc.createElement("enchantValue");
-			enchantValue.appendChild(doc.createTextNode(currentScene.enchantList.getSelectedItem().toString()));
-			itemType.appendChild(enchantValue);
-			
+//			Document doc = documentBuilder.newDocument();
+//			Element rootElement = doc.createElement(currentScene.itemType.getSelectedItem().toString());
+//			doc.appendChild(rootElement);
+//			
+//			//item id element
+//			Element itemType = doc.createElement("item");
+//			rootElement.appendChild(itemType);
+//			
+//			//set attribute to item element
+//			Attr attr = doc.createAttribute("id");
+//			attr.setValue("1");
+//			itemType.setAttributeNode(attr);
+//			
+//			//item elements
+//			Element itemSubType = doc.createElement("itemtype");
+//			itemSubType.appendChild(doc.createTextNode(currentScene.subItemType.getSelectedItem().toString()));
+//			itemType.appendChild(itemSubType);
+//			
+//			//second element
+//			Element name = doc.createElement("name");
+//			name.appendChild(doc.createTextNode(currentScene.nameField.getText()));
+//			itemType.appendChild(name);
+//			
+//			//third element
+//			Element enchantValue = doc.createElement("enchantValue");
+//			enchantValue.appendChild(doc.createTextNode(currentScene.enchantList.getSelectedItem().toString()));
+//			itemType.appendChild(enchantValue);
+//			
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			DOMSource source = new DOMSource(doc);
-			StreamResult streamResult = new StreamResult(new File("itemSave/itemFile.xml"));
+			StreamResult streamResult = new StreamResult(new File("itemSave/"+currentScene.itemType.getSelectedItem().toString()+".xml"));
 			
 			transformer.transform(source, streamResult);
 			System.out.println("File Saved!!");
