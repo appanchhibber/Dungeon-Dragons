@@ -118,6 +118,10 @@ public class CharacterModel extends Observable{
 	public void setDamage(String damage) {
 		this.damage = damage;
 	}
+	
+	/**
+	 * This is the Observer function notifying the Character view for any changes made.
+	 */
 	public void notifyCharacterView()
 	{
 		setChanged();

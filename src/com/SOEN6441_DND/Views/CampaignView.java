@@ -16,6 +16,11 @@ import com.SOEN6441_DND.Controller.CampaignViewController;
 import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 
+/**
+ * 
+ * @author Appan Chhibber
+ *
+ */
 public class CampaignView  extends View implements Observer{
 	
 	

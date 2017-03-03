@@ -9,10 +9,22 @@ import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Views.CampaignView;
 
+/**
+ * 
+ * @author Appan Chhibber
+ *
+ */
 public class CampaignViewController implements ActionListener {
 	CampaignView campaignView;
 	FileOperationModel ioModel;
 	CampaignModel campaignModel;
+	
+	
+	/**
+	 * This is constructor assigning passed input Campaign view
+	 * 
+	 * @param view
+	 */
 	public CampaignViewController(CampaignView view)
 	{
 		campaignView=view;
@@ -21,6 +33,9 @@ public class CampaignViewController implements ActionListener {
 	}
 
 	@Override
+	/**
+	 * This function is handling the action listener from thecampaign view.
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		// TODO Auto-generated method stub

@@ -6,6 +6,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import com.SOEN6441_DND.Controller.TransferHandlerController;
 
+/**
+ * 
+ * @author Punit Trivedi
+ * @author Appan Chhibber
+ *
+ */
 public class InventoryPanelView extends View {
 
 	public JLabel wallLabel;

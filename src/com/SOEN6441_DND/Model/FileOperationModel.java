@@ -31,12 +31,12 @@ import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
 
 /**
- * This Class is a view for Item Creation and Manipulation. This class is
- * observe by Item Model.
+ * This Class is a the file operation model handling the functionalities
+ * in and out of files for whole project.
  * 
  * @author Paras Malik
- * 
- *
+ * @author Punit Trivedi
+ *@author Appan Chhibber
  */
 public class FileOperationModel {
 
@@ -71,9 +71,10 @@ public class FileOperationModel {
 	}
 
 	/**
-	 * This Function is used to read from the Item files.
-	 * @param file
-	 * @author Punit Trivedi
+	 * This method is used to read the items file present in items folder.
+	 * Takes the input file to be read.
+	 * @param file File
+
 	 */
 	public void readFile(File file) {
 		this.file = file;
@@ -144,6 +145,10 @@ public class FileOperationModel {
 	
 	
 
+	/**
+	 * This function return the maps present in the map directory.
+	 * @return mapList List of all maps on maps directory.
+	 */
 	public DefaultListModel getAllMaps() {
 		mapList = new DefaultListModel();
 		File folder = new File("maps/");

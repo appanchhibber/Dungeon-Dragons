@@ -15,6 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 
+/**
+ * 
+ * @author Punit Trivedi
+ * @author Appan Chhibber
+ *
+ */
 public class TransferHandlerController {
 	
 

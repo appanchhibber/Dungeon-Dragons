@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.14" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.SOEN6441_DND.Controller.TransferHandlerController.ValueImportTransferHandler" 
+    project="SOEN6441_DND" file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/TransferHandlerController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="224" x="1787" y="269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.SOEN6441_DND.Controller.GameController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/GameController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="167" x="714" y="269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.SOEN6441_DND.Controller.TransferHandlerController.ValueExportTransferHandler" 
+    project="SOEN6441_DND" file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/TransferHandlerController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="251" x="2051" y="269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.SOEN6441_DND.Controller.PathValidatorController.Cell" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/PathValidatorController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="171" width="146" x="1460" y="642"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.SOEN6441_DND.Controller.MapViewController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/MapViewController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="189" width="194" x="85" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.SOEN6441_DND.Controller.DiceRollController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/DiceRollController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="225" width="146" x="319" y="269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.SOEN6441_DND.Controller.MainSceneController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/MainSceneController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="194" x="597" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.SOEN6441_DND.Controller.PathValidatorController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/PathValidatorController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="333" width="287" x="1460" y="269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.SOEN6441_DND.Controller.Game" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/Game.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="146" x="1129" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.SOEN6441_DND.Controller.CharacterSceneController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/CharacterSceneController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="238" x="319" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.SOEN6441_DND.Controller.TransferHandlerController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/TransferHandlerController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="295" x="2007" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.SOEN6441_DND.Controller.NavigationPanelController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/NavigationPanelController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="117" width="258" x="831" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.SOEN6441_DND.Controller.ItemSceneController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/ItemSceneController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="194" x="1315" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.SOEN6441_DND.Controller.CampaignViewController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/CampaignViewController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="153" width="226" x="1549" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.SOEN6441_DND.Controller.MapValidatorController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/MapValidatorController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="225" width="152" x="1815" y="-14"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="16">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="17" name="gameController"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="20" name="gameController"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="22">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="3"/>  
+  </nesting>  
+  <association id="23">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="24" name="open"/>      
+      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="27" name="gameController"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="30" name="diceRoll"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="33" name="pathValidator"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="35">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </nesting>  
+  <association id="36">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="37" name="grid"/>      
+      <multiplicity id="38" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="39">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="40" name="parent"/>      
+      <multiplicity id="41" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="42">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

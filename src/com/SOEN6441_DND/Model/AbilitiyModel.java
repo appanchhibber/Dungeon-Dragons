@@ -61,6 +61,12 @@ public class AbilitiyModel extends Observable {
 		this.charisma = charisma;
 		notifyCharacterView();
 	}
+	
+	/**
+	 * This function sets the abilities from the AbilityModel instance.
+	 * 
+	 * @param data
+	 */
 	public void setAbilities(AbilitiyModel data)
 	{
 		strength=data.strength;
@@ -71,6 +77,10 @@ public class AbilitiyModel extends Observable {
 		charisma=data.charisma;
 		notifyCharacterView();
 	}
+	
+	/**
+	 * Here Observer pattern is used notifying the character view for any changes made. 
+	 */
 	public void notifyCharacterView()
 	{
 		setChanged();

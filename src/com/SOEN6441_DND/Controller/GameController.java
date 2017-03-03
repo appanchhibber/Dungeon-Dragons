@@ -29,6 +29,9 @@ public class GameController {
 	CharacterScene character;
 	MainScene homeScreen;
 	
+	/**
+	 * Forcing single instance of the game therefore using the singleton pattern.
+	 */
 	private static GameController gameController;
 	public static GameController getInstance()
 	{
