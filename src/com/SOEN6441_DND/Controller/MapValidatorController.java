@@ -19,7 +19,12 @@ import javax.swing.JButton;
 import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.MapView;
 
-public class ValidatorController {
+/**
+ * 
+ * @author Punit Trivedi
+ *
+ */
+public class MapValidatorController {
 	private JButton[][] mapCell;
     private int exitDoorCount;
     private int entryDoorCount;
@@ -32,6 +37,11 @@ public class ValidatorController {
     
     private String result;
     
+    /**
+     * This function validates the map and returns appropriate message.
+     * @param view
+     * @return result Message of type String
+     */
 	public String validator(MapView view) {
         result="Map Validated";
 		mapCell = view.gridView.mapButtonsGrid;
@@ -100,4 +110,66 @@ for (int i = 0; i < mapCell.length; i++) {
        }
 		return result;
 	}
+
+	public String checkExitDoor(int exitDoorCount){
+		if(exitDoorCount>1){
+	    	   
+	    	    result =  "There can only be one Exit Door";
+	    return result;   
+		}
+		
+		else if(exitDoorCount==0)
+	       {
+	    	   result="There is no Exit Door";
+	      return result;
+	       }
+		
+		
+	else{
+		
+		return "Wrong Exit Door Placement";
+	}
+	}
+
+	public String checkEntryDoor(int entryDoorCount){
+		if(entryDoorCount>1){
+	    	   
+	    	    result =  "There can only be one Entry Door";
+	    return result;   
+		}
+		
+		else if(entryDoorCount==0)
+	       {
+	    	   result="There is no Entry Door";
+	      return result;
+	       }
+		
+		
+	else{
+		
+		result =  "Wrong Entry Door Placement";
+		return result;
+	}
+	}
+	public String checkChestCount(int chestCount){
+		if(chestCount>1){
+	    	   
+			result="There can only be one Chest";
+	    return result;   
+		}
+		
+		else if(chestCount==0)
+	       {
+			result="There is no chest/Character in the Map";
+	      return result;
+	       }
+		
+		
+	else{
+		
+		result =  "Wrong chest Placement";
+		return result;
+	}
+	}
+
 }

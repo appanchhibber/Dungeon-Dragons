@@ -27,6 +27,12 @@ public class ItemSceneController implements ActionListener {
 	public ItemModel itemModel;
 	public FileOperationModel fileModel;
 
+	/**
+	 * This constructor is passed with the current item view to be used
+	 * for event handling.
+	 * 
+	 * @param view
+	 */
 	public ItemSceneController(ItemScene view) {
 		itemScreen = view;
 		itemModel = view.itemViewModel;

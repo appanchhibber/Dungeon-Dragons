@@ -2,6 +2,11 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Image;
 
+/**
+ * 
+ * @author Paras Malik
+ *
+ */
 public class ArmorModel extends ItemModel{
 
 	private String type;

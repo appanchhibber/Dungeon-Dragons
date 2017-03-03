@@ -38,9 +38,6 @@ public class MainScene extends View {
 		characterCreation.addActionListener(msController);
 		mnCharacter.add(characterCreation);
 
-		editCharacter = new JMenuItem("Edit Character");
-		editCharacter.addActionListener(msController);
-		mnCharacter.add(editCharacter);
 
 		JMenu mnItem = new JMenu("Item");
 		menuBar.add(mnItem);
@@ -49,9 +46,6 @@ public class MainScene extends View {
 		itemCreation.addActionListener(msController);
 		mnItem.add(itemCreation);
 
-		editItem = new JMenuItem("Edit Item");
-		editItem.addActionListener(msController);
-		mnItem.add(editItem);
 
 		JMenu mnMap = new JMenu("Map");
 		menuBar.add(mnMap);
@@ -64,9 +58,7 @@ public class MainScene extends View {
 		campaignCreator=new JMenuItem("Campaign Creator");
 		campaignCreator.addActionListener(msController);
 		mnCampaign.add(campaignCreator);
-		campaignEditor=new JMenuItem("Campaign Editor");
-		campaignEditor.addActionListener(msController);
-		mnCampaign.add(campaignEditor);
+		
 		menuBar.setLocation(0, 0);
 		menuBar.setSize(860, 25);
 		this.add(menuBar);

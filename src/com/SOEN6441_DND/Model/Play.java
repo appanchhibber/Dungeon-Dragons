@@ -2,7 +2,11 @@ package com.SOEN6441_DND.Model;
 
 import java.io.File;
 
-
+/**
+ * 
+ * @author Appa Chhibber
+ *
+ */
 public class Play {
 private static Play currentPlay;
 	

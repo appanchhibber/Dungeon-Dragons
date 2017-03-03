@@ -7,6 +7,11 @@ import javax.swing.JButton;
 
 import com.SOEN6441_DND.Controller.NavigationPanelController;
 
+/**
+ * 
+ * @author Punit Trivedi
+ *
+ */
 public class NavigationPanelView extends View{
  //Navigation Buttons
 	public JButton homeButton;

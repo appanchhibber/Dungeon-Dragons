@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.14" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.SOEN6441_DND.Model.ArmorModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/ArmorModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="141" x="173" y="1034"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.SOEN6441_DND.Model.CampaignModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/CampaignModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="332" width="241" x="35" y="-162"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.SOEN6441_DND.Model.AbilitiyModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/AbilitiyModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="440" width="179" x="305" y="463"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.SOEN6441_DND.Model.HelmetModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/HelmetModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="152" width="141" x="343" y="1034"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="5" language="java" name="com.SOEN6441_DND.Model.ItemModel.itemTypeList" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/ItemModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="206" width="142" x="513" y="1034"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="6" language="java" name="com.SOEN6441_DND.Model.BeltModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/BeltModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="141" x="684" y="1034"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.SOEN6441_DND.Model.MapModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/MapModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="530" width="215" x="950" y="463"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.SOEN6441_DND.Model.RingModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/RingModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="141" x="854" y="1034"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.SOEN6441_DND.Model.ShieldModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/ShieldModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="141" x="1024" y="1034"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.SOEN6441_DND.Model.CharacterModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/CharacterModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="584" width="209" x="305" y="-162"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.SOEN6441_DND.Model.ItemModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/ItemModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="422" width="203" x="513" y="463"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.SOEN6441_DND.Model.BootsModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/BootsModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="141" x="543" y="-162"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.SOEN6441_DND.Model.FileOperationModel" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/FileOperationModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="386" width="215" x="713" y="-162"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.SOEN6441_DND.Model.Play" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Model/Play.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="224" width="151" x="957" y="-162"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="15">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="16" name="abilityScore"/>      
+      <multiplicity id="17" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="18">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <association id="19">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="20" name="currentPlay"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="23">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="24" name="map"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="27" name="itemtype"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="29">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="30">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="31" name="abilityModifier"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="33">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="34">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <association id="36">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="37" name="ownedItems"/>      
+      <multiplicity id="38" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -12,7 +12,10 @@ import javax.swing.JButton;
 
 import org.junit.Test;
 
+import com.SOEN6441_DND.Controller.MapValidatorController;
+import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Controller.PathValidatorController;
+import com.SOEN6441_DND.Views.MapView;
 
 //import java.awt.Dimension;
 
@@ -25,7 +28,7 @@ public class ControllerTest {
 	public PathValidatorController pathValidator;
 
 	@Test
-	public void MapValidation() {
+	public void testMapValidation() {
 		pathValidator= new PathValidatorController();
 		JButton[][] mapCell;
 		JButton mapButtonsGrid[][];
@@ -61,4 +64,49 @@ public class ControllerTest {
 		assertEquals("NoPath", message);
 	}
 
+	@Test
+	public void testExitDoorGreaterThanZero(){
+		
+		String expected = "There can only be one Exit Door";
+		MapValidatorController mapValidatorController = new MapValidatorController();
+		assertEquals(expected,mapValidatorController.checkExitDoor(2));
+	}
+	
+	@Test
+	public void testExitDoorEqualZero(){
+		
+		String expected = "There is no Exit Door";
+		MapValidatorController mapValidatorController = new MapValidatorController();
+		assertEquals(expected,mapValidatorController.checkExitDoor(0));
+	}
+	
+	@Test
+	public void testEntryDoorGreaterThanZero(){
+		
+		String expected = "There can only be one Entry Door";
+		MapValidatorController mapValidatorController = new MapValidatorController();
+		assertEquals(expected,mapValidatorController.checkEntryDoor(3));
+	}
+	
+	@Test
+	public void testCheckChestCountGreaterZero(){
+		
+		String expected = "There can only be one Chest";
+		MapValidatorController mapValidatorController = new MapValidatorController();
+		assertEquals(expected,mapValidatorController.checkChestCount(3));
+	}
+	@Test
+	public void testCheckChestCountEqualZero(){
+		
+		String expected = "There is no chest/Character in the Map";
+		MapValidatorController mapValidatorController = new MapValidatorController();
+		assertEquals(expected,mapValidatorController.checkChestCount(0));
+	}
+	@Test
+	public void testEntrytDoorEqualZero(){
+		
+		String expected = "There is no Entry Door";
+		MapValidatorController mapValidatorController = new MapValidatorController();
+		assertEquals(expected,mapValidatorController.checkEntryDoor(0));
+	}
 }

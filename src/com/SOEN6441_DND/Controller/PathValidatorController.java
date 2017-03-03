@@ -12,6 +12,12 @@ import java.util.PriorityQueue;
 
 import javax.swing.JButton;
 
+/**
+ * 
+ * @author Appan Chhibber
+ * @author Punit Trivedi
+ *
+ */
 public class PathValidatorController {
     public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;

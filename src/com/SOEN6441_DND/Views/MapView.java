@@ -11,6 +11,11 @@ import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Model.MapModel;
 
 @SuppressWarnings("serial")
+/**
+ * 
+ * @author Appan Chhibber
+ *
+ */
 public class MapView extends View {
 	public NavigationPanelView navPanel;
 	public InventoryPanelView inventView;

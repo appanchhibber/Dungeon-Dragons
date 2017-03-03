@@ -1,5 +1,10 @@
 package com.SOEN6441_DND.Model;
 
+/**
+ * 
+ * @author Paras Malik
+ *
+ */
 public class HelmetModel extends ItemModel{
 
 	public String name;

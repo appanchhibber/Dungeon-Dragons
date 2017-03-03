@@ -27,15 +27,16 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
 
 /**
- * This Class is a view for Item Creation and Manipulation. This class is
- * observe by Item Model.
+ * This Class is a the file operation model handling the functionalities
+ * in and out of files for whole project.
  * 
  * @author Paras Malik
- * 
- *
+ * @author Punit Trivedi
+ *@author Appan Chhibber
  */
 public class FileOperationModel {
 
@@ -46,6 +47,7 @@ public class FileOperationModel {
 	private ArrayList<String> itemsName;
 	private ArrayList<String> itemsImage;
 	private ArrayList<String> itemDesription;
+	private ArrayList<String> enchantValue;
 	private DefaultListModel mapList;
 
 	private String message;
@@ -68,11 +70,18 @@ public class FileOperationModel {
 		return itemsImage;
 	}
 
+	/**
+	 * This method is used to read the items file present in items folder.
+	 * Takes the input file to be read.
+	 * @param file File
+
+	 */
 	public void readFile(File file) {
 		this.file = file;
 		itemsName = new ArrayList<String>();
 		itemsImage = new ArrayList<String>();
 		itemDesription = new ArrayList<String>();
+		enchantValue= new ArrayList<String>();
 		try {
 			dbFactory = DocumentBuilderFactory.newInstance();
 			dBuilder = dbFactory.newDocumentBuilder();
@@ -83,7 +92,15 @@ public class FileOperationModel {
 				Element eElement = (Element) nList.item(i);
 				itemsName.add(eElement.getElementsByTagName("name").item(0).getTextContent());
 				itemsImage.add(eElement.getElementsByTagName("image").item(0).getTextContent());
-				itemDesription.add(eElement.getElementsByTagName("description").item(0).getTextContent());
+			//	System.out.println(file.getPath().split("/")[0]);	
+				if(file.getPath().split("/")[0].equals("items"))
+				{
+					itemDesription.add(eElement.getElementsByTagName("description").item(0).getTextContent());
+				}
+				else if(file.getPath().split("/")[0].equals("itemSave"))
+				{
+					enchantValue.add(eElement.getElementsByTagName("ench").item(0).getTextContent());
+				}
 
 				// items.add(eElement.getTextContent());
 			}
@@ -92,7 +109,46 @@ public class FileOperationModel {
 			e.printStackTrace();
 		}
 	}
+	
+    public String writeCharacter(CharacterScene characterScene)
+    {
+    	CharacterModel characterModel=characterScene.characterViewModel;
+    	File file = new File("characters/" + characterModel.getName() + ".xml");
+			org.dom4j.Document document = DocumentHelper.createDocument();
+			org.dom4j.Element root = document.addElement("Character");
+			root.addElement("name").addAttribute("id", "1").addText(characterModel.getName());
+			root.addElement("type").addText(characterModel.getType());
+			root.addElement("level").addText(String.valueOf(characterModel.getLevel()));
+			root.addElement("image").addText(String.valueOf(characterModel.getImage()));
+			
+			org.dom4j.Element abilityScore  = root.addElement("abilityScore");
+			abilityScore.addElement("strength").addText(String.valueOf(characterModel.getAbilityScore().getStrength()));
+			abilityScore.addElement("dexterity").addText(String.valueOf(characterModel.getAbilityScore().getDexterity()));
+			abilityScore.addElement("constitution").addText(String.valueOf(characterModel.getAbilityScore().getConstitution()));
+			abilityScore.addElement("intelligence").addText(String.valueOf(characterModel.getAbilityScore().getIntelligence()));
+			abilityScore.addElement("wisdom").addText(String.valueOf(characterModel.getAbilityScore().getWisdom()));
+			abilityScore.addElement("charisma").addText(String.valueOf(characterModel.getAbilityScore().getCharisma()));
+			
+			org.dom4j.Element abilityModifier  = root.addElement("abilityModifier");
+			abilityModifier.addElement("strength").addText(String.valueOf(characterModel.getAbilityModifier().getStrength()));
+			abilityModifier.addElement("dexterity").addText(String.valueOf(characterModel.getAbilityModifier().getDexterity()));
+			abilityModifier.addElement("constitution").addText(String.valueOf(characterModel.getAbilityModifier().getConstitution()));
+			abilityModifier.addElement("intelligence").addText(String.valueOf(characterModel.getAbilityModifier().getIntelligence()));
+			abilityModifier.addElement("wisdom").addText(String.valueOf(characterModel.getAbilityModifier().getWisdom()));
+			abilityModifier.addElement("charisma").addText(String.valueOf(characterModel.getAbilityModifier().getCharisma()));
+			
+			
+			//write(document,file);
+		return "File Saved!!";
+    	
+    }
+	
+	
 
+	/**
+	 * This function return the maps present in the map directory.
+	 * @return mapList List of all maps on maps directory.
+	 */
 	public DefaultListModel getAllMaps() {
 		mapList = new DefaultListModel();
 		File folder = new File("maps/");
@@ -151,6 +207,13 @@ public class FileOperationModel {
 		
 
 	}
+	/**
+	 * Function is used to right the Created Items in File
+	 * @param document
+	 * @param file
+	 * @throws IOException
+	 * @author Punit Trivedi
+	 */
     public void write(org.dom4j.Document document,File file) throws IOException {
     	OutputFormat format = OutputFormat.createPrettyPrint();
 	        // lets write to a file

@@ -18,6 +18,13 @@ import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Controller.TransferHandlerController;
 import com.SOEN6441_DND.Model.MapModel;
 
+/**
+ * 
+ * @author Appan Chhibber
+ * @author Punit Trivedi
+ * @author Parasm Malik
+ *
+ */
 public class GridView extends JPanel {
 	private int mapWidth;
 	private int mapHeight;
