@@ -16,19 +16,16 @@ import java.util.List;
 
 import javax.swing.JButton;
 
+import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.MapView;
 
 public class ValidatorController {
 	private JButton[][] mapCell;
-	private ArrayList list;
     private int exitDoorCount;
     private int entryDoorCount;
     private int chestCount;
     private int characterCount;
-    public ArrayList<Dimension> walls;
-    private Dimension entry;
-    private Dimension exit;
-    private Dimension chest;
+ public MapModel mapModel;
     public PathValidatorController pathValidator;
 
     
@@ -39,33 +36,33 @@ public class ValidatorController {
         result="Map Validated";
 		mapCell = view.gridView.mapButtonsGrid;
 		PathValidatorController.mapCell=view.gridView.mapButtonsGrid;
-list=new ArrayList();
-walls=new ArrayList<Dimension>();
+		
+		mapModel=view.mapModel;
 for (int i = 0; i < mapCell.length; i++) {
 			for (int j = 0; j < mapCell[i].length; j++) {
-				list.add(mapCell[i][j].getName());
+				mapModel.mapItemList.add(mapCell[i][j].getName());
 				if(mapCell[i][j].getName().equals("Wall"))
 				{
-					walls.add(new Dimension(i, j));
+					mapModel.walls.add(new Dimension(i, j));
 				}
 				else if(mapCell[i][j].getName().equals("EntryDoor"))
 				{
-					entry=new Dimension(i, j);
+					mapModel.entry=new Dimension(i, j);
 				}
 				else if (mapCell[i][j].getName().equals("ExitDoor")) {
-					exit=new Dimension(i, j);
+					mapModel.exit=new Dimension(i, j);
 				}
 				else if(mapCell[i][j].getName().equals("Chest")){
-					chest=new Dimension(i, j);
+					mapModel.chest=new Dimension(i, j);
 				}
 				mapCell[i][j].setBackground(Color.WHITE);
 			}
 
 		}
-		exitDoorCount=Collections.frequency(list, "ExitDoor");
-		entryDoorCount=Collections.frequency(list, "EntryDoor");
-        characterCount=Collections.frequency(list, "Character");
-        chestCount=Collections.frequency(list,"Chest");
+		exitDoorCount=Collections.frequency(mapModel.mapItemList, "ExitDoor");
+		entryDoorCount=Collections.frequency(mapModel.mapItemList, "EntryDoor");
+        characterCount=Collections.frequency(mapModel.mapItemList, "Character");
+        chestCount=Collections.frequency(mapModel.mapItemList,"Chest");
        if(exitDoorCount>1){
     	   
     	   result="There can only be one Exit Door";
@@ -93,8 +90,8 @@ for (int i = 0; i < mapCell.length; i++) {
        {
     	   pathValidator= new PathValidatorController();
     	   
-    	   String Valid1=PathValidatorController.test(1, mapCell.length, mapCell[1].length, (int) entry.getWidth(), (int)entry.getHeight(), (int)chest.getWidth(), (int)chest.getHeight(), walls);
-    	   String Valid2=PathValidatorController.test(2, mapCell.length, mapCell[1].length, (int) chest.getWidth(), (int)chest.getHeight(), (int)exit.getWidth(), (int)exit.getHeight(), walls);
+    	   String Valid1=PathValidatorController.test(1, mapCell.length, mapCell[1].length, (int) mapModel.entry.getWidth(), (int)mapModel.entry.getHeight(), (int)mapModel.chest.getWidth(), (int)mapModel.chest.getHeight(), mapModel.getWalls());
+    	   String Valid2=PathValidatorController.test(2, mapCell.length, mapCell[1].length, (int) mapModel.chest.getWidth(), (int)mapModel.chest.getHeight(), (int)mapModel.exit.getWidth(), (int)mapModel.exit.getHeight(),  mapModel.getWalls());
  
     	   if(Valid1=="NoPath"|| Valid2=="NoPath")
     	   {

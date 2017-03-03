@@ -51,6 +51,9 @@ public MapModel mapModel;
 		else if(e.getSource()==mapView.inventView.removeButton){
 			System.out.println("Remove Button Event FIred");
 		}
+		else if(e.getSource()==mapView.navPanel.saveButton){
+		System.out.println(mapModel.entry);
+		}
 		
 	}
 
