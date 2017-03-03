@@ -110,7 +110,7 @@ public class FileOperationModel {
 		}
 	}
 	
-    public String writeCharacter(CharacterScene characterScene)
+    public String writeCharacter(CharacterScene characterScene) throws IOException
     {
     	CharacterModel characterModel=characterScene.characterViewModel;
     	File file = new File("characters/" + characterModel.getName() + ".xml");
@@ -138,7 +138,7 @@ public class FileOperationModel {
 			abilityModifier.addElement("charisma").addText(String.valueOf(characterModel.getAbilityModifier().getCharisma()));
 			
 			
-			//write(document,file);
+			write(document,file);
 		return "File Saved!!";
     	
     }

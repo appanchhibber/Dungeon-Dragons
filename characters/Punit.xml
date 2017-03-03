@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Character>
+  <name id="1">Punit</name>
+  <type>Human</type>
+  <level>0</level>
+  <image>image/Human.jpg</image>
+  <abilityScore>
+    <strength>8</strength>
+    <dexterity>14</dexterity>
+    <constitution>11</constitution>
+    <intelligence>4</intelligence>
+    <wisdom>14</wisdom>
+    <charisma>28</charisma>
+  </abilityScore>
+  <abilityModifier>
+    <strength>-1</strength>
+    <dexterity>1</dexterity>
+    <constitution>0</constitution>
+    <intelligence>-2</intelligence>
+    <wisdom>1</wisdom>
+    <charisma>6</charisma>
+  </abilityModifier>
+</Character>

@@ -1,13 +1,16 @@
 package com.SOEN6441_DND.Controller;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import com.SOEN6441_DND.Model.AbilitiyModel;
 import com.SOEN6441_DND.Model.CharacterModel;
+import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Views.AbilityPanelView;
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemAssignView;
@@ -26,9 +29,11 @@ public class CharacterSceneController implements ActionListener {
 	public AbilitiyModel abilityScore;
 	public AbilityPanelView abilityPanel;
     public ItemAssignView itemAssignView;
+    public FileOperationModel fileModel;
 	public CharacterSceneController(CharacterScene view) {
 		this.characterScreen = view;
 		this.characterModel = view.characterViewModel;
+		fileModel= new FileOperationModel();
 		this.score=view.abilityViewModel;
 		this.abilityPanel=view.abilityPanel;
 		abilityModifier=view.characterViewModel.getAbilityModifier();
@@ -109,6 +114,12 @@ public class CharacterSceneController implements ActionListener {
 			else
 			{
 				characterModel.setName(characterScreen.nameText.getText());
+				try {
+					JOptionPane.showMessageDialog(null,fileModel.writeCharacter(characterScreen));
+				} catch (HeadlessException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 		characterModel.setAbilityModifier(abilityModifier);

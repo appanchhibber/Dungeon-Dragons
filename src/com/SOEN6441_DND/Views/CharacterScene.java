@@ -116,6 +116,7 @@ public class CharacterScene extends View implements Observer {
 		//Configure Model attach with Observer.
 		
 		characterViewModel.setImage("Human");
+		characterViewModel.setType("Human");
 		characterViewModel.addObserver(this);
 		characterImage = new ImageIcon(characterViewModel.getImage());
 		abilityModifier.setStrength(0);
@@ -124,6 +125,7 @@ public class CharacterScene extends View implements Observer {
 		abilityModifier.setIntelligence(0);
 		abilityModifier.setWisdom(0);
 		abilityModifier.setCharisma(0);
+		//characterViewModel.setAbilityModifier(abilitiyModifier);
 		
 		//Image Panel
 		imagePanel = new View();
