@@ -1,6 +1,8 @@
 package com.SOEN6441_DND.Model;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -15,16 +17,20 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+import org.xml.sax.SAXException;
+import org.dom4j.*;
+import org.dom4j.io.XMLWriter;
 import com.SOEN6441_DND.Views.ItemScene;
+
 /**
  * This Class is a view for Item Creation and Manipulation. This class is
- * observe by Item Model.	
+ * observe by Item Model.
  * 
  * @author Paras Malik
  * 
@@ -39,11 +45,12 @@ public class FileOperationModel {
 	private ArrayList<String> itemsName;
 	private ArrayList<String> itemsImage;
 	private ArrayList<String> itemDesription;
-	private DefaultListModel mapList; 
+	private DefaultListModel mapList;
 
-	
+	private String message;
+
 	public File setFile(String fileName) {
-		fileName = "items/" + fileName+".xml";
+		fileName = "items/" + fileName + ".xml";
 		this.file = new File(fileName);
 		return file;
 	}
@@ -51,7 +58,6 @@ public class FileOperationModel {
 	public ArrayList<String> getItemDesription() {
 		return itemDesription;
 	}
-
 
 	public ArrayList<String> getItemsName() {
 		return itemsName;
@@ -62,108 +68,159 @@ public class FileOperationModel {
 	}
 
 	public void readFile(File file) {
-		this.file=file;
-		itemsName= new ArrayList<String>();
-		itemsImage= new ArrayList<String>();
+		this.file = file;
+		itemsName = new ArrayList<String>();
+		itemsImage = new ArrayList<String>();
 		itemDesription = new ArrayList<String>();
 		try {
 			dbFactory = DocumentBuilderFactory.newInstance();
 			dBuilder = dbFactory.newDocumentBuilder();
-			doc=dBuilder.parse(file);
+			doc = dBuilder.parse(file);
 			doc.getDocumentElement().normalize();
 			NodeList nList = doc.getElementsByTagName("type");
-			for(int i=0;i<nList.getLength();i++){
+			for (int i = 0; i < nList.getLength(); i++) {
 				Element eElement = (Element) nList.item(i);
-				itemsName.add(eElement.getElementsByTagName("name").item(0).getTextContent());
-				itemsImage.add(eElement.getElementsByTagName("image").item(0).getTextContent());
-				itemDesription.add(eElement.getElementsByTagName("description").item(0).getTextContent());
-	
-				//items.add(eElement.getTextContent());
+				itemsName.add(eElement.getElementsByTagName("name").item(0)
+						.getTextContent());
+				itemsImage.add(eElement.getElementsByTagName("image").item(0)
+						.getTextContent());
+				itemDesription.add(eElement.getElementsByTagName("description")
+						.item(0).getTextContent());
+
+				// items.add(eElement.getTextContent());
 			}
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	public DefaultListModel getAllMaps()
-	{
-		mapList=new DefaultListModel();
-		File folder=new File("maps/");
-		File[] files=folder.listFiles();
-		for(File file:files){
-			if(file.isFile()){
+
+	public DefaultListModel getAllMaps() {
+		mapList = new DefaultListModel();
+		File folder = new File("maps/");
+		File[] files = folder.listFiles();
+		for (File file : files) {
+			if (file.isFile()) {
 				mapList.addElement(file.getName());
 			}
 		}
 		return mapList;
 	}
 
-/**
- * 
- * @param currentScene
- * @author Paras Malik
- */
-	public void writeItemData(ItemScene currentScene){
-		
-		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+	/**
+	 * 
+	 * @param currentScene
+	 * @author Paras Malik
+	 */
+	public void writeItemData(ItemScene currentScene) {
+
+		DocumentBuilderFactory builderFactory = DocumentBuilderFactory
+				.newInstance();
 		try {
-			DocumentBuilder documentBuilder = builderFactory.newDocumentBuilder();
-			
-			File file = new File("itemSave/"+currentScene.itemType.getSelectedItem().toString()+".xml");
-			if(file.exists()){
-				System.out.println("file present");
-				Document doc = documentBuilder.newDocument();
-				
+			DocumentBuilder documentBuilder = builderFactory
+					.newDocumentBuilder();
+
+			//File file = new File("itemSave/"
+				//	+ currentScene.itemType.getSelectedItem().toString()
+					//+ ".xml");
+			if (file.exists()) {
+				try {
+					documentBuilder.parse(file);
+					System.out.println(doc.getElementsByTagName("item"));
+				} catch (SAXException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} else {
+				System.out.println("nop exist");
 			}
-			else{
-			//root elements
-			Document doc = documentBuilder.newDocument();
-			Element rootElement = doc.createElement(currentScene.itemType.getSelectedItem().toString());
-			doc.appendChild(rootElement);
-			
-			//item id element
-			Element itemType = doc.createElement("item");
-			rootElement.appendChild(itemType);
-			
-			//set attribute to item element
-			Attr attr = doc.createAttribute("id");
-			attr.setValue("1");
-			itemType.setAttributeNode(attr);
-			
-			//item elements
-			Element itemSubType = doc.createElement("itemtype");
-			itemSubType.appendChild(doc.createTextNode(currentScene.subItemType.getSelectedItem().toString()));
-			itemType.appendChild(itemSubType);
-			
-			//second element
-			Element name = doc.createElement("name");
-			name.appendChild(doc.createTextNode(currentScene.nameField.getText()));
-			itemType.appendChild(name);
-			
-			//third element
-			Element enchantValue = doc.createElement("enchantValue");
-			enchantValue.appendChild(doc.createTextNode(currentScene.enchantList.getSelectedItem().toString()));
-			itemType.appendChild(enchantValue);
-			
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			// root elements
+			// Document doc = documentBuilder.newDocument();
+			// Element rootElement =
+			// doc.createElement(currentScene.itemType.getSelectedItem().toString());
+			// doc.appendChild(rootElement);
+			//
+			// //item id element
+			// Element itemType = doc.createElement("item");
+			// rootElement.appendChild(itemType);
+			//
+			// //set attribute to item element
+			// Attr attr = doc.createAttribute("id");
+			// attr.setValue("1");
+			// itemType.setAttributeNode(attr);
+			//
+			// //item elements
+			// Element itemSubType = doc.createElement("itemtype");
+			// itemSubType.appendChild(doc.createTextNode(currentScene.subItemType.getSelectedItem().toString()));
+			// itemType.appendChild(itemSubType);
+			//
+			// //second element
+			// Element name = doc.createElement("name");
+			// name.appendChild(doc.createTextNode(currentScene.nameField.getText()));
+			// itemType.appendChild(name);
+			//
+			// //third element
+			// Element enchantValue = doc.createElement("enchantValue");
+			// enchantValue.appendChild(doc.createTextNode(currentScene.enchantList.getSelectedItem().toString()));
+			// itemType.appendChild(enchantValue);
+			//
+			TransformerFactory transformerFactory = TransformerFactory
+					.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			DOMSource source = new DOMSource(doc);
-			StreamResult streamResult = new StreamResult(new File("itemSave/"+currentScene.itemType.getSelectedItem().toString()+".xml"));
-			
+			StreamResult streamResult = new StreamResult(new File("itemSave/"
+					+ currentScene.itemType.getSelectedItem().toString()
+					+ ".xml"));
+
 			transformer.transform(source, streamResult);
 			System.out.println("File Saved!!");
-			}
 
 		} catch (ParserConfigurationException | TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+
+	/**
+	 * This method is responsible for saving the map created
+	 * 
+	 * @param mapModel  MapModel
+	 * @author Appan Chhibber
+	 */
+	public String writeMapData(File file,MapModel mapModel) {
+		message = "Map Saved Successfully!";
+		org.dom4j.Document document=DocumentHelper.createDocument();
+		org.dom4j.Element rootElement=document.addElement("Map");
 		
 		
+	//	rootElement.add(play.encode());
+		
+		XMLWriter writer=null;
+		try{
+			writer=new XMLWriter(new FileWriter(file));
+			writer.write(document);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally{
+			if(writer!=null)
+			{
+				try{
+				writer.close();
+				}catch(Exception e)
+				{
+					
+				}
+			}
+		}
+		return message;
 	}
 }
