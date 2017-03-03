@@ -10,7 +10,11 @@ import javax.swing.JTextField;
 
 import com.SOEN6441_DND.Model.AbilitiyModel;
 
-
+/**
+ * 
+ * @author Punit Trivedi
+ *
+ */
 public class AbilityPanelView extends View implements Observer{
 	//Ability Labels
 	public JLabel strengthLabel;
@@ -51,7 +55,11 @@ public class AbilityPanelView extends View implements Observer{
 	public JButton calculateButton;
 
 	public AbilitiyModel abilityViewModel;
+	
 	@Override
+	/**
+	 * initSubviews() initializes the view to be used. Setting the default attributes for the view.
+	 */
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
 		super.initSubviews();
@@ -228,6 +236,9 @@ public class AbilityPanelView extends View implements Observer{
 		setAbilityPanel();
 	}
 	
+	/**
+	 * This function sets ability modifiers from he model to the view.
+	 */
 	public void setAbilityPanel()
 	{
 		strengthText.setText(String.valueOf(abilityViewModel.getStrength()));

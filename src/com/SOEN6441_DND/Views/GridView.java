@@ -15,6 +15,13 @@ import javax.swing.text.IconView;
 import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Controller.TransferHandlerController;
 
+/**
+ * 
+ * @author Appan Chhibber
+ * @author Punit Trivedi
+ * @author Parasm Malik
+ *
+ */
 public class GridView extends JPanel {
 	private int mapWidth;
 	private int mapHeight;

@@ -135,8 +135,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="com.SOEN6441_DND.Controller.ValidatorController" project="SOEN6441_DND" 
-    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/ValidatorController.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="15" language="java" name="com.SOEN6441_DND.Controller.MapValidatorController" project="SOEN6441_DND" 
+    file="/SOEN6441_DND/src/com/SOEN6441_DND/Controller/MapValidatorController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="225" width="152" x="1815" y="-14"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

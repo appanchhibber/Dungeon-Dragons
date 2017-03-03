@@ -24,6 +24,10 @@ public class CharacterSceneController implements ActionListener {
 	public AbilitiyModel abilityScore;
 	public AbilityPanelView abilityPanel;
 
+	/**
+	 * This constructor inputs the character view to be used for event handling
+	 * @param view
+	 */
 	public CharacterSceneController(CharacterScene view) {
 		this.characterScreen = view;
 		this.characterModel = view.characterViewModel;
@@ -97,6 +101,10 @@ public class CharacterSceneController implements ActionListener {
 		characterModel.setAbilityScore(abilityScore);
 		
 	}
+	
+	/**
+	 * This function resets the ability scores to zero when character is changed.
+	 */
 	public void resetScore(){
 		score.setStrength(0);
 		score.setDexterity(0);
@@ -105,6 +113,13 @@ public class CharacterSceneController implements ActionListener {
 		score.setWisdom(0);
 		score.setCharisma(0);
 	}
+	
+	/**
+	 * This functions calculates modifier scores based on the dice rolled.
+	 * 
+	 * @param score
+	 * @return
+	 */
 	public int modifierCalculator(int score){
 		
 		if(score==4 || score==5 ){

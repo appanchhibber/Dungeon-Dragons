@@ -17,13 +17,19 @@ import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.MapView;
 
+/**
+ * 
+ * This class is the controller handling the events from the map creater view.
+ * @author Appan Chhibber
+ *
+ */
 public class MapViewController implements ActionListener,MouseMotionListener {
 
 	
 @Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
-	//super.mouseDragged(e);
+
 	JLabel newlabel = (JLabel) e.getSource();
 	TransferHandler handler = newlabel.getTransferHandler();
 	handler.exportAsDrag(newlabel, e, TransferHandler.COPY);
@@ -32,6 +38,12 @@ public class MapViewController implements ActionListener,MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+public MapView getMapView() {
+		return mapView;
+	}
+	public void setMapView(MapView mapView) {
+		this.mapView = mapView;
 	}
 public MapView mapView;
 public MapModel mapModel;
@@ -47,7 +59,7 @@ public FileOperationModel ioModel;
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==mapView.inventView.validateButton){
-			ValidatorController validate=new ValidatorController();
+			MapValidatorController validate=new MapValidatorController();
 			String result=validate.validator(mapView);
 			if(result!="Map Validated")
 			{

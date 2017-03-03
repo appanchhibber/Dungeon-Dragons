@@ -5,6 +5,12 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author Appan Chhibber
+ * @author Punit Trivedi
+ *
+ */
 public class MapModel {
 	int mapWidth;
 

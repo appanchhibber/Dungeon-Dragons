@@ -18,11 +18,23 @@ import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.MapView;
+
+/**
+ * 
+ * @author Punit Trivedi
+ * @author Appan Chhibber
+ *
+ */
 public class MainSceneController implements ActionListener{
 
 	
 	private MainScene homeScreen;
 	private GameController gameController;
+	
+	/**
+	 * This constructor takes the current main scene view for event handling.
+	 * @param view
+	 */
 	public MainSceneController(MainScene view)
 	{
 		this.homeScreen=view;
@@ -87,7 +99,10 @@ public class MainSceneController implements ActionListener{
 
 
 
-	// To Open Dialog Box
+	/**
+	 * This function is used To Open the Dialog Box
+	 * @return
+	 */
 	public File openMapFile() {
 		JFileChooser fileChooser = new JFileChooser(new File("maps/"));
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
