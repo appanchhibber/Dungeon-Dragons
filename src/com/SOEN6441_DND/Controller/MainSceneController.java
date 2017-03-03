@@ -1,6 +1,6 @@
 package com.SOEN6441_DND.Controller;
-import java.awt.event.ActionEvent;
 
+import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,21 +13,28 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Model.FileOperationModel;
+import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.CampaignView;
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.MapView;
-public class MainSceneController implements ActionListener{
 
-	
+public class MainSceneController implements ActionListener {
+
 	private MainScene homeScreen;
 	private GameController gameController;
-	public MainSceneController(MainScene view)
-	{
-		this.homeScreen=view;
-		gameController=GameController.getInstance();
+	public FileOperationModel ioModel;
+	public MapModel mapModel;
+
+	public MainSceneController(MainScene view) {
+		this.homeScreen = view;
+		gameController = GameController.getInstance();
+		ioModel = new FileOperationModel();
+		mapModel = new MapModel();
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == homeScreen.exitGameButton) {
@@ -38,79 +45,58 @@ public class MainSceneController implements ActionListener{
 			System.out.println("Start Game button pressed");
 		}
 		if (e.getSource() == homeScreen.mapCreator) {
-			String[] mapValue={"10","11","12","13","14","15"};
+			String[] mapValue = { "10", "11", "12", "13", "14", "15" };
+			String mode = "create";
 			JComboBox txtX = new JComboBox();
 			txtX.setModel(new DefaultComboBoxModel(mapValue));
 			JComboBox txtY = new JComboBox();
 			txtY.setModel(new DefaultComboBoxModel(mapValue));
 			Object[] message = { "Size of X:", txtX, "Size of Y:", txtY };
-			int option = JOptionPane.showConfirmDialog(null, message,
-					"SET SIZE OF MAP", JOptionPane.CANCEL_OPTION);
+			int option = JOptionPane.showConfirmDialog(null, message, "SET SIZE OF MAP", JOptionPane.CANCEL_OPTION);
 			if (option == JOptionPane.OK_OPTION) {
-				//mapModel.setMapWidth(Integer.parseInt(txtX.getText().trim()));
-				//mapModel.setMapHeight(Integer.parseInt(txtY.getText().trim()));
-				
-				gameController.mainFrame.setView(new MapView(txtX.getSelectedItem().toString(),txtY.getSelectedItem().toString()));
+				// mapModel.setMapWidth(Integer.parseInt(txtX.getText().trim()));
+				// mapModel.setMapHeight(Integer.parseInt(txtY.getText().trim()));
+				mapModel.setMapHeight(Integer.parseInt(txtX.getSelectedItem().toString()));
+				mapModel.setMapWidth(Integer.parseInt(txtY.getSelectedItem().toString()));
+				gameController.mainFrame.setView(new MapView(mapModel, mode));
 
-			}
-			
-
-		}
-			if (e.getSource() == homeScreen.mapEditor) {
-				System.out.println("map editor fired");
-				File file = openMapFile();
-			}
-			if (e.getSource() == homeScreen.itemCreation) {
-				gameController.mainFrame.setView(new ItemScene());
-			}
-			if (e.getSource() == homeScreen.editItem) {
-				System.out.println("item editor fired");
-				File file = openItemFile();
-				System.out.println(file);
-				
-				//gameController.mainFrame.setView(new ItemScene());
-			}
-			if (e.getSource() == homeScreen.characterCreation) {
-				gameController.mainFrame.setView(new CharacterScene());
-			}
-			if (e.getSource() == homeScreen.editCharacter) {
-				System.out.println("character editor fired");
-			}
-			if(e.getSource()==homeScreen.campaignCreator){
-				gameController.mainFrame.setView(new CampaignView());
-			}
-			if(e.getSource()==homeScreen.campaignEditor){
-				
 			}
 
 		}
-
-
-
-	// To Open Dialog Box
-	public File openMapFile() {
-		JFileChooser fileChooser = new JFileChooser(new File("maps/"));
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
-				"xml");
-		fileChooser.setFileFilter(filter);
-		int option = fileChooser.showOpenDialog(gameController.mainFrame);
-
-		if (option == JFileChooser.APPROVE_OPTION) {
-			File file = fileChooser.getSelectedFile();
-			return file;
-		} else {
-			return null;
+		if (e.getSource() == homeScreen.itemCreation) {
+			gameController.mainFrame.setView(new ItemScene());
 		}
+		if (e.getSource() == homeScreen.editItem) {
+			System.out.println("item editor fired");
+			File file = openItemFile();
+			System.out.println(file);
+
+			// gameController.mainFrame.setView(new ItemScene());
+		}
+
+		if (e.getSource() == homeScreen.characterCreation) {
+			gameController.mainFrame.setView(new CharacterScene());
+		}
+		if (e.getSource() == homeScreen.editCharacter) {
+			System.out.println("character editor fired");
+		}
+		if (e.getSource() == homeScreen.campaignCreator) {
+			gameController.mainFrame.setView(new CampaignView());
+		}
+		if (e.getSource() == homeScreen.campaignEditor) {
+
+		}
+
 	}
 
-	/**to open file for editing map
+	/**
+	 * to open file for editing map
 	 * 
 	 * @return File type
 	 */
 	public File openItemFile() {
 		JFileChooser fileChooser = new JFileChooser(new File("itemSave/"));
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
-				"xml");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML", "xml");
 		fileChooser.setFileFilter(filter);
 		int option = fileChooser.showOpenDialog(gameController.mainFrame);
 

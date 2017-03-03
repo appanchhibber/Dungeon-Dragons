@@ -23,12 +23,14 @@ public class MapView extends View {
 public	int mapWidth;
 public	int mapHeight;
 	
-	public MapView(String textX,String textY) {
+	public MapView(MapModel model,String mode) {
 		// TODO Auto-generated constructor stub
-		mapWidth = Integer.parseInt(textX);
-		mapHeight = Integer.parseInt(textY);
+		mapWidth = model.getMapWidth();
+		mapHeight = mapModel.getMapWidth();
+			gridView=new GridView(model,this,mode);	
 	
-		gridView=new GridView(mapWidth, mapHeight,this);
+
+	
 		this.add(gridView);
 	}
 
@@ -46,13 +48,15 @@ public	int mapHeight;
 		inventView.chestLabel.addMouseMotionListener(mapController);
 		inventView.exitDoorLabel.addMouseMotionListener(mapController);
 		inventView.validateButton.addActionListener(mapController);
-		inventView.removeButton.addActionListener(mapController);
 		this.add(inventView);
+		
 
 		navPanel = new NavigationPanelView();
 		navPanel.saveButton.setEnabled(false);
 		navPanel.saveButton.addActionListener(mapController);
+		navPanel.loadButton.addActionListener(mapController);
 		this.add(navPanel);
+		
 	}
 
 }

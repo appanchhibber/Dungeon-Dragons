@@ -36,9 +36,10 @@ public class MapViewController implements ActionListener,MouseMotionListener {
 public MapView mapView;
 public MapModel mapModel;
 public FileOperationModel ioModel;
-
+private GameController gameController;
 	public MapViewController(MapView view)
 	{
+		gameController=GameController.getInstance();
 		this.mapView=view;
 		this.mapModel=view.mapModel;
 		ioModel=new FileOperationModel();
@@ -71,7 +72,28 @@ public FileOperationModel ioModel;
 			}
 		
 		}
+		else if (e.getSource() == mapView.navPanel.loadButton) {
+			File file = openMapFile();
+			mapModel=ioModel.readMapFile(file);
+			String mode="edit";
+			gameController.mainFrame.setView(new MapView(mapModel,mode));
+		}
 		
 	}
+	// To Open Dialog Box
+		public File openMapFile() {
+			JFileChooser fileChooser = new JFileChooser(new File("maps/"));
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
+					"xml");
+			fileChooser.setFileFilter(filter);
+			int option = fileChooser.showOpenDialog(gameController.mainFrame);
+
+			if (option == JFileChooser.APPROVE_OPTION) {
+				File file = fileChooser.getSelectedFile();
+				return file;
+			} else {
+				return null;
+			}
+		}
 
 }
