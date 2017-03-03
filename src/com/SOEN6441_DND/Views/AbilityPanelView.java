@@ -19,6 +19,10 @@ public class AbilityPanelView extends View implements Observer{
 	public JLabel intelligenceLabel;
 	public JLabel wisdomLabel;
 	public JLabel charismaLabel;
+	public JLabel scoreLabel;
+	public JLabel modiferLabel;
+	public JLabel abilityLabel;
+	
 	
 	//Ability TextFields
 	public JTextField strengthText;
@@ -28,6 +32,13 @@ public class AbilityPanelView extends View implements Observer{
 	public JTextField wisdomText;
 	public JTextField charismaText;
 	
+	//Ability Modifier
+	public JTextField strengthModifierText;
+	public JTextField dexterityModifierText;
+	public JTextField constitutionModifierText;
+	public JTextField intelligenceModifierText;
+	public JTextField wisdomModifierText;
+	public JTextField charismaModifierText;
 	//Buttons
 	public JButton calculateButton;
 
@@ -37,7 +48,7 @@ public class AbilityPanelView extends View implements Observer{
 		// TODO Auto-generated method stub
 		super.initSubviews();
 		setBackground(Color.BLACK);
-		setSize(300, 500);
+		setSize(600, 500);
 		setLocation(335, 70);
 		setVisible(true);
 			
@@ -48,6 +59,13 @@ public class AbilityPanelView extends View implements Observer{
 				intelligenceLabel= new JLabel("Intelligence :");
 				wisdomLabel= new JLabel("Wisdom :");
 				charismaLabel= new JLabel("Charisma :");
+				
+				//Labels
+				scoreLabel=new JLabel("Score");
+				modiferLabel=new JLabel("Modifiers");
+				abilityLabel= new JLabel("Ability Score");
+				
+				
 				// TextField
 				strengthText= new JTextField();
 				dexterityText=new JTextField();
@@ -57,48 +75,51 @@ public class AbilityPanelView extends View implements Observer{
 				charismaText=new JTextField();
 				
 				calculateButton = new JButton("Calculate Ability");
+				scoreLabel.setLocation(170,5);
 				
-				strengthLabel.setLocation(30,20);
+				
+				strengthLabel.setLocation(30,40);
 				strengthLabel.setForeground(Color.WHITE);
 				strengthLabel.setSize(80, 20);
-				strengthText.setLocation(150, 10);
+				strengthText.setLocation(150, 30);
 				strengthText.setSize(140, 40);
 				strengthText.setEditable(false);
 				
-				dexterityLabel.setLocation(30,90);
+				dexterityLabel.setLocation(30,110);
 				dexterityLabel.setForeground(Color.WHITE);
 				dexterityLabel.setSize(80, 20);
-				dexterityText.setLocation(150, 80);
+				dexterityText.setLocation(150, 100);
 				dexterityText.setSize(140, 40);
 				dexterityText.setEditable(false);
 				
-				constitutionLabel.setLocation(30,160);
+				constitutionLabel.setLocation(30,180);
 				constitutionLabel.setForeground(Color.WHITE);
 				constitutionLabel.setSize(120, 20);
-				constitutionText.setLocation(150, 150);
+				constitutionText.setLocation(150, 170);
 				constitutionText.setSize(140, 40);
 				constitutionText.setEditable(false);
 				
-				intelligenceLabel.setLocation(30,230);
+				intelligenceLabel.setLocation(30,250);
 				intelligenceLabel.setForeground(Color.WHITE);
 				intelligenceLabel.setSize(120, 20);
-				intelligenceText.setLocation(150, 220);
+				intelligenceText.setLocation(150, 240);
 				intelligenceText.setSize(140, 40);
 				intelligenceText.setEditable(false);
 				
-				wisdomLabel.setLocation(30,300);
+				wisdomLabel.setLocation(30,320);
 				wisdomLabel.setForeground(Color.WHITE);
 				wisdomLabel.setSize(80, 20);
-				wisdomText.setLocation(150, 290);
+				wisdomText.setLocation(150, 310);
 				wisdomText.setSize(140, 40);
 				wisdomText.setEditable(false);
 				
-				charismaLabel.setLocation(30,370);
+				charismaLabel.setLocation(30,390);
 				charismaLabel.setForeground(Color.WHITE);
 				charismaLabel.setSize(80, 20);
-				charismaText.setLocation(150, 360);
+				charismaText.setLocation(150, 380);
 				charismaText.setSize(140, 40);
 				charismaText.setEditable(false);
+				
 				
 				calculateButton.setLocation(50,425);
 				calculateButton.setSize(200, 40);	
