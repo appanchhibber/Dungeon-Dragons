@@ -1,5 +1,6 @@
 package com.SOEN6441_DND.Model;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,6 +19,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 
+
+
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -25,7 +29,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.dom4j.*;
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
+import org.dom4j.tree.DefaultElement;
+
 import com.SOEN6441_DND.Views.ItemScene;
 
 /**
@@ -198,13 +205,39 @@ public class FileOperationModel {
 		message = "Map Saved Successfully!";
 		org.dom4j.Document document=DocumentHelper.createDocument();
 		org.dom4j.Element rootElement=document.addElement("Map");
+		rootElement.addElement("mapfilename").addText(file.getName());
+		rootElement.addElement("mapwidth").addText(String.valueOf(mapModel.getMapWidth()));
+		rootElement.addElement("mapheight").addText(String.valueOf(mapModel.getMapHeight()));
 		
+		org.dom4j.Element entryDoorElement=new DefaultElement("EntryDoor");
+		entryDoorElement.addElement("X").addText(String.valueOf((int)mapModel.getEntry().getWidth()));
+		entryDoorElement.addElement("Y").addText(String.valueOf((int)mapModel.getEntry().getHeight()));
+		rootElement.add(entryDoorElement);
+
+		org.dom4j.Element wallElements=rootElement.addElement("Wall");
+		int counter=0;
+		for(Dimension dimension:mapModel.getWalls())
+		{
+			counter+=1;
+			org.dom4j.Element wallElement=new DefaultElement("wall id="+'"'+counter+'"');
+			wallElement.addElement("X").addText(String.valueOf((int)dimension.getWidth()));
+			wallElement.addElement("Y").addText(String.valueOf((int)dimension.getHeight()));
+			wallElements.add(wallElement);
+		}
+		org.dom4j.Element chestElement=new DefaultElement("Chest");
+		chestElement.addElement("X").addText(String.valueOf((int)mapModel.getChest().getWidth()));
+		chestElement.addElement("Y").addText(String.valueOf((int)mapModel.getChest().getHeight()));
+		rootElement.add(chestElement);
 		
-	//	rootElement.add(play.encode());
-		
-		XMLWriter writer=null;
+		org.dom4j.Element exitDoorElement=new DefaultElement("ExitDoor");
+		exitDoorElement.addElement("X").addText(String.valueOf((int)mapModel.getExit().getWidth()));
+		exitDoorElement.addElement("Y").addText(String.valueOf((int)mapModel.getExit().getHeight()));
+		rootElement.add(exitDoorElement);
+	
+	XMLWriter writer=null;
 		try{
-			writer=new XMLWriter(new FileWriter(file));
+			OutputFormat output=OutputFormat.createPrettyPrint();
+			writer=new XMLWriter(new FileWriter(file),output);
 			writer.write(document);
 		}catch(Exception e)
 		{

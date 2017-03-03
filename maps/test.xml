@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Map>
+  <mapfilename>test.xml</mapfilename>
+  <mapwidth>10</mapwidth>
+  <mapheight>10</mapheight>
+  <EntryDoor>
+    <X>0</X>
+    <Y>0</Y>
+  </EntryDoor>
+  <Wall>
+    <wall id="1">
+      <X>5</X>
+      <Y>3</Y>
+    </wall >
+    <wall id="2">
+      <X>5</X>
+      <Y>4</Y>
+    </wall id="2">
+    <wall id="3">
+      <X>5</X>
+      <Y>5</Y>
+    </wall id="3">
+  </Wall>
+  <Chest>
+    <X>0</X>
+    <Y>9</Y>
+  </Chest>
+  <ExitDoor>
+    <X>9</X>
+    <Y>9</Y>
+  </ExitDoor>
+</Map>

@@ -27,6 +27,8 @@ public class GridView extends JPanel {
 		this.mapHeight = mapHeight;
 		this.mapWidth = mapWidth;
 		this.mapView=mapView;
+		this.mapView.mapModel.setMapHeight(mapHeight);
+		this.mapView.mapModel.setMapWidth(mapWidth);
 		this.setLayout(new GridLayout(mapHeight,
 				mapWidth, 3, 3));
 		
