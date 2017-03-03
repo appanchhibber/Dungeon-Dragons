@@ -3,22 +3,22 @@
 <Character>
   <name id="1">Punit</name>
   <type>Human</type>
-  <level>0</level>
+  <level>2</level>
   <image>image/Human.jpg</image>
   <abilityScore>
-    <strength>8</strength>
-    <dexterity>14</dexterity>
-    <constitution>11</constitution>
-    <intelligence>4</intelligence>
-    <wisdom>14</wisdom>
-    <charisma>28</charisma>
+    <strength>15</strength>
+    <dexterity>3</dexterity>
+    <constitution>30</constitution>
+    <intelligence>35</intelligence>
+    <wisdom>29</wisdom>
+    <charisma>15</charisma>
   </abilityScore>
   <abilityModifier>
-    <strength>-1</strength>
-    <dexterity>1</dexterity>
-    <constitution>0</constitution>
-    <intelligence>-2</intelligence>
-    <wisdom>1</wisdom>
-    <charisma>6</charisma>
+    <strength>4</strength>
+    <dexterity>-4</dexterity>
+    <constitution>9</constitution>
+    <intelligence>13</intelligence>
+    <wisdom>8</wisdom>
+    <charisma>9</charisma>
   </abilityModifier>
 </Character>

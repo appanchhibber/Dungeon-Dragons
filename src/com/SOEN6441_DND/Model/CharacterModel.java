@@ -22,6 +22,16 @@ public class CharacterModel extends Observable{
 	
 	private int level;
 	
+	public String[] levelListValues = {"1","2","3","4","5","6","7","8"};
+	
+	public String[] getLevelListValues() {
+		return levelListValues;
+	}
+
+	public void setLevelListValues(String[] levelListValues) {
+		this.levelListValues = levelListValues;
+	}
+
 	private AbilitiyModel abilityScore;
 	
 	private AbilitiyModel abilityModifier;

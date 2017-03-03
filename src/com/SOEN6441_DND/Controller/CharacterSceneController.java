@@ -99,6 +99,10 @@ public class CharacterSceneController implements ActionListener {
 			abilityModifier.setWisdom(abilityModifier.getWisdom()+modifierCalculator(score.getWisdom()));
 			abilityModifier.setCharisma(abilityModifier.getCharisma()+modifierCalculator(score.getCharisma()));	
 		}
+		 else if (e.getSource() == characterScreen.levels)
+		 {
+			 characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));
+		 }
 		
 		else if(e.getSource()==characterScreen.navMenuPanel.nextButton)
 		{
@@ -106,7 +110,7 @@ public class CharacterSceneController implements ActionListener {
 		}
 		else if(e.getSource()== characterScreen.navMenuPanel.saveButton)
 		{
-			if(characterScreen.nameText.getText().equals(null))
+			if(characterScreen.nameText.getText().equals(""))
 			{
 				
 				JOptionPane.showMessageDialog(null, "Please enter the name of the character");

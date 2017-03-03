@@ -32,7 +32,8 @@ public class CharacterScene extends View implements Observer {
 	// Labels
 	JLabel nameLabel;
 	JLabel imageLabel;
-	JLabel charType;
+	JLabel charTypeLabel;
+	JLabel levelLabel;
 	// TextField
 	public JTextField nameText;
 	// Image
@@ -40,6 +41,9 @@ public class CharacterScene extends View implements Observer {
 	// Radio buttons.
 	public JRadioButton characterTypeRadio;
 	ButtonGroup charactertypeGroup;
+	
+	//ComboBox
+	public JComboBox levels;
 	//Character View Model
 	public CharacterModel characterViewModel;
 	
@@ -76,13 +80,22 @@ public class CharacterScene extends View implements Observer {
 		  nameText.setSize(250,30);
 		  this.add(nameLabel);
 		  this.add(nameText);
-		  
-		
+		 
+		 //levels
+		 levelLabel=new JLabel("Level :");
+		 levelLabel.setLocation(20,5);
+		 levelLabel.setSize(80, 20);
+		 levels = new JComboBox(characterViewModel.getLevelListValues());
+		 levels.setLocation(70,5);
+		 levels.setSize(250,30);
+		 levels.addActionListener(characterController);
+		 this.add(levelLabel);
+		 this.add(levels);
 		//Character Selection
-		charType=new JLabel("Select Your Character");
-		charType.setLocation(550,10);
-		charType.setSize(200,20);
-		this.add(charType);
+		charTypeLabel=new JLabel("Select Your Character");
+		charTypeLabel.setLocation(550,10);
+		charTypeLabel.setSize(200,20);
+		this.add(charTypeLabel);
 		
 		charactertypeGroup = new ButtonGroup();
 		characterTypeRadio = new JRadioButton("Human", true);
