@@ -51,6 +51,7 @@ public	int mapHeight;
 
 		navPanel = new NavigationPanelView();
 		navPanel.saveButton.setEnabled(false);
+		navPanel.saveButton.addActionListener(mapController);
 		this.add(navPanel);
 	}
 
