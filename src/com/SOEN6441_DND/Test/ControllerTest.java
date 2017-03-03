@@ -58,7 +58,7 @@ public class ControllerTest {
 		
 		String message=PathValidatorController.test(1, mapCell.length, mapCell[1].length, (int) entry.getWidth(), (int)entry.getHeight(), (int)exit.getWidth(), (int)exit.getHeight(), walls);
 				
-		assertTrue(true);
+		assertEquals("NoPath", message);
 	}
 
 }

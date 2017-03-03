@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Armor>
-	<item id="1">
-		<itemtype>Snake Armor</itemtype>
-		<name>jh</name>
-		<enchantValue>1</enchantValue>
-	</item>
-</Armor>
