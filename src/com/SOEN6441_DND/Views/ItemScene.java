@@ -59,6 +59,7 @@ public class ItemScene extends View implements Observer {
 
 	// ImageIcon
 	ImageIcon itemImage;
+	
 
 	@Override
 	protected void initSubviews() {
