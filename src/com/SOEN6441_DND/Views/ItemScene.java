@@ -7,10 +7,14 @@ import java.util.Observer;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+
 
 
 import com.SOEN6441_DND.Controller.ItemSceneController;
@@ -41,7 +45,7 @@ public class ItemScene extends View implements Observer {
 	public JComboBox<itemTypeList> itemType;
 	public JComboBox subItemType;
 	public JComboBox enchantList;
-
+    public JComboBox chestList;
 	// Label
 	public JLabel itemTypeLabel;
 	public JLabel itemLabel;
@@ -49,6 +53,8 @@ public class ItemScene extends View implements Observer {
 	public JLabel nameLabel;
 	public JLabel enchantLabel;
 	public JLabel itemInfoLabel;
+	public JLabel chestSelectLabel;
+	public JCheckBox addChest;
 	public JTextArea itemDescription;
 	
 	// TextField
@@ -119,7 +125,22 @@ public class ItemScene extends View implements Observer {
 		enchantList.setSize(60, 20);
 		enchantList.setLocation(180, 250);
 		
+		addChest=new JCheckBox("Add To Chest");
+		addChest.setSize(210, 30);
+		addChest.setOpaque(false);
+		addChest.setForeground(Color.WHITE);
+		addChest.setLocation(30, 275);
+		addChest.addActionListener(itemController);
 		
+		chestSelectLabel=new JLabel("Select Chest:");
+		chestSelectLabel.setLocation(30,350);
+		chestSelectLabel.setSize(100,20);
+		chestSelectLabel.setForeground(Color.WHITE);
+		chestSelectLabel.setVisible(false);
+		chestList=new JComboBox();
+		chestList.setSize(140,40);
+		chestList.setLocation(150,340);
+		chestList.setVisible(false);
 		itemViewPanel.add(itemTypeLabel);
 		itemViewPanel.add(itemType);
 		itemViewPanel.add(itemLabel);
@@ -128,8 +149,9 @@ public class ItemScene extends View implements Observer {
 		itemViewPanel.add(enchantLabel);
 		itemViewPanel.add(nameField);
 		itemViewPanel.add(enchantList);
-		
-		
+		itemViewPanel.add(addChest);
+		itemViewPanel.add(chestSelectLabel);
+		itemViewPanel.add(chestList);
 
 		if (itemViewModel.getImage() == null) {
 			itemViewModel.setImage("image/LightHelm.jpg");
@@ -212,6 +234,18 @@ public class ItemScene extends View implements Observer {
 		else if(itemViewModel.message=="DescriptionChanged")
 		{
 			itemDescription.setText(itemViewModel.getItemDecsription());
+		}
+		else if(itemViewModel.message=="chestListPopulated"){
+			this.chestSelectLabel.setVisible(true);
+			String[] list = (String[]) itemViewModel.getChestFileList().toArray(new String[itemViewModel.getChestFileList().size()]);
+			chestList.setModel(new DefaultComboBoxModel(list));
+			this.chestList.setVisible(true);
+		}
+		else if(itemViewModel.message=="UncheckCheckBox"){
+		
+			chestSelectLabel.setVisible(false);
+			chestList.removeAllItems();
+			chestList.setVisible(false);
 		}
 	}
 }

@@ -108,5 +108,18 @@ public class ItemSceneController implements ActionListener {
 				}
 			}
 		}
+		else if(e.getSource()==itemScreen.addChest)
+		{
+			if(itemScreen.addChest.isSelected()==true){
+			fileModel.readChestFile(fileModel.setFile("Chest"));
+			itemModel.chestNeeded=true;
+			itemModel.setChestFileList(fileModel.getChestList());
+			}
+			else
+			{
+				itemModel.chestNeeded=false;
+				itemModel.notifyItemView("UncheckCheckBox");
+			}
+		}
 	}
 }

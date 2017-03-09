@@ -16,14 +16,27 @@ public class ItemModel extends Observable{
 	
 	public String name;
     public String image;
+    
+    public Boolean chestNeeded;
 	public String[] getEnchanListValues() {
 		return enchanListValues;
+	}
+
+	public ArrayList chestFileList;
+	public ArrayList getChestFileList() {
+		return chestFileList;
+	}
+
+	public void setChestFileList(ArrayList chestFileList) {
+		this.chestFileList = chestFileList;
+		message="chestListPopulated";
+		notifyItemView(message);
 	}
 
 	public void setEnchanListValues(String[] enchanListValues) {
 		this.enchanListValues = enchanListValues;
 	}
-	public enum itemTypeList{Helmet,Armor,Shield,Ring,Belt,Boots,Weapon};
+	public enum itemTypeList{Helmet,Armor,Shield,Ring,Belt,Boots,Weapon,Chest};
 	public String[] enchanListValues = {"1","2","3","4","5"};
 	public itemTypeList itemtype;
 	public ArrayList subItemList;
@@ -77,6 +90,7 @@ public class ItemModel extends Observable{
 	public void notifyItemView(String message)
 	{
 		setChanged();
+		this.message=message;
 		notifyObservers(this);
 	}
 }

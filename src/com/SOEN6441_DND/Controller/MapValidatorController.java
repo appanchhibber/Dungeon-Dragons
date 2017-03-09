@@ -33,8 +33,7 @@ public class MapValidatorController {
  public MapModel mapModel;
     public PathValidatorController pathValidator;
 
-    
-    
+private ArrayList list;    
     private String result;
     
     /**
@@ -46,11 +45,15 @@ public class MapValidatorController {
         result="Map Validated";
 		mapCell = view.gridView.mapButtonsGrid;
 		PathValidatorController.mapCell=view.gridView.mapButtonsGrid;
-		
-		mapModel=view.mapModel;
+		exitDoorCount=0;
+		entryDoorCount=0;
+		chestCount=0;
+		characterCount=0;
+		list=new ArrayList();
+		this.mapModel=view.mapModel;
 for (int i = 0; i < mapCell.length; i++) {
 			for (int j = 0; j < mapCell[i].length; j++) {
-				mapModel.mapItemList.add(mapCell[i][j].getName());
+				list.add(mapCell[i][j].getName());
 				if(mapCell[i][j].getName().equals("Wall"))
 				{
 					mapModel.walls.add(new Dimension(i, j));
@@ -69,10 +72,13 @@ for (int i = 0; i < mapCell.length; i++) {
 			}
 
 		}
+		mapModel.mapItemList=list;
 		exitDoorCount=Collections.frequency(mapModel.mapItemList, "ExitDoor");
 		entryDoorCount=Collections.frequency(mapModel.mapItemList, "EntryDoor");
         characterCount=Collections.frequency(mapModel.mapItemList, "Character");
         chestCount=Collections.frequency(mapModel.mapItemList,"Chest");
+        
+        
        if(exitDoorCount>1){
     	   
     	   result="There can only be one Exit Door";
@@ -111,23 +117,23 @@ for (int i = 0; i < mapCell.length; i++) {
 		return result;
 	}
 
-	public String checkExitDoor(int exitDoorCount){
+	public Boolean checkExitDoor(int exitDoorCount){
 		if(exitDoorCount>1){
 	    	   
 	    	    result =  "There can only be one Exit Door";
-	    return result;   
+	    return false;   
 		}
 		
 		else if(exitDoorCount==0)
 	       {
 	    	   result="There is no Exit Door";
-	      return result;
+	      return false;
 	       }
 		
 		
 	else{
 		
-		return "Wrong Exit Door Placement";
+		return true;
 	}
 	}
 

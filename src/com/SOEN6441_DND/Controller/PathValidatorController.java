@@ -96,15 +96,6 @@ public class PathValidatorController {
                 t = grid[current.i-1][current.j];
                 checkAndUpdateCost(current, t, current.finalCost+V_H_COST); 
 
-                /*if(current.j-1>=0){                      
-                    t = grid[current.i-1][current.j-1];
-                    checkAndUpdateCost(current, t, current.finalCost+DIAGONAL_COST); 
-                }
-
-                if(current.j+1<grid[0].length){
-                    t = grid[current.i-1][current.j+1];
-                    checkAndUpdateCost(current, t, current.finalCost+DIAGONAL_COST); 
-                }*/
             } 
 
             if(current.j-1>=0){
@@ -121,15 +112,6 @@ public class PathValidatorController {
                 t = grid[current.i+1][current.j];
                 checkAndUpdateCost(current, t, current.finalCost+V_H_COST); 
 
-               /* if(current.j-1>=0){
-                    t = grid[current.i+1][current.j-1];
-                    checkAndUpdateCost(current, t, current.finalCost+DIAGONAL_COST); 
-                }
-                
-                if(current.j+1<grid[0].length){
-                   t = grid[current.i+1][current.j+1];
-                    checkAndUpdateCost(current, t, current.finalCost+DIAGONAL_COST); 
-                }  */
             }
         } 
     }
@@ -142,7 +124,6 @@ public class PathValidatorController {
     int[][] blocked = array containing inaccessible cell coordinates
     */
     public static String test(int tCase, int x, int y, int si, int sj, int ei, int ej, ArrayList<Dimension> blocked){
-           //System.out.println("\n\nTest Case #"+tCase);
             //Reset
            grid = new Cell[x][y];
            closed = new boolean[x][y];
@@ -163,9 +144,7 @@ public class PathValidatorController {
               for(int j=0;j<y;++j){
                   grid[i][j] = new Cell(i, j);
                   grid[i][j].heuristicCost = Math.abs(i-endI)+Math.abs(j-endJ);
-//                  System.out.print(grid[i][j].heuristicCost+" ");
               }
-//              System.out.println();
            }
            grid[si][sj].finalCost = 0;
            
@@ -177,44 +156,21 @@ public class PathValidatorController {
            {
         	   setBlocked((int)dimension.getWidth(),(int)dimension.getHeight());
            }
-           
-           //Display initial map
-          /* System.out.println("Grid: ");
-            for(int i=0;i<x;++i){
-                for(int j=0;j<y;++j){
-                   if(i==si&&j==sj)System.out.print("SO  "); //Source
-                   else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
-                   else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
-                   else// System.out.print("BL  "); 
-                }
-                System.out.println();
-            } 
-            System.out.println();*/
-           
+
            AStar(); 
-           //System.out.println("\nScores for cells: ");
-       /*    for(int i=0;i<x;++i){
-               for(int j=0;j<x;++j){
-                   if(grid[i][j]!=null)System.out.printf("%-3d ", grid[i][j].finalCost);
-                   else System.out.print("BL  ");
-               }
-               System.out.println();
-           }
-           System.out.println();*/
-            
+
            if(closed[endI][endJ]){
                //Trace back the path 
-               // System.out.println("Path: ");
                 Cell current = grid[endI][endJ];
                // System.out.print(current);
                 while(current.parent!=null){
                 	mapCell[current.parent.i][current.parent.j].setBackground(Color.BLUE);
-                 //   System.out.print(" -> "+current.parent);
                     current = current.parent;
                     
                     
                 } 
                return "";
-           }else return "NoPath";
+           }
+           else return "NoPath";
     }
 }

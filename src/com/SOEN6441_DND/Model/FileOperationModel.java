@@ -13,15 +13,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 import org.dom4j.tree.DefaultElement;
+import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
@@ -41,15 +38,16 @@ import com.SOEN6441_DND.Views.ItemScene;
 public class FileOperationModel {
 
 	public File file;
-	DocumentBuilderFactory dbFactory;
-	DocumentBuilder dBuilder;
-	Document doc;
 	private ArrayList<String> itemsName;
 	private ArrayList<String> itemsImage;
 	private ArrayList<String> itemDesription;
 	private ArrayList<String> enchantValue;
 	private DefaultListModel mapList;
+	private ArrayList<String> chestList;
 
+	public ArrayList<String> getChestList() {
+		return chestList;
+	}
 	private String message;
 
 	public File setFile(String fileName) {
@@ -82,31 +80,21 @@ public class FileOperationModel {
 		itemsImage = new ArrayList<String>();
 		itemDesription = new ArrayList<String>();
 		enchantValue= new ArrayList<String>();
+		SAXReader reader = new SAXReader();
+		Document document = null;
 		try {
-			dbFactory = DocumentBuilderFactory.newInstance();
-			dBuilder = dbFactory.newDocumentBuilder();
-			doc = dBuilder.parse(file);
-			doc.getDocumentElement().normalize();
-			NodeList nList = doc.getElementsByTagName("type");
-			for (int i = 0; i < nList.getLength(); i++) {
-				Element eElement = (Element) nList.item(i);
-				itemsName.add(eElement.getElementsByTagName("name").item(0).getTextContent());
-				itemsImage.add(eElement.getElementsByTagName("image").item(0).getTextContent());
-			//	System.out.println(file.getPath().split("/")[0]);	
-				if(file.getPath().split("/")[0].equals("items"))
-				{
-					itemDesription.add(eElement.getElementsByTagName("description").item(0).getTextContent());
-				}
-				else if(file.getPath().split("/")[0].equals("itemSave"))
-				{
-					enchantValue.add(eElement.getElementsByTagName("ench").item(0).getTextContent());
-				}
-
-				// items.add(eElement.getTextContent());
-			}
-
+			document=reader.read(file);	
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		Element rootElement=document.getRootElement();
+		List<Element> typeElements=rootElement.elements();
+		for(Element item:typeElements)
+		{
+			itemsName.add(item.selectSingleNode("name").getText());
+			itemsImage.add(item.selectSingleNode("image").getText());
+			itemDesription.add(item.selectSingleNode("description").getText());
 		}
 	}
 	
@@ -114,14 +102,14 @@ public class FileOperationModel {
     {
     	CharacterModel characterModel=characterScene.characterViewModel;
     	File file = new File("characters/" + characterModel.getName() + ".xml");
-			org.dom4j.Document document = DocumentHelper.createDocument();
-			org.dom4j.Element root = document.addElement("Character");
+		Document document = DocumentHelper.createDocument();
+		Element root = document.addElement("Character");
 			root.addElement("name").addAttribute("id", "1").addText(characterModel.getName());
 			root.addElement("type").addText(characterModel.getType());
 			root.addElement("level").addText(String.valueOf(characterModel.getLevel()));
 			root.addElement("image").addText(String.valueOf(characterModel.getImage()));
 			
-			org.dom4j.Element abilityScore  = root.addElement("abilityScore");
+		Element abilityScore  = root.addElement("abilityScore");
 			abilityScore.addElement("strength").addText(String.valueOf(characterModel.getAbilityScore().getStrength()));
 			abilityScore.addElement("dexterity").addText(String.valueOf(characterModel.getAbilityScore().getDexterity()));
 			abilityScore.addElement("constitution").addText(String.valueOf(characterModel.getAbilityScore().getConstitution()));
@@ -129,7 +117,7 @@ public class FileOperationModel {
 			abilityScore.addElement("wisdom").addText(String.valueOf(characterModel.getAbilityScore().getWisdom()));
 			abilityScore.addElement("charisma").addText(String.valueOf(characterModel.getAbilityScore().getCharisma()));
 			
-			org.dom4j.Element abilityModifier  = root.addElement("abilityModifier");
+		Element abilityModifier  = root.addElement("abilityModifier");
 			abilityModifier.addElement("strength").addText(String.valueOf(characterModel.getAbilityModifier().getStrength()));
 			abilityModifier.addElement("dexterity").addText(String.valueOf(characterModel.getAbilityModifier().getDexterity()));
 			abilityModifier.addElement("constitution").addText(String.valueOf(characterModel.getAbilityModifier().getConstitution()));
@@ -175,15 +163,15 @@ public class FileOperationModel {
 		if (file.exists()) {
 
 			SAXReader reader = new SAXReader();
-			org.dom4j.Document document;
+		Document document;
 			try {
 				document = reader.read(file);
-				org.dom4j.Element root= document.getRootElement();
-				org.dom4j.Element typeElement= root.element("type");
+			Element root= document.getRootElement();
+			Element typeElement= root.element("type");
 				
-				List<Element> list = root.elements();
+				List<org.dom4j.Element> list = root.elements();
 				int total=list.size()+1;
-				org.dom4j.Element typeId = root.addElement("type").addAttribute("id", String.valueOf(total));
+			Element typeId = root.addElement("type").addAttribute("id", String.valueOf(total));
 				typeId.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
 				typeId.addElement("name").addText(currentScene.nameField.getText());
 				typeId.addElement("enchantValue").addText(currentScene.enchantList.getSelectedItem().toString());
@@ -195,9 +183,9 @@ public class FileOperationModel {
 
 		} else {
 
-			org.dom4j.Document document = DocumentHelper.createDocument();
-			org.dom4j.Element root = document.addElement(currentScene.itemType.getSelectedItem().toString());
-			org.dom4j.Element typeId = root.addElement("type").addAttribute("id", "1");
+		Document document = DocumentHelper.createDocument();
+		Element root = document.addElement(currentScene.itemType.getSelectedItem().toString());
+		Element typeId = root.addElement("type").addAttribute("id", "1");
 			typeId.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
 			typeId.addElement("name").addText(currentScene.nameField.getText());
 			typeId.addElement("enchantValue").addText(currentScene.enchantList.getSelectedItem().toString());
@@ -207,6 +195,28 @@ public class FileOperationModel {
 		
 
 	}
+	
+	
+	
+	public void readChestFile(File file){
+		this.file = file;
+		chestList=new ArrayList<String>();
+		SAXReader reader = new SAXReader();
+		Document document = null;
+		try {
+			document=reader.read(file);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		Element rootElement=document.getRootElement();
+		List<Element> typeElements=rootElement.elements();
+		for(Element item:typeElements)
+		{
+			chestList.add(item.selectSingleNode("name").getText());
+		}
+	}
+	
 	/**
 	 * Function is used to right the Created Items in File
 	 * @param document
@@ -233,39 +243,39 @@ public class FileOperationModel {
 	 */
 	public String writeMapData(File file, MapModel mapModel) {
 		message = "Map Saved Successfully!";
-		org.dom4j.Document document = DocumentHelper.createDocument();
-		org.dom4j.Element rootElement = document.addElement("Map");
+	Document document = DocumentHelper.createDocument();
+	Element rootElement = document.addElement("Map");
 		rootElement.addElement("mapfilename").addText(file.getName());
 		rootElement.addElement("mapwidth").addText(
 				String.valueOf(mapModel.getMapWidth()));
 		rootElement.addElement("mapheight").addText(
 				String.valueOf(mapModel.getMapHeight()));
 
-		org.dom4j.Element entryDoorElement = new DefaultElement("EntryDoor");
+	Element entryDoorElement = new DefaultElement("EntryDoor");
 		entryDoorElement.addElement("X").addText(
 				String.valueOf((int) mapModel.getEntry().getWidth()));
 		entryDoorElement.addElement("Y").addText(
 				String.valueOf((int) mapModel.getEntry().getHeight()));
 		rootElement.add(entryDoorElement);
 
-		org.dom4j.Element wallElements = rootElement.addElement("Wall");
+	Element wallElements = rootElement.addElement("Wall");
 		for (Dimension dimension : mapModel.getWalls()) {
 
-			org.dom4j.Element wallElement = new DefaultElement("wall");
+		Element wallElement = new DefaultElement("wall");
 			wallElement.addElement("X").addText(
 					String.valueOf((int) dimension.getWidth()));
 			wallElement.addElement("Y").addText(
 					String.valueOf((int) dimension.getHeight()));
 			wallElements.add(wallElement);
 		}
-		org.dom4j.Element chestElement =  new DefaultElement("Chest");
+	Element chestElement =  new DefaultElement("Chest");
 		chestElement.addElement("X").addText(
 				String.valueOf((int) mapModel.getChest().getWidth()));
 		chestElement.addElement("Y").addText(
 				String.valueOf((int) mapModel.getChest().getHeight()));
 		rootElement.add(chestElement);
 
-		org.dom4j.Element exitDoorElement = new DefaultElement("ExitDoor");
+	Element exitDoorElement = new DefaultElement("ExitDoor");
 		exitDoorElement.addElement("X").addText(
 				String.valueOf((int) mapModel.getExit().getWidth()));
 		exitDoorElement.addElement("Y").addText(
@@ -301,43 +311,43 @@ public class FileOperationModel {
 	public MapModel readMapFile(File file) {
 		MapModel mapModel = new MapModel();
 		SAXReader reader = new SAXReader();
-		org.dom4j.Document document = null;
+	Document document = null;
 		try {
 			document = reader.read(file);
 		} catch (DocumentException e) {
 			e.printStackTrace();
 		}
 
-		org.dom4j.Element rootElement = document.getRootElement();
+	Element rootElement = document.getRootElement();
 
-		org.dom4j.Node mapWidth = rootElement.selectSingleNode("mapwidth");
+	Node mapWidth = rootElement.selectSingleNode("mapwidth");
 		mapModel.setMapWidth(Integer.parseInt(mapWidth.getText()));
-		org.dom4j.Node mapHeight = rootElement.selectSingleNode("mapheight");
+	Node mapHeight = rootElement.selectSingleNode("mapheight");
 		mapModel.setMapHeight(Integer.parseInt(mapHeight.getText()));
 
-		org.dom4j.Element entryDoor = rootElement.element("EntryDoor");
-		org.dom4j.Node entryX = entryDoor.selectSingleNode("X");
-		org.dom4j.Node entryY = entryDoor.selectSingleNode("Y");
+	Element entryDoor = rootElement.element("EntryDoor");
+	Node entryX = entryDoor.selectSingleNode("X");
+	Node entryY = entryDoor.selectSingleNode("Y");
 		mapModel.setEntry(new Dimension(Integer.parseInt(entryX.getText()),
 				Integer.parseInt(entryY.getText())));
 
-		org.dom4j.Element wallElement = rootElement.element("Wall");
+	Element wallElement = rootElement.element("Wall");
 		List<org.dom4j.Element> wallElements = wallElement.elements();
 		for (org.dom4j.Element element : wallElements) {
-			org.dom4j.Node wallX = element.selectSingleNode("X");
-			org.dom4j.Node wallY = element.selectSingleNode("Y");
+		Node wallX = element.selectSingleNode("X");
+		Node wallY = element.selectSingleNode("Y");
 			mapModel.walls.add(new Dimension(Integer.parseInt(wallX.getText()),
 					Integer.parseInt(wallY.getText())));
 		}
-		org.dom4j.Element chest = rootElement.element("Chest");
-		org.dom4j.Node chestX = chest.selectSingleNode("X");
-		org.dom4j.Node chestY = chest.selectSingleNode("Y");
+	Element chest = rootElement.element("Chest");
+	Node chestX = chest.selectSingleNode("X");
+	Node chestY = chest.selectSingleNode("Y");
 		mapModel.setChest(new Dimension(Integer.parseInt(chestX.getText()),Integer.parseInt(chestY.getText())));
 		
 		
-		org.dom4j.Element exitDoor=rootElement.element("ExitDoor");
-		org.dom4j.Node exitX=exitDoor.selectSingleNode("X");
-		org.dom4j.Node exitY=exitDoor.selectSingleNode("Y");
+	Element exitDoor=rootElement.element("ExitDoor");
+	Node exitX=exitDoor.selectSingleNode("X");
+	Node exitY=exitDoor.selectSingleNode("Y");
 		mapModel.setExit(new Dimension(Integer.parseInt(exitX.getText()),Integer.parseInt(exitY.getText())));
 		return mapModel;
 	}
