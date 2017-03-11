@@ -67,6 +67,7 @@ private GameController gameController;
 				JOptionPane.showMessageDialog(null,result);
 			}
 			else{
+				JOptionPane.showMessageDialog(null,result);
 				mapView.navPanel.saveButton.setEnabled(true);
 			}
 		}
