@@ -85,6 +85,11 @@ public class TransferHandlerController {
 					if (value instanceof String) {
 						Component component = support.getComponent();
 						if (component instanceof JButton) {
+							if(!component.getName().contains(","))
+							{
+								accept=false;
+							}
+							else{
 						ImageIcon	image= new ImageIcon(new ImageIcon(value.toString()).getImage().getScaledInstance(component.getWidth(), component.getHeight(),java.awt.Image.SCALE_SMOOTH ));
 						((JButton) component).setIcon(image);
 						((JButton) component).setText(((JButton) component).getName());
@@ -92,7 +97,9 @@ public class TransferHandlerController {
 						String[] name=value.toString().split("/");
 						((JButton) component).setName(name[1].replaceAll(".jpg","").trim());
 						
+						
 							accept = true;
+							}
 						}
 					}
 				} catch (Exception exp) {
