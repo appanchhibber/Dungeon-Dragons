@@ -46,12 +46,7 @@ public class CharacterSceneController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() instanceof JRadioButton) {
-			abilityModifier.setStrength(0);
-			abilityModifier.setDexterity(0);
-			abilityModifier.setConstitution(0);
-			abilityModifier.setIntelligence(0);
-			abilityModifier.setWisdom(0);
-			abilityModifier.setCharisma(0);
+			
 			switch (((JRadioButton) e.getSource()).getText()) {
 			case "Human": {
 				characterModel.setImage("Human");
@@ -60,29 +55,23 @@ public class CharacterSceneController implements ActionListener {
 			}
 			case "Dwarf": {
 				characterModel.setImage("Dwarf");
-				abilityModifier.setConstitution(2);
-				abilityModifier.setIntelligence(-2);
 				characterModel.setType("Dwarf");
 				
 				break;
 			}
 			case "Elf": {
 				characterModel.setImage("Elf");
-				abilityModifier.setDexterity(2);
-				abilityModifier.setConstitution(-2);
 				characterModel.setType("Elf");
 				break;
 			}
 			case "Orc": {
 				characterModel.setImage("Orc");
-				abilityModifier.setStrength(2);
-				abilityModifier.setIntelligence(-2);
-				abilityModifier.setCharisma(-2);
 				characterModel.setType("Orc");
 				break;
 			}
 			
 			}
+			setModifer();
 			resetScore();
 			
 		} else if (e.getSource() == abilityPanel.calculateButton) {
@@ -92,6 +81,7 @@ public class CharacterSceneController implements ActionListener {
 			score.setIntelligence(diceRoll.getDiceRollResult());
 			score.setWisdom(diceRoll.getDiceRollResult());
 			score.setCharisma(diceRoll.getDiceRollResult());
+			setModifer();
 			abilityModifier.setStrength(abilityModifier.getStrength()+modifierCalculator(score.getStrength()));
 			abilityModifier.setDexterity(abilityModifier.getDexterity()+modifierCalculator(score.getDexterity()));
 			abilityModifier.setConstitution(abilityModifier.getConstitution()+modifierCalculator(score.getConstitution()));
@@ -145,45 +135,39 @@ public class CharacterSceneController implements ActionListener {
 		score.setWisdom(0);
 		score.setCharisma(0);
 	}
+	public void setModifer(){
+		abilityModifier.setStrength(0);
+		abilityModifier.setDexterity(0);
+		abilityModifier.setConstitution(0);
+		abilityModifier.setIntelligence(0);
+		abilityModifier.setWisdom(0);
+		abilityModifier.setCharisma(0);
+		switch (characterModel.getType()) {
+		case "Human": {
+			break;
+		}
+		case "Dwarf": {
+			abilityModifier.setConstitution(2);
+			abilityModifier.setIntelligence(-2);			
+			break;
+		}
+		case "Elf": {
+			abilityModifier.setDexterity(2);
+			abilityModifier.setConstitution(-2);
+			break;
+		}
+		case "Orc": {
+			abilityModifier.setStrength(2);
+			abilityModifier.setIntelligence(-2);
+			abilityModifier.setCharisma(-2);
+			break;
+		}
+		
+		}
+	}
 	public int modifierCalculator(int score){
 		
-		if(score==4 || score==5 ){
-			return -3;
-		}
-		else if(score==6 || score==7){
-			return -2;
-		}
-		else if(score==6 || score==7){
-			return -2;
-		}
-		else if(score==8 || score==9){
-			return -1;
-		}
-		else if(score==10 || score==11){
-			return 0;
-		}
-		else if(score==12 || score==13){
-			return 1;
-		}
-		else if(score==14 || score==15){
-			return 2;
-		}
-		else if(score==16 || score==17){
-			return 3;
-		}
-		else if(score==18 || score==19){
-			return 4;
-		}
-		else if(score==20 || score==21){
-			return 5;
-		}
-		else if(score==22 || score==23){
-			return 6;
-		}
-		else if(score==24){
-			return 7;
-		}
-		return 0;
+		return ((score/2)-5);
 	}
 	
 	

@@ -5,25 +5,37 @@ import java.util.Observable;
 /**
  * This Class Defines all the characteristics and property of the character.
  * This class extends Observable.
- * @author Amirbabak Rahgozar 
+ * 
+ * @author Amirbabak Rahgozar
  * @author Paras Malik
  *
  */
-public class CharacterModel extends Observable{
-	
-	//Get or set character name
+public class CharacterModel extends Observable {
+
+	// Get or set character name
 	private String name;
-	
-	//Get or set character type
+
+	// Get or set character type
 	private String type;
-	
-	//Get or set hit points
-	private int hitPoints;	
-	
+
+	// Fighter Type
+	private String fighterType;
+
+	public String getFighterType() {
+		return fighterType;
+	}
+
+	public void setFighterType(String fighterType) {
+		this.fighterType = fighterType;
+	}
+
+	// Get or set hit points
+	private int hitPoints;
+
 	private int level;
-	
-	public String[] levelListValues = {"1","2","3","4","5","6","7","8"};
-	
+
+	public String[] levelListValues = { "1", "2", "3", "4", "5", "6", "7", "8" };
+
 	public String[] getLevelListValues() {
 		return levelListValues;
 	}
@@ -33,13 +45,13 @@ public class CharacterModel extends Observable{
 	}
 
 	private AbilitiyModel abilityScore;
-	
+
 	private AbilitiyModel abilityModifier;
-	
+
 	private int speed;
 
 	private ItemModel ownedItems[];
-	
+
 	private String image;
 
 	private String damage;
@@ -76,14 +88,12 @@ public class CharacterModel extends Observable{
 		this.level = level;
 	}
 
-	
-
 	public AbilitiyModel getAbilityScore() {
 		return abilityScore;
 	}
 
 	public void setAbilityScore(AbilitiyModel abilityModel) {
-		this.abilityScore=abilityModel;
+		this.abilityScore = abilityModel;
 		notifyCharacterView();
 	}
 
@@ -117,7 +127,7 @@ public class CharacterModel extends Observable{
 	}
 
 	public void setImage(String image) {
-		this.image = "image/"+image+".jpg";
+		this.image = "image/" + image + ".jpg";
 		notifyCharacterView();
 	}
 
@@ -128,14 +138,14 @@ public class CharacterModel extends Observable{
 	public void setDamage(String damage) {
 		this.damage = damage;
 	}
-	
+
 	/**
-	 * This is the Observer function notifying the Character view for any changes made.
+	 * This is the Observer function notifying the Character view for any
+	 * changes made.
 	 */
-	public void notifyCharacterView()
-	{
+	public void notifyCharacterView() {
 		setChanged();
 		notifyObservers(this);
 	}
-     
+
 }
