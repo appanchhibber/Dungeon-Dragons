@@ -4,13 +4,16 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
 import com.SOEN6441_DND.Controller.GameController;
 import com.SOEN6441_DND.Controller.MapViewController;
+import com.SOEN6441_DND.Controller.TransferHandlerController;
 import com.SOEN6441_DND.Model.MapModel;
 
 @SuppressWarnings("serial")
@@ -30,7 +33,6 @@ public class MapView extends View implements Observer {
 	// Global Variables
 public	int mapWidth;
 public	int mapHeight;
-	
 	public MapView(MapModel model,String mode) {
 		// TODO Auto-generated constructor stub
 		mapWidth = model.getMapWidth();
@@ -55,9 +57,13 @@ public	int mapHeight;
 		inventView.wallLabel.addMouseMotionListener(mapController);
 		inventView.chestLabel.addMouseMotionListener(mapController);
 		inventView.exitDoorLabel.addMouseMotionListener(mapController);
+		inventView.charImageLabel.addMouseMotionListener(mapController);
+		inventView.treaImageLabel.addMouseMotionListener(mapController);
 		inventView.validateButton.addActionListener(mapController);
 		inventView.addCharacter.addActionListener(mapController);
 		inventView.addTreasure.addActionListener(mapController);
+		inventView.characterDropDown.addActionListener(mapController);
+		inventView.treasureDropDown.addActionListener(mapController);
 		this.add(inventView);
 		
        
@@ -70,6 +76,26 @@ public	int mapHeight;
 		
 	}
 
+	public void createTreasureImage(String imagePath){
+		inventView.treasureImage=new ImageIcon(new ImageIcon(imagePath).getImage()
+				.getScaledInstance(50,
+						50,
+						java.awt.Image.SCALE_SMOOTH));
+		inventView.treaImageLabel.setIcon(inventView.treasureImage);
+		inventView.treaImageLabel.setTransferHandler(new TransferHandlerController()
+		.valueExportCreator(imagePath));
+		inventView.revalidate();
+		inventView.repaint();
+	}
+	public void createCharacterImage(String imagePath){
+		inventView.characterImage=new ImageIcon(new ImageIcon(imagePath).getImage()
+				.getScaledInstance(50,
+						50,
+						java.awt.Image.SCALE_SMOOTH));
+		inventView.charImageLabel.setIcon(inventView.characterImage);
+		inventView.charImageLabel.setTransferHandler(new TransferHandlerController()
+		.valueExportCreator(imagePath));
+	}
 	@Override
 	public void update(Observable o, Object arg) {
 	this.mapModel=(MapModel)o;
@@ -90,6 +116,12 @@ public	int mapHeight;
 		else if(mapModel.message=="UncheckTreasure"){
 			inventView.treasureDropDown.setVisible(false);
 			inventView.treasureLabel.setVisible(false);
+		}
+		else if(mapModel.message=="characterImage"){
+			createCharacterImage(mapModel.getCharacterImage());
+		}
+		else if(mapModel.message=="treasureImage"){
+			createTreasureImage("image/Treasure.jpg");
 		}
 
 	}

@@ -107,6 +107,13 @@ private GameController gameController;
 				mapModel.notifyMapView("UncheckTreasure");
 			}
 		}
+		else if(e.getSource()==mapView.inventView.characterDropDown){
+				ioModel.readCharaterFile(ioModel.setCharacterFile(mapView.inventView.characterDropDown.getSelectedItem().toString()));
+				mapModel.setCharacterImage(ioModel.getCharacterImage());
+		}
+		else if(e.getSource()==mapView.inventView.treasureDropDown){
+		 mapModel.notifyMapView("treasureImage");
+		}
 		
 	}
 	// To Open Dialog Box

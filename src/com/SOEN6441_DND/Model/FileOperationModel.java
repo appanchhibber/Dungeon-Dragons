@@ -45,6 +45,11 @@ public class FileOperationModel {
 	private DefaultListModel readFileList;
 	private DefaultListModel treasureList;
 
+	
+	private String characterImage;
+	public String getCharacterImage(){
+		return characterImage;
+	}
 	public DefaultListModel getTreasureList() {
 		return treasureList;
 	}
@@ -56,7 +61,17 @@ public class FileOperationModel {
 		this.file = new File(fileName);
 		return file;
 	}
-
+/**
+ * This method creates file based on the string name 
+ * @param fileName
+ * @return file
+ * @author Appan Chhibber
+ */
+	public File setCharacterFile(String fileName){
+		fileName = "characters/" + fileName + ".xml";
+		this.file = new File(fileName);
+		return file;
+	}
 	public ArrayList<String> getItemDesription() {
 		return itemDesription;
 	}
@@ -99,7 +114,25 @@ public class FileOperationModel {
 			itemDesription.add(item.selectSingleNode("description").getText());
 		}
 	}
+/**
+ * This method is used to read the character file saved by the user
+ * @param file
+ * @author Appan Chhibber
+ */
+	public void readCharaterFile(File file){
+		this.file=file;
+		itemsImage=new ArrayList<String>();
+		SAXReader reader = new SAXReader();
+		Document document = null;
+		try {
+			document = reader.read(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		Element rootElement = document.getRootElement();
+		characterImage=rootElement.selectSingleNode("image").getText();
+	}
 	public ArrayList<String> readSaveItemFile(File file) {
 		this.file = file;
 		itemsName = new ArrayList<String>();
@@ -129,9 +162,10 @@ public class FileOperationModel {
 		readFileList = new DefaultListModel();
 		File folder = new File(folderName + "/");
 		File[] files = folder.listFiles();
+		readFileList.addElement("Select");
 		for (File file : files) {
 			if (file.isFile()) {
-				readFileList.addElement(file.getName());
+				readFileList.addElement(file.getName().replaceAll(".xml", "").trim());
 			}
 		}
 		return readFileList;

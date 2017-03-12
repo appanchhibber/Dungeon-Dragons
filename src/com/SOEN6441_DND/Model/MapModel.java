@@ -49,9 +49,18 @@ public class MapModel extends Observable {
 	public String characterName;
 	public String characterBehavior;
 	public DefaultListModel characterList;
-	
+	public String characterImage;
 	public DefaultListModel getCharacterList() {
 		return characterList;
+	}
+
+	public String getCharacterImage() {
+		return characterImage;
+	}
+
+	public void setCharacterImage(String characterImage) {
+		this.characterImage = characterImage;
+		notifyMapView("characterImage");
 	}
 
 	public void setCharacterList(DefaultListModel characterList) {

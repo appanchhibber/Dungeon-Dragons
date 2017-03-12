@@ -22,14 +22,18 @@ public class InventoryPanelView extends View {
 	public JLabel entryDoorLabel;
 	public JLabel chestLabel;
 	public JLabel exitDoorLabel;
+	public JLabel charImageLabel;
+	public JLabel treaImageLabel;
+	//-For Dropdown Label//
 	public JLabel characterLabel;
 	public JLabel treasureLabel;
-	
+	//------------//
 	public ImageIcon chestImage;
 	public ImageIcon wallImage;
 	public ImageIcon entryDoorImage;
 	public ImageIcon exitDoorImage;
-	
+	public ImageIcon treasureImage;
+	public ImageIcon characterImage;
 public JButton validateButton;
 public JButton removeButton;
 
@@ -39,6 +43,8 @@ public JCheckBox addTreasure;
 
 	public JComboBox characterDropDown;
 	public JComboBox treasureDropDown;
+	
+
 	@Override
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
@@ -82,6 +88,14 @@ public JCheckBox addTreasure;
 		exitDoorLabel.setSize(50, 50);
 		exitDoorLabel.setTransferHandler(new TransferHandlerController()
 		.valueExportCreator("image/ExitDoor.jpg"));
+		
+		treaImageLabel=new JLabel();
+		treaImageLabel.setSize(50,50);
+		treaImageLabel.setLocation(130, 70);
+		
+		charImageLabel=new JLabel();
+		charImageLabel.setSize(50,50);
+		charImageLabel.setLocation(70, 70);
 		
 		addCharacter=new JCheckBox("Add Character");
 		addCharacter.setSize(120,30);
@@ -130,6 +144,8 @@ public JCheckBox addTreasure;
 		this.add(treasureDropDown);
 		this.add(characterLabel);
 		this.add(treasureLabel);
+		this.add(charImageLabel);
+		this.add(treaImageLabel);
 		this.setVisible(true);
 	}
 
