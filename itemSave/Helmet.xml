@@ -16,9 +16,54 @@
     <name>jj</name>  
     <enchantValue>1</enchantValue> 
   </type>  
-  <type id="4">
+  <type id="4"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>jui</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="5"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>paias</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="6"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>s</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="7"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>a</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="8"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>j</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="9"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>mkm</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="10"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>i</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="11"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>j</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="12"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>jh</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="13">
     <itemTypeName>Light Helm</itemTypeName>
-    <name>jui</name>
+    <name>o</name>
     <enchantValue>1</enchantValue>
   </type>
 </Helmet>

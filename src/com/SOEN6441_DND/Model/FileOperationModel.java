@@ -194,21 +194,51 @@ public class FileOperationModel {
 	
 	public void writeChestFile(ItemScene currentScene){
 		File file = new File("items/Tressure.xml");
-		Document document = DocumentHelper.createDocument();
-		Element rootElement = document.addElement("treasure");
-		Element root = rootElement.addElement("item");
-		//Element typeId = root.addElement("type").addAttribute("id", "1");
-			root.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
-			root.addElement("name").addText(currentScene.nameField.getText());
+		
+		if (file.exists()) {
+
+			SAXReader reader = new SAXReader();
+		Document document;
+			try {
+				document = reader.read(file);
+			Element root= document.getRootElement();
+			List<org.dom4j.Element> list = root.elements();
+			int total=list.size()+1;
 			
+			Element item = list.get(0);
+			item.addElement("type").addText(currentScene.itemType.getSelectedItem().toString());
+			item.addElement("name").addText(currentScene.nameField.getText());
 			try {
 				write(document,file);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			} catch (DocumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+			
+			else{
+				Document document = DocumentHelper.createDocument();
+	
+		Element rootElement = document.addElement("treasure");
+		Element root = rootElement.addElement("item");
+		//Element typeId = root.addElement("type").addAttribute("id", "1");
+			root.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
+			root.addElement("name").addText(currentScene.nameField.getText());
+			try {
+				write(document,file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
 		
 	}
+
 	
 	public void readChestFile(File file){
 		this.file = file;

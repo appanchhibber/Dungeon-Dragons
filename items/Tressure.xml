@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<treasure>
-  <item>
-    <itemTypeName>Light Helm</itemTypeName>
-    <name>jui</name>
-  </item>
+<treasure> 
+  <item> 
+    <itemTypeName>Dragon Scale Shield</itemTypeName>  
+    <name>ppp</name>  
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>o</name>  
+    <itemTypeName>Predator's Grace</itemTypeName>  
+    <name>kj</name>  
+    <type>Weapon</type>
+    <name>j</name>
+  </item> 
 </treasure>
