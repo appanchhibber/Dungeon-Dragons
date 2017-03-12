@@ -51,6 +51,7 @@ private ArrayList list;
 		characterCount=0;
 		list=new ArrayList();
 		this.mapModel=view.mapModel;
+		mapModel.walls.clear();
 for (int i = 0; i < mapCell.length; i++) {
 			for (int j = 0; j < mapCell[i].length; j++) {
 				list.add(mapCell[i][j].getName());
@@ -77,8 +78,7 @@ for (int i = 0; i < mapCell.length; i++) {
 		entryDoorCount=Collections.frequency(mapModel.mapItemList, "EntryDoor");
         characterCount=Collections.frequency(mapModel.mapItemList, "Character");
         chestCount=Collections.frequency(mapModel.mapItemList,"Chest");
-        
-        
+
        if(exitDoorCount>1){
     	   
     	   result="There can only be one Exit Door";
