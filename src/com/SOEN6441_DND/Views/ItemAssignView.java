@@ -1,6 +1,7 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
+import java.io.File;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -115,7 +116,7 @@ public class ItemAssignView extends View {
 		itemSubTypeLabel.setForeground(Color.WHITE);
 		itemPanel.add(itemSubTypeLabel);
 		subItemType = new JComboBox();
-		subItemType.setModel(new DefaultComboBoxModel(fileIO.getAllFolderFile("itemSave").toArray()));
+		subItemType.setModel(new DefaultComboBoxModel(fileIO.readSaveItemFile(new File("itemSave/"+itemType.getSelectedItem().toString()+".xml")).toArray()));
 		subItemType.setSize(140, 40);
 		subItemType.setLocation(150, 80);
 		itemPanel.add(subItemType);
