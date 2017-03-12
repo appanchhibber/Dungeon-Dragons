@@ -80,7 +80,7 @@ private GameController gameController;
 					"XML", "xml"));
 			int result = fileChooser.showSaveDialog(null);
 			if (result == JFileChooser.APPROVE_OPTION) {
-				File file = new File(fileChooser.getSelectedFile()+".xml");
+				File file = new File(fileChooser.getSelectedFile().toString());
 				String saveResult=ioModel.writeMapData(file,mapModel);
 			}
 		
