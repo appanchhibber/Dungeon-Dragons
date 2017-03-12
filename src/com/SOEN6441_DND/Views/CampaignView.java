@@ -62,7 +62,7 @@ public JButton removeAllMaps;
 		
 		
 		ioModel=new FileOperationModel();
-		campaignModel.setMapList(ioModel.getAllMaps());
+		campaignModel.setMapList(ioModel.getAllFolderFile("maps"));
 		
 		availMap=new JLabel("Maps:");
 		availMap.setSize(70,20);
@@ -136,7 +136,7 @@ public JButton removeAllMaps;
 		}
 		else if(campaignModel.message=="RemoveAll")
 		{
-			maps.setModel(ioModel.getAllMaps());
+			maps.setModel(ioModel.getAllFolderFile("maps"));
 			campMaps.setModel(new DefaultListModel());
 			removeAllMaps.setEnabled(false);
 			removeMap.setEnabled(false);

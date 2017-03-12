@@ -42,7 +42,7 @@ public class FileOperationModel {
 	private ArrayList<String> itemsImage;
 	private ArrayList<String> itemDesription;
 	private ArrayList<String> enchantValue;
-	private DefaultListModel mapList;
+	private DefaultListModel readFileList;
 	private ArrayList<String> chestList;
 
 	public ArrayList<String> getChestList() {
@@ -97,7 +97,22 @@ public class FileOperationModel {
 			itemDesription.add(item.selectSingleNode("description").getText());
 		}
 	}
-	
+	/**
+	 * Returns all the save files name.
+	 * @author Punit Trivedi
+	 * @return item list
+	 */
+	public DefaultListModel getAllFolderFile(String folderName) {
+		readFileList = new DefaultListModel();
+		File folder = new File(folderName+"/");
+		File[] files = folder.listFiles();
+		for (File file : files) {
+			if (file.isFile()) {
+				readFileList.addElement(file.getName());
+			}
+		}
+		return readFileList;
+	}
     public String writeCharacter(CharacterScene characterScene) throws IOException
     {
     	CharacterModel characterModel=characterScene.characterViewModel;
@@ -130,25 +145,6 @@ public class FileOperationModel {
 		return "File Saved!!";
     	
     }
-	
-	
-
-	/**
-	 * This function return the maps present in the map directory.
-	 * @return mapList List of all maps on maps directory.
-	 */
-	public DefaultListModel getAllMaps() {
-		mapList = new DefaultListModel();
-		File folder = new File("maps/");
-		File[] files = folder.listFiles();
-		for (File file : files) {
-			if (file.isFile()) {
-				mapList.addElement(file.getName());
-			}
-		}
-		return mapList;
-	}
-
 	/**
 	 * This method is reponsible for saving the item created.
 	 * 
