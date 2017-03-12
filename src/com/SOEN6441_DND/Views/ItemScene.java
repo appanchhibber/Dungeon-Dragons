@@ -125,12 +125,11 @@ public class ItemScene extends View implements Observer {
 		enchantList.setSize(60, 20);
 		enchantList.setLocation(180, 250);
 		
-		addChest=new JCheckBox("Add To Chest");
+		addChest=new JCheckBox("Add To Tressure");
 		addChest.setSize(210, 30);
 		addChest.setOpaque(false);
 		addChest.setForeground(Color.WHITE);
 		addChest.setLocation(30, 275);
-		addChest.addActionListener(itemController);
 		
 		chestSelectLabel=new JLabel("Select Chest:");
 		chestSelectLabel.setLocation(30,350);
@@ -235,12 +234,7 @@ public class ItemScene extends View implements Observer {
 		{
 			itemDescription.setText(itemViewModel.getItemDecsription());
 		}
-		else if(itemViewModel.message=="chestListPopulated"){
-			this.chestSelectLabel.setVisible(true);
-			String[] list = (String[]) itemViewModel.getChestFileList().toArray(new String[itemViewModel.getChestFileList().size()]);
-			chestList.setModel(new DefaultComboBoxModel(list));
-			this.chestList.setVisible(true);
-		}
+
 		else if(itemViewModel.message=="UncheckCheckBox"){
 		
 			chestSelectLabel.setVisible(false);

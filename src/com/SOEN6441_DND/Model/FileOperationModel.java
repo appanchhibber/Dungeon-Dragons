@@ -196,7 +196,23 @@ public class FileOperationModel {
 
 	}
 	
-	
+	public void writeChestFile(ItemScene currentScene){
+		File file = new File("items/Tressure.xml");
+		Document document = DocumentHelper.createDocument();
+		Element rootElement = document.addElement("treasure");
+		Element root = rootElement.addElement("item");
+		//Element typeId = root.addElement("type").addAttribute("id", "1");
+			root.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
+			root.addElement("name").addText(currentScene.nameField.getText());
+			
+			try {
+				write(document,file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
 	
 	public void readChestFile(File file){
 		this.file = file;

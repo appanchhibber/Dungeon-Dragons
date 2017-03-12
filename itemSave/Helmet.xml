@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Helmet> 
+  <type id="1"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>Paras</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="2"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>Paras</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="3"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>jj</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="4">
+    <itemTypeName>Light Helm</itemTypeName>
+    <name>jui</name>
+    <enchantValue>1</enchantValue>
+  </type>
+</Helmet>

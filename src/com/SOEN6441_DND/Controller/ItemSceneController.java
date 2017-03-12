@@ -101,25 +101,21 @@ public class ItemSceneController implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Please enter Item name.");
 			} else {
 				try {
-					JOptionPane.showMessageDialog(null, fileModel.writeItemData(itemScreen));
+					
+					if(itemScreen.addChest.isSelected()==true){
+						fileModel.writeChestFile(itemScreen);
+						
+						}
+			JOptionPane.showMessageDialog(null, fileModel.writeItemData(itemScreen));
+
+					
+				
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		}
-		else if(e.getSource()==itemScreen.addChest)
-		{
-			if(itemScreen.addChest.isSelected()==true){
-			fileModel.readChestFile(fileModel.setFile("Chest"));
-			itemModel.chestNeeded=true;
-			itemModel.setChestFileList(fileModel.getChestList());
-			}
-			else
-			{
-				itemModel.chestNeeded=false;
-				itemModel.notifyItemView("UncheckCheckBox");
-			}
-		}
+
 	}
 }

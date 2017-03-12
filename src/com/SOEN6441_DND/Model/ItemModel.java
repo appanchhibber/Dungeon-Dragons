@@ -36,7 +36,7 @@ public class ItemModel extends Observable{
 	public void setEnchanListValues(String[] enchanListValues) {
 		this.enchanListValues = enchanListValues;
 	}
-	public enum itemTypeList{Helmet,Armor,Shield,Ring,Belt,Boots,Weapon,Chest};
+	public enum itemTypeList{Helmet,Armor,Shield,Ring,Belt,Boots,Weapon};
 	public String[] enchanListValues = {"1","2","3","4","5"};
 	public itemTypeList itemtype;
 	public ArrayList subItemList;
