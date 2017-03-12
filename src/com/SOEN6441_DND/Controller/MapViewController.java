@@ -71,9 +71,7 @@ private GameController gameController;
 				mapView.navPanel.saveButton.setEnabled(true);
 			}
 		}
-		else if(e.getSource()==mapView.inventView.removeButton){
-			System.out.println("Remove Button Event FIred");
-		}
+
 		else if(e.getSource()==mapView.navPanel.saveButton){
 			JFileChooser fileChooser = new JFileChooser(new File("maps/"));
 			fileChooser.addChoosableFileFilter(new FileNameExtensionFilter(
@@ -90,6 +88,24 @@ private GameController gameController;
 			mapModel=ioModel.readMapFile(file);
 			String mode="edit";
 			gameController.mainFrame.setView(new MapView(mapModel,mode));
+		}
+		else if(e.getSource()==mapView.inventView.addCharacter){
+			if(mapView.inventView.addCharacter.isSelected()==true){				
+				mapModel.setCharacterList(ioModel.getAllFolderFile("characters"));				
+			}
+			else{
+				
+				mapModel.notifyMapView("Uncheckcharacter");
+			}
+		}
+		else if(e.getSource()==mapView.inventView.addTreasure){
+			if(mapView.inventView.addTreasure.isSelected()==true){
+				ioModel.readTreasureFile();
+				mapModel.setTreasureList(ioModel.getTreasureList());
+			}
+			else{
+				mapModel.notifyMapView("UncheckTreasure");
+			}
 		}
 		
 	}

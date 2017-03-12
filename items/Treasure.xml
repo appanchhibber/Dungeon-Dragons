@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<treasure> 
+
+  <item name="j"> 
+    <type>Weapon</type>
+    <name>j</name>
+  </item>
+    <item name="test"> 
+    <type>Weapon</type>
+    <name>test</name>
+  </item>
+</treasure>

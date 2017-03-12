@@ -1,9 +1,13 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+
 import com.SOEN6441_DND.Controller.TransferHandlerController;
 
 /**
@@ -18,6 +22,8 @@ public class InventoryPanelView extends View {
 	public JLabel entryDoorLabel;
 	public JLabel chestLabel;
 	public JLabel exitDoorLabel;
+	public JLabel characterLabel;
+	public JLabel treasureLabel;
 	
 	public ImageIcon chestImage;
 	public ImageIcon wallImage;
@@ -26,8 +32,13 @@ public class InventoryPanelView extends View {
 	
 public JButton validateButton;
 public JButton removeButton;
+
+public JCheckBox addCharacter;
+public JCheckBox addTreasure;
 	public TransferHandlerController transferHandler;
 
+	public JComboBox characterDropDown;
+	public JComboBox treasureDropDown;
 	@Override
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
@@ -72,25 +83,53 @@ public JButton removeButton;
 		exitDoorLabel.setTransferHandler(new TransferHandlerController()
 		.valueExportCreator("image/ExitDoor.jpg"));
 		
+		addCharacter=new JCheckBox("Add Character");
+		addCharacter.setSize(120,30);
+		addCharacter.setLocation(25,130);
+		addCharacter.setForeground(Color.WHITE);
+		addCharacter.setOpaque(false);
+		addTreasure=new JCheckBox("Add Treasure");
+		addTreasure.setSize(120, 30);
+		addTreasure.setLocation(25,160);
+		addTreasure.setForeground(Color.WHITE);
+		addTreasure.setOpaque(false);
 		
+		characterLabel=new JLabel("Select Character:");
+		characterLabel.setForeground(Color.WHITE);
+		characterLabel.setSize(120, 20);
+		characterLabel.setLocation(10,190);
+		characterLabel.setVisible(false);
+		characterDropDown=new JComboBox();
+		characterDropDown.setSize(120,30);
+		characterDropDown.setLocation(10, 210);
+		characterDropDown.setVisible(false);
 		
+		treasureLabel=new JLabel("Select Treasure:");
+		treasureLabel.setForeground(Color.WHITE);
+		treasureLabel.setSize(120, 20);
+		treasureLabel.setLocation(10, 250);
+		treasureLabel.setVisible(false);
+		treasureDropDown=new JComboBox();
+		treasureDropDown.setSize(120, 30);
+		treasureDropDown.setLocation(10, 270);
+		treasureDropDown.setVisible(false);
 		//Validate Button 
 		validateButton=new JButton("Validate");
 		validateButton.setSize(100,30);
 		validateButton.setLocation(50,495);
 		//------------//
-		//Remove Button//
-		removeButton=new JButton("Remove");
-		removeButton.setSize(100,30);
-		removeButton.setLocation(50, 445);
-		removeButton.setVisible(false);
-		//-------------//
+
 		this.add(chestLabel);
 		this.add(entryDoorLabel);
 		this.add(wallLabel);
 		this.add(exitDoorLabel);
 		this.add(validateButton);
-		this.add(removeButton);
+		this.add(addCharacter);
+		this.add(addTreasure);
+		this.add(characterDropDown);
+		this.add(treasureDropDown);
+		this.add(characterLabel);
+		this.add(treasureLabel);
 		this.setVisible(true);
 	}
 

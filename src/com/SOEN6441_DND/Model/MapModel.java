@@ -2,7 +2,9 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Observable;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 
 /**
@@ -11,15 +13,68 @@ import javax.swing.JPanel;
  * @author Punit Trivedi
  *
  */
-public class MapModel {
+public class MapModel extends Observable {
 	int mapWidth;
 
 	int mapHeight;
 	public int mapGridSelection[][];
 
 	public JPanel MapView;
+	public String message;
+	public Boolean characterChecked;
 	
+	//Treasure Addition in the map //
+	public String treasureName;
+	public DefaultListModel treasureList;
 	
+	public String getTreasureName() {
+		return treasureName;
+	}
+
+	public void setTreasureName(String treasureName) {
+		this.treasureName = treasureName;
+	}
+
+	public DefaultListModel getTreasureList() {
+		return treasureList;
+	}
+
+	public void setTreasureList(DefaultListModel treasureList) {
+		this.treasureList = treasureList;
+		notifyMapView("TreasureList");
+	}
+
+	//------------------------------//
+	//Character Addition and Behavior//
+	public String characterName;
+	public String characterBehavior;
+	public DefaultListModel characterList;
+	
+	public DefaultListModel getCharacterList() {
+		return characterList;
+	}
+
+	public void setCharacterList(DefaultListModel characterList) {
+		this.characterList = characterList; 
+		 notifyMapView("characterList");
+	}
+
+	public String getCharacterName() {
+		return characterName;
+	}
+
+	public void setCharacterName(String characterName) {
+		this.characterName = characterName;
+	}
+
+	public String getCharacterBehavior() {
+		return characterBehavior;
+	}
+
+	public void setCharacterBehavior(String characterBehavior) {
+		this.characterBehavior = characterBehavior;
+	}
+
 	//-For saving of the map------//
 	public ArrayList<String> mapItemList;
     public ArrayList<Dimension> walls;
@@ -98,5 +153,11 @@ public class MapModel {
 		MapView = mapView;
 	}
 
+	public void notifyMapView(String message)
+	{
+		this.message=message;
+		setChanged();
+		notifyObservers(this);
+	}
 
 }

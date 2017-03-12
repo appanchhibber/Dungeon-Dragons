@@ -43,10 +43,10 @@ public class FileOperationModel {
 	private ArrayList<String> itemDesription;
 	private ArrayList<String> enchantValue;
 	private DefaultListModel readFileList;
-	private ArrayList<String> chestList;
+	private DefaultListModel treasureList;
 
-	public ArrayList<String> getChestList() {
-		return chestList;
+	public DefaultListModel getTreasureList() {
+		return treasureList;
 	}
 
 	private String message;
@@ -274,10 +274,13 @@ public class FileOperationModel {
 		}
 
 	}
-
-	public void readChestFile(File file) {
-		this.file = file;
-		chestList = new ArrayList<String>();
+	/**
+	 * This Method is responsible for getting name of all the treasures created by the user
+	 * @author Appan Chhibber
+	 */
+	public void readTreasureFile() {
+		this.file = new File("items/Treasure.xml");
+		treasureList = new DefaultListModel();
 		SAXReader reader = new SAXReader();
 		Document document = null;
 		try {
@@ -289,7 +292,8 @@ public class FileOperationModel {
 		Element rootElement = document.getRootElement();
 		List<Element> typeElements = rootElement.elements();
 		for (Element item : typeElements) {
-			chestList.add(item.selectSingleNode("name").getText());
+			treasureList.addElement(item.attributeValue("name"));
+			
 		}
 	}
 
@@ -416,4 +420,6 @@ public class FileOperationModel {
 		mapModel.setExit(new Dimension(Integer.parseInt(exitX.getText()), Integer.parseInt(exitY.getText())));
 		return mapModel;
 	}
+	
+	
 }
