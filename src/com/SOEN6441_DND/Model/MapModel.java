@@ -2,6 +2,7 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 import javax.swing.DefaultListModel;
@@ -23,10 +24,22 @@ public class MapModel extends Observable {
 	public String message;
 	public Boolean characterChecked;
 	
+	public HashMap<String,Dimension> characters;
+	
+	
+	public HashMap<String,Dimension> getCharacters() {
+		return characters;
+	}
+
+
 	//Treasure Addition in the map //
 	public String treasureName;
 	public DefaultListModel treasureList;
-	
+	public HashMap<String,Dimension> treasures;
+	public HashMap<String,Dimension> getTreasures()
+	{
+		return treasures;
+	}
 	public String getTreasureName() {
 		return treasureName;
 	}
@@ -95,6 +108,8 @@ public class MapModel extends Observable {
 	{
 	walls=new ArrayList<Dimension>();	
 	mapItemList=new ArrayList<String>();
+	characters=new HashMap<String,Dimension>();
+	treasures=new HashMap<String,Dimension>();
 	}
     
 	public ArrayList<Dimension> getWalls() {

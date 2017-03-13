@@ -69,6 +69,14 @@ for (int i = 0; i < mapCell.length; i++) {
 				else if(mapCell[i][j].getName().equals("Chest")){
 					mapModel.chest=new Dimension(i, j);
 				}
+				else if(mapCell[i][j].getName().startsWith("_"))
+				{
+					mapModel.characters.put(mapCell[i][j].getName().replace("_", "").trim(),new Dimension(i,j));
+					
+				}
+				else if(mapCell[i][j].getName().startsWith(".")){
+					mapModel.treasures.put(mapCell[i][j].getName().replace(".", "").trim(),new Dimension(i,j));
+				}
 				mapCell[i][j].setBackground(Color.WHITE);
 			}
 
@@ -76,7 +84,7 @@ for (int i = 0; i < mapCell.length; i++) {
 		mapModel.mapItemList=list;
 		exitDoorCount=Collections.frequency(mapModel.mapItemList, "ExitDoor");
 		entryDoorCount=Collections.frequency(mapModel.mapItemList, "EntryDoor");
-        characterCount=Collections.frequency(mapModel.mapItemList, "Character");
+        characterCount=Collections.frequency(mapModel.mapItemList, "_");
         chestCount=Collections.frequency(mapModel.mapItemList,"Chest");
 
        if(exitDoorCount>1){
@@ -94,7 +102,7 @@ for (int i = 0; i < mapCell.length; i++) {
        {
     	   result="There is no Exit Door";
        }
-       else if(chestCount==0)
+       else if(chestCount==0 && characterCount==0)
        {
     	   result="There is no chest/Character in the Map";
        }

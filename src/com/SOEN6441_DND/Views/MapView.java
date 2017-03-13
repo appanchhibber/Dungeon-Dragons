@@ -82,7 +82,7 @@ public	int mapHeight;
 						50,
 						java.awt.Image.SCALE_SMOOTH));
 		inventView.treaImageLabel.setIcon(inventView.treasureImage);
-		inventView.treaImageLabel.setName(inventView.treasureDropDown.getSelectedItem().toString());
+		inventView.treaImageLabel.setName("."+inventView.treasureDropDown.getSelectedItem().toString());
 		inventView.treaImageLabel.setTransferHandler(new TransferHandlerController()
 		.valueExportCreator(imagePath,inventView.treaImageLabel.getName()));
 		inventView.revalidate();
@@ -94,7 +94,7 @@ public	int mapHeight;
 						50,
 						java.awt.Image.SCALE_SMOOTH));
 		inventView.charImageLabel.setIcon(inventView.characterImage);
-		inventView.charImageLabel.setName(inventView.characterDropDown.getSelectedItem().toString());
+		inventView.charImageLabel.setName("_"+inventView.characterDropDown.getSelectedItem().toString());
 		inventView.charImageLabel.setTransferHandler(new TransferHandlerController()
 		.valueExportCreator(imagePath,inventView.charImageLabel.getName()));
 		inventView.revalidate();

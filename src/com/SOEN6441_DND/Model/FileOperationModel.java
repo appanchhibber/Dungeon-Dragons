@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.DefaultListModel;
 
@@ -384,7 +386,22 @@ public class FileOperationModel {
 		exitDoorElement.addElement("X").addText(String.valueOf((int) mapModel.getExit().getWidth()));
 		exitDoorElement.addElement("Y").addText(String.valueOf((int) mapModel.getExit().getHeight()));
 		rootElement.add(exitDoorElement);
-
+		
+		Element characterElements=rootElement.addElement("Character");
+		for(Map.Entry<String,Dimension> character:mapModel.getCharacters().entrySet()){
+			Element characterElement=new DefaultElement("character").addAttribute("name", character.getKey());
+			characterElement.addElement("X").addText(String.valueOf((int)character.getValue().getWidth()));
+			characterElement.addElement("Y").addText(String.valueOf((int)character.getValue().getHeight()));
+			characterElements.add(characterElement);
+		}
+		
+		Element treasureElements=rootElement.addElement("Treasure");
+		for(Map.Entry<String,Dimension> treasure:mapModel.getTreasures().entrySet()){
+			Element treasureElement=new DefaultElement("treasure").addAttribute("name",treasure.getKey() );
+			treasureElement.addElement("X").addText(String.valueOf((int)treasure.getValue().getWidth()));
+			treasureElement.addElement("Y").addText(String.valueOf((int)treasure.getValue().getHeight()));
+			treasureElements.add(treasureElement);
+		}
 		XMLWriter writer = null;
 		try {
 			OutputFormat output = OutputFormat.createPrettyPrint();
