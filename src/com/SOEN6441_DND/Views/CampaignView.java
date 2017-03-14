@@ -45,10 +45,7 @@ public JButton removeAllMaps;
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
 		super.initSubviews();
-		campaignModel=new CampaignModel();
-		ioModel=new FileOperationModel();
-		campaignController=new CampaignViewController(this);
-	
+
 		//Name Character
 		  nameLabel= new JLabel("Name :");
 		  nameText = new JTextField();
@@ -62,13 +59,10 @@ public JButton removeAllMaps;
 		
 		
 		
-		ioModel=new FileOperationModel();
-		campaignModel.setMapList(ioModel.getAllFolderFile("maps"));
-		
 		availMap=new JLabel("Maps:");
 		availMap.setSize(70,20);
 		availMap.setLocation(20,50);
-		maps=new JList(campaignModel.getMapList().toArray());
+		maps=new JList();
 		JScrollPane scrollPane1=new JScrollPane(maps);
 		scrollPane1.setBounds(20, 70, 300, 475);
 		buttonView=new View();
@@ -79,27 +73,27 @@ public JButton removeAllMaps;
 		addMap=new JButton("Add  >");
 		addMap.setSize(120,30);
 		addMap.setLocation(65,20);
-		addMap.addActionListener(campaignController);
+	
 		buttonView.add(addMap);
 		
 		addAllMaps=new JButton("Add All  >>");
 		addAllMaps.setSize(120,30);
 		addAllMaps.setLocation(65, 70);
-		addAllMaps.addActionListener(campaignController);
+
 		buttonView.add(addAllMaps);
 		
 		removeMap=new JButton("Remove  <");
 		removeMap.setSize(120,30);
 		removeMap.setLocation(65,170);
 		removeMap.setEnabled(false);
-		removeMap.addActionListener(campaignController);
+
 		buttonView.add(removeMap);
 		
 		removeAllMaps=new JButton("Remove All  <<");
 		removeAllMaps.setSize(120,30);
 		removeAllMaps.setLocation(65,220);
 		removeAllMaps.setEnabled(false);
-		removeAllMaps.addActionListener(campaignController);
+
 		buttonView.add(removeAllMaps);
 		buttonView.setVisible(true);
 		
@@ -113,8 +107,6 @@ public JButton removeAllMaps;
 		scrollPane2.setBounds(585, 70, 270, 475);
 		
 		navPanel=new NavigationPanelView();
-		navPanel.saveButton.addActionListener(campaignController);
-		campaignModel.addObserver(this);
 		this.add(scrollPane1);
 		this.add(scrollPane2);
 		this.add(buttonView);
@@ -124,9 +116,31 @@ public JButton removeAllMaps;
 		this.setVisible(true);
 
 	}
+	public CampaignView(CampaignModel model,String mode) {
+		this.campaignModel=model;
+		
+		ioModel=new FileOperationModel();
+		campaignController=new CampaignViewController(this);
+		
+		addMap.addActionListener(campaignController);
+		addAllMaps.addActionListener(campaignController);
+		removeMap.addActionListener(campaignController);
+		removeAllMaps.addActionListener(campaignController);
+		navPanel.saveButton.addActionListener(campaignController);
+		navPanel.loadButton.addActionListener(campaignController);
+    if(mode=="create"){
+    	this.campaignModel.setMapList(ioModel.getAllFolderFile("maps"));
+    	maps.setModel(campaignModel.getMapList());
+    }
+    else{
+       campMaps.setModel(campaignModel.getCampMapList());
+       nameText.setText(campaignModel.campaignName);
+    }
+	campaignModel.addObserver(this);
+	}
 	@Override
 	public void update(Observable o, Object arg) {
-		
+
 		// TODO Auto-generated method stub
 		this.campaignModel=(CampaignModel)o;
 		
