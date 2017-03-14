@@ -28,6 +28,7 @@ import org.dom4j.io.XMLWriter;
 
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
+import com.sun.beans.decoder.DocumentHandler;
 
 /**
  * This Class is a the file operation model handling the functionalities in and
@@ -421,7 +422,35 @@ public class FileOperationModel {
 		}
 		return message;
 	}
+/**
+ * This method is used to save the campaign created into xml file
+ * @param file
+ * @return message
+ * @author Appan Chhibber
+ */
+	public String createCampaignFile(File file,ArrayList list){
+		message="Campaign Saved Successfully";
 
+		Document document=DocumentHelper.createDocument();
+		Element rootElement=document.addElement("Campaign");
+		Element mapElements=rootElement.addElement("Maps");
+		int counter=0;
+		for(Object map:list){
+			counter++;
+          Element mapElement=new DefaultElement("map").addAttribute("id",String.valueOf(counter));
+          mapElement.addElement("name").addText(map.toString()+".xml");
+
+  		mapElements.add(mapElement);
+		}
+		try {
+			write(document,file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			message="Campaign not Saved";
+			e.printStackTrace();
+		}
+		return message;
+	}
 	/**
 	 * This method is resposible for reading the saved map file and setting in
 	 * the model and returning it

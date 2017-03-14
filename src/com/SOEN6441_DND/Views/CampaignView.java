@@ -46,6 +46,7 @@ public JButton removeAllMaps;
 		// TODO Auto-generated method stub
 		super.initSubviews();
 		campaignModel=new CampaignModel();
+		ioModel=new FileOperationModel();
 		campaignController=new CampaignViewController(this);
 	
 		//Name Character
@@ -110,8 +111,9 @@ public JButton removeAllMaps;
 		campMaps=new JList(new DefaultListModel());
 		JScrollPane scrollPane2=new JScrollPane(campMaps);
 		scrollPane2.setBounds(585, 70, 270, 475);
-		navPanel=new NavigationPanelView();
 		
+		navPanel=new NavigationPanelView();
+		navPanel.saveButton.addActionListener(campaignController);
 		campaignModel.addObserver(this);
 		this.add(scrollPane1);
 		this.add(scrollPane2);

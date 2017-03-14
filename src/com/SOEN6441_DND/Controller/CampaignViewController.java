@@ -2,12 +2,18 @@ package com.SOEN6441_DND.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Views.CampaignView;
+
 
 /**
  * 
@@ -64,6 +70,19 @@ public class CampaignViewController implements ActionListener {
             }
 
             campaignModel.setMapList(model);
+        }
+        else if (e.getSource()==campaignView.navPanel.saveButton){
+        	DefaultListModel list=(DefaultListModel)campaignView.campMaps.getModel();
+        	if(campaignView.nameText.getText().equals(""))
+        	{
+        	JOptionPane.showMessageDialog(null, "Enter name of the campaign");	
+        	}
+        	else{
+          ArrayList arrayList=Collections.list(list.elements());
+          File file=new File("campaign/"+campaignView.nameText.getText()+".xml");
+          String result= ioModel.createCampaignFile(file,arrayList);
+          JOptionPane.showMessageDialog(null, result);
+        	}
         }
         }
 
