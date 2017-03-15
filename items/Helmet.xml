@@ -1,65 +1,29 @@
-<helmet>
-	<type id="1">
-		<name>Light Helm</name>
-		<image>image/LightHelm.jpg</image>
-		<description>
-This gold and mithral helm looks like the bristle-bearded head of a
-manticore.
-A helm of the hunter grants you a +5 com­petence bonus on Spot checks
-and the benefit of the Far Shot feat. These effects function
-continuously.
-When you activate this helm, you gain low-light vision and darkvision out
-to 60 feet for 4 hours. This ability functions once per day.
-Cost to Create: 4500, 360 XP, 9 days.
-</description>
-	</type>
-	<type id="2">
-		<name>Crested Helmet</name>
-		<image>image/CrestHelmet.jpg</image>
-		<description>
-A crested helmet or cassis crista, is a heavy, all-enclosing helmet
-with grill-like visor. This helmet is usually made of bronze and
-decorated with a plume crest.
-The great helm only grants its AC bonus if you are wearing light or no
-armor (it is assumed that a suit medium and heavy armor already
-provides head protection). In addition, you have disadvantage on
-Wisdom (Perception) checks while wearing a great helm.
-Cost : 15gp , Armor Class : +1, Strength : 13, Weight : 5lb
-</description>
-	</type>
-	<type id="3">
-		<name>Imperial Close Helm</name>
-		<image>image/ImperialHelmetClosed.jpg</image>
-		<description>The Imperial Helmet is a piece of heavy armor and part of
-the Imperial Armor set. It is a full-face variant of the Imperial
-Officer's Helmet, but is relatively rare and can only be found in
-three locations.
-Base Armor : 18, Weight : 5lb, Base Value : 30
-		</description>
-	</type>
-	<type id="4">
-		<name>Steel Horned Helmet</name>
-		<image>image/SteelHornedHelmet.jpg</image>
-		<description>The Steel Horned Helmet is a piece of heavy armor and
-part of the steel armor set found in The Elder Scrolls V: Skyrim.
-Steel Armor requires a Smithing level of 20 and the Steel Smithing
-perk to create. It can be forged at a blacksmith's forge with the
-following components:
-2 × Leather Strips
-2 × Steel Ingots
-1 × Iron Ingot
-It can be upgraded with a steel ingot at a workbench and also benefits
-from the Steel Smithing perk, which doubles the improvement.
-		</description>
-	</type>
-	<type id="5">
-		<name>Dukaan Mask</name>
-		<image>image/DukaanMask.jpg</image>
-		<description>Dukaan (Dovahzul: , "Dishonor") is a dragon priest mask
-found in Dungeons and Dragons.
-It can be upgraded with an ebony ingot at a workbench, and also
-benefits from the Daedric Smithing perk, which doubles the
-improvement.
-Base Armor : 23, Weight : 9, Base Value : 500</description>
-	</type>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<helmet> 
+  <type id="1"> 
+    <name>Light Helm</name>  
+    <image>image/LightHelm.jpg</image>  
+    <description>This gold and mithral helm looks like the bristle-bearded head of a manticore. A helm of the hunter grants you a +5 com­petence bonus on Spot checks and the benefit of the Far Shot feat. These effects function continuously. When you activate this helm, you gain low-light vision and darkvision out to 60 feet for 4 hours. This ability functions once per day. Cost to Create: 4500, 360 XP, 9 days.</description> 
+  </type>  
+  <type id="2"> 
+    <name>Crested Helmet</name>  
+    <image>image/CrestHelmet.jpg</image>  
+    <description>A crested helmet or cassis crista, is a heavy, all-enclosing helmet with grill-like visor. This helmet is usually made of bronze and decorated with a plume crest. The great helm only grants its AC bonus if you are wearing light or no armor (it is assumed that a suit medium and heavy armor already provides head protection). In addition, you have disadvantage on Wisdom (Perception) checks while wearing a great helm. Cost : 15gp , Armor Class : +1, Strength : 13, Weight : 5lb</description> 
+  </type>  
+  <type id="3"> 
+    <name>Imperial Close Helm</name>  
+    <image>image/ImperialHelmetClosed.jpg</image>  
+    <description>The Imperial Helmet is a piece of heavy armor and part of the Imperial Armor set. It is a full-face variant of the Imperial Officer's Helmet, but is relatively rare and can only be found in three locations. Base Armor : 18, Weight : 5lb, Base Value : 30</description> 
+  </type>  
+  <type id="4"> 
+    <name>Steel Horned Helmet</name>  
+    <image>image/SteelHornedHelmet.jpg</image>  
+    <description>The Steel Horned Helmet is a piece of heavy armor and part of the steel armor set found in The Elder Scrolls V: Skyrim. Steel Armor requires a Smithing level of 20 and the Steel Smithing perk to create. It can be forged at a blacksmith's forge with the following components: 2 × Leather Strips 2 × Steel Ingots 1 × Iron Ingot It can be upgraded with a steel ingot at a workbench and also benefits from the Steel Smithing perk, which doubles the improvement.</description> 
+  </type>  
+  <type id="5"> 
+    <name>Dukaan Mask</name>  
+    <image>image/DukaanMask.jpg</image>  
+    <description>Dukaan (Dovahzul: , "Dishonor") is a dragon priest mask found in Dungeons and Dragons. It can be upgraded with an ebony ingot at a workbench, and also benefits from the Daedric Smithing perk, which doubles the improvement. Base Armor : 23, Weight : 9, Base Value : 500</description> 
+  </type>  
 </helmet>

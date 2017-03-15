@@ -6,12 +6,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.ItemModel;
 import com.SOEN6441_DND.Views.ItemScene;
+import com.SOEN6441_DND.Views.MapView;
 
 /**
  * This Class is a view for Item Creation and Manipulation. This class is
@@ -26,6 +29,8 @@ public class ItemSceneController implements ActionListener {
 	public ItemScene itemScreen;
 	public ItemModel itemModel;
 	public FileOperationModel fileModel;
+	private GameController gameController;
+	File file;
 
 	/**
 	 * This constructor is passed with the current item view to be used
@@ -37,6 +42,7 @@ public class ItemSceneController implements ActionListener {
 		itemScreen = view;
 		itemModel = view.itemViewModel;
 		fileModel = view.fileModel;
+		gameController = GameController.getInstance();
 	}
 
 	@Override
@@ -96,6 +102,7 @@ public class ItemSceneController implements ActionListener {
 
 		}
 
+		
 		else if (e.getSource() == itemScreen.navMenuPanel.saveButton) {
 			if (itemScreen.nameField.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Please enter Item name.");
@@ -115,6 +122,34 @@ public class ItemSceneController implements ActionListener {
 					e1.printStackTrace();
 				}
 			}
+		}
+		
+		else if(e.getSource() == itemScreen.navMenuPanel.loadButton){
+			
+			File file = openItemFile();
+			itemModel=fileModel.readItemSaveFile(file);
+			gameController.mainFrame.setView(new ItemScene(itemModel,"edit") );
+			
+		}
+	
+	}
+
+	public ArrayList itemNameList(File file){
+		return fileModel.readSaveItemFile(new File("itemSave/"+file.getName()));
+	}
+	public File openItemFile(){
+		JFileChooser fileChooser = new JFileChooser(new File("itemSave/"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
+				"xml");
+		fileChooser.setFileFilter(filter);
+		int option = fileChooser.showOpenDialog(gameController.mainFrame);
+
+		if (option == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			this.file = file;
+			return file;
+		} else {
+			return null;
 		}
 
 	}

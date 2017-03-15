@@ -2,6 +2,7 @@ package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -56,7 +57,8 @@ public class ItemScene extends View implements Observer {
 	public JLabel chestSelectLabel;
 	public JCheckBox addChest;
 	public JTextArea itemDescription;
-	
+
+	public JComboBox savedItemNames;
 	// TextField
 	public JTextField nameField;
 
@@ -71,9 +73,6 @@ public class ItemScene extends View implements Observer {
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
 		super.initSubviews();
-		itemViewModel = new ItemModel();
-		fileModel = new FileOperationModel();
-		itemController = new ItemSceneController(this);
 
 		itemViewPanel = new View();
 		itemViewPanel.setBackground(Color.BLACK);
@@ -86,24 +85,20 @@ public class ItemScene extends View implements Observer {
 		itemTypeLabel.setLocation(30, 20);
 		itemTypeLabel.setForeground(Color.WHITE);
 
-		itemType = new JComboBox<itemTypeList>(itemTypeList.values());
-		itemType.addActionListener(itemController);
+		itemType = new JComboBox();
 		itemType.setSize(140, 40);
 		itemType.setLocation(150, 10);
 
-		if (itemViewModel.getSubItemList() == null) {
-			fileModel.readFile(fileModel.setFile("Helmet"));
-			itemViewModel.setSubItemList(fileModel.getItemsName());
-		}
+	
 		itemLabel = new JLabel("Select Item:");
 		itemLabel.setSize(80, 20);
 		itemLabel.setLocation(30, 90);
 		itemLabel.setForeground(Color.WHITE);
 
-		subItemType = new JComboBox(itemViewModel.subItemList.toArray());
+		subItemType = new JComboBox();
 		subItemType.setSize(140, 40);
 		subItemType.setLocation(150, 80);
-		subItemType.addActionListener(itemController);
+
 		
 		nameLabel = new JLabel("Set Name :");
 		nameLabel.setSize(100, 30);
@@ -114,14 +109,16 @@ public class ItemScene extends View implements Observer {
 		nameField.setSize(140, 30);
 		nameField.setLocation(150, 170);
 		
-		
-		
+		savedItemNames=new JComboBox<>();
+		savedItemNames.setSize(140, 30);
+		savedItemNames.setLocation(150, 170);
+		savedItemNames.setVisible(false);
 		enchantLabel = new JLabel("Enchantment Value:");
 		enchantLabel.setSize(210, 20);
 		enchantLabel.setLocation(30, 250);
 		enchantLabel.setForeground(Color.WHITE);
 		
-		enchantList = new JComboBox(itemViewModel.getEnchanListValues());
+		enchantList = new JComboBox();
 		enchantList.setSize(60, 20);
 		enchantList.setLocation(180, 250);
 		
@@ -131,15 +128,7 @@ public class ItemScene extends View implements Observer {
 		addChest.setForeground(Color.WHITE);
 		addChest.setLocation(30, 275);
 		
-		chestSelectLabel=new JLabel("Select Chest:");
-		chestSelectLabel.setLocation(30,350);
-		chestSelectLabel.setSize(100,20);
-		chestSelectLabel.setForeground(Color.WHITE);
-		chestSelectLabel.setVisible(false);
-		chestList=new JComboBox();
-		chestList.setSize(140,40);
-		chestList.setLocation(150,340);
-		chestList.setVisible(false);
+		
 		itemViewPanel.add(itemTypeLabel);
 		itemViewPanel.add(itemType);
 		itemViewPanel.add(itemLabel);
@@ -149,21 +138,14 @@ public class ItemScene extends View implements Observer {
 		itemViewPanel.add(nameField);
 		itemViewPanel.add(enchantList);
 		itemViewPanel.add(addChest);
-		itemViewPanel.add(chestSelectLabel);
-		itemViewPanel.add(chestList);
+		itemViewPanel.add(savedItemNames);
 
-		if (itemViewModel.getImage() == null) {
-			itemViewModel.setImage("image/LightHelm.jpg");
-		}
+		
 		imagePanel = new View();
 		imagePanel.setBackground(Color.WHITE);
 		imagePanel.setSize(300, 475);
 		imagePanel.setLocation(10, 70);
-		itemImage = new ImageIcon(itemViewModel.getImage());
-		imageLabel = new JLabel(new ImageIcon(
-				((itemImage.getImage().getScaledInstance(imagePanel.getWidth(),
-						imagePanel.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
-		imageLabel.setSize(imagePanel.getWidth(), imagePanel.getHeight());
+		imageLabel = new JLabel();
 		imageLabel.setLocation(0, 0);
 
 		imagePanel.add(imageLabel);
@@ -183,7 +165,7 @@ public class ItemScene extends View implements Observer {
 		itemInfoLabel.setFont(new Font("Calibri", Font.PLAIN, 20));
 		
 		itemDescription = new JTextArea();
-		itemDescription.setText(fileModel.getItemDesription().get(0));
+		
 		itemDescription.setSize(210,500);
 		itemDescription.setLocation(10, 70);
 		itemDescription.setForeground(Color.WHITE);
@@ -198,15 +180,61 @@ public class ItemScene extends View implements Observer {
 		itemInfoPanel.add(itemInfoLabel);
 		
 		navMenuPanel = new NavigationPanelView();
-		navMenuPanel.saveButton.addActionListener(itemController);
+		
 		this.add(navMenuPanel);
 		this.add(itemViewPanel);
 		this.add(imagePanel);
 		this.add(itemInfoPanel);
-		itemViewModel.addObserver(this);
+		
 
 	}
 
+	 public ItemScene(ItemModel model,String mode) {
+			itemViewModel = model;
+			fileModel = new FileOperationModel();
+			itemController = new ItemSceneController(this);
+
+				itemType.setModel(new DefaultComboBoxModel<>( itemTypeList.values()));
+				if (itemViewModel.getSubItemList() == null) {
+					fileModel.readFile(fileModel.setFile("Helmet"));
+					itemViewModel.setSubItemList(fileModel.getItemsName());
+				}
+				subItemType.setModel(new DefaultComboBoxModel(itemViewModel.subItemList.toArray()));
+				
+				enchantList.setModel(new DefaultComboBoxModel(itemViewModel.getEnchanListValues()));
+				if (itemViewModel.getImage() == null) {
+					itemViewModel.setImage("image/LightHelm.jpg");
+				}
+				itemImage = new ImageIcon(itemViewModel.getImage());
+				imageLabel.setIcon(new ImageIcon(
+					((itemImage.getImage().getScaledInstance(imagePanel.getWidth(),
+							imagePanel.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+			imageLabel.setSize(imagePanel.getWidth(), imagePanel.getHeight());
+			itemDescription.setText(fileModel.getItemDesription().get(0));
+			
+			if(mode.equalsIgnoreCase("edit")){
+				
+				itemType.setSelectedItem(itemViewModel.getItemType());
+				subItemType.setModel(itemViewModel.getSavedItemTypeList());
+				nameField.setVisible(false);
+				savedItemNames.setModel(itemViewModel.getSavedItemNameList());
+				savedItemNames.setVisible(true);
+				HashMap<String,String> enchantLists=itemViewModel.getSavedEnchantValueList();
+				enchantList.setSelectedItem(enchantLists.get(savedItemNames.getSelectedItem().toString()));
+				imageLabel.setIcon(new ImageIcon(
+					((new ImageIcon("image/"+subItemType.getSelectedItem().toString().trim()+".jpg").getImage().getScaledInstance(imagePanel.getWidth(),
+							imagePanel.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+			imageLabel.setSize(imagePanel.getWidth(), imagePanel.getHeight());
+			}
+			
+			
+			
+		navMenuPanel.saveButton.addActionListener(itemController);
+		navMenuPanel.loadButton.addActionListener(itemController);
+		itemType.addActionListener(itemController);
+		subItemType.addActionListener(itemController);
+		itemViewModel.addObserver(this);
+	}
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub

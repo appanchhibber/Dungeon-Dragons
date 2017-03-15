@@ -1,84 +1,29 @@
-<armor>
-	<type id="1">
-		<name>Snake Armor</name>
-		<image>image/SnakeHarness.jpg</image>
-		<description>Snake Armor is a gear set Dungeons and Dragons. It’s a
-			medium set which has a great armor rating and provides near immunity
-			to poison.To obtain it, you’ll have to find the diagrams for it, a
-			bunch of
-			materials and a capable artisan. You’ll need to craft the
-			gear.
-			Wire x4Hardened Leather x4
-			Leather Straps x5
-			Linen x4
-			Cured
-			Draconid Leather x1
-		</description>
-	</type>
-	<type id="2">
-		<name>Kendo Armor</name>
-		<image>image/KendoArmor.jpg</image>
-		<description>Kendo Armor is a heavy armor set in Dungeons and Dragons.
+<?xml version="1.0" encoding="UTF-8"?>
 
-			It boasts some of the highest elemental resistances and physical
-			defense in the game.
-
-			Physical Defence : 30, Defence : 22, Weight :
-			7.5lbs, Value : 300
-		</description>
-	</type>
-	<type id="3">
-		<name>Leather Jacket</name>
-		<image>image/LeatherJacket.jpg</image>
-		<description>The armor is mostly made of leather and is lightweight,
-			making it ideal for the agile shadow-hugging thief.
-			It offers higher
-			defense than Elven or Scaled Armor and is available
-			extremely early in
-			the game after 2 non combat quests.
-			Incidentally, the armor cannot be
-			disenchanted. Upgraded with Leather.
-
-			The Armor upgrade has carrying
-			capacity +35 instead of +20.
-
-			Base Armor : 68, Weight : 11lbs, Base
-			Value : 1679
-		</description>
-	</type>
-	<type id="4">
-		<name>Sentinel Coat</name>
-		<image>image/SentinelCoat.jpg</image>
-		<description>The Sentinel armor is a vacuum-sealed asbestos jumpsuit
-			covering the entire body. Attached to it is the interface and mounts
-			for the T-45d power armor. Its purpose is twofold - it allows the
-			user to actually operate the armor and protect soft tissue from heat
-			and moving parts inside the suit.
-			It is a decent option for stealth
-			and sniper mercantile-based
-			characters who seek an alternative to
-			combat armor or Talon combat
-			armor.
-			Its good Damage Resistance and its
-			Sneak bonus make it a good choice for
-			early-game characters.
-
-			Weight :
-			20lbs, Value : 1000
-		</description>
-	</type>
-	<type id="5">
-		<name>Red Lotus</name>
-		<image>image/RedLotus.jpg</image>
-		<description>The Superior Death Lotus chestplate is ranged body
-			armour.
-			Wearing a Red Lotus armour set (including augmented parts, but
-			not weapons)
-			grants a passive ability, Death Knot, which gives a
-			chance to obtain
-			a ports resource crate when defeating an opponent.
-
-			Value : 1200, Weight : 8lbs
-		</description>
-	</type>
+<armor> 
+  <type id="1"> 
+    <name>Snake Armor</name>  
+    <image>image/SnakeHarness.jpg</image>  
+    <description>Snake Armor is a gear set Dungeons and Dragons. It’s a medium set which has a great armor rating and provides near immunity to poison.To obtain it, you’ll have to find the diagrams for it, a bunch of materials and a capable artisan. You’ll need to craft the gear. Wire x4Hardened Leather x4 Leather Straps x5 Linen x4 Cured Draconid Leather x1</description> 
+  </type>  
+  <type id="2"> 
+    <name>Kendo Armor</name>  
+    <image>image/KendoArmor.jpg</image>  
+    <description>Kendo Armor is a heavy armor set in Dungeons and Dragons. It boasts some of the highest elemental resistances and physical defense in the game. Physical Defence : 30, Defence : 22, Weight : 7.5lbs, Value : 300</description> 
+  </type>  
+  <type id="3"> 
+    <name>Leather Jacket</name>  
+    <image>image/LeatherJacket.jpg</image>  
+    <description>The armor is mostly made of leather and is lightweight, making it ideal for the agile shadow-hugging thief. It offers higher defense than Elven or Scaled Armor and is available extremely early in the game after 2 non combat quests. Incidentally, the armor cannot be disenchanted. Upgraded with Leather. The Armor upgrade has carrying capacity +35 instead of +20. Base Armor : 68, Weight : 11lbs, Base Value : 1679</description> 
+  </type>  
+  <type id="4"> 
+    <name>Sentinel Coat</name>  
+    <image>image/SentinelCoat.jpg</image>  
+    <description>The Sentinel armor is a vacuum-sealed asbestos jumpsuit covering the entire body. Attached to it is the interface and mounts for the T-45d power armor. Its purpose is twofold - it allows the user to actually operate the armor and protect soft tissue from heat and moving parts inside the suit. It is a decent option for stealth and sniper mercantile-based characters who seek an alternative to combat armor or Talon combat armor. Its good Damage Resistance and its Sneak bonus make it a good choice for early-game characters. Weight : 20lbs, Value : 1000</description> 
+  </type>  
+  <type id="5"> 
+    <name>Red Lotus</name>  
+    <image>image/RedLotus.jpg</image>  
+    <description>The Superior Death Lotus chestplate is ranged body armour. Wearing a Red Lotus armour set (including augmented parts, but not weapons) grants a passive ability, Death Knot, which gives a chance to obtain a ports resource crate when defeating an opponent. Value : 1200, Weight : 8lbs</description> 
+  </type>  
 </armor>
