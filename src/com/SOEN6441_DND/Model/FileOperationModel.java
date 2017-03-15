@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 import org.dom4j.tree.DefaultElement;
 import org.dom4j.Document;
@@ -136,23 +137,30 @@ public class FileOperationModel {
 		Element rootElement = document.getRootElement();
 		characterImage=rootElement.selectSingleNode("image").getText();
 	}
-	public ArrayList<String> readSaveItemFile(File file) {
+	public Map<String, ArrayList<String>> readSaveItemFile(File file) {
+		Map<String,ArrayList<String>> hm = new HashMap<String,ArrayList<String>>();
 		this.file = file;
+		String filename=file.getName().replaceAll(".xml", "");
 		itemsName = new ArrayList<String>();
 		SAXReader reader = new SAXReader();
 		Document document = null;
 		try {
 			document = reader.read(file);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			Element rootElement = document.getRootElement();
+			List<Element> typeElements = rootElement.elements();
 
-		Element rootElement = document.getRootElement();
-		List<Element> typeElements = rootElement.elements();
-		for (Element item : typeElements) {
-			itemsName.add(item.selectSingleNode("name").getText());
+			for (Element item : typeElements) {
+				itemsName.add(item.selectSingleNode("name").getText());//Name of Item
+				itemsName.add(filename);//Type of Item
+				itemsName.add(item.selectSingleNode("itemTypeName").getText());//Sub Type
+				itemsName.add(item.selectSingleNode("enchantValue").getText());//Enchanment Value
+				hm.put(item.selectSingleNode("name").getText(),itemsName);
+			}
+			return hm;
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No Item has been created for this type");
 		}
-		return itemsName;
+		return hm;
 	}
 
 	/**

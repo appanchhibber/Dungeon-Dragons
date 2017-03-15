@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
 import java.awt.image.ImageProducer;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -51,6 +53,11 @@ public class CharacterScene extends View implements Observer {
 	public AbilitiyModel abilityModifier;
 	public AbilitiyModel abilityScore;
 	
+	//backPack
+	public Map<String, ArrayList<String>> backPackMap;
+	public Map<String, ArrayList<String>> assignItemMap;
+	
+	
 	@Override
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
@@ -61,9 +68,11 @@ public class CharacterScene extends View implements Observer {
 		abilityViewModel=new AbilitiyModel();
 		abilityModifier= new AbilitiyModel();
 		abilityScore= new AbilitiyModel();
+		
 		itemAssignView=new ItemAssignView();
 		characterViewModel.setAbilityScore(abilityScore);
 		characterViewModel.setAbilityModifier(abilityModifier);
+		
 	
 		
 		//Panel Initialization
@@ -161,6 +170,9 @@ public class CharacterScene extends View implements Observer {
 		this.add(navMenuPanel);
 		navMenuPanel.nextButton.addActionListener(characterController);
 		navMenuPanel.saveButton.addActionListener(characterController);
+		itemAssignView.itemType.addActionListener(characterController);
+		itemAssignView.subItemType.addActionListener(characterController);
+		itemAssignView.backpackAssign.addActionListener(characterController);
 		this.add(imagePanel);
 		this.add(abilityPanel);
 		
