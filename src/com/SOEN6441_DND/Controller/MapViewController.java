@@ -73,21 +73,35 @@ private GameController gameController;
 		}
 
 		else if(e.getSource()==mapView.navPanel.saveButton){
+			File file;
 			JFileChooser fileChooser = new JFileChooser(new File("maps/"));
-			fileChooser.addChoosableFileFilter(new FileNameExtensionFilter(
-					"XML", "xml"));
+			fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
+					"xml");
+			fileChooser.setFileFilter(filter);
 			int result = fileChooser.showSaveDialog(null);
 			if (result == JFileChooser.APPROVE_OPTION) {
-				File file = new File(fileChooser.getSelectedFile().toString());
+				if(!fileChooser.getSelectedFile().getAbsolutePath().endsWith(".xml"))
+				{
+					 file = new File(fileChooser.getSelectedFile().toString()+".xml");	
+				}else{
+					 file = new File(fileChooser.getSelectedFile().toString());
+				}
+				
 				String saveResult=ioModel.writeMapData(file,mapModel);
 			}
 		
 		}
 		else if (e.getSource() == mapView.navPanel.loadButton) {
 			File file = openMapFile();
+			if(file==null)
+			{
+				return;
+			}else{
 			mapModel=ioModel.readMapFile(file);
 			String mode="edit";
 			gameController.mainFrame.setView(new MapView(mapModel,mode));
+			}
 		}
 		else if(e.getSource()==mapView.inventView.addCharacter){
 			if(mapView.inventView.addCharacter.isSelected()==true){				

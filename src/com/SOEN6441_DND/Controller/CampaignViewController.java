@@ -49,14 +49,14 @@ public class CampaignViewController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		// TODO Auto-generated method stub
-		if(e.getSource()==campaignView.addAllMaps){
+/*		if(e.getSource()==campaignView.addAllMaps){
 			campaignModel.setCampMapList(campaignModel.getMapList());
 
 		}
 		else if(e.getSource()==campaignView.removeAllMaps){
 			campaignModel.notifyCampaignView("RemoveAll");
-		}
-        else if(e.getSource()==campaignView.addMap){
+		}*/
+         if(e.getSource()==campaignView.addMap){
              DefaultListModel model=(DefaultListModel)campaignView.campMaps.getModel();
              for (Object selectedValue : campaignView.maps.getSelectedValuesList()) {
                     model.addElement(selectedValue);
