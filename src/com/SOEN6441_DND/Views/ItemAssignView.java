@@ -2,6 +2,8 @@ package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -43,8 +45,12 @@ public class ItemAssignView extends View {
 	public JComboBox itemType;
 	public JComboBox subItemType;
 
-	public JList backpackList;
+	public JList backPackList;
 	public JList assignItemList;
+	
+	public int backPackCounter;
+	
+	public Map<String, ArrayList<String>> items;
 
 	public JButton backpackAssign;
 	public JButton charBackButton;
@@ -68,10 +74,10 @@ public class ItemAssignView extends View {
 		backpackPanel.setBackground(Color.BLACK);
 		backpackPanel.setSize(500, 500);
 		backpackPanel.setLocation(340, 30);
-		backpackList = new JList();
-		backpackList.setSize(200, 480);
-		backpackList.setLocation(10, 10);
-		backpackPanel.add(backpackList);
+		backPackList = new JList();
+		backPackList.setSize(200, 480);
+		backPackList.setLocation(10, 10);
+		backpackPanel.add(backPackList);
 
 		addItem = new JButton(">");
 		addItem.setSize(50, 30);
@@ -116,7 +122,8 @@ public class ItemAssignView extends View {
 		itemSubTypeLabel.setForeground(Color.WHITE);
 		itemPanel.add(itemSubTypeLabel);
 		subItemType = new JComboBox();
-		subItemType.setModel(new DefaultComboBoxModel(fileIO.readSaveItemFile(new File("itemSave/"+itemType.getSelectedItem().toString()+".xml")).toArray()));
+		items=(Map<String, ArrayList<String>>) fileIO.readSaveItemFile(new File("itemSave/"+itemType.getSelectedItem().toString()+".xml"));
+		subItemType.setModel(new DefaultComboBoxModel(items.keySet().toArray()));
 		subItemType.setSize(140, 40);
 		subItemType.setLocation(150, 80);
 		itemPanel.add(subItemType);

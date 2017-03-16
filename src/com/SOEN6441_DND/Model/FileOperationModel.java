@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 import org.dom4j.tree.DefaultElement;
 import org.dom4j.Document;
@@ -28,6 +29,7 @@ import org.dom4j.io.XMLWriter;
 
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
+import com.sun.beans.decoder.DocumentHandler;
 
 /**
  * This Class is a the file operation model handling the functionalities in and
@@ -172,23 +174,30 @@ public class FileOperationModel {
 		return itemModel;
 	}
 	
-	public ArrayList<String> readSaveItemFile(File file) {
+	public Map<String, ArrayList<String>> readSaveItemFile(File file) {
+		Map<String,ArrayList<String>> hm = new HashMap<String,ArrayList<String>>();
 		this.file = file;
+		String filename=file.getName().replaceAll(".xml", "");
 		itemsName = new ArrayList<String>();
 		SAXReader reader = new SAXReader();
 		Document document = null;
 		try {
 			document = reader.read(file);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			Element rootElement = document.getRootElement();
+			List<Element> typeElements = rootElement.elements();
 
-		Element rootElement = document.getRootElement();
-		List<Element> typeElements = rootElement.elements();
-		for (Element item : typeElements) {
-			itemsName.add(item.selectSingleNode("name").getText());
+			for (Element item : typeElements) {
+				itemsName.add(item.selectSingleNode("name").getText());//Name of Item
+				itemsName.add(filename);//Type of Item
+				itemsName.add(item.selectSingleNode("itemTypeName").getText());//Sub Type
+				itemsName.add(item.selectSingleNode("enchantValue").getText());//Enchanment Value
+				hm.put(item.selectSingleNode("name").getText(),itemsName);
+			}
+			return hm;
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No Item has been created for this type");
 		}
-		return itemsName;
+		return hm;
 	}
 
 	/**
@@ -492,7 +501,35 @@ public class FileOperationModel {
 		}
 		return message;
 	}
+/**
+ * This method is used to save the campaign created into xml file
+ * @param file
+ * @return message
+ * @author Appan Chhibber
+ */
+	public String createCampaignFile(File file,ArrayList list){
+		message="Campaign Saved Successfully";
 
+		Document document=DocumentHelper.createDocument();
+		Element rootElement=document.addElement("Campaign");
+		Element mapElements=rootElement.addElement("Maps");
+		int counter=0;
+		for(Object map:list){
+			counter++;
+          Element mapElement=new DefaultElement("map").addAttribute("id",String.valueOf(counter));
+          mapElement.addElement("name").addText(map.toString()+".xml");
+
+  		mapElements.add(mapElement);
+		}
+		try {
+			write(document,file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			message="Campaign not Saved";
+			e.printStackTrace();
+		}
+		return message;
+	}
 	/**
 	 * This method is resposible for reading the saved map file and setting in
 	 * the model and returning it

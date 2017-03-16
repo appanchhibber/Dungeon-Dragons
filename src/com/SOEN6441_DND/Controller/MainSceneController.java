@@ -1,7 +1,6 @@
 package com.SOEN6441_DND.Controller;
 
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 import java.io.File;
 
@@ -13,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.ItemModel;
 import com.SOEN6441_DND.Model.MapModel;
@@ -85,7 +85,7 @@ public class MainSceneController implements ActionListener {
 			System.out.println("character editor fired");
 		}
 		if (e.getSource() == homeScreen.campaignCreator) {
-			gameController.mainFrame.setView(new CampaignView());
+			gameController.mainFrame.setView(new CampaignView(new CampaignModel(),"create"));
 		}
 		if (e.getSource() == homeScreen.campaignEditor) {
 
