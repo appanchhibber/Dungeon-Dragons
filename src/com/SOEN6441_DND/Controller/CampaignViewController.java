@@ -2,8 +2,11 @@ package com.SOEN6441_DND.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
@@ -18,7 +21,8 @@ public class CampaignViewController implements ActionListener {
 	CampaignView campaignView;
 	FileOperationModel ioModel;
 	CampaignModel campaignModel;
-	
+    private GameController gameController;
+
 	
 	/**
 	 * This is constructor assigning passed input Campaign view
@@ -27,6 +31,7 @@ public class CampaignViewController implements ActionListener {
 	 */
 	public CampaignViewController(CampaignView view)
 	{
+		gameController=GameController.getInstance();
 		campaignView=view;
 		ioModel=view.ioModel;
 		this.campaignModel=view.campaignModel;
@@ -55,6 +60,14 @@ public class CampaignViewController implements ActionListener {
              campaignModel.setSelectedMapList(model);
              
             }
+         else if(e.getSource()==campaignView.navPanel.loadButton)
+         {
+             File file = openCampaignFile();
+             campaignModel=ioModel.readCampaignFile(file);
+             String mode="edit";
+             gameController.mainFrame.setView(new CampaignView(campaignModel,mode));
+         }
+
         else if(e.getSource()==campaignView.removeMap){
             DefaultListModel model =(DefaultListModel)campaignView.maps.getModel();
             campaignModel.campMapList=(DefaultListModel)campaignView.campMaps.getModel();
@@ -67,6 +80,21 @@ public class CampaignViewController implements ActionListener {
         }
         }
 
+    // To Open Dialog Box
+    public File openCampaignFile() {
+        JFileChooser fileChooser = new JFileChooser(new File("campaign/"));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
+                "xml");
+        fileChooser.setFileFilter(filter);
+        int option = fileChooser.showOpenDialog(gameController.mainFrame);
+
+        if (option == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            return file;
+        } else {
+            return null;
+        }
+    }
 
 		
 	}

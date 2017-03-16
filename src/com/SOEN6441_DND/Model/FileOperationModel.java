@@ -579,5 +579,34 @@ public class FileOperationModel {
 		mapModel.setExit(new Dimension(Integer.parseInt(exitX.getText()), Integer.parseInt(exitY.getText())));
 		return mapModel;
 	}
+    /**
+     * This method reads the selected campaign file 
+     * @param file
+     * @return Campaign Model
+     * @author Appan Chhibber
+     */
+    public CampaignModel readCampaignFile(File file){
+        CampaignModel campaignModel=new CampaignModel();
+        SAXReader reader = new SAXReader();
+        Document document = null;
+        try {
+            document = reader.read(file);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+
+        Element rootElement = document.getRootElement();
+        Element mapElement=rootElement.element("Maps");
+        List<Element> mapElements=mapElement.elements();
+        DefaultListModel campaignMaps=new DefaultListModel();
+        for(Element element:mapElements){
+            Node mapName=element.selectSingleNode("name");
+            campaignMaps.addElement(mapName.getText());
+        }
+        campaignModel.setCampMapList(campaignMaps);
+        campaignModel.campaignName=file.getName().replace(".xml", "").trim();
+        return campaignModel;
+    }
+
 
 }

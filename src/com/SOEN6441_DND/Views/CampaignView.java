@@ -76,11 +76,11 @@ public JButton removeAllMaps;
 	
 		buttonView.add(addMap);
 		
-		addAllMaps=new JButton("Add All  >>");
+/*		addAllMaps=new JButton("Add All  >>");
 		addAllMaps.setSize(120,30);
 		addAllMaps.setLocation(65, 70);
 
-		buttonView.add(addAllMaps);
+		buttonView.add(addAllMaps);*/
 		
 		removeMap=new JButton("Remove  <");
 		removeMap.setSize(120,30);
@@ -89,12 +89,12 @@ public JButton removeAllMaps;
 
 		buttonView.add(removeMap);
 		
-		removeAllMaps=new JButton("Remove All  <<");
+/*		removeAllMaps=new JButton("Remove All  <<");
 		removeAllMaps.setSize(120,30);
 		removeAllMaps.setLocation(65,220);
 		removeAllMaps.setEnabled(false);
 
-		buttonView.add(removeAllMaps);
+		buttonView.add(removeAllMaps);*/
 		buttonView.setVisible(true);
 		
 		
@@ -123,16 +123,15 @@ public JButton removeAllMaps;
 		campaignController=new CampaignViewController(this);
 		
 		addMap.addActionListener(campaignController);
-		addAllMaps.addActionListener(campaignController);
+		//addAllMaps.addActionListener(campaignController);
 		removeMap.addActionListener(campaignController);
-		removeAllMaps.addActionListener(campaignController);
+		//removeAllMaps.addActionListener(campaignController);
 		navPanel.saveButton.addActionListener(campaignController);
 		navPanel.loadButton.addActionListener(campaignController);
-    if(mode=="create"){
     	this.campaignModel.setMapList(ioModel.getAllFolderFile("maps"));
     	maps.setModel(campaignModel.getMapList());
-    }
-    else{
+    
+    if(mode=="edit"){
        campMaps.setModel(campaignModel.getCampMapList());
        nameText.setText(campaignModel.campaignName);
     }
@@ -147,28 +146,28 @@ public JButton removeAllMaps;
 		if(campaignModel.message.equals("setCampMapList")){
 			campMaps.setModel(campaignModel.getCampMapList());
 			maps.setModel(new DefaultListModel());
-			removeAllMaps.setEnabled(true);
+			//removeAllMaps.setEnabled(true);
 			removeMap.setEnabled(true);
 		}
-		else if(campaignModel.message=="RemoveAll")
+/*		else if(campaignModel.message=="RemoveAll")
 		{
 			maps.setModel(ioModel.getAllFolderFile("maps"));
 			campMaps.setModel(new DefaultListModel());
 			removeAllMaps.setEnabled(false);
 			removeMap.setEnabled(false);
-		}
+		}*/
         else if(campaignModel.message=="selectedMapList")
         {
             campMaps.setModel(campaignModel.getSelectedMapList());
             maps.setModel(campaignModel.getMapList());
-            removeAllMaps.setEnabled(true);
+            //removeAllMaps.setEnabled(true);
             removeMap.setEnabled(true);
         }
         else if(campaignModel.message=="setMapList"){
             campMaps.setModel(campaignModel.getSelectedMapList());
             maps.setModel(campaignModel.getMapList());
             if(campMaps.getSize()==null){
-                removeAllMaps.setEnabled(false);
+               // removeAllMaps.setEnabled(false);
                 removeMap.setEnabled(false);
             }
         }
