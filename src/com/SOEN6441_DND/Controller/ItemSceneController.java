@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -134,7 +135,7 @@ public class ItemSceneController implements ActionListener {
 	
 	}
 
-	public ArrayList itemNameList(File file){
+	public Map<String,ArrayList<String>> itemNameList(File file){
 		return fileModel.readSaveItemFile(new File("itemSave/"+file.getName()));
 	}
 	public File openItemFile(){
