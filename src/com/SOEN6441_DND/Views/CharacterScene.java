@@ -73,7 +73,6 @@ public class CharacterScene extends View implements Observer {
 		characterViewModel.setAbilityScore(abilityScore);
 		characterViewModel.setAbilityModifier(abilityModifier);
 		
-	
 		
 		//Panel Initialization
 		abilityPanel = new AbilityPanelView(abilityViewModel);

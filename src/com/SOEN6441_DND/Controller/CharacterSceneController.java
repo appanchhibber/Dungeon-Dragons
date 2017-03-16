@@ -5,7 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
@@ -36,14 +38,8 @@ public class CharacterSceneController implements ActionListener {
 	public AbilityPanelView abilityPanel;
 	public ItemAssignView itemAssignView;
 	public FileOperationModel fileModel;
-	
-	public String helmetFlag;
-	public String armorFlag;
-	public String beltFlag;
-	public String bootsFlag;
-	public String ringFlag;
-	public String weaponFlag;
-	
+	public Array backPackItems;
+
 	// public String
 
 	public CharacterSceneController(CharacterScene view) {
@@ -137,17 +133,24 @@ public class CharacterSceneController implements ActionListener {
 				itemAssignView.subItemType.setModel(new DefaultComboBoxModel(items.keySet().toArray()));
 			}
 		} else if (e.getSource() == itemAssignView.backpackAssign) {
-			if (itemAssignView.subItemType.getSelectedItem()!= null) {
+			if (itemAssignView.subItemType.getSelectedItem() != null) {
 				String item = itemAssignView.subItemType.getSelectedItem().toString();
-				if (!item.equals(null)) {
-					itemAssignView.backPackModel.addElement(item);
-					itemAssignView.backPackList.setModel(itemAssignView.backPackModel);
+				if (characterModel.getBackPackCounter() < 11) {
+					if (characterModel.getBackPackItems().contains(item)) {
+						JOptionPane.showMessageDialog(null, "This Item is already inside the Backpack");
+					} else {
+						itemAssignView.backPackModel.addElement(item);
+						itemAssignView.backPackList.setModel(itemAssignView.backPackModel);
+						characterModel.setBackPackCounter(characterModel.getBackPackCounter() + 1);
+						characterModel.addBackPackItems(item);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "You can store only 10 items in your Backpack");
 				}
 			}
 
-		}
-		else if (e.getSource() == itemAssignView.backpackAssign) {
-			
+		} else if (e.getSource() == itemAssignView.backpackAssign) {
+
 		}
 
 		characterModel.setAbilityModifier(abilityModifier);
