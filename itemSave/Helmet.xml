@@ -35,5 +35,25 @@
     <itemTypeName>Light Helm</itemTypeName>  
     <name>new helm</name>  
     <enchantValue>1</enchantValue> 
-  </type> 
+  </type>  
+  <type id="8"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>nrew</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="9"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>nnnn</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="10"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>jj</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="11">
+    <itemTypeName>Light Helm</itemTypeName>
+    <name>jjk</name>
+    <enchantValue>1</enchantValue>
+  </type>
 </Helmet>

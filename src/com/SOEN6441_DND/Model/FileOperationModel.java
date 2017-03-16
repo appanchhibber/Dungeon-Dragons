@@ -340,9 +340,13 @@ public class FileOperationModel {
 		return "File Saved!!";
 
 	}
-
+	/**
+	 * This function add values in the treasure file in items folder
+	 * @param currentScene
+	 * @author Paras Malik
+	 */
 	public void writeChestFile(ItemScene currentScene) {
-		File file = new File("items/Tressure.xml");
+		File file = new File("items/Treasure.xml");
 
 		if (file.exists()) {
 
@@ -354,7 +358,7 @@ public class FileOperationModel {
 				List<org.dom4j.Element> list = root.elements();
 				int total = list.size() + 1;
 
-				Element item = list.get(0);
+				Element item = root.addElement("item").addAttribute("name", currentScene.nameField.getText());
 				item.addElement("type").addText(currentScene.itemType.getSelectedItem().toString());
 				item.addElement("name").addText(currentScene.nameField.getText());
 				try {
@@ -375,8 +379,8 @@ public class FileOperationModel {
 
 			Element rootElement = document.addElement("treasure");
 			Element root = rootElement.addElement("item");
-			// Element typeId = root.addElement("type").addAttribute("id", "1");
-			root.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
+			root.addAttribute("name", currentScene.nameField.getText());
+			root.addElement("type").addText(currentScene.itemType.getSelectedItem().toString());
 			root.addElement("name").addText(currentScene.nameField.getText());
 			try {
 				write(document, file);
@@ -387,7 +391,6 @@ public class FileOperationModel {
 		}
 
 	}
-
 	/**
 	 * This Method is responsible for getting name of all the treasures created
 	 * by the user
