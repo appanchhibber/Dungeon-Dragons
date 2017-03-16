@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Helmet> 
+  <type id="1"> 
+    <itemTypeName>chnages</itemTypeName>  
+    <name>my helm</name>  
+    <enchantValue>3</enchantValue> 
+  </type>  
+  <type id="2"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>hello</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="3"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>helloq</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="4"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>mm</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="5"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>check</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="6"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>new heml</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="7"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>new helm</name>  
+    <enchantValue>1</enchantValue> 
+  </type> 
+</Helmet>

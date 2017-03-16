@@ -3,7 +3,10 @@ package com.SOEN6441_DND.Model;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
+
+import javax.swing.DefaultComboBoxModel;
 /**
  * This Class is a view for Item Creation and Manipulation. This class is
  * observe by Item Model.	
@@ -16,8 +19,59 @@ public class ItemModel extends Observable{
 	
 	public String name;
     public String image;
+    public String itemType;
+    public String subItemType;
+    public int enchantValue;
     
-    public Boolean chestNeeded;
+    
+    public ItemModel(){
+    	savedItemTypeList=new DefaultComboBoxModel();
+    	savedItemNameList=new DefaultComboBoxModel();
+    	savedEnchantValueList=new HashMap<String,String>();
+    }
+    
+    //for reading file data //
+    public DefaultComboBoxModel savedItemTypeList;
+    public DefaultComboBoxModel savedItemNameList;
+    public HashMap<String,String> savedEnchantValueList;
+    
+    public HashMap<String,String> getSavedEnchantValueList(){
+    	return savedEnchantValueList;
+    }
+    public DefaultComboBoxModel getSavedItemTypeList() {
+		return savedItemTypeList;
+	}
+
+	public DefaultComboBoxModel getSavedItemNameList() {
+		return savedItemNameList;
+	}
+
+	//----------------------//
+    public String getItemType() {
+		return itemType;
+	}
+
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
+	}
+
+	public String getSubItemType() {
+		return subItemType;
+	}
+
+	public void setSubItemType(String subItemType) {
+		this.subItemType = subItemType;
+	}
+
+	public int getEnchantValue() {
+		return enchantValue;
+	}
+
+	public void setEnchantValue(int enchantValue) {
+		this.enchantValue = enchantValue;
+	}
+
+	public Boolean chestNeeded;
 	public String[] getEnchanListValues() {
 		return enchanListValues;
 	}

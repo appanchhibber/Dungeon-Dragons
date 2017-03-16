@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 import org.dom4j.tree.DefaultElement;
 import org.dom4j.Document;
@@ -29,7 +28,6 @@ import org.dom4j.io.XMLWriter;
 
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
-import com.sun.beans.decoder.DocumentHandler;
 
 /**
  * This Class is a the file operation model handling the functionalities in and
@@ -49,11 +47,12 @@ public class FileOperationModel {
 	private DefaultListModel readFileList;
 	private DefaultListModel treasureList;
 
-	
 	private String characterImage;
-	public String getCharacterImage(){
+
+	public String getCharacterImage() {
 		return characterImage;
 	}
+
 	public DefaultListModel getTreasureList() {
 		return treasureList;
 	}
@@ -65,17 +64,20 @@ public class FileOperationModel {
 		this.file = new File(fileName);
 		return file;
 	}
-/**
- * This method creates file based on the string name 
- * @param fileName
- * @return file
- * @author Appan Chhibber
- */
-	public File setCharacterFile(String fileName){
+
+	/**
+	 * This method creates file based on the string name
+	 * 
+	 * @param fileName
+	 * @return file
+	 * @author Appan Chhibber
+	 */
+	public File setCharacterFile(String fileName) {
 		fileName = "characters/" + fileName + ".xml";
 		this.file = new File(fileName);
 		return file;
 	}
+
 	public ArrayList<String> getItemDesription() {
 		return itemDesription;
 	}
@@ -118,14 +120,16 @@ public class FileOperationModel {
 			itemDesription.add(item.selectSingleNode("description").getText());
 		}
 	}
-/**
- * This method is used to read the character file saved by the user
- * @param file
- * @author Appan Chhibber
- */
-	public void readCharaterFile(File file){
-		this.file=file;
-		itemsImage=new ArrayList<String>();
+
+	/**
+	 * This method is used to read the character file saved by the user
+	 * 
+	 * @param file
+	 * @author Appan Chhibber
+	 */
+	public void readCharaterFile(File file) {
+		this.file = file;
+		itemsImage = new ArrayList<String>();
 		SAXReader reader = new SAXReader();
 		Document document = null;
 		try {
@@ -135,32 +139,56 @@ public class FileOperationModel {
 		}
 
 		Element rootElement = document.getRootElement();
-		characterImage=rootElement.selectSingleNode("image").getText();
+		characterImage = rootElement.selectSingleNode("image").getText();
 	}
-	public Map<String, ArrayList<String>> readSaveItemFile(File file) {
-		Map<String,ArrayList<String>> hm = new HashMap<String,ArrayList<String>>();
+/**
+ * This method is responsible for reading the itemtype files saved in itemsave folder
+ * @param file
+ * @return itemModel
+ * @author Appan Chhibber
+ * @author Paras Malik 
+ */
+	public ItemModel readItemSaveFile(File file){
+		ItemModel itemModel=new ItemModel();
+		SAXReader reader = new SAXReader();
+		Document document = null;
+		try {
+			document = reader.read(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Element rootElement = document.getRootElement();
+		List<Element> typeElements=rootElement.elements();
+		for(Element item:typeElements){
+			Node itemType=item.selectSingleNode("itemTypeName");
+			itemModel.savedItemTypeList.addElement(itemType.getText());
+			Node itemName=item.selectSingleNode("name");
+			itemModel.savedItemNameList.addElement(itemName.getText());
+			Node enchantValue=item.selectSingleNode("enchantValue");
+			itemModel.savedEnchantValueList.put(itemName.getText(),enchantValue.getText());
+		}
+		itemModel.itemType=rootElement.getName();
+		return itemModel;
+	}
+	
+	public ArrayList<String> readSaveItemFile(File file) {
 		this.file = file;
-		String filename=file.getName().replaceAll(".xml", "");
 		itemsName = new ArrayList<String>();
 		SAXReader reader = new SAXReader();
 		Document document = null;
 		try {
 			document = reader.read(file);
-			Element rootElement = document.getRootElement();
-			List<Element> typeElements = rootElement.elements();
-
-			for (Element item : typeElements) {
-				itemsName.add(item.selectSingleNode("name").getText());//Name of Item
-				itemsName.add(filename);//Type of Item
-				itemsName.add(item.selectSingleNode("itemTypeName").getText());//Sub Type
-				itemsName.add(item.selectSingleNode("enchantValue").getText());//Enchanment Value
-				hm.put(item.selectSingleNode("name").getText(),itemsName);
-			}
-			return hm;
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "No Item has been created for this type");
+			e.printStackTrace();
 		}
-		return hm;
+
+		Element rootElement = document.getRootElement();
+		List<Element> typeElements = rootElement.elements();
+		for (Element item : typeElements) {
+			itemsName.add(item.selectSingleNode("name").getText());
+		}
+		return itemsName;
 	}
 
 	/**
@@ -228,47 +256,78 @@ public class FileOperationModel {
 	 * @author Paras Malik
 	 * @throws IOException
 	 */
+
+	public ItemModel readItemFile(File file) {
+
+		ItemModel itemModel = new ItemModel();
+		this.file = file;
+
+		SAXReader reader = new SAXReader();
+		Document document = null;
+		try {
+			document = reader.read(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Element rootElement = document.getRootElement();
+		
+		itemModel.setItemType(rootElement.getName());
+		Element type = rootElement.element("type");
+		itemModel.setSubItemType(type.selectSingleNode("itemTypeName").getText());
+		itemModel.setName(type.selectSingleNode("name").getText());
+		itemModel.setEnchantValue(Integer.parseInt((type.selectSingleNode("enchantValue").getText())));
+
+		return itemModel;
+	}
+
 	public String writeItemData(ItemScene currentScene) throws IOException {
-		File file = new File("itemSave/" + currentScene.itemType.getSelectedItem().toString() + ".xml");
+		File file = null;
+		
+			file = new File("itemSave/" + currentScene.itemType.getSelectedItem().toString() + ".xml");
 
-		if (file.exists()) {
+				if (file.exists()) {
 
-			SAXReader reader = new SAXReader();
-			Document document;
-			try {
-				document = reader.read(file);
-				Element root = document.getRootElement();
-				List<Element> typeElements = root.elements();
-				Element typeElement = root.element("type");
-				for (Element item : typeElements) {
-					itemsName.add(item.selectSingleNode("name").getText());
+				SAXReader reader = new SAXReader();
+				Document document;
+				try {
+					document = reader.read(file);
+					Element root = document.getRootElement();
+					List<Element> typeElements = root.elements();
+					Element typeElement = root.element("type");
+					for (Element item : typeElements) {
+						itemsName.add(item.selectSingleNode("name").getText());
+					}
+					if (itemsName.contains(currentScene.nameField.getText())) {
+						return "Item already Exist!!";
+					} else {
+						List<org.dom4j.Element> list = root.elements();
+						int total = list.size() + 1;
+						Element typeId = root.addElement("type").addAttribute("id", String.valueOf(total));
+						typeId.addElement("itemTypeName")
+								.addText(currentScene.subItemType.getSelectedItem().toString());
+						typeId.addElement("name").addText(currentScene.nameField.getText());
+						typeId.addElement("enchantValue")
+								.addText(currentScene.enchantList.getSelectedItem().toString());
+						write(document, file);
+					}
+				} catch (DocumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				if (itemsName.contains(currentScene.nameField.getText())) {
-					return "Item already Exist!!";
-				} else {
-					List<org.dom4j.Element> list = root.elements();
-					int total = list.size() + 1;
-					Element typeId = root.addElement("type").addAttribute("id", String.valueOf(total));
+			}
+				else {
+
+					Document document = DocumentHelper.createDocument();
+					Element root = document.addElement(currentScene.itemType.getSelectedItem().toString());
+					Element typeId = root.addElement("type").addAttribute("id", "1");
 					typeId.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
 					typeId.addElement("name").addText(currentScene.nameField.getText());
 					typeId.addElement("enchantValue").addText(currentScene.enchantList.getSelectedItem().toString());
 					write(document, file);
 				}
-			} catch (DocumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	
 
-		} else {
-
-			Document document = DocumentHelper.createDocument();
-			Element root = document.addElement(currentScene.itemType.getSelectedItem().toString());
-			Element typeId = root.addElement("type").addAttribute("id", "1");
-			typeId.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
-			typeId.addElement("name").addText(currentScene.nameField.getText());
-			typeId.addElement("enchantValue").addText(currentScene.enchantList.getSelectedItem().toString());
-			write(document, file);
-		}
+	 
 		return "File Saved!!";
 
 	}
@@ -319,8 +378,11 @@ public class FileOperationModel {
 		}
 
 	}
+
 	/**
-	 * This Method is responsible for getting name of all the treasures created by the user
+	 * This Method is responsible for getting name of all the treasures created
+	 * by the user
+	 * 
 	 * @author Appan Chhibber
 	 */
 	public void readTreasureFile() {
@@ -338,7 +400,7 @@ public class FileOperationModel {
 		List<Element> typeElements = rootElement.elements();
 		for (Element item : typeElements) {
 			treasureList.addElement(item.attributeValue("name"));
-			
+
 		}
 	}
 
@@ -395,20 +457,20 @@ public class FileOperationModel {
 		exitDoorElement.addElement("X").addText(String.valueOf((int) mapModel.getExit().getWidth()));
 		exitDoorElement.addElement("Y").addText(String.valueOf((int) mapModel.getExit().getHeight()));
 		rootElement.add(exitDoorElement);
-		
-		Element characterElements=rootElement.addElement("Character");
-		for(Map.Entry<String,Dimension> character:mapModel.getCharacters().entrySet()){
-			Element characterElement=new DefaultElement("character").addAttribute("name", character.getKey());
-			characterElement.addElement("X").addText(String.valueOf((int)character.getValue().getWidth()));
-			characterElement.addElement("Y").addText(String.valueOf((int)character.getValue().getHeight()));
+
+		Element characterElements = rootElement.addElement("Character");
+		for (Map.Entry<String, Dimension> character : mapModel.getCharacters().entrySet()) {
+			Element characterElement = new DefaultElement("character").addAttribute("name", character.getKey());
+			characterElement.addElement("X").addText(String.valueOf((int) character.getValue().getWidth()));
+			characterElement.addElement("Y").addText(String.valueOf((int) character.getValue().getHeight()));
 			characterElements.add(characterElement);
 		}
-		
-		Element treasureElements=rootElement.addElement("Treasure");
-		for(Map.Entry<String,Dimension> treasure:mapModel.getTreasures().entrySet()){
-			Element treasureElement=new DefaultElement("treasure").addAttribute("name",treasure.getKey() );
-			treasureElement.addElement("X").addText(String.valueOf((int)treasure.getValue().getWidth()));
-			treasureElement.addElement("Y").addText(String.valueOf((int)treasure.getValue().getHeight()));
+
+		Element treasureElements = rootElement.addElement("Treasure");
+		for (Map.Entry<String, Dimension> treasure : mapModel.getTreasures().entrySet()) {
+			Element treasureElement = new DefaultElement("treasure").addAttribute("name", treasure.getKey());
+			treasureElement.addElement("X").addText(String.valueOf((int) treasure.getValue().getWidth()));
+			treasureElement.addElement("Y").addText(String.valueOf((int) treasure.getValue().getHeight()));
 			treasureElements.add(treasureElement);
 		}
 		XMLWriter writer = null;
@@ -430,35 +492,7 @@ public class FileOperationModel {
 		}
 		return message;
 	}
-/**
- * This method is used to save the campaign created into xml file
- * @param file
- * @return message
- * @author Appan Chhibber
- */
-	public String createCampaignFile(File file,ArrayList list){
-		message="Campaign Saved Successfully";
 
-		Document document=DocumentHelper.createDocument();
-		Element rootElement=document.addElement("Campaign");
-		Element mapElements=rootElement.addElement("Maps");
-		int counter=0;
-		for(Object map:list){
-			counter++;
-          Element mapElement=new DefaultElement("map").addAttribute("id",String.valueOf(counter));
-          mapElement.addElement("name").addText(map.toString()+".xml");
-
-  		mapElements.add(mapElement);
-		}
-		try {
-			write(document,file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			message="Campaign not Saved";
-			e.printStackTrace();
-		}
-		return message;
-	}
 	/**
 	 * This method is resposible for reading the saved map file and setting in
 	 * the model and returning it
@@ -508,34 +542,5 @@ public class FileOperationModel {
 		mapModel.setExit(new Dimension(Integer.parseInt(exitX.getText()), Integer.parseInt(exitY.getText())));
 		return mapModel;
 	}
-	
-	/**
-	 * This method reads the selected campaign file 
-	 * @param file
-	 * @return Campaign Model
-	 * @author Appan Chhibber
-	 */
-	public CampaignModel readCampaignFile(File file){
-		CampaignModel campaignModel=new CampaignModel();
-		SAXReader reader = new SAXReader();
-		Document document = null;
-		try {
-			document = reader.read(file);
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		}
 
-		Element rootElement = document.getRootElement();
-		Element mapElement=rootElement.element("Maps");
-		List<Element> mapElements=mapElement.elements();
-		DefaultListModel campaignMaps=new DefaultListModel();
-		for(Element element:mapElements){
-			Node mapName=element.selectSingleNode("name");
-			campaignMaps.addElement(mapName.getText());
-		}
-		campaignModel.setCampMapList(campaignMaps);
-		campaignModel.campaignName=file.getName().replace(".xml", "").trim();
-		return campaignModel;
-	}
-	
 }

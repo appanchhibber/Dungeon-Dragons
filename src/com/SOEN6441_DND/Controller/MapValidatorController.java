@@ -30,7 +30,7 @@ public class MapValidatorController {
     private int entryDoorCount;
     private int chestCount;
     private int characterCount;
-    public MapModel mapModel;
+ public MapModel mapModel;
     public PathValidatorController pathValidator;
 
 private ArrayList list;    

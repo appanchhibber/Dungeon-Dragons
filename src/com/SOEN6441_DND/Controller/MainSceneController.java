@@ -1,6 +1,7 @@
 package com.SOEN6441_DND.Controller;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.io.File;
 
@@ -12,8 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
-import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
+import com.SOEN6441_DND.Model.ItemModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.CampaignView;
 import com.SOEN6441_DND.Views.CharacterScene;
@@ -27,12 +28,14 @@ public class MainSceneController implements ActionListener {
 	private GameController gameController;
 	public FileOperationModel ioModel;
 	public MapModel mapModel;
+	public ItemModel itemModel;
 
 	public MainSceneController(MainScene view) {
 		this.homeScreen = view;
 		gameController = GameController.getInstance();
 		ioModel = new FileOperationModel();
 		mapModel = new MapModel();
+		itemModel = new ItemModel();
 	}
 
 	@Override
@@ -64,7 +67,8 @@ public class MainSceneController implements ActionListener {
 
 		}
 		if (e.getSource() == homeScreen.itemCreation) {
-			gameController.mainFrame.setView(new ItemScene());
+			String mode = "create";
+			gameController.mainFrame.setView(new ItemScene(new ItemModel(),"create"));
 		}
 		if (e.getSource() == homeScreen.editItem) {
 			System.out.println("item editor fired");
@@ -81,7 +85,7 @@ public class MainSceneController implements ActionListener {
 			System.out.println("character editor fired");
 		}
 		if (e.getSource() == homeScreen.campaignCreator) {
-			gameController.mainFrame.setView(new CampaignView(new CampaignModel(),"create"));
+			gameController.mainFrame.setView(new CampaignView());
 		}
 		if (e.getSource() == homeScreen.campaignEditor) {
 
