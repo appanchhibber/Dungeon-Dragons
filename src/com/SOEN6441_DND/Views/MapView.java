@@ -106,11 +106,15 @@ public	int mapHeight;
 		if(mapModel.message=="characterList"){
 			inventView.characterLabel.setVisible(true);
 			inventView.characterDropDown.setModel(new DefaultComboBoxModel(mapModel.getCharacterList().toArray()));
-			inventView.characterDropDown.setVisible(true);		
+			inventView.characterDropDown.setVisible(true);	
+			inventView.characterBehavior.setVisible(true);
+			inventView.selectBehavior.setVisible(true);
 		}
 		else if(mapModel.message=="Uncheckcharacter"){
 			inventView.characterDropDown.setVisible(false);
 			inventView.characterLabel.setVisible(false);
+			inventView.characterBehavior.setVisible(false);
+			inventView.selectBehavior.setVisible(false);
 		}
 		else if(mapModel.message=="TreasureList"){
 			inventView.treasureLabel.setVisible(true);

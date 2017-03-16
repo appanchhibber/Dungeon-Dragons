@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import com.SOEN6441_DND.Controller.TransferHandlerController;
 
@@ -27,6 +28,7 @@ public class InventoryPanelView extends View {
 	//-For Dropdown Label//
 	public JLabel characterLabel;
 	public JLabel treasureLabel;
+	public JLabel characterBehavior;
 	//------------//
 	public ImageIcon chestImage;
 	public ImageIcon wallImage;
@@ -39,11 +41,12 @@ public JButton removeButton;
 
 public JCheckBox addCharacter;
 public JCheckBox addTreasure;
+
 	public TransferHandlerController transferHandler;
 
 	public JComboBox characterDropDown;
 	public JComboBox treasureDropDown;
-	
+	public JTextField selectBehavior;
 
 	@Override
 	protected void initSubviews() {
@@ -127,6 +130,17 @@ public JCheckBox addTreasure;
 		treasureDropDown.setSize(120, 30);
 		treasureDropDown.setLocation(10, 270);
 		treasureDropDown.setVisible(false);
+		
+		characterBehavior=new JLabel("Character Behaviour:");
+		characterBehavior.setForeground(Color.WHITE);
+		characterBehavior.setSize(120,20);
+		characterBehavior.setLocation(10, 310);
+		characterBehavior.setVisible(false);
+		selectBehavior=new JTextField();
+		selectBehavior.setSize(120, 30);
+		selectBehavior.setLocation(10, 330);
+		selectBehavior.setVisible(false);
+		selectBehavior.setEnabled(false);
 		//Validate Button 
 		validateButton=new JButton("Validate");
 		validateButton.setSize(100,30);
@@ -146,6 +160,8 @@ public JCheckBox addTreasure;
 		this.add(treasureLabel);
 		this.add(charImageLabel);
 		this.add(treaImageLabel);
+		this.add(characterBehavior);
+		this.add(selectBehavior);
 		this.setVisible(true);
 	}
 
