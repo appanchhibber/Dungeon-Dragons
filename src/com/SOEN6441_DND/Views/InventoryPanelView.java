@@ -25,22 +25,22 @@ public class InventoryPanelView extends View {
 	public JLabel exitDoorLabel;
 	public JLabel charImageLabel;
 	public JLabel treaImageLabel;
-	//-For Dropdown Label//
+	// -For Dropdown Label//
 	public JLabel characterLabel;
 	public JLabel treasureLabel;
 	public JLabel characterBehavior;
-	//------------//
+	// ------------//
 	public ImageIcon chestImage;
 	public ImageIcon wallImage;
 	public ImageIcon entryDoorImage;
 	public ImageIcon exitDoorImage;
 	public ImageIcon treasureImage;
 	public ImageIcon characterImage;
-public JButton validateButton;
-public JButton removeButton;
+	public JButton validateButton;
+	public JButton removeButton;
 
-public JCheckBox addCharacter;
-public JCheckBox addTreasure;
+	public JCheckBox addCharacter;
+	public JCheckBox addTreasure;
 
 	public TransferHandlerController transferHandler;
 
@@ -57,95 +57,87 @@ public JCheckBox addTreasure;
 		this.setLocation(645, 10);
 		this.setBackground(Color.BLACK);
 		wallImage = new ImageIcon("image/Wall.jpg");
-		wallLabel = new JLabel(new ImageIcon(
-				((wallImage.getImage().getScaledInstance(50, 50,
-						java.awt.Image.SCALE_SMOOTH)))));
+		wallLabel = new JLabel(
+				new ImageIcon(((wallImage.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)))));
 		wallLabel.setLocation(10, 10);
 		wallLabel.setSize(50, 50);
-		wallLabel.setTransferHandler(new TransferHandlerController()
-				.valueExportCreator("image/Wall.jpg"));
+		wallLabel.setTransferHandler(new TransferHandlerController().valueExportCreator("image/Wall.jpg"));
 
 		entryDoorImage = new ImageIcon("image/EntryDoor.jpg");
-		entryDoorLabel = new JLabel(new ImageIcon(
-				((entryDoorImage.getImage().getScaledInstance(50, 50,
-						java.awt.Image.SCALE_SMOOTH)))));
+		entryDoorLabel = new JLabel(
+				new ImageIcon(((entryDoorImage.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)))));
 		entryDoorLabel.setLocation(70, 10);
 		entryDoorLabel.setSize(50, 50);
-		entryDoorLabel.setTransferHandler(new TransferHandlerController()
-		.valueExportCreator("image/EntryDoor.jpg"));
-		
-		chestImage=new ImageIcon("image/Chest.jpg");
-		chestLabel=new JLabel(new ImageIcon(
-				((chestImage.getImage().getScaledInstance(50, 50,
-						java.awt.Image.SCALE_SMOOTH)))));
+		entryDoorLabel.setTransferHandler(new TransferHandlerController().valueExportCreator("image/EntryDoor.jpg"));
+
+		chestImage = new ImageIcon("image/Chest.jpg");
+		chestLabel = new JLabel(
+				new ImageIcon(((chestImage.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)))));
 		chestLabel.setLocation(130, 10);
 		chestLabel.setSize(50, 50);
-		chestLabel.setTransferHandler(new TransferHandlerController()
-		.valueExportCreator("image/Chest.jpg"));
-		
+		chestLabel.setTransferHandler(new TransferHandlerController().valueExportCreator("image/Chest.jpg"));
+
 		exitDoorImage = new ImageIcon("image/ExitDoor.jpg");
-		exitDoorLabel = new JLabel(new ImageIcon(
-				((exitDoorImage.getImage().getScaledInstance(50, 50,
-						java.awt.Image.SCALE_SMOOTH)))));
+		exitDoorLabel = new JLabel(
+				new ImageIcon(((exitDoorImage.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)))));
 		exitDoorLabel.setLocation(10, 70);
 		exitDoorLabel.setSize(50, 50);
-		exitDoorLabel.setTransferHandler(new TransferHandlerController()
-		.valueExportCreator("image/ExitDoor.jpg"));
-		
-		treaImageLabel=new JLabel();
-		treaImageLabel.setSize(50,50);
+		exitDoorLabel.setTransferHandler(new TransferHandlerController().valueExportCreator("image/ExitDoor.jpg"));
+
+		treaImageLabel = new JLabel();
+		treaImageLabel.setSize(50, 50);
 		treaImageLabel.setLocation(130, 70);
-		
-		charImageLabel=new JLabel();
-		charImageLabel.setSize(50,50);
+
+		charImageLabel = new JLabel();
+		charImageLabel.setSize(50, 50);
 		charImageLabel.setLocation(70, 70);
-		
-		addCharacter=new JCheckBox("Add Character");
-		addCharacter.setSize(120,30);
-		addCharacter.setLocation(25,130);
+
+		addCharacter = new JCheckBox("Add Character");
+		addCharacter.setSize(120, 30);
+		addCharacter.setLocation(25, 130);
 		addCharacter.setForeground(Color.WHITE);
 		addCharacter.setOpaque(false);
-		addTreasure=new JCheckBox("Add Treasure");
+		addTreasure = new JCheckBox("Add Treasure");
 		addTreasure.setSize(120, 30);
-		addTreasure.setLocation(25,160);
+		addTreasure.setLocation(25, 160);
 		addTreasure.setForeground(Color.WHITE);
 		addTreasure.setOpaque(false);
-		
-		characterLabel=new JLabel("Select Character:");
+
+		characterLabel = new JLabel("Select Character:");
 		characterLabel.setForeground(Color.WHITE);
 		characterLabel.setSize(120, 20);
-		characterLabel.setLocation(10,190);
+		characterLabel.setLocation(10, 190);
 		characterLabel.setVisible(false);
-		characterDropDown=new JComboBox();
-		characterDropDown.setSize(120,30);
+		characterDropDown = new JComboBox();
+		characterDropDown.setSize(120, 30);
 		characterDropDown.setLocation(10, 210);
 		characterDropDown.setVisible(false);
-		
-		treasureLabel=new JLabel("Select Treasure:");
+
+		treasureLabel = new JLabel("Select Treasure:");
 		treasureLabel.setForeground(Color.WHITE);
 		treasureLabel.setSize(120, 20);
 		treasureLabel.setLocation(10, 250);
 		treasureLabel.setVisible(false);
-		treasureDropDown=new JComboBox();
+		treasureDropDown = new JComboBox();
 		treasureDropDown.setSize(120, 30);
 		treasureDropDown.setLocation(10, 270);
 		treasureDropDown.setVisible(false);
-		
-		characterBehavior=new JLabel("Character Behaviour:");
+
+		characterBehavior = new JLabel("Character Behaviour:");
 		characterBehavior.setForeground(Color.WHITE);
-		characterBehavior.setSize(120,20);
+		characterBehavior.setSize(120, 20);
 		characterBehavior.setLocation(10, 310);
 		characterBehavior.setVisible(false);
-		selectBehavior=new JTextField();
+		selectBehavior = new JTextField();
 		selectBehavior.setSize(120, 30);
 		selectBehavior.setLocation(10, 330);
 		selectBehavior.setVisible(false);
 		selectBehavior.setEnabled(false);
-		//Validate Button 
-		validateButton=new JButton("Validate");
-		validateButton.setSize(100,30);
-		validateButton.setLocation(50,495);
-		//------------//
+		// Validate Button
+		validateButton = new JButton("Validate");
+		validateButton.setSize(100, 30);
+		validateButton.setLocation(50, 495);
+		// ------------//
 
 		this.add(chestLabel);
 		this.add(entryDoorLabel);

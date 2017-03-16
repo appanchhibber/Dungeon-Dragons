@@ -36,6 +36,15 @@ public class CharacterSceneController implements ActionListener {
 	public AbilityPanelView abilityPanel;
 	public ItemAssignView itemAssignView;
 	public FileOperationModel fileModel;
+	
+	public String helmetFlag;
+	public String armorFlag;
+	public String beltFlag;
+	public String bootsFlag;
+	public String ringFlag;
+	public String weaponFlag;
+	
+	// public String
 
 	public CharacterSceneController(CharacterScene view) {
 		this.characterScreen = view;
@@ -46,7 +55,7 @@ public class CharacterSceneController implements ActionListener {
 		abilityModifier = view.characterViewModel.getAbilityModifier();
 		abilityScore = view.characterViewModel.getAbilityScore();
 		diceRoll = new DiceRollController(4, 6); // Dice type 4d6
-		itemAssignView = new ItemAssignView();
+		itemAssignView = view.itemAssignView;
 	}
 
 	@Override
@@ -102,7 +111,10 @@ public class CharacterSceneController implements ActionListener {
 		}
 
 		else if (e.getSource() == characterScreen.navMenuPanel.nextButton) {
-			GameController.getInstance().mainFrame.setView(characterScreen.itemAssignView);
+			GameController.getInstance().mainFrame.setView(itemAssignView);
+		} else if (e.getSource() == itemAssignView.charBackButton) {
+			itemAssignView.setVisible(false);
+			GameController.getInstance().mainFrame.setView(characterScreen);
 		} else if (e.getSource() == characterScreen.navMenuPanel.saveButton) {
 			if (characterScreen.nameText.getText().equals("")) {
 
@@ -116,16 +128,25 @@ public class CharacterSceneController implements ActionListener {
 					e1.printStackTrace();
 				}
 			}
-		} else if (e.getSource() == characterScreen.itemAssignView.itemType) {
-			File f1 = new File(
-					"itemSave/" + characterScreen.itemAssignView.itemType.getSelectedItem().toString() + ".xml");
+		} else if (e.getSource() == itemAssignView.itemType) {
+			File f1 = new File("itemSave/" + itemAssignView.itemType.getSelectedItem().toString() + ".xml");
 			Map<String, ArrayList<String>> items = new FileOperationModel().readSaveItemFile(f1);
 			if (items.isEmpty()) {
-				characterScreen.itemAssignView.subItemType.removeAllItems();
+				itemAssignView.subItemType.removeAllItems();
 			} else {
-				characterScreen.itemAssignView.subItemType.setModel(new DefaultComboBoxModel(items.keySet().toArray()));
+				itemAssignView.subItemType.setModel(new DefaultComboBoxModel(items.keySet().toArray()));
 			}
-		} else if (e.getSource() == characterScreen.itemAssignView.backpackAssign) {
+		} else if (e.getSource() == itemAssignView.backpackAssign) {
+			if (itemAssignView.subItemType.getSelectedItem()!= null) {
+				String item = itemAssignView.subItemType.getSelectedItem().toString();
+				if (!item.equals(null)) {
+					itemAssignView.backPackModel.addElement(item);
+					itemAssignView.backPackList.setModel(itemAssignView.backPackModel);
+				}
+			}
+
+		}
+		else if (e.getSource() == itemAssignView.backpackAssign) {
 			
 		}
 

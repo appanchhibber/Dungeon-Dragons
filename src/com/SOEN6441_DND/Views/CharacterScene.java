@@ -97,6 +97,7 @@ public class CharacterScene extends View implements Observer {
 		 levels = new JComboBox(characterViewModel.getLevelListValues());
 		 levels.setLocation(70,5);
 		 levels.setSize(250,30);
+		 characterViewModel.setLevel(Integer.parseInt(levels.getSelectedItem().toString()));
 		 levels.addActionListener(characterController);
 		 this.add(levelLabel);
 		 this.add(levels);
@@ -173,6 +174,9 @@ public class CharacterScene extends View implements Observer {
 		itemAssignView.itemType.addActionListener(characterController);
 		itemAssignView.subItemType.addActionListener(characterController);
 		itemAssignView.backpackAssign.addActionListener(characterController);
+		itemAssignView.charBackButton.addActionListener(characterController);
+		itemAssignView.addItem.addActionListener(characterController);
+		itemAssignView.removeItem.addActionListener(characterController);
 		this.add(imagePanel);
 		this.add(abilityPanel);
 		
@@ -184,6 +188,12 @@ public class CharacterScene extends View implements Observer {
 		setImagePanel();
 		setModifier();
 		setAbilityScore();
+		characterSkillUpdate();
+	}
+	public void characterSkillUpdate()
+	{
+		itemAssignView.levelsValueLabel.setText(String.valueOf(characterViewModel.getLevel()));
+		
 	}
 	
 	
