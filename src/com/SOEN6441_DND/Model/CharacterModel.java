@@ -1,5 +1,7 @@
 package com.SOEN6441_DND.Model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -28,7 +30,11 @@ public class CharacterModel extends Observable {
 	public void setFighterType(String fighterType) {
 		this.fighterType = fighterType;
 	}
-
+	public CharacterModel()
+	{
+		backPackItems=new ArrayList<String>();
+		backPackCounter=0;
+	}
 	// Get or set hit points
 	private int hitPoints;
 
@@ -51,6 +57,84 @@ public class CharacterModel extends Observable {
 	private int speed;
 
 	private ItemModel ownedItems[];
+	
+	
+	private String helmetFlag;
+	private String armorFlag;
+	private String beltFlag;
+	private String bootsFlag;
+	private String ringFlag;
+	private String weaponFlag;
+	public ArrayList<String> backPackItems;
+	private int backPackCounter;
+	
+	public ArrayList<String> getBackPackItems() {
+		return backPackItems;
+	}
+
+	public void setBackPackItems(ArrayList<String> backPackItems) {
+		this.backPackItems = backPackItems;
+	}
+	
+	public void addBackPackItems(String item){
+		this.backPackItems.add(item);
+	}
+
+	public int getBackPackCounter() {
+		return backPackCounter;
+	}
+
+	public void setBackPackCounter(int backPackCounter) {
+		this.backPackCounter = backPackCounter;
+	}
+
+	public String getHelmetFlag() {
+		return helmetFlag;
+	}
+
+	public void setHelmetFlag(String helmetFlag) {
+		this.helmetFlag = helmetFlag;
+	}
+
+	public String getArmorFlag() {
+		return armorFlag;
+	}
+
+	public void setArmorFlag(String armorFlag) {
+		this.armorFlag = armorFlag;
+	}
+
+	public String getBeltFlag() {
+		return beltFlag;
+	}
+
+	public void setBeltFlag(String beltFlag) {
+		this.beltFlag = beltFlag;
+	}
+
+	public String getBootsFlag() {
+		return bootsFlag;
+	}
+
+	public void setBootsFlag(String bootsFlag) {
+		this.bootsFlag = bootsFlag;
+	}
+
+	public String getRingFlag() {
+		return ringFlag;
+	}
+
+	public void setRingFlag(String ringFlag) {
+		this.ringFlag = ringFlag;
+	}
+
+	public String getWeaponFlag() {
+		return weaponFlag;
+	}
+
+	public void setWeaponFlag(String weaponFlag) {
+		this.weaponFlag = weaponFlag;
+	}
 
 	private String image;
 

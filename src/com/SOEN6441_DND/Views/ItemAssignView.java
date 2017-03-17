@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -46,7 +47,7 @@ public class ItemAssignView extends View {
 	public JComboBox subItemType;
 
 	public JList backPackList;
-	public JList assignItemList;
+	public DefaultListModel<String> backPackModel;
 	
 	public int backPackCounter;
 	
@@ -56,6 +57,12 @@ public class ItemAssignView extends View {
 	public JButton charBackButton;
 	public JButton addItem;
 	public JButton removeItem;
+	public JButton helmetButton;
+	public JButton armorButton;
+	public JButton beltButton;
+	public JButton bootsButton;
+	public JButton ringButton;
+	public JButton weaponButton;
 	
 	public FileOperationModel fileIO;
 
@@ -74,6 +81,8 @@ public class ItemAssignView extends View {
 		backpackPanel.setBackground(Color.BLACK);
 		backpackPanel.setSize(500, 500);
 		backpackPanel.setLocation(340, 30);
+		
+		backPackModel= new DefaultListModel<String>();
 		backPackList = new JList();
 		backPackList.setSize(200, 480);
 		backPackList.setLocation(10, 10);
@@ -89,11 +98,10 @@ public class ItemAssignView extends View {
 		removeItem.setLocation(220, 200);
 		backpackPanel.add(removeItem);
 
-		assignItemList = new JList();
-		assignItemList.setSize(200, 480);
-		assignItemList.setLocation(290, 10);
-		backpackPanel.add(assignItemList);
-		backpackPanel.setVisible(true);
+		helmetButton= new JButton("Helmet");
+		helmetButton.setLocation(350,10);
+		helmetButton.setSize(100,100);
+		backpackPanel.add(helmetButton);
 
 		navPanel = new JPanel();
 		navPanel.setBackground(Color.BLACK);

@@ -33,7 +33,7 @@ public class GridView extends JPanel {
 	public MapView mapView;
 	public MapModel mapModel;
 	public TransferHandlerController transferHandler;
-
+	private int count=0;
 	public GridView(MapModel mapModel, MapView mapView, String mode) {
 		this.mapModel = mapModel;
 		this.mapHeight = mapModel.getMapHeight();
@@ -162,6 +162,19 @@ public class GridView extends JPanel {
 								button.setIcon(null);
 								button.setName(button.getText());
 
+							}
+						}else if(e.getButton()==MouseEvent.BUTTON1){
+							JButton button=(JButton)e.getSource();
+							if(button.getName().contains("_")){
+								count++;
+								if(count%2==0)
+								{
+									mapView.inventView.selectBehavior.setText("Hostile");
+									button.setToolTipText("Hostile");
+								}else{
+								mapView.inventView.selectBehavior.setText("Friendly");
+								button.setToolTipText("Friendly");
+								}
 							}
 						}
 

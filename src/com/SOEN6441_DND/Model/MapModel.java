@@ -30,8 +30,8 @@ public class MapModel extends Observable {
 	public HashMap<String,Dimension> getCharacters() {
 		return characters;
 	}
-
-
+	
+	
 	//Treasure Addition in the map //
 	public String treasureName;
 	public DefaultListModel treasureList;
