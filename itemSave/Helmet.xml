@@ -51,9 +51,24 @@
     <name>jj</name>  
     <enchantValue>1</enchantValue> 
   </type>  
-  <type id="11">
-    <itemTypeName>Light Helm</itemTypeName>
-    <name>jjk</name>
+  <type id="11"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>jjk</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="12"> 
+    <itemTypeName>chnages</itemTypeName>  
+    <name>aaaaa</name>  
+    <enchantValue>3</enchantValue> 
+  </type>  
+  <type id="13"> 
+    <itemTypeName>Light Helm</itemTypeName>  
+    <name>new aaaaaa</name>  
+    <enchantValue>3</enchantValue> 
+  </type>  
+  <type id="14">
+    <itemTypeName>Magic Clutch</itemTypeName>
+    <name>new ring</name>
     <enchantValue>1</enchantValue>
   </type>
 </Helmet>

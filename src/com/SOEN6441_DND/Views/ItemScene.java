@@ -57,6 +57,7 @@ public class ItemScene extends View implements Observer {
 	public JLabel chestSelectLabel;
 	public JCheckBox addChest;
 	public JTextArea itemDescription;
+	public JLabel itemNewName;
 
 	public JComboBox savedItemNames;
 	// TextField
@@ -109,6 +110,12 @@ public class ItemScene extends View implements Observer {
 		nameField.setSize(140, 30);
 		nameField.setLocation(150, 170);
 		
+		itemNewName = new JLabel("Set new Name");
+		itemNewName.setSize(130, 30);
+		itemNewName.setLocation(30, 210);
+		itemNewName.setForeground(Color.WHITE);
+		itemNewName.setVisible(false);
+		
 		savedItemNames=new JComboBox<>();
 		savedItemNames.setSize(140, 30);
 		savedItemNames.setLocation(150, 170);
@@ -139,6 +146,7 @@ public class ItemScene extends View implements Observer {
 		itemViewPanel.add(enchantList);
 		itemViewPanel.add(addChest);
 		itemViewPanel.add(savedItemNames);
+		itemViewPanel.add(itemNewName);
 
 		
 		imagePanel = new View();
@@ -211,12 +219,14 @@ public class ItemScene extends View implements Observer {
 							imagePanel.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
 			imageLabel.setSize(imagePanel.getWidth(), imagePanel.getHeight());
 			itemDescription.setText(fileModel.getItemDesription().get(0));
-			
+		
 			if(mode.equalsIgnoreCase("edit")){
-				
-				itemType.setSelectedItem(itemViewModel.getItemType());
+				itemType.setSelectedIndex(itemTypeList.valueOf(itemViewModel.getItemType()).ordinal());
 				subItemType.setModel(itemViewModel.getSavedItemTypeList());
-				nameField.setVisible(false);
+				nameLabel.setText("Name");
+				nameField.setLocation(150, 210);
+				nameField.setVisible(true);
+				itemNewName.setVisible(true);
 				savedItemNames.setModel(itemViewModel.getSavedItemNameList());
 				savedItemNames.setVisible(true);
 				HashMap<String,String> enchantLists=itemViewModel.getSavedEnchantValueList();

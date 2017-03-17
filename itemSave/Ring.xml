@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Ring>
+  <type id="1">
+    <itemTypeName>Magic Clutch</itemTypeName>
+    <name>my ring</name>
+    <enchantValue>1</enchantValue>
+  </type>
+</Ring>

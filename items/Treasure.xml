@@ -9,8 +9,12 @@
     <type>Weapon</type>  
     <name>test</name> 
   </item>  
-  <item name="my boot">
-    <type>Boots</type>
-    <name>my boot</name>
+  <item name="my boot"> 
+    <type>Boots</type>  
+    <name>my boot</name> 
+  </item>  
+  <item name="my ring">
+    <type>Ring</type>
+    <name>my ring</name>
   </item>
 </treasure>

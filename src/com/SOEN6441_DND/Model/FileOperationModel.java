@@ -294,8 +294,8 @@ public class FileOperationModel {
 		
 			file = new File("itemSave/" + currentScene.itemType.getSelectedItem().toString() + ".xml");
 
-				if (file.exists()) {
-
+			if (file.exists()) {
+					
 				SAXReader reader = new SAXReader();
 				Document document;
 				try {

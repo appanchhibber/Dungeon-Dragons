@@ -105,6 +105,7 @@ public class ItemSceneController implements ActionListener {
 
 		
 		else if (e.getSource() == itemScreen.navMenuPanel.saveButton) {
+			System.out.println(itemScreen.itemType.getSelectedItem().toString());
 			if (itemScreen.nameField.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Please enter Item name.");
 			} else {
