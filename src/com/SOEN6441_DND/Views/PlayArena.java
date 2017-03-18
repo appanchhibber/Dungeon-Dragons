@@ -1,6 +1,7 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -49,6 +50,7 @@ int charLocY=0;
 			protected void paintComponent(Graphics g) {
 				// TODO Auto-generated method stub
 				super.paintComponent(g);
+
 				mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(
 						new ImageIcon("image/Human.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 			}
@@ -82,19 +84,28 @@ int charLocY=0;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int nextX=0;
-				int nextY=0;
+				int nextX=charLocX;
+				int nextY=charLocY;
 				if(charLocX+xDelta>(mapModel.getMapWidth()-1))
 				{
-					nextX=mapModel.getMapWidth()-1;
+					nextX=mapModel.getMapWidth()-2;
 					nextY=charLocY+yDelta;
 				}
-				else if(charLocX+xDelta>(mapModel.getMapHeight()-1)){
-					nextY=mapModel.getMapHeight()-1;
+				else if(charLocY+yDelta>(mapModel.getMapHeight()-1)){
+					nextY=mapModel.getMapHeight()-2;
 					nextX=charLocX+xDelta;
 				}
-				if(gridView.mapButtonsGrid[nextY][nextX].getName().contains(","))
+				else if(charLocX+xDelta<0){
+					nextX=1;
+					nextY=charLocY+yDelta;
+				}
+				else if(charLocY+yDelta<0){
+					nextY=1;
+					nextX=charLocX+xDelta;
+				}
+				if(gridView.mapButtonsGrid[nextY+yDelta][nextX+xDelta].getName().contains(","))
 				{	gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
+				
 					charLocX += xDelta;
 					charLocY+=yDelta;	
 
