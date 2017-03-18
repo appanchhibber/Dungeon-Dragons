@@ -2,8 +2,8 @@
 
 <Boots>
   <type id="1">
-    <itemTypeName>Predator's Grace</itemTypeName>
-    <name>my boot</name>
+    <itemTypeName>Dwarven Boots</itemTypeName>
+    <name>My Boot</name>
     <enchantValue>1</enchantValue>
   </type>
 </Boots>

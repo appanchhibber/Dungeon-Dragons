@@ -1,7 +1,7 @@
 <shield>
 	<type id="1">
 		<name>Dragon Scale Shield</name>
-		<image>image/DragonscaleShield.jpg</image>
+		<image>image/DragonScaleShield.jpg</image>
 		<description>A Dragonscale Shield is a piece of light armor.
 It can be crafted at a blacksmith's forge with the following
 components:
@@ -12,7 +12,7 @@ Base Armor : 29, Weight : 6, Base Value : 750
 		</description>
 	</type>
 	<type id="2">
-		<name>Iron shield</name>
+		<name>Iron Shield</name>
 		<image>image/IronShield.jpg</image>
 		<description>The Iron Shield is a piece of heavy armor.
 It can be crafted at a blacksmith's forge with the following
@@ -23,8 +23,8 @@ Base Armor : 20, Weight : 12, Base Value : 60
 		</description>
 	</type>
 	<type id="3">
-		<name>Glass shield</name>
-		<image>image/Glassshield.jpg</image>
+		<name>Glass Shield</name>
+		<image>image/GlassShield.jpg</image>
 		<description>The Glass Shield is a piece of light armor.
 It can be forged at a blacksmith's forge with the following components:
 4 × Refined Malachite
@@ -45,7 +45,7 @@ Base Armor : 26, Weight : 12, Base Value : 2000
 		</description>
 	</type>
 	<type id="5">
-		<name>Stalhrim Shield</name>
+		<name>Stalhrim</name>
 		<image>image/Stalhrim.jpg</image>
 		<description>A Stalhrim Shield is a light armor shield.
 It can be forged at a blacksmith's forge with the following components:

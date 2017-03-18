@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Helmet>
+<Weapon>
   <type id="1">
-    <itemTypeName>Imperial Helmet</itemTypeName>
-    <name>My Helm</name>
+    <itemTypeName>Thane Steel Battle Axe</itemTypeName>
+    <name>My Axe</name>
     <enchantValue>1</enchantValue>
   </type>
-</Helmet>
+</Weapon>

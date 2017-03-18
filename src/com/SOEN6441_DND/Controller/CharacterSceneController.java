@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
@@ -131,6 +132,37 @@ public class CharacterSceneController implements ActionListener {
 				itemAssignView.subItemType.removeAllItems();
 			} else {
 				itemAssignView.subItemType.setModel(new DefaultComboBoxModel(items.keySet().toArray()));
+				switch (itemAssignView.itemType.getSelectedItem().toString()) {
+
+				case "Helmet": {
+					itemAssignView.items[0] = items;
+					break;
+				}
+				case "Armor": {
+					itemAssignView.items[1] = items;
+					break;
+				}
+				case "Shield": {
+					itemAssignView.items[2] = items;
+					break;
+				}
+				case "Belt": {
+					itemAssignView.items[3] = items;
+					break;
+				}
+				case "Boots": {
+					itemAssignView.items[4] = items;
+					break;
+				}
+				case "Ring": {
+					itemAssignView.items[5] = items;
+					break;
+				}
+				case "Weapon": {
+					itemAssignView.items[6] = items;
+					break;
+				}
+				}
 			}
 		} else if (e.getSource() == itemAssignView.backpackAssign) {
 			if (itemAssignView.subItemType.getSelectedItem() != null) {
@@ -149,7 +181,107 @@ public class CharacterSceneController implements ActionListener {
 				}
 			}
 
-		} else if (e.getSource() == itemAssignView.backpackAssign) {
+		} else if (e.getSource() == itemAssignView.addItem) {
+			if (itemAssignView.backPackList.getSelectedValue() != null) {
+				String item = itemAssignView.backPackList.getSelectedValue().toString();
+				String itemType = "";
+				String image = "";
+				for (int i = 0; i < 7; i++) {
+					try{
+						if(itemAssignView.items[i].get(item).toArray()!=null){
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						image = (itemAssignView.items[i].get(item).toArray()[2].toString()).replaceAll("\\s+", "");
+						break;
+					}
+					}catch (NullPointerException ex) {
+						// TODO: handle exception
+					}
+				}
+				if (!itemType.equals("")) {
+					ImageIcon itemImage = new ImageIcon("image/" + image + ".jpg");
+					switch (itemType) {
+					case "Helmet": {
+						if (characterModel.getHelmetFlag() == null) {
+							characterModel.setHelmetFlag(item);
+							itemAssignView.helmetButton.setIcon(new ImageIcon(
+									((itemImage.getImage().getScaledInstance(itemAssignView.helmetButton.getWidth(),
+											itemAssignView.helmetButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							
+						} else {
+							JOptionPane.showMessageDialog(null, "This Item is already assign");
+						}
+						break;
+					}
+					case "Armor": {
+						if (characterModel.getArmorFlag() == null) {
+							characterModel.setArmorFlag(item);
+							itemAssignView.armorButton.setIcon(new ImageIcon(
+									((itemImage.getImage().getScaledInstance(itemAssignView.armorButton.getWidth(),
+											itemAssignView.armorButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+						} else {
+							JOptionPane.showMessageDialog(null, "This Item is already assign");
+						}
+						break;
+					}
+					case "Shield": {
+						if (characterModel.getShieldFlag() == null) {
+							characterModel.setShieldFlag(item);
+							itemAssignView.shieldButton.setIcon(new ImageIcon(
+									((itemImage.getImage().getScaledInstance(itemAssignView.shieldButton.getWidth(),
+											itemAssignView.shieldButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+						} else {
+							JOptionPane.showMessageDialog(null, "This Item is already assign");
+						}
+						break;
+					}
+					case "Belt": {
+						if (characterModel.getBeltFlag() == null) {
+							characterModel.setBeltFlag(item);
+							itemAssignView.beltButton.setIcon(new ImageIcon(
+									((itemImage.getImage().getScaledInstance(itemAssignView.beltButton.getWidth(),
+											itemAssignView.beltButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+						} else {
+							JOptionPane.showMessageDialog(null, "This Item is already assign");
+						}
+						break;
+					}
+					case "Boots": {
+						if (characterModel.getBootFlag() == null) {
+							characterModel.setBootFlag(item);
+							itemAssignView.bootButton.setIcon(new ImageIcon(
+									((itemImage.getImage().getScaledInstance(itemAssignView.bootButton.getWidth(),
+											itemAssignView.bootButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+						} else {
+							JOptionPane.showMessageDialog(null, "This Item is already assign");
+						}
+						break;
+					}
+					case "Ring": {
+						if (characterModel.getRingFlag() == null) {
+							characterModel.setRingFlag(item);
+							itemAssignView.ringButton.setIcon(new ImageIcon(
+									((itemImage.getImage().getScaledInstance(itemAssignView.ringButton.getWidth(),
+											itemAssignView.ringButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+						} else {
+							JOptionPane.showMessageDialog(null, "This Item is already assign");
+						}
+						break;
+					}
+					case "Weapon": {
+						if (characterModel.getWeaponFlag() == null) {
+							characterModel.setWeaponFlag(item);
+							itemAssignView.weaponButton.setIcon(new ImageIcon(
+									((itemImage.getImage().getScaledInstance(itemAssignView.weaponButton.getWidth(),
+											itemAssignView.weaponButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+						} else {
+							JOptionPane.showMessageDialog(null, "This Item is already assign");
+						}
+						break;
+					}
+
+					}
+				}
+			}
 
 		}
 

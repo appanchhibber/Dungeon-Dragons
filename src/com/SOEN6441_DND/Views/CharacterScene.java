@@ -175,7 +175,7 @@ public class CharacterScene extends View implements Observer {
 		itemAssignView.backpackAssign.addActionListener(characterController);
 		itemAssignView.charBackButton.addActionListener(characterController);
 		itemAssignView.addItem.addActionListener(characterController);
-		itemAssignView.removeItem.addActionListener(characterController);
+
 		this.add(imagePanel);
 		this.add(abilityPanel);
 		

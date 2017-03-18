@@ -2,17 +2,17 @@
 
 <belt> 
   <type id="1"> 
-    <name>The Irons</name>  
+    <name>Irons</name>  
     <image>image/Irons.jpg</image>  
     <description>Fashioned from the black steel of Kirkwall's infamous iron foundries, miner's safety harnesses such as this one have protected their hearty wearers since the days when the Tevinter Imperium last claimed the City of Chains. +1 constitution +7 health</description> 
   </type>  
   <type id="2"> 
-    <name>The High Lord's Belt</name>  
+    <name>High Lords Belt</name>  
     <image>image/HighLordsBelt.jpg</image>  
     <description>Belt of the Chastened is a unique belt in Dungeons and Dragons. +1 Constitution +2 mana/stamina regeneration</description> 
   </type>  
   <type id="3"> 
-    <name>The Antivan Garrote</name>  
+    <name>Antivan Garrote</name>  
     <image>image/AntivanGarrote.jpg</image>  
     <description>The Antivan Garrote is a belt for Dungeons and Dragons. +2% critical chance +4% critical damage</description> 
   </type>  
@@ -22,7 +22,7 @@
     <description>Hindsight is a unique belt in Dungeons nd Dragons that increases its wearer's resistances. +1 armor +138 fire resistance +138 nature resistance</description> 
   </type>  
   <type id="5"> 
-    <name>Evra's Trophy Belt</name>  
+    <name>Evras Trophy Belt</name>  
     <image>image/EvrasTrophyBelt.jpg</image>  
     <description>Evra's Trophy Belt is a belt in Dungeons and Dragons. This grisly belt is filled with monstrous teeth, chipped blades, scraps of fur, and armor fragments. +2 health regeneration +3% physical damage</description> 
   </type>  

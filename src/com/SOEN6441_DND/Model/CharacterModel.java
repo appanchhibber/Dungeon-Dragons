@@ -22,6 +22,37 @@ public class CharacterModel extends Observable {
 
 	// Fighter Type
 	private String fighterType;
+	private String helmetFlag;
+	private String armorFlag;
+	private String beltFlag;
+	private String bootFlag;
+	private String ringFlag;
+	private String weaponFlag;
+	private String shieldFlag;
+	
+	public String getShieldFlag() {
+		return shieldFlag;
+	}
+
+	public void setShieldFlag(String shildFlag) {
+		this.shieldFlag = shildFlag;
+	}
+
+	public ArrayList<String> backPackItems;
+
+	private int backPackCounter;
+	public String[] levelListValues = { "1", "2", "3", "4", "5", "6", "7", "8" };
+	// Get or set hit points
+	private int hitPoints;
+
+	private int level;
+	private AbilitiyModel abilityScore;
+
+	private AbilitiyModel abilityModifier;
+
+	private int speed;
+
+	private ItemModel ownedItems[];
 
 	public String getFighterType() {
 		return fighterType;
@@ -30,17 +61,11 @@ public class CharacterModel extends Observable {
 	public void setFighterType(String fighterType) {
 		this.fighterType = fighterType;
 	}
-	public CharacterModel()
-	{
-		backPackItems=new ArrayList<String>();
-		backPackCounter=0;
+
+	public CharacterModel() {
+		backPackItems = new ArrayList<String>();
+		backPackCounter = 0;
 	}
-	// Get or set hit points
-	private int hitPoints;
-
-	private int level;
-
-	public String[] levelListValues = { "1", "2", "3", "4", "5", "6", "7", "8" };
 
 	public String[] getLevelListValues() {
 		return levelListValues;
@@ -50,24 +75,6 @@ public class CharacterModel extends Observable {
 		this.levelListValues = levelListValues;
 	}
 
-	private AbilitiyModel abilityScore;
-
-	private AbilitiyModel abilityModifier;
-
-	private int speed;
-
-	private ItemModel ownedItems[];
-	
-	
-	private String helmetFlag;
-	private String armorFlag;
-	private String beltFlag;
-	private String bootsFlag;
-	private String ringFlag;
-	private String weaponFlag;
-	public ArrayList<String> backPackItems;
-	private int backPackCounter;
-	
 	public ArrayList<String> getBackPackItems() {
 		return backPackItems;
 	}
@@ -75,8 +82,8 @@ public class CharacterModel extends Observable {
 	public void setBackPackItems(ArrayList<String> backPackItems) {
 		this.backPackItems = backPackItems;
 	}
-	
-	public void addBackPackItems(String item){
+
+	public void addBackPackItems(String item) {
 		this.backPackItems.add(item);
 	}
 
@@ -112,12 +119,12 @@ public class CharacterModel extends Observable {
 		this.beltFlag = beltFlag;
 	}
 
-	public String getBootsFlag() {
-		return bootsFlag;
+	public String getBootFlag() {
+		return bootFlag;
 	}
 
-	public void setBootsFlag(String bootsFlag) {
-		this.bootsFlag = bootsFlag;
+	public void setBootFlag(String bootsFlag) {
+		this.bootFlag = bootsFlag;
 	}
 
 	public String getRingFlag() {

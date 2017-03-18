@@ -7,13 +7,13 @@
     <description>This gold and mithral helm looks like the bristle-bearded head of a manticore. A helm of the hunter grants you a +5 com­petence bonus on Spot checks and the benefit of the Far Shot feat. These effects function continuously. When you activate this helm, you gain low-light vision and darkvision out to 60 feet for 4 hours. This ability functions once per day. Cost to Create: 4500, 360 XP, 9 days.</description> 
   </type>  
   <type id="2"> 
-    <name>Crested Helmet</name>  
+    <name>Crest Helmet</name>  
     <image>image/CrestHelmet.jpg</image>  
     <description>A crested helmet or cassis crista, is a heavy, all-enclosing helmet with grill-like visor. This helmet is usually made of bronze and decorated with a plume crest. The great helm only grants its AC bonus if you are wearing light or no armor (it is assumed that a suit medium and heavy armor already provides head protection). In addition, you have disadvantage on Wisdom (Perception) checks while wearing a great helm. Cost : 15gp , Armor Class : +1, Strength : 13, Weight : 5lb</description> 
   </type>  
   <type id="3"> 
-    <name>Imperial Close Helm</name>  
-    <image>image/ImperialHelmetClosed.jpg</image>  
+    <name>Imperial Helmet </name>  
+    <image>image/ImperialHelmet.jpg</image>  
     <description>The Imperial Helmet is a piece of heavy armor and part of the Imperial Armor set. It is a full-face variant of the Imperial Officer's Helmet, but is relatively rare and can only be found in three locations. Base Armor : 18, Weight : 5lb, Base Value : 30</description> 
   </type>  
   <type id="4"> 

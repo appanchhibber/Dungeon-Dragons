@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Helmet>
+<Shield>
   <type id="1">
-    <itemTypeName>Imperial Helmet</itemTypeName>
-    <name>My Helm</name>
+    <itemTypeName>Iron Shield</itemTypeName>
+    <name>My Shield</name>
     <enchantValue>1</enchantValue>
   </type>
-</Helmet>
+</Shield>

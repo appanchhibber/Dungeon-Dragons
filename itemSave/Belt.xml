@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Helmet>
+<Belt>
   <type id="1">
-    <itemTypeName>Imperial Helmet</itemTypeName>
-    <name>My Helm</name>
+    <itemTypeName>High Lords Belt</itemTypeName>
+    <name>My Belt</name>
     <enchantValue>1</enchantValue>
   </type>
-</Helmet>
+</Belt>
