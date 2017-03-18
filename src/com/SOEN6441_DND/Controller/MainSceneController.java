@@ -21,6 +21,7 @@ import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.MapView;
+import com.SOEN6441_DND.Views.StartGameView;
 
 public class MainSceneController implements ActionListener {
 
@@ -45,7 +46,7 @@ public class MainSceneController implements ActionListener {
 			System.exit(0);
 		}
 		if (e.getSource() == homeScreen.startGameButton) {
-			System.out.println("Start Game button pressed");
+			gameController.mainFrame.setView(new StartGameView());
 		}
 		if (e.getSource() == homeScreen.mapCreator) {
 			String[] mapValue = { "10", "11", "12", "13", "14", "15" };
