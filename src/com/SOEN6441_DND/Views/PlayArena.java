@@ -28,6 +28,7 @@ public class PlayArena extends View  {
 public Timer repaintTimer;
 
 private int xDelta = 0;
+private int yDelta=0;
 private int keyPressCount = 0;
 
 
@@ -43,17 +44,22 @@ int charLocY=0;
 		this.mapModel = mapModel;
 		this.campaignModel = campaignModel;
 		playController = new PlayArenaController(this);
-		gridView = new GridView(mapModel, this);
+		gridView = new GridView(mapModel, this){
+			@Override
+			protected void paintComponent(Graphics g) {
+				// TODO Auto-generated method stub
+				super.paintComponent(g);
+				mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(
+						new ImageIcon("image/Human.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+			}
+		};
 		this.add(gridView);
-//		gridView.addKeyListener(playController);
-	//	gridView.setFocusable(true);
-		//gridView.setFocusTraversalKeysEnabled(false);
 		placePlayerOnMap(gridView.mapButtonsGrid);
 		
 		
 		//for key Binding
-		InputMap inputMap=getInputMap(WHEN_IN_FOCUSED_WINDOW);
-		ActionMap actionMap=getActionMap();
+		InputMap inputMap=this.gridView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+		ActionMap actionMap=this.gridView.getActionMap();
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0,false), "pressed.Left");
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0,false), "pressed.Right");
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0,true), "released.Left");
@@ -64,25 +70,52 @@ int charLocY=0;
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0,true), "released.Down");
 
 		
-		actionMap.put("pressed.Left", new MoveAction(-1,true));
-		actionMap.put("pressed.Right", new MoveAction(1,true));
-		actionMap.put("released.Left", new MoveAction(0,false));
-		actionMap.put("released.Right", new MoveAction(0,false));
-		actionMap.put("pressed.Up", new MoveAction(-1,true));
-		actionMap.put("pressed.Down", new MoveAction(1,true));
-		actionMap.put("released.Up", new MoveAction(0,false));
-		actionMap.put("released.Down", new MoveAction(0,false));
-		repaintTimer=new Timer(40,new ActionListener() {
+		actionMap.put("pressed.Left", new MoveAction(-1,0,true));
+		actionMap.put("pressed.Right", new MoveAction(1,0,true));
+		actionMap.put("released.Left", new MoveAction(0,0,false));
+		actionMap.put("released.Right", new MoveAction(0,0,false));
+		actionMap.put("pressed.Up", new MoveAction(0,-1,true));
+		actionMap.put("pressed.Down", new MoveAction(0,1,true));
+		actionMap.put("released.Up", new MoveAction(0,0,false));
+		actionMap.put("released.Down", new MoveAction(0,0,false));
+		repaintTimer=new Timer(100,new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("inside Action Listener");
-				charLocX += xDelta;
-                  if (charLocX < 0) {
+				int nextX=0;
+				int nextY=0;
+				if(charLocX+xDelta>(mapModel.getMapWidth()-1))
+				{
+					nextX=mapModel.getMapWidth()-1;
+					nextY=charLocY+yDelta;
+				}
+				else if(charLocX+xDelta>(mapModel.getMapHeight()-1)){
+					nextY=mapModel.getMapHeight()-1;
+					nextX=charLocX+xDelta;
+				}
+				if(gridView.mapButtonsGrid[nextY][nextX].getName().contains(","))
+				{	gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
+					charLocX += xDelta;
+					charLocY+=yDelta;	
+
+				}
+					
+				  if (charLocX < 0) {
                 	  charLocX = 0;
                   } 
-                  revalidate();
-                  repaint();
+                  else if(charLocY<0){
+                	  charLocY=0;
+                  }
+                  else if(charLocX>(mapModel.getMapWidth()-1))
+                  {
+                	  charLocX=mapModel.getMapWidth()-1;
+                  }
+                  else if(charLocY>(mapModel.getMapHeight()-1)){
+                	  charLocY=mapModel.getMapHeight()-1;
+                  }
+                
+                  gridView.revalidate();
+                  gridView.repaint();
               
 			}
 		});
@@ -90,16 +123,6 @@ int charLocY=0;
 		repaintTimer.setCoalesce(true);
 	}
 
-	@Override
-	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
-		super.paintComponent(g);
-		System.out.println("inside paint method");
-		Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setColor(Color.RED);
-        g2d.drawRect(charLocX,charLocY,50,50);
-        g2d.dispose();
-	}
 
 	public void placePlayerOnMap(JButton mapButtonsGrid[][]){
 		if(mapButtonsGrid[(int)(mapModel.getEntry().getWidth())+1][(int)mapModel.getEntry().getHeight()].getName().contains(",")){
@@ -112,28 +135,29 @@ int charLocY=0;
 	}
 	 class MoveAction extends javax.swing.AbstractAction {
 
-		    private int direction;
+		    private int x=0;
+		    private int y=0;
 		    private boolean keyDown;
 
-		    public MoveAction(int direction, boolean down) {
-		        this.direction = direction;
-		        System.out.println(direction);
+		    public MoveAction(int x,int y, boolean down) {
+		        this.x = x;
+		        this.y=y;
 		        keyDown = down;
 		    }
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		        xDelta = direction;
 		        if (keyDown) {
 		            if (!repaintTimer.isRunning()) {
 		                repaintTimer.start();
+				        xDelta = x;
+				        yDelta=y;
 		            }
 		        } else {
 		            repaintTimer.stop();
 		        }
 		    }
-		}
-
+	 }
 }
 
 
