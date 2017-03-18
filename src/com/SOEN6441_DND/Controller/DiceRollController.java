@@ -19,6 +19,7 @@ public class DiceRollController {
 	public int maxTotal;
 	public int total;
 	public int diceResult[];
+	public int sortedRevDiceList[] = new int[6];
 
 	/**
 	 * This constructor inputs takes input the dice value and counter to be used
@@ -52,6 +53,26 @@ public class DiceRollController {
 		}
 		return total;
 	}
+	
+	/**
+	 * This function returns array of dice result in descending order
+	 * 
+	 * @return sortedRevDiceResult  dice result in descending order.
+	 */
+public int[] getDescSortedDiceResult(){
+		
+		for(int i=0;i<6;i++){
+		int value = getDiceRollResult();
+		sortedRevDiceList[i] = value;
+		}
+		Arrays.sort(sortedRevDiceList);
+		for (int i = 0; i < sortedRevDiceList.length / 2; i++) {
+			  int temp = sortedRevDiceList[i];
+			  sortedRevDiceList[i] = sortedRevDiceList[sortedRevDiceList.length - 1 - i];
+			  sortedRevDiceList[sortedRevDiceList.length - 1 - i] = temp;
+			}
+		return sortedRevDiceList;
+		}
 
 	/**
 	 * 

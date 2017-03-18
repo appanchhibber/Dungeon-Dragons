@@ -44,6 +44,11 @@ public class CharacterScene extends View implements Observer {
 	public JRadioButton characterTypeRadio;
 	ButtonGroup charactertypeGroup;
 	
+	//button
+		public JButton bully;
+		public JButton tank;
+		public JButton nimble;
+		
 	//ComboBox
 	public JComboBox levels;
 	//Character View Model
@@ -176,6 +181,24 @@ public class CharacterScene extends View implements Observer {
 		itemAssignView.charBackButton.addActionListener(characterController);
 		itemAssignView.addItem.addActionListener(characterController);
 
+		bully = new JButton("Bully");
+		bully.setSize(90, 30);
+		bully.setLocation(420, 120);
+		bully.addActionListener(characterController);
+		abilityPanel.add(bully);
+		
+		nimble = new JButton("Nimble");
+		nimble.setSize(90, 30);
+		nimble.setLocation(420, 170);
+		nimble.addActionListener(characterController);
+		abilityPanel.add(nimble);
+		
+		tank = new JButton("Tank");
+		tank.setSize(90, 30);
+		tank.setLocation(420, 220);
+		tank.addActionListener(characterController);
+		abilityPanel.add(tank);
+		
 		this.add(imagePanel);
 		this.add(abilityPanel);
 		
