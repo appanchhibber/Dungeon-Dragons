@@ -22,6 +22,11 @@ import com.SOEN6441_DND.Views.AbilityPanelView;
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemAssignView;
 
+import Builder.BullyCharacterBuilder;
+import Builder.CharacterBuilder;
+import Builder.NimbleCharacterBuilder;
+import Builder.TankCharacterBuilder;
+
 /**
  * This Class is responsible for handle all the view Events.
  * 
@@ -40,6 +45,7 @@ public class CharacterSceneController implements ActionListener {
 	public ItemAssignView itemAssignView;
 	public FileOperationModel fileModel;
 	public Array backPackItems;
+	public CharacterBuilder characterBuilder;
 
 	// public String
 
@@ -87,7 +93,19 @@ public class CharacterSceneController implements ActionListener {
 			setModifer();
 			resetScore();
 
-		} else if (e.getSource() == abilityPanel.calculateButton) {
+		}
+		
+		else if(e.getSource() == characterScreen.bully){
+			createCharacter("bully");
+		}
+		else if(e.getSource() == characterScreen.nimble){
+			createCharacter("nimble");
+		}
+		else if(e.getSource() == characterScreen.tank){
+			createCharacter("tank");
+		}
+		
+		else if (e.getSource() == abilityPanel.calculateButton) {
 			score.setStrength(diceRoll.getDiceRollResult());
 			score.setDexterity(diceRoll.getDiceRollResult());
 			score.setConstitution(diceRoll.getDiceRollResult());
@@ -339,6 +357,57 @@ public class CharacterSceneController implements ActionListener {
 	public int modifierCalculator(int score) {
 
 		return ((score / 2) - 5);
+	}
+
+	public void createCharacter(String charType){
+		
+		CharacterBuilder cb;
+		int[] scoreArray = new int[6];
+		scoreArray[0] = score.getStrength();
+		scoreArray[1] = score.getConstitution();
+		scoreArray[2] = score.getDexterity();
+		scoreArray[3] = score.getIntelligence();
+		scoreArray[4] = score.getCharisma();
+		scoreArray[5] = score.getWisdom();
+		
+		Arrays.sort(scoreArray);
+		for (int i = 0; i < scoreArray.length / 2; i++) {
+			  int temp = scoreArray[i];
+			  scoreArray[i] = scoreArray[scoreArray.length - 1 - i];
+			  scoreArray[scoreArray.length - 1 - i] = temp;
+			}
+		if(charType.equals("bully"))
+		{
+			characterBuilder=new BullyCharacterBuilder(score,scoreArray);
+			
+		}
+		else if(charType.equals("nimble"))
+		{
+			characterBuilder=new NimbleCharacterBuilder(score,scoreArray);
+			
+		}
+		else if(charType.equals("tank"))
+		{
+			characterBuilder=new TankCharacterBuilder(score,scoreArray);
+			
+		}
+		
+		characterBuilder.buildStrength();
+		characterBuilder.buildCharisma();
+		characterBuilder.buildConstitution();
+		characterBuilder.buildDexterity();
+		characterBuilder.buildWisdom();
+		characterBuilder.buildIntelligence();
+		setModifer();
+		abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(score.getStrength()));
+		abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(score.getDexterity()));
+		abilityModifier
+				.setConstitution(abilityModifier.getConstitution() + modifierCalculator(score.getConstitution()));
+		abilityModifier
+				.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(score.getIntelligence()));
+		abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(score.getWisdom()));
+		abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(score.getCharisma()));
+
 	}
 
 }
