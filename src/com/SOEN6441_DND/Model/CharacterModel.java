@@ -116,8 +116,14 @@ public class CharacterModel extends Observable {
 
 	public void addBackPackItems(String item) {
 		this.backPackItems.add(item);
+		notifyCharacterView();
 	}
-
+	
+	public void removeBackPackItems(String item) {
+		this.backPackItems.remove(item);
+		notifyCharacterView();
+	}
+	
 	public int getBackPackCounter() {
 		return backPackCounter;
 	}

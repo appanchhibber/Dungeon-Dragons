@@ -144,7 +144,7 @@ public class CharacterSceneController implements ActionListener {
 			
 			fileModel.setCharacterModel(characterScreen.characterViewModel);
 			try {
-				fileModel.loadCharacter(file.getName().replace(".xml", ""));
+				characterScreen.characterViewModel=fileModel.loadCharacter(file.getName().replace(".xml", ""));
 			} catch (DocumentException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -233,8 +233,6 @@ public class CharacterSceneController implements ActionListener {
 					if (characterModel.getBackPackItems().contains(item)) {
 						JOptionPane.showMessageDialog(null, "This Item is already inside the Backpack");
 					} else {
-						itemAssignView.backPackModel.addElement(item);
-						itemAssignView.backPackList.setModel(itemAssignView.backPackModel);
 						characterModel.setBackPackCounter(characterModel.getBackPackCounter() + 1);
 						characterModel.addBackPackItems(item);
 					}
@@ -271,6 +269,8 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.helmetButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.helmetButton.getWidth(),
 											itemAssignView.helmetButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.removeBackPackItems(item);
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
 							characterModel.setArmorClass(enchantBonus+characterModel.getArmorClass());
 
 						} else {
@@ -281,9 +281,8 @@ public class CharacterSceneController implements ActionListener {
 					case "Armor": {
 						if (characterModel.getArmorFlag() == null) {
 							characterModel.setArmorFlag(item);
-							itemAssignView.armorButton.setIcon(new ImageIcon(
-									((itemImage.getImage().getScaledInstance(itemAssignView.armorButton.getWidth(),
-											itemAssignView.armorButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.removeBackPackItems(item);
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
 							characterModel.setArmorClass(enchantBonus+characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -296,6 +295,8 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.shieldButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.shieldButton.getWidth(),
 											itemAssignView.shieldButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.removeBackPackItems(item);
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
 							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -308,6 +309,8 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.beltButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.beltButton.getWidth(),
 											itemAssignView.beltButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.removeBackPackItems(item);
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
 							characterModel.getAbilityModifier().setConstitution(characterModel.getAbilityModifier().getConstitution()+enchantBonus);
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -320,6 +323,8 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.bootButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.bootButton.getWidth(),
 											itemAssignView.bootButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.removeBackPackItems(item);
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
 							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -332,6 +337,8 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.ringButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.ringButton.getWidth(),
 											itemAssignView.ringButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.removeBackPackItems(item);
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
 							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -341,10 +348,10 @@ public class CharacterSceneController implements ActionListener {
 					case "Weapon": {
 						if (characterModel.getWeaponFlag() == null) {
 							characterModel.setWeaponFlag(item);
-							itemAssignView.weaponButton.setIcon(new ImageIcon(
-									((itemImage.getImage().getScaledInstance(itemAssignView.weaponButton.getWidth(),
-											itemAssignView.weaponButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							
 							characterModel.setDamageBonus(enchantBonus+characterModel.getAbilityModifier().getStrength());
+							characterModel.removeBackPackItems(item);
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}

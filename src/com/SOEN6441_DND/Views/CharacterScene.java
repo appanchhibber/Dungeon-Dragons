@@ -143,6 +143,7 @@ public class CharacterScene extends View implements Observer {
 		characterViewModel.setImage("image/Human.jpg");
 		characterViewModel.setType("Human");
 		characterViewModel.addObserver(this);
+		characterViewModel.addObserver(itemAssignView);
 		characterImage = new ImageIcon(characterViewModel.getImage());
 		abilityModifier.setStrength(0);
 		abilityModifier.setDexterity(0);

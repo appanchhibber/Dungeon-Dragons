@@ -5,16 +5,20 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.ItemModel;
 
@@ -24,7 +28,7 @@ import com.SOEN6441_DND.Model.ItemModel;
  * @author Appan Chhibber
  *
  */
-public class ItemAssignView extends View {
+public class ItemAssignView extends View implements Observer {
 	public View itemPanel;
 	public View backpackPanel;
 	public JPanel navPanel;
@@ -236,6 +240,58 @@ public class ItemAssignView extends View {
 		this.add(navPanel);
 		this.setVisible(true);
 
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		backPackModel.removeAllElements();
+		for(String s:((CharacterModel)o).getBackPackItems()){
+		    backPackModel.addElement(s);
+		}
+		backPackList.setModel(backPackModel);
+		if(((CharacterModel)o).getWeaponFlag()!=null)
+		{
+		weaponButton.setIcon(new ImageIcon(
+				(((new ImageIcon("image/" + items[6].get(((CharacterModel)o).getWeaponFlag())  + ".jpg")).getImage().getScaledInstance(weaponButton.getWidth(),
+						weaponButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+		}
+		if(((CharacterModel)o).getHelmetFlag()!=null)
+		{
+		helmetButton.setIcon(new ImageIcon(
+				(((new ImageIcon("image/" + items[6].get(((CharacterModel)o).getHelmetFlag())  + ".jpg")).getImage().getScaledInstance(helmetButton.getWidth(),
+						helmetButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+		}
+		if(((CharacterModel)o).getShieldFlag()!=null)
+		{
+		shieldButton.setIcon(new ImageIcon(
+				(((new ImageIcon("image/" + items[6].get(((CharacterModel)o).getShieldFlag())  + ".jpg")).getImage().getScaledInstance(shieldButton.getWidth(),
+						shieldButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+		}
+		if(((CharacterModel)o).getBeltFlag()!=null)
+		{
+		beltButton.setIcon(new ImageIcon(
+				(((new ImageIcon("image/" + items[6].get(((CharacterModel)o).getBeltFlag())  + ".jpg")).getImage().getScaledInstance(beltButton.getWidth(),
+						beltButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+		}
+		if(((CharacterModel)o).getBootFlag()!=null)
+		{
+		bootButton.setIcon(new ImageIcon(
+				(((new ImageIcon("image/" + items[6].get(((CharacterModel)o).getBootFlag())  + ".jpg")).getImage().getScaledInstance(bootButton.getWidth(),
+						bootButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+		}
+		if(((CharacterModel)o).getRingFlag()!=null)
+		{
+		ringButton.setIcon(new ImageIcon(
+				(((new ImageIcon("image/" + items[6].get(((CharacterModel)o).getRingFlag())  + ".jpg")).getImage().getScaledInstance(ringButton.getWidth(),
+						ringButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+		}
+		if(((CharacterModel)o).getArmorFlag()!=null)
+		{
+		armorButton.setIcon(new ImageIcon(
+				(((new ImageIcon("image/" + items[6].get(((CharacterModel)o).getArmorFlag())  + ".jpg")).getImage().getScaledInstance(armorButton.getWidth(),
+						armorButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+		}
 	}
 
 }

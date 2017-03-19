@@ -288,9 +288,11 @@ public class FileOperationModel {
 			
 			
 			chModel.setBackPackCounter(Integer.parseInt(rootElement.selectSingleNode("backPackCounter").getText()));
-			List<Element> backPackItem = rootElement.elements("item");
-			for (Element item : backPackItem) {
-				backPackList.add(item.toString());
+			Element backPackElement = rootElement.element("backPackItems");
+			List<Element> backPackItems=backPackElement.elements();
+			for (Element item : backPackItems) {
+				backPackList.add(item.getText());
+				//System.out.println(backPackList.toString());
 			}
 			chModel.setBackPackItems(backPackList);
 		}catch (NumberFormatException e) {
