@@ -553,7 +553,7 @@ public class FileOperationModel {
 		}
 
 		Element rootElement = document.getRootElement();
-
+		mapModel.mapName=rootElement.selectSingleNode("mapfilename").getText();
 		Node mapWidth = rootElement.selectSingleNode("mapwidth");
 		mapModel.setMapWidth(Integer.parseInt(mapWidth.getText()));
 		Node mapHeight = rootElement.selectSingleNode("mapheight");

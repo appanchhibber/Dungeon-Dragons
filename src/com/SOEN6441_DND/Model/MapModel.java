@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  */
 public class MapModel extends Observable {
 	int mapWidth;
-
+	public String mapName;
 	int mapHeight;
 	public int mapGridSelection[][];
 

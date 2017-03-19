@@ -6,35 +6,42 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
+import com.SOEN6441_DND.Controller.GameController;
 import com.SOEN6441_DND.Controller.PlayArenaController;
 import com.SOEN6441_DND.Model.CampaignModel;
+import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.sun.glass.events.KeyEvent;
+import com.sun.xml.internal.messaging.saaj.util.CharWriter;
 
 public class PlayArena extends View  {
 	public PlayArenaController playController;
 	public MapModel mapModel;
 	public CampaignModel campaignModel;
-
+	public FileOperationModel ioModel;
+	public GameController gameController;
 	public JButton playerPos;
 	public GridView gridView;
 public Timer repaintTimer;
-
+	
+	public boolean chestFlag;
 private int xDelta = 0;
 private int yDelta=0;
 private int keyPressCount = 0;
 
 
-int charLocX=0;
-int charLocY=0;
+public int charLocX=0;
+public int charLocY=0;
 
 	@Override
 	protected void initSubviews() {
@@ -44,20 +51,30 @@ int charLocY=0;
 	public PlayArena(MapModel mapModel, CampaignModel campaignModel) {
 		this.mapModel = mapModel;
 		this.campaignModel = campaignModel;
+		ioModel=new FileOperationModel();
+		gameController=GameController.getInstance();
 		playController = new PlayArenaController(this);
 		gridView = new GridView(mapModel, this){
 			@Override
 			protected void paintComponent(Graphics g) {
 				// TODO Auto-generated method stub
 				super.paintComponent(g);
-
+				
 				mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(
 						new ImageIcon("image/Human.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+					
+				mapButtonsGrid[charLocY][charLocX].setText(mapButtonsGrid[charLocY][charLocX].getName());
+				mapButtonsGrid[charLocY][charLocX].setName("Player");
+		
+				mapButtonsGrid[charLocY][charLocX].addActionListener(playController);
+				
+				revalidate();
 			}
 		};
 		this.add(gridView);
-		placePlayerOnMap(gridView.mapButtonsGrid);
-		
+		charLocX=(int)(mapModel.getEntry().getWidth())+1;
+		charLocY=(int)(mapModel.getEntry().getHeight());
+		chestFlag=false;
 		
 		//for key Binding
 		InputMap inputMap=this.gridView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
@@ -94,6 +111,7 @@ int charLocY=0;
 				else if(charLocY+yDelta>(mapModel.getMapHeight()-1)){
 					nextY=mapModel.getMapHeight()-2;
 					nextX=charLocX+xDelta;
+					
 				}
 				else if(charLocX+xDelta<0){
 					nextX=1;
@@ -105,45 +123,63 @@ int charLocY=0;
 				}
 				if(gridView.mapButtonsGrid[nextY+yDelta][nextX+xDelta].getName().contains(","))
 				{	gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
-				
+				    gridView.mapButtonsGrid[charLocY][charLocX].setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
 					charLocX += xDelta;
 					charLocY+=yDelta;	
 
 				}
+				else if(gridView.mapButtonsGrid[nextY+yDelta][nextX+xDelta].getName().contains("EntryDoor")){
+						gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
+						gridView.mapButtonsGrid[charLocY][charLocX].setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
+					}
+					else if(gridView.mapButtonsGrid[nextY+yDelta][nextX+xDelta].getName().contains("Wall")){
+						gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
+						gridView.mapButtonsGrid[charLocY][charLocX].setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
+					}
+					else if(gridView.mapButtonsGrid[nextY+yDelta][nextX+xDelta].getName().contains("Chest")){
+						gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
+						gridView.mapButtonsGrid[charLocY][charLocX].setName(charLocY+","+charLocX);
+						gridView.mapButtonsGrid[charLocY][charLocX].setText(charLocY+","+charLocX);
+						charLocX += xDelta;
+						charLocY+=yDelta;
+						chestFlag=true;
+					}
+					else if(gridView.mapButtonsGrid[nextY+yDelta][nextX+xDelta].getName().contains("ExitDoor")){
+						gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
+						repaintTimer.stop();
+						gridView.mapButtonsGrid[charLocY][charLocX].setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
+						if(chestFlag){
+							campaignModel.getCampMapList().removeElement(mapModel.mapName);
+							if(campaignModel.getCampMapList().size()==0)
+							{
+								gameController.mainFrame.setView(new MainScene());
+							}
+							else{
+							loadNextMap(campaignModel.getCampMapList().get(0).toString());
+							}
+						}
+						else{
+							JOptionPane.showMessageDialog(null,"Collect Chest First");
+						}
+					}																		
 					
-				  if (charLocX < 0) {
-                	  charLocX = 0;
-                  } 
-                  else if(charLocY<0){
-                	  charLocY=0;
-                  }
-                  else if(charLocX>(mapModel.getMapWidth()-1))
-                  {
-                	  charLocX=mapModel.getMapWidth()-1;
-                  }
-                  else if(charLocY>(mapModel.getMapHeight()-1)){
-                	  charLocY=mapModel.getMapHeight()-1;
-                  }
-                
+					else{
+							gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
+							gridView.mapButtonsGrid[charLocY][charLocX].setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
+						}
+				
                   gridView.revalidate();
                   gridView.repaint();
               
 			}
 		});
-		repaintTimer.setRepeats(true);
-		repaintTimer.setCoalesce(true);
+	}
+	public void loadNextMap(String mapName){
+		mapModel=ioModel.readMapFile(new File("maps/"+mapName));
+		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel));
 	}
 
 
-	public void placePlayerOnMap(JButton mapButtonsGrid[][]){
-		if(mapButtonsGrid[(int)(mapModel.getEntry().getWidth())+1][(int)mapModel.getEntry().getHeight()].getName().contains(",")){
-			mapButtonsGrid[(int)(mapModel.getEntry().getWidth())+1][(int)mapModel.getEntry().getHeight()].setName("Player");
-			mapButtonsGrid[(int)(mapModel.getEntry().getWidth())+1][(int)mapModel.getEntry().getHeight()].setIcon(new ImageIcon(
-					new ImageIcon("image/Human.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
-					charLocX=(int)(mapModel.getEntry().getWidth())+1;
-					charLocY=(int)(mapModel.getEntry().getHeight());
-		}
-	}
 	 class MoveAction extends javax.swing.AbstractAction {
 
 		    private int x=0;
