@@ -142,7 +142,7 @@ public class CharacterSceneController implements ActionListener {
 			characterScreen.characterTypeRadio[2].setVisible(true);
 			characterScreen.characterTypeRadio[3].setVisible(true);
 			
-			fileModel.setCharacterModel(characterModel);
+			fileModel.setCharacterModel(characterScreen.characterViewModel);
 			try {
 				fileModel.loadCharacter(file.getName().replace(".xml", ""));
 			} catch (DocumentException e1) {

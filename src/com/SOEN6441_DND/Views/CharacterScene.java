@@ -238,9 +238,6 @@ public class CharacterScene extends View implements Observer {
 		imageLabel.setIcon(characterImage);
 		imageLabel.revalidate();
 		imageLabel.repaint();
-		abilityModifier=characterViewModel.getAbilityModifier();
-		abilityScore=characterViewModel.getAbilityScore();
-		
 	}
 	public void setModifier()
 	{
