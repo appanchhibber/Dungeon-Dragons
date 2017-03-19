@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -23,6 +24,8 @@ import org.dom4j.DocumentException;
 import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
+import com.SOEN6441_DND.Model.ItemModel;
+import com.SOEN6441_DND.Model.ItemModel.itemTypeList;
 import com.SOEN6441_DND.Views.AbilityPanelView;
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemAssignView;
@@ -131,7 +134,7 @@ public class CharacterSceneController implements ActionListener {
 		} else if (e.getSource() == characterScreen.levels) {
 			characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));
 			calculateAbility();
-		}else if (e.getSource() == characterScreen.navMenuPanel.loadButton) {
+		} else if (e.getSource() == characterScreen.navMenuPanel.loadButton) {
 			File file = openCharFile();
 			abilityPanel.calculateButton.setVisible(true);
 			characterScreen.bully.setVisible(true);
@@ -141,10 +144,10 @@ public class CharacterSceneController implements ActionListener {
 			characterScreen.characterTypeRadio[1].setVisible(true);
 			characterScreen.characterTypeRadio[2].setVisible(true);
 			characterScreen.characterTypeRadio[3].setVisible(true);
-			
+
 			fileModel.setCharacterModel(characterScreen.characterViewModel);
 			try {
-				characterScreen.characterViewModel=fileModel.loadCharacter(file.getName().replace(".xml", ""));
+				characterScreen.characterViewModel = fileModel.loadCharacter(file.getName().replace(".xml", ""));
 			} catch (DocumentException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -161,15 +164,12 @@ public class CharacterSceneController implements ActionListener {
 			characterScreen.characterTypeRadio[1].setVisible(false);
 			characterScreen.characterTypeRadio[2].setVisible(false);
 			characterScreen.characterTypeRadio[3].setVisible(false);
-			if(characterModel.getArmorClass()==0)
-			{
+			if (characterModel.getArmorClass() == 0) {
 				characterModel.setArmorClass(characterModel.getAbilityModifier().getDexterity());
 			}
-			if(characterModel.getDamageBonus()==0)
-			{
+			if (characterModel.getDamageBonus() == 0) {
 				characterModel.setDamageBonus(0);
 			}
-			
 			calculateAbility();
 		} else if (e.getSource() == itemAssignView.charBackButton) {
 			itemAssignView.setVisible(false);
@@ -188,43 +188,12 @@ public class CharacterSceneController implements ActionListener {
 				}
 			}
 		} else if (e.getSource() == itemAssignView.itemType) {
-			File f1 = new File("itemSave/" + itemAssignView.itemType.getSelectedItem().toString() + ".xml");
+			File f1 = new File("itemSave/" + itemAssignView.itemType.getSelectedItem() + ".xml");
 			Map<String, ArrayList<String>> items = new FileOperationModel().readSaveItemFile(f1);
 			if (items.isEmpty()) {
 				itemAssignView.subItemType.removeAllItems();
 			} else {
 				itemAssignView.subItemType.setModel(new DefaultComboBoxModel(items.keySet().toArray()));
-				switch (itemAssignView.itemType.getSelectedItem().toString()) {
-
-				case "Helmet": {
-					itemAssignView.items[0] = items;
-					break;
-				}
-				case "Armor": {
-					itemAssignView.items[1] = items;
-					break;
-				}
-				case "Shield": {
-					itemAssignView.items[2] = items;
-					break;
-				}
-				case "Belt": {
-					itemAssignView.items[3] = items;
-					break;
-				}
-				case "Boots": {
-					itemAssignView.items[4] = items;
-					break;
-				}
-				case "Ring": {
-					itemAssignView.items[5] = items;
-					break;
-				}
-				case "Weapon": {
-					itemAssignView.items[6] = items;
-					break;
-				}
-				}
 			}
 		} else if (e.getSource() == itemAssignView.backpackAssign) {
 			if (itemAssignView.subItemType.getSelectedItem() != null) {
@@ -270,8 +239,8 @@ public class CharacterSceneController implements ActionListener {
 									((itemImage.getImage().getScaledInstance(itemAssignView.helmetButton.getWidth(),
 											itemAssignView.helmetButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
 							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
-							characterModel.setArmorClass(enchantBonus+characterModel.getArmorClass());
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -282,8 +251,8 @@ public class CharacterSceneController implements ActionListener {
 						if (characterModel.getArmorFlag() == null) {
 							characterModel.setArmorFlag(item);
 							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
-							characterModel.setArmorClass(enchantBonus+characterModel.getArmorClass());
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -296,7 +265,7 @@ public class CharacterSceneController implements ActionListener {
 									((itemImage.getImage().getScaledInstance(itemAssignView.shieldButton.getWidth(),
 											itemAssignView.shieldButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
 							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
 							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -310,8 +279,9 @@ public class CharacterSceneController implements ActionListener {
 									((itemImage.getImage().getScaledInstance(itemAssignView.beltButton.getWidth(),
 											itemAssignView.beltButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
 							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
-							characterModel.getAbilityModifier().setConstitution(characterModel.getAbilityModifier().getConstitution()+enchantBonus);
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+							characterModel.getAbilityModifier().setConstitution(
+									characterModel.getAbilityModifier().getConstitution() + enchantBonus);
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -324,7 +294,7 @@ public class CharacterSceneController implements ActionListener {
 									((itemImage.getImage().getScaledInstance(itemAssignView.bootButton.getWidth(),
 											itemAssignView.bootButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
 							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
 							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -338,7 +308,7 @@ public class CharacterSceneController implements ActionListener {
 									((itemImage.getImage().getScaledInstance(itemAssignView.ringButton.getWidth(),
 											itemAssignView.ringButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
 							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
 							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
@@ -348,10 +318,11 @@ public class CharacterSceneController implements ActionListener {
 					case "Weapon": {
 						if (characterModel.getWeaponFlag() == null) {
 							characterModel.setWeaponFlag(item);
-							
-							characterModel.setDamageBonus(enchantBonus+characterModel.getAbilityModifier().getStrength());
+
+							characterModel
+									.setDamageBonus(enchantBonus + characterModel.getAbilityModifier().getStrength());
 							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter()-1));
+							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -419,10 +390,10 @@ public class CharacterSceneController implements ActionListener {
 
 		return ((score / 2) - 5);
 	}
-	
-	public File openCharFile(){
+
+	public File openCharFile() {
 		JFileChooser fileChooser = new JFileChooser(new File("characters/"));
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML","xml");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML", "xml");
 		fileChooser.setFileFilter(filter);
 		int option = fileChooser.showOpenDialog(characterScreen);
 
@@ -434,7 +405,46 @@ public class CharacterSceneController implements ActionListener {
 		}
 
 	}
-	
+
+	public void readAllItems() {
+		Map<String, ArrayList<String>> items;
+		for (itemTypeList s : ItemModel.itemTypeList.values()) {
+			File f1 = new File("itemSave/" + s.toString() + ".xml");
+			items = new FileOperationModel().readSaveItemFile(f1);
+			switch (s.toString()) {
+			case "Helmet": {
+				itemAssignView.items[0] = items;
+				break;
+			}
+			case "Armor": {
+				itemAssignView.items[1] = items;
+				break;
+			}
+			case "Shield": {
+				itemAssignView.items[2] = items;
+				break;
+			}
+			case "Belt": {
+				itemAssignView.items[3] = items;
+				break;
+			}
+			case "Boots": {
+				itemAssignView.items[4] = items;
+				break;
+			}
+			case "Ring": {
+				itemAssignView.items[5] = items;
+				break;
+			}
+			case "Weapon": {
+				itemAssignView.items[6] = items;
+				break;
+			}
+			}
+
+		}
+	}
+
 	public void createCharacter(String charType) {
 
 		CharacterBuilder cb;

@@ -32,6 +32,7 @@ public class CharacterModel extends Observable {
 	private String ringFlag;
 	private String weaponFlag;
 	private String shieldFlag;
+	public String message;
 
 	public ArrayList<String> backPackItems;
 
@@ -253,6 +254,7 @@ public class CharacterModel extends Observable {
 
 	public void setImage(String image) {
 		this.image = image;
+		message="item_image";
 		notifyCharacterView();
 	}
 
