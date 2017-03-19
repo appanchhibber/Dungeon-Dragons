@@ -24,10 +24,10 @@ public class MapModel extends Observable {
 	public String message;
 	public Boolean characterChecked;
 	
-	public HashMap<String,Dimension> characters;
+	public HashMap<String,MapModel> characters;
 	
 	
-	public HashMap<String,Dimension> getCharacters() {
+	public HashMap<String,MapModel> getCharacters() {
 		return characters;
 	}
 	
@@ -63,6 +63,14 @@ public class MapModel extends Observable {
 	public String characterBehavior;
 	public DefaultListModel characterList;
 	public String characterImage;
+	public Dimension characterLocation;
+	
+	public void  setCharacterLocation(Dimension characterLocation){
+		this.characterLocation=characterLocation;
+	}
+	public Dimension getCharacterLocation(){
+		return characterLocation;
+	}
 	public DefaultListModel getCharacterList() {
 		return characterList;
 	}
@@ -108,7 +116,7 @@ public class MapModel extends Observable {
 	{
 	walls=new ArrayList<Dimension>();	
 	mapItemList=new ArrayList<String>();
-	characters=new HashMap<String,Dimension>();
+	characters=new HashMap<String,MapModel>();
 	treasures=new HashMap<String,Dimension>();
 	}
     

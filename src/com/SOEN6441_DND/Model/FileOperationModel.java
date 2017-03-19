@@ -573,10 +573,11 @@ public class FileOperationModel {
 		rootElement.add(exitDoorElement);
 
 		Element characterElements = rootElement.addElement("Character");
-		for (Map.Entry<String, Dimension> character : mapModel.getCharacters().entrySet()) {
+		for (Map.Entry<String, MapModel> character : mapModel.getCharacters().entrySet()) {
 			Element characterElement = new DefaultElement("character").addAttribute("name", character.getKey());
-			characterElement.addElement("X").addText(String.valueOf((int) character.getValue().getWidth()));
-			characterElement.addElement("Y").addText(String.valueOf((int) character.getValue().getHeight()));
+			characterElement.addElement("Behavior").addText(character.getValue().getCharacterBehavior());
+			characterElement.addElement("X").addText(String.valueOf((int) character.getValue().getCharacterLocation().getWidth()));
+			characterElement.addElement("Y").addText(String.valueOf((int) character.getValue().getCharacterLocation().getHeight()));
 			characterElements.add(characterElement);
 		}
 
@@ -605,6 +606,26 @@ public class FileOperationModel {
 			}
 		}
 		return message;
+	}
+	
+/**
+ * This method returns the image of the character for the map 
+ * @param Name
+ * @return image
+ * @author Appan Chhibber
+ */
+	public String getCharacterImagePath(String Name){
+		this.file = new File("characters/"+Name+".xml");
+		SAXReader reader = new SAXReader();
+		Document document = null;
+		try {
+			document = reader.read(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Element rootElement=document.getRootElement();
+		String image=rootElement.selectSingleNode("image").getText();
+		return image;
 	}
 /**
  * This method is used to save the campaign created into xml file
@@ -682,6 +703,19 @@ public class FileOperationModel {
 		Node exitX = exitDoor.selectSingleNode("X");
 		Node exitY = exitDoor.selectSingleNode("Y");
 		mapModel.setExit(new Dimension(Integer.parseInt(exitX.getText()), Integer.parseInt(exitY.getText())));
+		
+		Element characterNode=rootElement.element("Character");
+		List<Element> characters=characterNode.elements();
+		for(Element character:characters){
+			MapModel model=new MapModel();
+			Node characterX=character.selectSingleNode("X");
+		    Node characterY=character.selectSingleNode("Y");
+		    model.setCharacterName(character.attributeValue("name"));
+			model.setCharacterLocation(new Dimension(Integer.parseInt(characterX.getText()), Integer.parseInt(characterY.getText())));
+			model.setCharacterBehavior(character.selectSingleNode("Behavior").getText());
+			model.setCharacterImage(getCharacterImagePath(character.attributeValue("name")));
+			mapModel.characters.put(character.attributeValue("name"), model);
+		}
 		return mapModel;
 	}
     /**
