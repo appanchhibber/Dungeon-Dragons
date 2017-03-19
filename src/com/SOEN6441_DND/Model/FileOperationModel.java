@@ -704,6 +704,7 @@ public class FileOperationModel {
 		Node exitY = exitDoor.selectSingleNode("Y");
 		mapModel.setExit(new Dimension(Integer.parseInt(exitX.getText()), Integer.parseInt(exitY.getText())));
 		
+		if(rootElement.element("Character")!=null){
 		Element characterNode=rootElement.element("Character");
 		List<Element> characters=characterNode.elements();
 		for(Element character:characters){
@@ -715,6 +716,7 @@ public class FileOperationModel {
 			model.setCharacterBehavior(character.selectSingleNode("Behavior").getText());
 			model.setCharacterImage(getCharacterImagePath(character.attributeValue("name")));
 			mapModel.characters.put(character.attributeValue("name"), model);
+		}
 		}
 		return mapModel;
 	}
