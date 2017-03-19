@@ -44,7 +44,7 @@ public class PlayArenaController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 	if(e.getSource()==playArena.gridView.mapButtonsGrid[playArena.charLocY][playArena.charLocX]){
-		System.out.println("Player action listener fired");
+		
 	}
 	}
 }

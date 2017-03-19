@@ -12,6 +12,7 @@ import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
@@ -21,6 +22,7 @@ import com.SOEN6441_DND.Controller.PlayArenaController;
 import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
+import com.SOEN6441_DND.Model.PlayModel;
 import com.sun.glass.events.KeyEvent;
 import com.sun.xml.internal.messaging.saaj.util.CharWriter;
 
@@ -29,6 +31,7 @@ public class PlayArena extends View  {
 	public MapModel mapModel;
 	public CampaignModel campaignModel;
 	public FileOperationModel ioModel;
+	public PlayModel playModel;
 	public GameController gameController;
 	public JButton playerPos;
 	public GridView gridView;
@@ -43,16 +46,28 @@ private int keyPressCount = 0;
 public int charLocX=0;
 public int charLocY=0;
 
+public View playInfoPanel;
+
+
+
 	@Override
 	protected void initSubviews() {
 		super.initSubviews();
+		playInfoPanel=new PlayerInfoPanelView();
+		
+		
+		
+		
+		this.add(playInfoPanel);
+		
 	}
 
-	public PlayArena(MapModel mapModel, CampaignModel campaignModel) {
+	public PlayArena(MapModel mapModel, CampaignModel campaignModel,PlayModel playModel) {
 		this.mapModel = mapModel;
 		this.campaignModel = campaignModel;
 		ioModel=new FileOperationModel();
 		gameController=GameController.getInstance();
+		this.playModel=playModel;
 		playController = new PlayArenaController(this);
 		gridView = new GridView(mapModel, this){
 			@Override
@@ -61,10 +76,10 @@ public int charLocY=0;
 				super.paintComponent(g);
 				
 				mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(
-						new ImageIcon("image/Human.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+						new ImageIcon(playModel.getPlayerImage()).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					
 				mapButtonsGrid[charLocY][charLocX].setText(mapButtonsGrid[charLocY][charLocX].getName());
-				mapButtonsGrid[charLocY][charLocX].setName("Player");
+				mapButtonsGrid[charLocY][charLocX].setName(playModel.getPlayerName());
 		
 				mapButtonsGrid[charLocY][charLocX].addActionListener(playController);
 				
@@ -176,7 +191,7 @@ public int charLocY=0;
 	}
 	public void loadNextMap(String mapName){
 		mapModel=ioModel.readMapFile(new File("maps/"+mapName));
-		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel));
+		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel,playModel));
 	}
 
 

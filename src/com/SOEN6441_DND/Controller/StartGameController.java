@@ -10,6 +10,7 @@ import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
+import com.SOEN6441_DND.Model.PlayModel;
 import com.SOEN6441_DND.Model.StartGameModel;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.PlayArena;
@@ -24,11 +25,13 @@ public class StartGameController implements ActionListener{
 	public CampaignModel campaignModel;
 	public CharacterModel characterModel;
 	public FileOperationModel ioModel;
+	public PlayModel playModel;
 	public StartGameController(StartGameView view){
 		startView=view;
 		startModel=view.startModel;
 		gameController=GameController.getInstance();
 		ioModel=new FileOperationModel();
+		playModel=new PlayModel();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -38,8 +41,10 @@ public class StartGameController implements ActionListener{
 			}
 			else{
 				campaignModel=ioModel.readCampaignFile(new File("campaign/"+startView.selectCampaign.getSelectedItem()+".xml"));
+				playModel.setPlayerName(startView.selectCharacter.getSelectedItem().toString());
+				playModel.setPlayerImage(ioModel.getCharacterImagePath(playModel.getPlayerName()));
 				mapModel=ioModel.readMapFile(new File("maps/"+campaignModel.getCampMapList().get(0)));
-				gameController.mainFrame.setView(new PlayArena(mapModel,campaignModel));
+				gameController.mainFrame.setView(new PlayArena(mapModel,campaignModel,playModel));
 			}
 		}
 		else if(e.getSource()==startView.backBtn){
