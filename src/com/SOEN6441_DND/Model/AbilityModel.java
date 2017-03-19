@@ -9,7 +9,7 @@ import java.util.Observable;
  *
  */
 
-public class AbilitiyModel extends Observable {
+public class AbilityModel extends Observable {
 	
 	private int strength;
 	private int dexterity;
@@ -67,7 +67,7 @@ public class AbilitiyModel extends Observable {
 	 * 
 	 * @param data
 	 */
-	public void setAbilities(AbilitiyModel data)
+	public void setAbilities(AbilityModel data)
 	{
 		strength=data.strength;
 		dexterity=data.dexterity;

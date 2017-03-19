@@ -3,16 +3,16 @@ package Builder;
 import java.util.Random;
 
 import com.SOEN6441_DND.Controller.CharacterSceneController;
-import com.SOEN6441_DND.Model.AbilitiyModel;
+import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 
 public abstract class CharacterBuilder {
 
-	protected AbilitiyModel characterScore;
+	protected AbilityModel characterScore;
 	public CharacterSceneController characterSceneController;
 	protected int score[] = new int[6];
 	
-	public void setAbilityModel(AbilitiyModel model){
+	public void setAbilityModel(AbilityModel model){
 		characterScore = model;
 	}
 	

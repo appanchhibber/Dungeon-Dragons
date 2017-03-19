@@ -50,6 +50,7 @@ public class FileOperationModel {
 	private DefaultListModel treasureList;
 
 	private String characterImage;
+	private CharacterModel chModel;
 
 	public String getCharacterImage() {
 		return characterImage;
@@ -218,6 +219,86 @@ public class FileOperationModel {
 		}
 		return readFileList;
 	}
+	public void setCharacterModel(CharacterModel model)
+	{
+		chModel=model;
+	}
+	/**
+	 * @author Punit Trivedi
+	 * @param characteName
+	 * @return
+	 * @throws DocumentException 
+	 */
+	public CharacterModel loadCharacter(String characteName) throws DocumentException
+	{
+		AbilityModel abilityScore;
+		AbilityModel abilityModifier;
+		ArrayList<String> backPackList=new ArrayList<String>();
+		if(chModel==null){
+			chModel = new CharacterModel();
+			abilityScore =new AbilityModel();
+			abilityModifier =new AbilityModel();
+			chModel.setAbilityModifier(abilityModifier);
+			chModel.setAbilityScore(abilityScore);
+		}
+
+		SAXReader reader = new SAXReader();
+		Document document = null;
+		try {
+			document = reader.read(new File("characters/"+characteName+".xml"));
+			Element rootElement = document.getRootElement();
+			chModel.setName(rootElement.selectSingleNode("name").getText());
+			chModel.setType(rootElement.selectSingleNode("type").getText());
+			chModel.setLevel(Integer.parseInt(rootElement.selectSingleNode("level").getText()));
+			chModel.setImage(rootElement.selectSingleNode("image").getText());
+			
+			Element charCharacteristics = rootElement.element("characteristics");
+			chModel.setHitPoints(Integer.parseInt(charCharacteristics.selectSingleNode("hitPoint").getText()));
+			chModel.setArmorClass(Integer.parseInt(charCharacteristics.selectSingleNode("armorClass").getText()));
+			chModel.setAttackBonus(Integer.parseInt(charCharacteristics.selectSingleNode("attackBonus").getText()));
+			chModel.setDamageBonus(Integer.parseInt(charCharacteristics.selectSingleNode("damageBonus").getText()));
+			
+			Element itemEquip = rootElement.element("itemEquip");
+			chModel.setHelmetFlag(itemEquip.selectSingleNode("helmetFlag").getText());
+			chModel.setArmorFlag(itemEquip.selectSingleNode("armorFlag").getText());
+			chModel.setBeltFlag(itemEquip.selectSingleNode("beltFlag").getText());
+			chModel.setBootFlag(itemEquip.selectSingleNode("bootFlag").getText());
+			chModel.setRingFlag(itemEquip.selectSingleNode("ringFlag").getText());
+			chModel.setShieldFlag(itemEquip.selectSingleNode("shieldFlag").getText());
+			chModel.setWeaponFlag(itemEquip.selectSingleNode("weaponFlag").getText());
+			
+			Element abiModiElement = rootElement.element("abilityModifier");
+			chModel.getAbilityModifier().setStrength(Integer.parseInt(abiModiElement.selectSingleNode("strength").getText()));
+			chModel.getAbilityModifier().setConstitution(Integer.parseInt(abiModiElement.selectSingleNode("constitution").getText()));
+			chModel.getAbilityModifier().setDexterity(Integer.parseInt(abiModiElement.selectSingleNode("dexterity").getText()));
+			chModel.getAbilityModifier().setIntelligence(Integer.parseInt(abiModiElement.selectSingleNode("intelligence").getText()));
+			chModel.getAbilityModifier().setWisdom(Integer.parseInt(abiModiElement.selectSingleNode("wisdom").getText()));
+			chModel.getAbilityModifier().setCharisma(Integer.parseInt(abiModiElement.selectSingleNode("charisma").getText()));
+
+			
+			
+			Element abiScorElement = rootElement.element("abilityScore");
+			chModel.getAbilityScore().setStrength(Integer.parseInt(abiScorElement.selectSingleNode("strength").getText()));
+			chModel.getAbilityScore().setConstitution(Integer.parseInt(abiScorElement.selectSingleNode("constitution").getText()));
+			chModel.getAbilityScore().setDexterity(Integer.parseInt(abiScorElement.selectSingleNode("dexterity").getText()));
+			chModel.getAbilityScore().setIntelligence(Integer.parseInt(abiScorElement.selectSingleNode("intelligence").getText()));
+			chModel.getAbilityScore().setWisdom(Integer.parseInt(abiScorElement.selectSingleNode("wisdom").getText()));
+			chModel.getAbilityScore().setCharisma(Integer.parseInt(abiScorElement.selectSingleNode("charisma").getText()));
+			
+			
+			chModel.setBackPackCounter(Integer.parseInt(rootElement.selectSingleNode("backPackCounter").getText()));
+			List<Element> backPackItem = rootElement.elements("item");
+			for (Element item : backPackItem) {
+				backPackList.add(item.toString());
+			}
+			chModel.setBackPackItems(backPackList);
+		}catch (NumberFormatException e) {
+			// TODO: handle exception
+			System.out.println("Exception");
+		}
+		return chModel;
+		
+	}
 
 	public String writeCharacter(CharacterScene characterScene) throws IOException {
 		CharacterModel characterModel = characterScene.characterViewModel;
@@ -228,7 +309,22 @@ public class FileOperationModel {
 		root.addElement("type").addText(characterModel.getType());
 		root.addElement("level").addText(String.valueOf(characterModel.getLevel()));
 		root.addElement("image").addText(String.valueOf(characterModel.getImage()));
-
+		
+		Element characteristics=root.addElement("characteristics");
+		characteristics.addElement("hitPoint").addText(String.valueOf(characterModel.getHitPoints()));
+		characteristics.addElement("armorClass").addText(String.valueOf(characterModel.getArmorClass()));
+		characteristics.addElement("attackBonus").addText(String.valueOf(characterModel.getAttackBonus()));
+		characteristics.addElement("damageBonus").addText(String.valueOf(characterModel.getDamageBonus()));
+		
+		Element itemEquip=root.addElement("itemEquip");
+		itemEquip.addElement("helmetFlag").addText(characterModel.getHelmetFlag());
+		itemEquip.addElement("armorFlag").addText(characterModel.getArmorFlag());
+		itemEquip.addElement("shieldFlag").addText(characterModel.getShieldFlag());
+		itemEquip.addElement("beltFlag").addText(characterModel.getBeltFlag());
+		itemEquip.addElement("bootFlag").addText(characterModel.getBootFlag());
+		itemEquip.addElement("ringFlag").addText(characterModel.getRingFlag());
+		itemEquip.addElement("weaponFlag").addText(characterModel.getWeaponFlag());
+		
 		Element abilityScore = root.addElement("abilityScore");
 		abilityScore.addElement("strength").addText(String.valueOf(characterModel.getAbilityScore().getStrength()));
 		abilityScore.addElement("dexterity").addText(String.valueOf(characterModel.getAbilityScore().getDexterity()));
@@ -251,7 +347,12 @@ public class FileOperationModel {
 		abilityModifier.addElement("wisdom").addText(String.valueOf(characterModel.getAbilityModifier().getWisdom()));
 		abilityModifier.addElement("charisma")
 				.addText(String.valueOf(characterModel.getAbilityModifier().getCharisma()));
-
+		
+		root.addElement("backPackCounter").addText(String.valueOf(characterModel.getBackPackCounter()));
+		Element backPackItem = root.addElement("backPackItems");
+		for (String item: characterModel.backPackItems) {
+			backPackItem.addElement("item").addText(item);
+		}
 		write(document, file);
 		return "File Saved!!";
 

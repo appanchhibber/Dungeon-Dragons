@@ -9,13 +9,18 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Random;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.SOEN6441_DND.Model.AbilitiyModel;
+import org.dom4j.DocumentException;
+
+import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Views.AbilityPanelView;
@@ -38,9 +43,9 @@ public class CharacterSceneController implements ActionListener {
 	public CharacterModel characterModel;
 	public CharacterScene characterScreen;
 	public DiceRollController diceRoll;
-	public AbilitiyModel score;
-	public AbilitiyModel abilityModifier;
-	public AbilitiyModel abilityScore;
+	public AbilityModel score;
+	public AbilityModel abilityModifier;
+	public AbilityModel abilityScore;
 	public AbilityPanelView abilityPanel;
 	public ItemAssignView itemAssignView;
 	public FileOperationModel fileModel;
@@ -68,23 +73,23 @@ public class CharacterSceneController implements ActionListener {
 
 			switch (((JRadioButton) e.getSource()).getText()) {
 			case "Human": {
-				characterModel.setImage("Human");
+				characterModel.setImage("image/Human.jpg");
 				characterModel.setType("Human");
 				break;
 			}
 			case "Dwarf": {
-				characterModel.setImage("Dwarf");
+				characterModel.setImage("image/Dwarf.jpg");
 				characterModel.setType("Dwarf");
 
 				break;
 			}
 			case "Elf": {
-				characterModel.setImage("Elf");
+				characterModel.setImage("image/Elf.jpg");
 				characterModel.setType("Elf");
 				break;
 			}
 			case "Orc": {
-				characterModel.setImage("Orc");
+				characterModel.setImage("image/Orc.jpg");
 				characterModel.setType("Orc");
 				break;
 			}
@@ -94,20 +99,18 @@ public class CharacterSceneController implements ActionListener {
 			resetScore();
 			calculateAbility();
 		}
-		
-		else if(e.getSource() == characterScreen.bully){
+
+		else if (e.getSource() == characterScreen.bully) {
 			createCharacter("bully");
 			calculateAbility();
-		}
-		else if(e.getSource() == characterScreen.nimble){
+		} else if (e.getSource() == characterScreen.nimble) {
 			createCharacter("nimble");
 			calculateAbility();
-		}
-		else if(e.getSource() == characterScreen.tank){
+		} else if (e.getSource() == characterScreen.tank) {
 			createCharacter("tank");
 			calculateAbility();
 		}
-		
+
 		else if (e.getSource() == abilityPanel.calculateButton) {
 			score.setStrength(diceRoll.getDiceRollResult());
 			score.setDexterity(diceRoll.getDiceRollResult());
@@ -128,10 +131,45 @@ public class CharacterSceneController implements ActionListener {
 		} else if (e.getSource() == characterScreen.levels) {
 			characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));
 			calculateAbility();
+		}else if (e.getSource() == characterScreen.navMenuPanel.loadButton) {
+			File file = openCharFile();
+			abilityPanel.calculateButton.setVisible(true);
+			characterScreen.bully.setVisible(true);
+			characterScreen.nimble.setVisible(true);
+			characterScreen.tank.setVisible(true);
+			characterScreen.characterTypeRadio[0].setVisible(true);
+			characterScreen.characterTypeRadio[1].setVisible(true);
+			characterScreen.characterTypeRadio[2].setVisible(true);
+			characterScreen.characterTypeRadio[3].setVisible(true);
+			
+			fileModel.setCharacterModel(characterModel);
+			try {
+				fileModel.loadCharacter(file.getName().replace(".xml", ""));
+			} catch (DocumentException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		else if (e.getSource() == characterScreen.navMenuPanel.nextButton) {
 			GameController.getInstance().mainFrame.setView(itemAssignView);
+			abilityPanel.calculateButton.setVisible(false);
+			characterScreen.bully.setVisible(false);
+			characterScreen.nimble.setVisible(false);
+			characterScreen.tank.setVisible(false);
+			characterScreen.characterTypeRadio[0].setVisible(false);
+			characterScreen.characterTypeRadio[1].setVisible(false);
+			characterScreen.characterTypeRadio[2].setVisible(false);
+			characterScreen.characterTypeRadio[3].setVisible(false);
+			if(characterModel.getArmorClass()==0)
+			{
+				characterModel.setArmorClass(characterModel.getAbilityModifier().getDexterity());
+			}
+			if(characterModel.getDamageBonus()==0)
+			{
+				characterModel.setDamageBonus(0);
+			}
+			
 			calculateAbility();
 		} else if (e.getSource() == itemAssignView.charBackButton) {
 			itemAssignView.setVisible(false);
@@ -208,18 +246,19 @@ public class CharacterSceneController implements ActionListener {
 		} else if (e.getSource() == itemAssignView.addItem) {
 			if (itemAssignView.backPackList.getSelectedValue() != null) {
 				String item = itemAssignView.backPackList.getSelectedValue().toString();
-				int enchantBonus=0;
+				int enchantBonus = 0;
 				String itemType = "";
 				String image = "";
 				for (int i = 0; i < 7; i++) {
-					try{
-						if(itemAssignView.items[i].get(item).toArray()!=null){
-						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
-						image = (itemAssignView.items[i].get(item).toArray()[2].toString()).replaceAll("\\s+", "");
-						enchantBonus=Integer.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
-						break;
-					}
-					}catch (NullPointerException ex) {
+					try {
+						if (itemAssignView.items[i].get(item).toArray() != null) {
+							itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+							image = (itemAssignView.items[i].get(item).toArray()[2].toString()).replaceAll("\\s+", "");
+							enchantBonus = Integer
+									.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+							break;
+						}
+					} catch (NullPointerException ex) {
 						// TODO: handle exception
 					}
 				}
@@ -232,7 +271,8 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.helmetButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.helmetButton.getWidth(),
 											itemAssignView.helmetButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
-							
+							characterModel.setArmorClass(enchantBonus+characterModel.getArmorClass());
+
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -244,6 +284,7 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.armorButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.armorButton.getWidth(),
 											itemAssignView.armorButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.setArmorClass(enchantBonus+characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -255,6 +296,7 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.shieldButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.shieldButton.getWidth(),
 											itemAssignView.shieldButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -266,6 +308,7 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.beltButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.beltButton.getWidth(),
 											itemAssignView.beltButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.getAbilityModifier().setConstitution(characterModel.getAbilityModifier().getConstitution()+enchantBonus);
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -277,6 +320,7 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.bootButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.bootButton.getWidth(),
 											itemAssignView.bootButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -288,6 +332,7 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.ringButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.ringButton.getWidth(),
 											itemAssignView.ringButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -299,7 +344,7 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.weaponButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.weaponButton.getWidth(),
 											itemAssignView.weaponButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
-							characterModel.setDamageBonus(enchantBonus);
+							characterModel.setDamageBonus(enchantBonus+characterModel.getAbilityModifier().getStrength());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -352,23 +397,14 @@ public class CharacterSceneController implements ActionListener {
 
 		}
 	}
-	public void calculateAbility()
-	{
+
+	public void calculateAbility() {
 		abilityScore.setStrength(score.getStrength() + abilityModifier.getStrength());
 		abilityScore.setDexterity(score.getDexterity() + abilityModifier.getDexterity());
 		abilityScore.setConstitution(score.getConstitution() + abilityModifier.getConstitution());
 		abilityScore.setIntelligence(score.getIntelligence() + abilityModifier.getIntelligence());
 		abilityScore.setCharisma(score.getCharisma() + abilityModifier.getCharisma());
 		abilityScore.setWisdom(score.getWisdom() + abilityModifier.getWisdom());
-		if(characterModel.getWeaponFlag()==null)
-		{
-			characterModel.setDamageBonus(0);
-		}
-		else
-		{
-			characterModel.setDamageBonus(Integer.parseInt(itemAssignView.items[6].get(characterModel.getWeaponFlag()).toArray()[3].toString()));
-		}
-		
 		characterModel.calculateChar();
 	}
 
@@ -376,9 +412,24 @@ public class CharacterSceneController implements ActionListener {
 
 		return ((score / 2) - 5);
 	}
+	
+	public File openCharFile(){
+		JFileChooser fileChooser = new JFileChooser(new File("characters/"));
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML","xml");
+		fileChooser.setFileFilter(filter);
+		int option = fileChooser.showOpenDialog(characterScreen);
 
-	public void createCharacter(String charType){
-		
+		if (option == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			return file;
+		} else {
+			return null;
+		}
+
+	}
+	
+	public void createCharacter(String charType) {
+
 		CharacterBuilder cb;
 		int[] scoreArray = new int[6];
 		scoreArray[0] = score.getStrength();
@@ -387,29 +438,24 @@ public class CharacterSceneController implements ActionListener {
 		scoreArray[3] = score.getIntelligence();
 		scoreArray[4] = score.getCharisma();
 		scoreArray[5] = score.getWisdom();
-		
+
 		Arrays.sort(scoreArray);
 		for (int i = 0; i < scoreArray.length / 2; i++) {
-			  int temp = scoreArray[i];
-			  scoreArray[i] = scoreArray[scoreArray.length - 1 - i];
-			  scoreArray[scoreArray.length - 1 - i] = temp;
-			}
-		if(charType.equals("bully"))
-		{
-			characterBuilder=new BullyCharacterBuilder(score,scoreArray);
-			
+			int temp = scoreArray[i];
+			scoreArray[i] = scoreArray[scoreArray.length - 1 - i];
+			scoreArray[scoreArray.length - 1 - i] = temp;
 		}
-		else if(charType.equals("nimble"))
-		{
-			characterBuilder=new NimbleCharacterBuilder(score,scoreArray);
-			
+		if (charType.equals("bully")) {
+			characterBuilder = new BullyCharacterBuilder(score, scoreArray);
+
+		} else if (charType.equals("nimble")) {
+			characterBuilder = new NimbleCharacterBuilder(score, scoreArray);
+
+		} else if (charType.equals("tank")) {
+			characterBuilder = new TankCharacterBuilder(score, scoreArray);
+
 		}
-		else if(charType.equals("tank"))
-		{
-			characterBuilder=new TankCharacterBuilder(score,scoreArray);
-			
-		}
-		
+
 		characterBuilder.buildStrength();
 		characterBuilder.buildCharisma();
 		characterBuilder.buildConstitution();

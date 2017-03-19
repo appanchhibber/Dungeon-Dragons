@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import com.SOEN6441_DND.Model.AbilitiyModel;
+import com.SOEN6441_DND.Model.AbilityModel;
 
 /**
  * 
@@ -54,7 +54,7 @@ public class AbilityPanelView extends View implements Observer{
 	//Buttons
 	public JButton calculateButton;
 
-	public AbilitiyModel abilityViewModel;
+	public AbilityModel abilityViewModel;
 	
 	@Override
 	/**
@@ -230,12 +230,14 @@ public class AbilityPanelView extends View implements Observer{
 				add(charismaScoreText);
 				
 	}
-	AbilityPanelView(AbilitiyModel model){
+	AbilityPanelView(AbilityModel model){
+		setAbilityModel(model);
+	}
+	public void setAbilityModel(AbilityModel model){
 		abilityViewModel=model;
 		abilityViewModel.addObserver(this);
 		setAbilityPanel();
 	}
-	
 	/**
 	 * This function sets ability modifiers from he model to the view.
 	 */

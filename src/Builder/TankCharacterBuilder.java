@@ -1,10 +1,10 @@
 package Builder;
 
-import com.SOEN6441_DND.Model.AbilitiyModel;
+import com.SOEN6441_DND.Model.AbilityModel;
 
 public class TankCharacterBuilder extends CharacterBuilder{
 
-	public TankCharacterBuilder(AbilitiyModel scoreModel,int[] sc) {
+	public TankCharacterBuilder(AbilityModel scoreModel,int[] sc) {
 		// TODO Auto-generated constructor stub
 		setAbilityModel(scoreModel);
 		score=sc;

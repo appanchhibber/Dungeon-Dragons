@@ -44,8 +44,8 @@ public class CharacterModel extends Observable {
 	private int armorClass;
 	private String image;
 	private int level;
-	private AbilitiyModel abilityScore;
-	private AbilitiyModel abilityModifier;
+	private AbilityModel abilityScore;
+	private AbilityModel abilityModifier;
 	private int speed;
 	
 	public String getShieldFlag() {
@@ -62,6 +62,7 @@ public class CharacterModel extends Observable {
 
 	public void setAttackBonus(int attackBonus) {
 		this.attackBonus = attackBonus;
+		notifyCharacterView();
 	}
 
 	public int getDamageBonus() {
@@ -69,7 +70,7 @@ public class CharacterModel extends Observable {
 	}
 
 	public void setDamageBonus(int damageBonus) {
-		this.damageBonus = damageBonus+getAbilityModifier().getStrength();
+		this.damageBonus = damageBonus;
 		notifyCharacterView();
 		
 	}
@@ -80,8 +81,9 @@ public class CharacterModel extends Observable {
 
 	public void setArmorClass(int armorClass) {
 		this.armorClass = armorClass;
+		notifyCharacterView();
 	}
-
+	
 	public String getFighterType() {
 		return fighterType;
 	}
@@ -109,6 +111,7 @@ public class CharacterModel extends Observable {
 
 	public void setBackPackItems(ArrayList<String> backPackItems) {
 		this.backPackItems = backPackItems;
+		notifyObservers();
 	}
 
 	public void addBackPackItems(String item) {
@@ -206,26 +209,26 @@ public class CharacterModel extends Observable {
 
 	public void calculateChar() {
 		if (getAbilityModifier() != null && getAbilityScore() != null) {
-			setHitPoints(((new Random().nextInt(10) + getAbilityScore().getConstitution()) * getLevel()));
+			setHitPoints((new Random().nextInt(10)+getAbilityScore().getConstitution()) * getLevel());
 			setAttackBonus(getAbilityModifier().getStrength() + getLevel());
 			notifyCharacterView();
 		}
 	}
 
-	public AbilitiyModel getAbilityScore() {
+	public AbilityModel getAbilityScore() {
 		return abilityScore;
 	}
 
-	public void setAbilityScore(AbilitiyModel abilityModel) {
+	public void setAbilityScore(AbilityModel abilityModel) {
 		this.abilityScore = abilityModel;
 	}
 
-	public AbilitiyModel getAbilityModifier() {
+	public AbilityModel getAbilityModifier() {
 		return abilityModifier;
 
 	}
 
-	public void setAbilityModifier(AbilitiyModel abilitiyModifier) {
+	public void setAbilityModifier(AbilityModel abilitiyModifier) {
 		this.abilityModifier = abilitiyModifier;
 		notifyCharacterView();
 	}
@@ -243,7 +246,7 @@ public class CharacterModel extends Observable {
 	}
 
 	public void setImage(String image) {
-		this.image = "image/" + image + ".jpg";
+		this.image = image;
 		notifyCharacterView();
 	}
 

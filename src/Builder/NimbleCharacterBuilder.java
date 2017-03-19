@@ -1,10 +1,10 @@
 package Builder;
 
-import com.SOEN6441_DND.Model.AbilitiyModel;
+import com.SOEN6441_DND.Model.AbilityModel;
 
 public class NimbleCharacterBuilder extends CharacterBuilder{
 	int[] score;
-	public NimbleCharacterBuilder(AbilitiyModel scoreModel,int[] sc) {
+	public NimbleCharacterBuilder(AbilityModel scoreModel,int[] sc) {
 		// TODO Auto-generated constructor stub
 		setAbilityModel(scoreModel);
 		score=sc;

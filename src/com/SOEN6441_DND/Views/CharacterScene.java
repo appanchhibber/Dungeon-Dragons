@@ -17,7 +17,7 @@ import javax.swing.*;
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
 import com.SOEN6441_DND.Controller.CharacterSceneController;
 import com.SOEN6441_DND.Controller.GameController;
-import com.SOEN6441_DND.Model.AbilitiyModel;
+import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 /**
  * <b>This Class is View for Character Creation and Editor.</b>
@@ -42,8 +42,8 @@ public class CharacterScene extends View implements Observer {
 	// Image
 	ImageIcon characterImage;
 	// Radio buttons.
-	public JRadioButton characterTypeRadio;
-	ButtonGroup charactertypeGroup;
+	public JRadioButton[] characterTypeRadio;
+	public ButtonGroup characterTypeGroup;
 	
 	//button
 		public JButton bully;
@@ -55,9 +55,9 @@ public class CharacterScene extends View implements Observer {
 	//Character View Model
 	public CharacterModel characterViewModel;
 	
-	public AbilitiyModel abilityViewModel;
-	public AbilitiyModel abilityModifier;
-	public AbilitiyModel abilityScore;
+	public AbilityModel abilityViewModel;
+	public AbilityModel abilityModifier;
+	public AbilityModel abilityScore;
 	
 	//backPack
 	public Map<String, ArrayList<String>> backPackMap;
@@ -71,9 +71,9 @@ public class CharacterScene extends View implements Observer {
 		
 		//Model Initialization
 		characterViewModel= new CharacterModel();
-		abilityViewModel=new AbilitiyModel();
-		abilityModifier= new AbilitiyModel();
-		abilityScore= new AbilitiyModel();
+		abilityViewModel=new AbilityModel();
+		abilityModifier= new AbilityModel();
+		abilityScore= new AbilityModel();
 		
 		itemAssignView=new ItemAssignView();
 		characterViewModel.setAbilityScore(abilityScore);
@@ -112,38 +112,35 @@ public class CharacterScene extends View implements Observer {
 		charTypeLabel.setSize(200,20);
 		this.add(charTypeLabel);
 		
-		charactertypeGroup = new ButtonGroup();
-		characterTypeRadio = new JRadioButton("Human", true);
-		characterTypeRadio.setSize(100, 20);
-		characterTypeRadio.setLocation(360, 40);
-		characterTypeRadio.addActionListener(characterController);
-		charactertypeGroup.add(characterTypeRadio);
-		this.add(characterTypeRadio);
+		characterTypeGroup = new ButtonGroup();
+		characterTypeRadio= new JRadioButton[]{new JRadioButton("Human", true),new JRadioButton("Dwarf"),new JRadioButton("Elf"),new JRadioButton("Orc")};
+		characterTypeRadio[0].setSize(100, 20);
+		characterTypeRadio[0].setLocation(360, 40);
+		characterTypeRadio[0].addActionListener(characterController);
+		characterTypeGroup.add(characterTypeRadio[0]);
+		this.add(characterTypeRadio[0]);
 
-		characterTypeRadio = new JRadioButton("Dwarf");
-		characterTypeRadio.setSize(100, 20);
-		characterTypeRadio.setLocation(480, 40);
-		characterTypeRadio.addActionListener(characterController);
-		charactertypeGroup.add(characterTypeRadio);
-		this.add(characterTypeRadio);
+		characterTypeRadio[1].setSize(100, 20);
+		characterTypeRadio[1].setLocation(480, 40);
+		characterTypeRadio[1].addActionListener(characterController);
+		characterTypeGroup.add(characterTypeRadio[1]);
+		this.add(characterTypeRadio[1]);
 
-		characterTypeRadio = new JRadioButton("Elf");
-		characterTypeRadio.setSize(100, 20);
-		characterTypeRadio.setLocation(600, 40);
-		characterTypeRadio.addActionListener(characterController);
-		charactertypeGroup.add(characterTypeRadio);
-		this.add(characterTypeRadio);
+		characterTypeRadio[2].setSize(100, 20);
+		characterTypeRadio[2].setLocation(600, 40);
+		characterTypeRadio[2].addActionListener(characterController);
+		characterTypeGroup.add(characterTypeRadio[2]);
+		this.add(characterTypeRadio[2]);
 
-		characterTypeRadio = new JRadioButton("Orc");
-		characterTypeRadio.setSize(100, 20);
-		characterTypeRadio.setLocation(720, 40);
-		characterTypeRadio.addActionListener(characterController);
-		charactertypeGroup.add(characterTypeRadio);
-		this.add(characterTypeRadio);
+		characterTypeRadio[3].setSize(100, 20);
+		characterTypeRadio[3].setLocation(720, 40);
+		characterTypeRadio[3].addActionListener(characterController);
+		characterTypeGroup.add(characterTypeRadio[3]);
+		this.add(characterTypeRadio[3]);
 		//End Character Selection
 		//Configure Model attach with Observer.
 		
-		characterViewModel.setImage("Human");
+		characterViewModel.setImage("image/Human.jpg");
 		characterViewModel.setType("Human");
 		characterViewModel.addObserver(this);
 		characterImage = new ImageIcon(characterViewModel.getImage());
@@ -174,8 +171,11 @@ public class CharacterScene extends View implements Observer {
 		setAbilityScore();
 		this.setVisible(true);
 		this.add(navMenuPanel);
+		
 		navMenuPanel.nextButton.addActionListener(characterController);
 		navMenuPanel.saveButton.addActionListener(characterController);
+		navMenuPanel.loadButton.addActionListener(characterController);
+		
 		itemAssignView.itemType.addActionListener(characterController);
 		itemAssignView.subItemType.addActionListener(characterController);
 		itemAssignView.backpackAssign.addActionListener(characterController);
@@ -211,7 +211,14 @@ public class CharacterScene extends View implements Observer {
 		setImagePanel();
 		setModifier();
 		setAbilityScore();
+		setCharacter();
 		characterSkillUpdate();
+	}
+	public void setCharacter()
+	{
+		this.levels.setSelectedItem(String.valueOf(characterViewModel.getLevel()));
+		this.nameText.setText(characterViewModel.getName());
+		
 	}
 	public void characterSkillUpdate()
 	{		
@@ -231,6 +238,8 @@ public class CharacterScene extends View implements Observer {
 		imageLabel.setIcon(characterImage);
 		imageLabel.revalidate();
 		imageLabel.repaint();
+		abilityModifier=characterViewModel.getAbilityModifier();
+		abilityScore=characterViewModel.getAbilityScore();
 		
 	}
 	public void setModifier()

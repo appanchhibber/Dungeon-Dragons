@@ -2,13 +2,13 @@ package Builder;
 
 import java.util.Arrays;
 
-import com.SOEN6441_DND.Model.AbilitiyModel;
+import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 
 public class BullyCharacterBuilder extends CharacterBuilder{
 
 	int[] score;
-	public BullyCharacterBuilder(AbilitiyModel scoreModel,int[] sc) {
+	public BullyCharacterBuilder(AbilityModel scoreModel,int[] sc) {
 		// TODO Auto-generated constructor stub
 		setAbilityModel(scoreModel);
 		score=sc;
