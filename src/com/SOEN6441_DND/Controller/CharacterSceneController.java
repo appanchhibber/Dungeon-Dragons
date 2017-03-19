@@ -92,17 +92,20 @@ public class CharacterSceneController implements ActionListener {
 			}
 			setModifer();
 			resetScore();
-
+			calculateAbility();
 		}
 		
 		else if(e.getSource() == characterScreen.bully){
 			createCharacter("bully");
+			calculateAbility();
 		}
 		else if(e.getSource() == characterScreen.nimble){
 			createCharacter("nimble");
+			calculateAbility();
 		}
 		else if(e.getSource() == characterScreen.tank){
 			createCharacter("tank");
+			calculateAbility();
 		}
 		
 		else if (e.getSource() == abilityPanel.calculateButton) {
@@ -121,12 +124,15 @@ public class CharacterSceneController implements ActionListener {
 					.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(score.getIntelligence()));
 			abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(score.getWisdom()));
 			abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(score.getCharisma()));
+			calculateAbility();
 		} else if (e.getSource() == characterScreen.levels) {
 			characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));
+			calculateAbility();
 		}
 
 		else if (e.getSource() == characterScreen.navMenuPanel.nextButton) {
 			GameController.getInstance().mainFrame.setView(itemAssignView);
+			calculateAbility();
 		} else if (e.getSource() == itemAssignView.charBackButton) {
 			itemAssignView.setVisible(false);
 			GameController.getInstance().mainFrame.setView(characterScreen);
@@ -202,6 +208,7 @@ public class CharacterSceneController implements ActionListener {
 		} else if (e.getSource() == itemAssignView.addItem) {
 			if (itemAssignView.backPackList.getSelectedValue() != null) {
 				String item = itemAssignView.backPackList.getSelectedValue().toString();
+				int enchantBonus=0;
 				String itemType = "";
 				String image = "";
 				for (int i = 0; i < 7; i++) {
@@ -209,6 +216,7 @@ public class CharacterSceneController implements ActionListener {
 						if(itemAssignView.items[i].get(item).toArray()!=null){
 						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
 						image = (itemAssignView.items[i].get(item).toArray()[2].toString()).replaceAll("\\s+", "");
+						enchantBonus=Integer.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
 						break;
 					}
 					}catch (NullPointerException ex) {
@@ -291,6 +299,7 @@ public class CharacterSceneController implements ActionListener {
 							itemAssignView.weaponButton.setIcon(new ImageIcon(
 									((itemImage.getImage().getScaledInstance(itemAssignView.weaponButton.getWidth(),
 											itemAssignView.weaponButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
+							characterModel.setDamageBonus(enchantBonus);
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -302,16 +311,6 @@ public class CharacterSceneController implements ActionListener {
 			}
 
 		}
-
-		characterModel.setAbilityModifier(abilityModifier);
-		abilityScore.setStrength(score.getStrength() + abilityModifier.getStrength());
-		abilityScore.setDexterity(score.getDexterity() + abilityModifier.getDexterity());
-		abilityScore.setConstitution(score.getConstitution() + abilityModifier.getConstitution());
-		abilityScore.setIntelligence(score.getIntelligence() + abilityModifier.getIntelligence());
-		abilityScore.setCharisma(score.getCharisma() + abilityModifier.getCharisma());
-		abilityScore.setWisdom(score.getWisdom() + abilityModifier.getWisdom());
-		characterModel.setAbilityScore(abilityScore);
-
 	}
 
 	public void resetScore() {
@@ -352,6 +351,25 @@ public class CharacterSceneController implements ActionListener {
 		}
 
 		}
+	}
+	public void calculateAbility()
+	{
+		abilityScore.setStrength(score.getStrength() + abilityModifier.getStrength());
+		abilityScore.setDexterity(score.getDexterity() + abilityModifier.getDexterity());
+		abilityScore.setConstitution(score.getConstitution() + abilityModifier.getConstitution());
+		abilityScore.setIntelligence(score.getIntelligence() + abilityModifier.getIntelligence());
+		abilityScore.setCharisma(score.getCharisma() + abilityModifier.getCharisma());
+		abilityScore.setWisdom(score.getWisdom() + abilityModifier.getWisdom());
+		if(characterModel.getWeaponFlag()==null)
+		{
+			characterModel.setDamageBonus(0);
+		}
+		else
+		{
+			characterModel.setDamageBonus(Integer.parseInt(itemAssignView.items[6].get(characterModel.getWeaponFlag()).toArray()[3].toString()));
+		}
+		
+		characterModel.calculateChar();
 	}
 
 	public int modifierCalculator(int score) {

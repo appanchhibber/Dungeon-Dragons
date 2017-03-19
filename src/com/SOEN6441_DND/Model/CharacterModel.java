@@ -3,6 +3,7 @@ package com.SOEN6441_DND.Model;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Random;
 
 /**
  * This Class Defines all the characteristics and property of the character.
@@ -22,6 +23,8 @@ public class CharacterModel extends Observable {
 
 	// Fighter Type
 	private String fighterType;
+
+	// Equipped Items
 	private String helmetFlag;
 	private String armorFlag;
 	private String beltFlag;
@@ -29,6 +32,21 @@ public class CharacterModel extends Observable {
 	private String ringFlag;
 	private String weaponFlag;
 	private String shieldFlag;
+
+	public ArrayList<String> backPackItems;
+
+	private int backPackCounter;
+	public String[] levelListValues = { "1", "2", "3", "4", "5", "6", "7", "8" };
+	// Get or set hit points
+	private int hitPoints;
+	private int attackBonus;
+	private int damageBonus;
+	private int armorClass;
+	private String image;
+	private int level;
+	private AbilitiyModel abilityScore;
+	private AbilitiyModel abilityModifier;
+	private int speed;
 	
 	public String getShieldFlag() {
 		return shieldFlag;
@@ -38,21 +56,31 @@ public class CharacterModel extends Observable {
 		this.shieldFlag = shildFlag;
 	}
 
-	public ArrayList<String> backPackItems;
+	public int getAttackBonus() {
+		return attackBonus;
+	}
 
-	private int backPackCounter;
-	public String[] levelListValues = { "1", "2", "3", "4", "5", "6", "7", "8" };
-	// Get or set hit points
-	private int hitPoints;
+	public void setAttackBonus(int attackBonus) {
+		this.attackBonus = attackBonus;
+	}
 
-	private int level;
-	private AbilitiyModel abilityScore;
+	public int getDamageBonus() {
+		return damageBonus;
+	}
 
-	private AbilitiyModel abilityModifier;
+	public void setDamageBonus(int damageBonus) {
+		this.damageBonus = damageBonus+getAbilityModifier().getStrength();
+		notifyCharacterView();
+		
+	}
 
-	private int speed;
+	public int getArmorClass() {
+		return armorClass;
+	}
 
-	private ItemModel ownedItems[];
+	public void setArmorClass(int armorClass) {
+		this.armorClass = armorClass;
+	}
 
 	public String getFighterType() {
 		return fighterType;
@@ -143,10 +171,6 @@ public class CharacterModel extends Observable {
 		this.weaponFlag = weaponFlag;
 	}
 
-	private String image;
-
-	private String damage;
-
 	public String getName() {
 		return name;
 	}
@@ -177,6 +201,15 @@ public class CharacterModel extends Observable {
 
 	public void setLevel(int level) {
 		this.level = level;
+		notifyCharacterView();
+	}
+
+	public void calculateChar() {
+		if (getAbilityModifier() != null && getAbilityScore() != null) {
+			setHitPoints(((new Random().nextInt(10) + getAbilityScore().getConstitution()) * getLevel()));
+			setAttackBonus(getAbilityModifier().getStrength() + getLevel());
+			notifyCharacterView();
+		}
 	}
 
 	public AbilitiyModel getAbilityScore() {
@@ -185,11 +218,11 @@ public class CharacterModel extends Observable {
 
 	public void setAbilityScore(AbilitiyModel abilityModel) {
 		this.abilityScore = abilityModel;
-		notifyCharacterView();
 	}
 
 	public AbilitiyModel getAbilityModifier() {
 		return abilityModifier;
+
 	}
 
 	public void setAbilityModifier(AbilitiyModel abilitiyModifier) {
@@ -205,14 +238,6 @@ public class CharacterModel extends Observable {
 		this.speed = speed;
 	}
 
-	public ItemModel[] getOwnedItems() {
-		return ownedItems;
-	}
-
-	public void setOwnedItems(ItemModel[] ownedItems) {
-		this.ownedItems = ownedItems;
-	}
-
 	public String getImage() {
 		return image;
 	}
@@ -220,14 +245,6 @@ public class CharacterModel extends Observable {
 	public void setImage(String image) {
 		this.image = "image/" + image + ".jpg";
 		notifyCharacterView();
-	}
-
-	public String getDamage() {
-		return damage;
-	}
-
-	public void setDamage(String damage) {
-		this.damage = damage;
 	}
 
 	/**

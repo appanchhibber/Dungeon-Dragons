@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -213,9 +214,12 @@ public class CharacterScene extends View implements Observer {
 		characterSkillUpdate();
 	}
 	public void characterSkillUpdate()
-	{
+	{		
 		itemAssignView.levelsValueLabel.setText(String.valueOf(characterViewModel.getLevel()));
-		
+		itemAssignView.hitValueLabel.setText(String.valueOf(characterViewModel.getHitPoints()));
+		itemAssignView.attackValueLabel.setText(String.valueOf(characterViewModel.getAttackBonus()));	
+		itemAssignView.damageValueLabel.setText(String.valueOf(characterViewModel.getDamageBonus()));
+		itemAssignView.armorValueLabel.setText(String.valueOf(characterViewModel.getArmorClass()));
 	}
 	
 	
