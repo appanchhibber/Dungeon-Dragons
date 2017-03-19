@@ -71,12 +71,12 @@ for (int i = 0; i < mapCell.length; i++) {
 				}
 				else if(mapCell[i][j].getName().startsWith("_"))
 				{
-					System.out.println("Character detected");
+					
 					MapModel model=new MapModel();
 					model.setCharacterBehavior(mapCell[i][j].getToolTipText());
 					model.setCharacterLocation(new Dimension(i,j));
 					mapModel.characters.put(mapCell[i][j].getName().replace("_", "").trim(),model);
-					System.out.println(mapModel.characters.size());
+					
 				}
 				else if(mapCell[i][j].getName().startsWith(".")){
 					mapModel.treasures.put(mapCell[i][j].getName().replace(".", "").trim(),new Dimension(i,j));

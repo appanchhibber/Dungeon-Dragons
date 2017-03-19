@@ -89,6 +89,7 @@ private GameController gameController;
 				}
 				
 				String saveResult=ioModel.writeMapData(file,mapModel);
+				JOptionPane.showMessageDialog(null, saveResult);
 			}
 		
 		}

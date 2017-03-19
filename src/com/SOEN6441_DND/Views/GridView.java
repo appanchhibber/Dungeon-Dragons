@@ -129,6 +129,16 @@ public class GridView extends JPanel {
 			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()]
 					.setText((int) dimension.getWidth() + "," + (int) dimension.getHeight());
 		}
+		for (Map.Entry<String ,MapModel> character:mapModel.getCharacters().entrySet()){
+		int characterX=(int)character.getValue().getCharacterLocation().getWidth();
+		int characterY=(int)character.getValue().getCharacterLocation().getHeight();
+	mapButtonsGrid[characterX][characterY].setName("_"+character.getKey());
+	mapButtonsGrid[characterX][characterY].setFont(new Font("Calibri", Font.PLAIN, 0));
+	mapButtonsGrid[characterX][characterY].setText(characterX+","+characterY);
+	mapButtonsGrid[characterX][characterY].setToolTipText(character.getValue().getCharacterBehavior());
+	mapButtonsGrid[characterX][characterY].setIcon(new ImageIcon(
+					new ImageIcon(character.getValue().getCharacterImage()).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		}
 
 	}
 
