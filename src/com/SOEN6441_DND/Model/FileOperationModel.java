@@ -643,8 +643,11 @@ public class FileOperationModel {
 		for(Object map:list){
 			counter++;
           Element mapElement=new DefaultElement("map").addAttribute("id",String.valueOf(counter));
+          if(map.toString().contains(".xml")){
+        	  mapElement.addElement("name").addText(map.toString());
+          }else{
           mapElement.addElement("name").addText(map.toString()+".xml");
-
+          }
   		mapElements.add(mapElement);
 		}
 		try {

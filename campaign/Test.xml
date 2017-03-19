@@ -8,5 +8,8 @@
     <map id="2">
       <name>test.xml</name>
     </map>
+    <map id="3">
+      <name>k.xml</name>
+    </map>
   </Maps>
 </Campaign>
