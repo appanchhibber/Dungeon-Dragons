@@ -1,10 +1,13 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Color;
+import java.util.Observable;
+import java.util.Observer;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class PlayerInfoPanelView extends View {
+public class PlayerInfoPanelView extends View  {
 	public JLabel lblStrength;
 	public JLabel lblConstitution;
 	public JLabel lblDexterity;
@@ -26,6 +29,8 @@ public class PlayerInfoPanelView extends View {
 	public JLabel charTypeValue;
 	public JLabel hitpointValue;
 	public JLabel charLevelValue;
+	
+	public JButton inventoryBtn;
 	@Override
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
@@ -155,6 +160,13 @@ public class PlayerInfoPanelView extends View {
 		hitpointValue.setForeground(Color.WHITE);
 		hitpointValue.setLocation(190, 185);
 		this.add(lblCharName);
+		
+		
+		inventoryBtn=new JButton("Inventory View");
+		inventoryBtn.setSize(150, 30);
+		inventoryBtn.setLocation(50,225);
+		this.add(inventoryBtn);
 	}
+
 
 }

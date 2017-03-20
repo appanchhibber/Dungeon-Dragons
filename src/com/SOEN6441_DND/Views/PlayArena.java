@@ -1,18 +1,16 @@
 package com.SOEN6441_DND.Views;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
 import javax.swing.InputMap;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
@@ -20,18 +18,17 @@ import javax.swing.Timer;
 import com.SOEN6441_DND.Controller.GameController;
 import com.SOEN6441_DND.Controller.PlayArenaController;
 import com.SOEN6441_DND.Model.CampaignModel;
+import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
-import com.SOEN6441_DND.Model.PlayModel;
 import com.sun.glass.events.KeyEvent;
-import com.sun.xml.internal.messaging.saaj.util.CharWriter;
 
-public class PlayArena extends View  {
+public class PlayArena extends View implements Observer  {
 	public PlayArenaController playController;
 	public MapModel mapModel;
 	public CampaignModel campaignModel;
 	public FileOperationModel ioModel;
-	public PlayModel playModel;
+	public CharacterModel charModel;
 	public GameController gameController;
 	public JButton playerPos;
 	public GridView gridView;
@@ -46,7 +43,7 @@ private int keyPressCount = 0;
 public int charLocX=0;
 public int charLocY=0;
 
-public View playInfoPanel;
+public PlayerInfoPanelView playInfoPanel;
 
 
 
@@ -55,20 +52,20 @@ public View playInfoPanel;
 		super.initSubviews();
 		playInfoPanel=new PlayerInfoPanelView();
 		
-		
-		
+	
 		
 		this.add(playInfoPanel);
 		
 	}
 
-	public PlayArena(MapModel mapModel, CampaignModel campaignModel,PlayModel playModel) {
+	public PlayArena(MapModel mapModel, CampaignModel campaignModel,CharacterModel charModel) {
 		this.mapModel = mapModel;
 		this.campaignModel = campaignModel;
 		ioModel=new FileOperationModel();
 		gameController=GameController.getInstance();
-		this.playModel=playModel;
+		this.charModel=charModel;
 		playController = new PlayArenaController(this);
+		playInfoPanel.inventoryBtn.addActionListener(playController);
 		gridView = new GridView(mapModel, this){
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -76,10 +73,10 @@ public View playInfoPanel;
 				super.paintComponent(g);
 				
 				mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(
-						new ImageIcon(playModel.getPlayerImage()).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+						new ImageIcon(charModel.getImage()).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					
 				mapButtonsGrid[charLocY][charLocX].setText(mapButtonsGrid[charLocY][charLocX].getName());
-				mapButtonsGrid[charLocY][charLocX].setName(playModel.getPlayerName());
+				mapButtonsGrid[charLocY][charLocX].setName(charModel.getName());
 		
 				mapButtonsGrid[charLocY][charLocX].addActionListener(playController);
 				
@@ -112,6 +109,7 @@ public View playInfoPanel;
 		actionMap.put("pressed.Down", new MoveAction(0,1,true));
 		actionMap.put("released.Up", new MoveAction(0,0,false));
 		actionMap.put("released.Down", new MoveAction(0,0,false));
+		charModel.addObserver(this);
 		repaintTimer=new Timer(100,new ActionListener() {
 			
 			@Override
@@ -188,14 +186,27 @@ public View playInfoPanel;
               
 			}
 		});
+
+		}
+	 @Override
+	public void update(Observable o, Object arg) {
+	this.charModel=(CharacterModel)o;
+	System.out.println("inside update method");
+		 if(charModel.message=="character data"){
+			 System.out.println("inside character data method");
+		System.out.println(charModel.getAbilityScore().getWisdom());
+		System.out.println(charModel.getAbilityScore().getCharisma());
+		System.out.println(charModel.getFighterType());
+		System.out.println(charModel.getName());
+	}
+		
 	}
 	public void loadNextMap(String mapName){
 		mapModel=ioModel.readMapFile(new File("maps/"+mapName));
-		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel,playModel));
+		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel,charModel));
 	}
 
-
-	 class MoveAction extends javax.swing.AbstractAction {
+	class MoveAction extends javax.swing.AbstractAction {
 
 		    private int x=0;
 		    private int y=0;

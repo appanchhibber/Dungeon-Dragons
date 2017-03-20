@@ -25,13 +25,12 @@ public class StartGameController implements ActionListener{
 	public CampaignModel campaignModel;
 	public CharacterModel characterModel;
 	public FileOperationModel ioModel;
-	public PlayModel playModel;
 	public StartGameController(StartGameView view){
 		startView=view;
 		startModel=view.startModel;
 		gameController=GameController.getInstance();
 		ioModel=new FileOperationModel();
-		playModel=new PlayModel();
+		characterModel=new CharacterModel();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -41,10 +40,10 @@ public class StartGameController implements ActionListener{
 			}
 			else{
 				campaignModel=ioModel.readCampaignFile(new File("campaign/"+startView.selectCampaign.getSelectedItem()+".xml"));
-				playModel.setPlayerName(startView.selectCharacter.getSelectedItem().toString());
-				playModel.setPlayerImage(ioModel.getCharacterImagePath(playModel.getPlayerName()));
+				characterModel.setName(startView.selectCharacter.getSelectedItem().toString());
+				characterModel.setImage(ioModel.getCharacterImagePath(characterModel.getName()));
 				mapModel=ioModel.readMapFile(new File("maps/"+campaignModel.getCampMapList().get(0)));
-				gameController.mainFrame.setView(new PlayArena(mapModel,campaignModel,playModel));
+				gameController.mainFrame.setView(new PlayArena(mapModel,campaignModel,characterModel));
 			}
 		}
 		else if(e.getSource()==startView.backBtn){

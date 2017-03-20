@@ -259,7 +259,6 @@ public class FileOperationModel {
 			chModel.setDamageBonus(Integer.parseInt(charCharacteristics.selectSingleNode("damageBonus").getText()));
 			
 			Element itemEquip = rootElement.element("itemEquip");
-			System.out.println(chModel.getAbilityModifier().getStrength());
 			chModel.setHelmetFlag(itemEquip.selectSingleNode("helmetFlag").getText());
 			chModel.setArmorFlag(itemEquip.selectSingleNode("armorFlag").getText());
 			chModel.setBeltFlag(itemEquip.selectSingleNode("beltFlag").getText());
