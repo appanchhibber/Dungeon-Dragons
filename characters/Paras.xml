@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Character>
+  <name id="1">Paras</name>
+  <type>Human</type>
+  <level>1</level>
+  <image>image/Human.jpg</image>
+  <characteristics>
+    <hitPoint>28</hitPoint>
+    <armorClass>7</armorClass>
+    <attackBonus>3</attackBonus>
+    <damageBonus>3</damageBonus>
+  </characteristics>
+  <itemEquip>
+    <helmetFlag>My Helm</helmetFlag>
+    <armorFlag>My Arm</armorFlag>
+    <shieldFlag>My Shield</shieldFlag>
+    <beltFlag>My Belt</beltFlag>
+    <bootFlag>My Boot</bootFlag>
+    <ringFlag>My Ring</ringFlag>
+    <weaponFlag>My Axe2</weaponFlag>
+  </itemEquip>
+  <abilityScore>
+    <strength>16</strength>
+    <dexterity>16</dexterity>
+    <constitution>21</constitution>
+    <intelligence>16</intelligence>
+    <wisdom>2</wisdom>
+    <charisma>14</charisma>
+  </abilityScore>
+  <abilityModifier>
+    <strength>2</strength>
+    <dexterity>2</dexterity>
+    <constitution>4</constitution>
+    <intelligence>2</intelligence>
+    <wisdom>-3</wisdom>
+    <charisma>1</charisma>
+  </abilityModifier>
+  <backPackCounter>3</backPackCounter>
+  <backPackItems>
+    <item>My Helm</item>
+    <item>My Axe2</item>
+    <item>My Shield</item>
+  </backPackItems>
+</Character>

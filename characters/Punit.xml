@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Character>
+  <name id="1">Punit</name>
+  <type>Elf</type>
+  <level>1</level>
+  <image>image/Elf.jpg</image>
+  <characteristics>
+    <hitPoint>24</hitPoint>
+    <armorClass>9</armorClass>
+    <attackBonus>2</attackBonus>
+    <damageBonus>2</damageBonus>
+  </characteristics>
+  <itemEquip>
+    <helmetFlag>My Helm</helmetFlag>
+    <armorFlag>My Arm</armorFlag>
+    <shieldFlag>My Shield</shieldFlag>
+    <beltFlag>My Belt</beltFlag>
+    <bootFlag>My Boot</bootFlag>
+    <ringFlag>My Ring</ringFlag>
+    <weaponFlag>My Axe</weaponFlag>
+  </itemEquip>
+  <abilityScore>
+    <strength>13</strength>
+    <dexterity>18</dexterity>
+    <constitution>19</constitution>
+    <intelligence>11</intelligence>
+    <wisdom>10</wisdom>
+    <charisma>11</charisma>
+  </abilityScore>
+  <abilityModifier>
+    <strength>1</strength>
+    <dexterity>4</dexterity>
+    <constitution>2</constitution>
+    <intelligence>0</intelligence>
+    <wisdom>0</wisdom>
+    <charisma>0</charisma>
+  </abilityModifier>
+  <backPackCounter>0</backPackCounter>
+  <backPackItems/>
+</Character>
