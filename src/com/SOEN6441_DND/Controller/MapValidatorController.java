@@ -129,23 +129,23 @@ for (int i = 0; i < mapCell.length; i++) {
 		return result;
 	}
 
-	public Boolean checkExitDoor(int exitDoorCount){
+	public String checkExitDoor(int exitDoorCount){
 		if(exitDoorCount>1){
 	    	   
 	    	    result =  "There can only be one Exit Door";
-	    return false;   
+	    return result;   
 		}
 		
 		else if(exitDoorCount==0)
 	       {
 	    	   result="There is no Exit Door";
-	      return false;
+	      return result;
 	       }
 		
 		
 	else{
 		
-		return true;
+		return "Wrong Exit door placement";
 	}
 	}
 

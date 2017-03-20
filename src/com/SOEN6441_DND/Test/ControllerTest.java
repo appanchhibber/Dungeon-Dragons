@@ -6,6 +6,7 @@ package com.SOEN6441_DND.Test;
 import static org.junit.Assert.*;
 
 import java.awt.Dimension;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -15,17 +16,19 @@ import org.junit.Test;
 import com.SOEN6441_DND.Controller.MapValidatorController;
 import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Controller.PathValidatorController;
+import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Views.MapView;
 
 //import java.awt.Dimension;
 
 /**
- * @author Amir
+ * @author Paras Malik
  *
  */
 public class ControllerTest {
 	
 	public PathValidatorController pathValidator;
+	public FileOperationModel fileIo;
 
 	@Test
 	public void testMapValidation() {
@@ -109,4 +112,8 @@ public class ControllerTest {
 		MapValidatorController mapValidatorController = new MapValidatorController();
 		assertEquals(expected,mapValidatorController.checkEntryDoor(0));
 	}
+
+	
+
+	
 }

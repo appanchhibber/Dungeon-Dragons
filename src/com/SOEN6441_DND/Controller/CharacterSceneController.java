@@ -57,6 +57,12 @@ public class CharacterSceneController implements ActionListener {
 
 	// public String
 
+	public CharacterSceneController(){
+		
+		}
+	public static CharacterSceneController getInstance(){
+		return new CharacterSceneController();
+	}
 	public CharacterSceneController(CharacterScene view) {
 		this.characterScreen = view;
 		this.characterModel = view.characterViewModel;
