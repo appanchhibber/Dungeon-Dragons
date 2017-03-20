@@ -26,7 +26,9 @@ public class CampaignViewController implements ActionListener {
 	CampaignModel campaignModel;
     private GameController gameController;
 
-	
+	public CampaignViewController(){
+		
+	}
 	/**
 	 * This is constructor assigning passed input Campaign view
 	 * 

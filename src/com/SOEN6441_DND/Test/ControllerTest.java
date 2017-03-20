@@ -16,8 +16,12 @@ import org.junit.Test;
 import com.SOEN6441_DND.Controller.MapValidatorController;
 import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Controller.PathValidatorController;
+import com.SOEN6441_DND.Model.CampaignModel;
+import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
+import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.MapView;
+import com.SOEN6441_DND.Views.PlayArena;
 
 //import java.awt.Dimension;
 

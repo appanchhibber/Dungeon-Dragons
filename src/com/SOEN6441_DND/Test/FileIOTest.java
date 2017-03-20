@@ -1,10 +1,12 @@
 package com.SOEN6441_DND.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.swing.DefaultListModel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -58,5 +60,13 @@ public class FileIOTest {
 		String output = fileIo.createCampaignFile(file, list);
 		assertEquals(expected, output);
 		
+	}
+
+	@Test
+	public void testReturnFilesFolder(){
+		DefaultListModel defaultListModel;
+		defaultListModel = fileIo.getAllFolderFile("itemSave");
+
+		assertNotNull(defaultListModel);
 	}
 }
