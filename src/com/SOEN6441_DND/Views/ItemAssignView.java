@@ -249,49 +249,47 @@ public class ItemAssignView extends View implements Observer {
 			backPackModel.addElement(s);
 		}
 		backPackList.setModel(backPackModel);
-		if(((CharacterModel) o).message=="item_image"){
-		if (((CharacterModel) o).getWeaponFlag() != null) {
+		if(((CharacterModel) o).message=="weaponFlag") {
 			weaponButton.setIcon(new ImageIcon((((new ImageIcon("image/"
 					+ items[6].get(((CharacterModel) o).getWeaponFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(weaponButton.getWidth(), weaponButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 		}
-		if (((CharacterModel) o).getHelmetFlag() != null) {
+		else if (((CharacterModel) o).message=="helmetFlag") {
 			helmetButton.setIcon(new ImageIcon((((new ImageIcon("image/"
 					+ items[0].get(((CharacterModel) o).getHelmetFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(helmetButton.getWidth(), helmetButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 		}
-		if (((CharacterModel) o).getShieldFlag() != null) {
+		else if (((CharacterModel) o).message=="shieldFlag") {
 			shieldButton.setIcon(new ImageIcon((((new ImageIcon("image/"
 					+ items[2].get(((CharacterModel) o).getShieldFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(shieldButton.getWidth(), shieldButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 		}
-		if (((CharacterModel) o).getBeltFlag() != null) {
+		else if (((CharacterModel) o).message=="beltFlag") {
 			beltButton.setIcon(new ImageIcon((((new ImageIcon("image/"
 					+ items[3].get(((CharacterModel) o).getBeltFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(beltButton.getWidth(), beltButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 		}
-		if (((CharacterModel) o).getBootFlag() != null) {
+		else if (((CharacterModel) o).message=="bootFlag") {
 			bootButton.setIcon(new ImageIcon((((new ImageIcon("image/"
 					+ items[4].get(((CharacterModel) o).getBootFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(bootButton.getWidth(), bootButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 		}
-		if (((CharacterModel) o).getRingFlag() != null) {
+		else if (((CharacterModel) o).message=="ringFlag") {
 			ringButton.setIcon(new ImageIcon((((new ImageIcon("image/"
 					+ items[5].get(((CharacterModel) o).getRingFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(ringButton.getWidth(), ringButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 		}
-		if (((CharacterModel) o).getArmorFlag() != null) {
+		else if (((CharacterModel) o).message=="armorFlag") {
 			armorButton.setIcon(new ImageIcon((((new ImageIcon("image/"
 					+ items[1].get(((CharacterModel) o).getArmorFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(armorButton.getWidth(), armorButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 		}
-	}
 	}
 }

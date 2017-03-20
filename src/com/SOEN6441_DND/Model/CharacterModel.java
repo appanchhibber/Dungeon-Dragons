@@ -53,8 +53,10 @@ public class CharacterModel extends Observable {
 		return shieldFlag;
 	}
 
-	public void setShieldFlag(String shildFlag) {
-		this.shieldFlag = shildFlag;
+	public void setShieldFlag(String shieldFlag) {
+		this.shieldFlag = shieldFlag;
+		message="shieldFlag";
+		notifyCharacterView();
 	}
 
 	public int getAttackBonus() {
@@ -139,6 +141,8 @@ public class CharacterModel extends Observable {
 
 	public void setHelmetFlag(String helmetFlag) {
 		this.helmetFlag = helmetFlag;
+		message="helmetFlag";
+		notifyCharacterView();
 	}
 
 	public String getArmorFlag() {
@@ -147,6 +151,8 @@ public class CharacterModel extends Observable {
 
 	public void setArmorFlag(String armorFlag) {
 		this.armorFlag = armorFlag;
+		message="armorFlag";
+		notifyCharacterView();
 	}
 
 	public String getBeltFlag() {
@@ -155,6 +161,8 @@ public class CharacterModel extends Observable {
 
 	public void setBeltFlag(String beltFlag) {
 		this.beltFlag = beltFlag;
+		message="beltFlag";
+		notifyCharacterView();
 	}
 
 	public String getBootFlag() {
@@ -163,6 +171,8 @@ public class CharacterModel extends Observable {
 
 	public void setBootFlag(String bootsFlag) {
 		this.bootFlag = bootsFlag;
+		message="bootFlag";
+		notifyCharacterView();
 	}
 
 	public String getRingFlag() {
@@ -171,6 +181,8 @@ public class CharacterModel extends Observable {
 
 	public void setRingFlag(String ringFlag) {
 		this.ringFlag = ringFlag;
+		message="ringFlag";
+		notifyCharacterView();
 	}
 
 	public String getWeaponFlag() {
@@ -179,6 +191,8 @@ public class CharacterModel extends Observable {
 
 	public void setWeaponFlag(String weaponFlag) {
 		this.weaponFlag = weaponFlag;
+		message="weaponFlag";
+		notifyCharacterView();
 	}
 
 	public String getName() {
@@ -254,8 +268,6 @@ public class CharacterModel extends Observable {
 
 	public void setImage(String image) {
 		this.image = image;
-		message="item_image";
-		notifyCharacterView();
 	}
 
 	/**
