@@ -162,7 +162,7 @@ public class ItemAssignView extends View implements Observer {
 		itemPanel.add(itemSubTypeLabel);
 		subItemType = new JComboBox();
 		items = new HashMap[7];
-		items[0] = fileIO.readSaveItemFile(new File("itemSave/" + itemType.getSelectedItem().toString() + ".xml"));
+		items=new FileOperationModel().readAllItems();
 		subItemType.setModel(new DefaultComboBoxModel(items[0].keySet().toArray()));
 		subItemType.setSize(140, 40);
 		subItemType.setLocation(150, 80);

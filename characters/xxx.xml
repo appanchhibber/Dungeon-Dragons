@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Character>
+  <name id="1">xxx</name>
+  <type>Elf</type>
+  <level>1</level>
+  <image>image/Elf.jpg</image>
+  <characteristics>
+    <hitPoint>21</hitPoint>
+    <armorClass>8</armorClass>
+    <attackBonus>3</attackBonus>
+    <damageBonus>3</damageBonus>
+  </characteristics>
+  <itemEquip>
+    <helmetFlag>My Helm</helmetFlag>
+    <armorFlag>My Arm</armorFlag>
+    <shieldFlag>My Shield</shieldFlag>
+    <beltFlag>My Belt</beltFlag>
+    <bootFlag>My Boot</bootFlag>
+    <ringFlag>My Ring</ringFlag>
+    <weaponFlag>My Axe2</weaponFlag>
+  </itemEquip>
+  <abilityScore>
+    <strength>16</strength>
+    <dexterity>16</dexterity>
+    <constitution>13</constitution>
+    <intelligence>13</intelligence>
+    <wisdom>5</wisdom>
+    <charisma>11</charisma>
+  </abilityScore>
+  <abilityModifier>
+    <strength>2</strength>
+    <dexterity>3</dexterity>
+    <constitution>0</constitution>
+    <intelligence>1</intelligence>
+    <wisdom>-2</wisdom>
+    <charisma>0</charisma>
+  </abilityModifier>
+  <backPackCounter>0</backPackCounter>
+  <backPackItems/>
+</Character>

@@ -27,6 +27,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import com.SOEN6441_DND.Model.ItemModel.itemTypeList;
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
 import com.sun.beans.decoder.DocumentHandler;
@@ -229,6 +230,46 @@ public class FileOperationModel {
 	 * @return
 	 * @throws DocumentException 
 	 */
+	public Map<String, ArrayList<String>>[] readAllItems() {
+		Map<String, ArrayList<String>>[] itemList = new HashMap[7];
+		Map<String, ArrayList<String>> items;
+		for (itemTypeList s : ItemModel.itemTypeList.values()) {
+			File f1 = new File("itemSave/" + s.toString() + ".xml");
+			items = new FileOperationModel().readSaveItemFile(f1);
+			switch (s.toString()) {
+			case "Helmet": {
+				itemList[0] = items;
+				break;
+			}
+			case "Armor": {
+				itemList[1] = items;
+				break;
+			}
+			case "Shield": {
+				itemList[2] = items;
+				break;
+			}
+			case "Belt": {
+				itemList[3] = items;
+				break;
+			}
+			case "Boots": {
+				itemList[4] = items;
+				break;
+			}
+			case "Ring": {
+				itemList[5] = items;
+				break;
+			}
+			case "Weapon": {
+				itemList[6] = items;
+				break;
+			}
+			}
+
+		}
+		return itemList;
+	}
 	public CharacterModel loadCharacter(String characteName) throws DocumentException
 	{
 		AbilityModel abilityScore;
@@ -236,12 +277,9 @@ public class FileOperationModel {
 		ArrayList<String> backPackList=new ArrayList<String>();
 		if(chModel==null){
 			chModel = new CharacterModel();
-			abilityScore =new AbilityModel();
-			abilityModifier =new AbilityModel();
-			chModel.setAbilityModifier(abilityModifier);
-			chModel.setAbilityScore(abilityScore);
 		}
-
+		abilityScore =new AbilityModel();
+		abilityModifier =new AbilityModel();
 		SAXReader reader = new SAXReader();
 		Document document = null;
 		try {
@@ -268,23 +306,25 @@ public class FileOperationModel {
 			chModel.setWeaponFlag(itemEquip.selectSingleNode("weaponFlag").getText());
 			
 			Element abiModiElement = rootElement.element("abilityModifier");
-			chModel.getAbilityModifier().setStrength(Integer.parseInt(abiModiElement.selectSingleNode("strength").getText()));
-			chModel.getAbilityModifier().setConstitution(Integer.parseInt(abiModiElement.selectSingleNode("constitution").getText()));
-			chModel.getAbilityModifier().setDexterity(Integer.parseInt(abiModiElement.selectSingleNode("dexterity").getText()));
-			chModel.getAbilityModifier().setIntelligence(Integer.parseInt(abiModiElement.selectSingleNode("intelligence").getText()));
-			chModel.getAbilityModifier().setWisdom(Integer.parseInt(abiModiElement.selectSingleNode("wisdom").getText()));
-			chModel.getAbilityModifier().setCharisma(Integer.parseInt(abiModiElement.selectSingleNode("charisma").getText()));
+			abilityModifier.setStrength(Integer.parseInt(abiModiElement.selectSingleNode("strength").getText()));
+			abilityModifier.setConstitution(Integer.parseInt(abiModiElement.selectSingleNode("constitution").getText()));
+			abilityModifier.setDexterity(Integer.parseInt(abiModiElement.selectSingleNode("dexterity").getText()));
+			abilityModifier.setIntelligence(Integer.parseInt(abiModiElement.selectSingleNode("intelligence").getText()));
+			abilityModifier.setWisdom(Integer.parseInt(abiModiElement.selectSingleNode("wisdom").getText()));
+			abilityModifier.setCharisma(Integer.parseInt(abiModiElement.selectSingleNode("charisma").getText()));
 
 			
 			
 			Element abiScorElement = rootElement.element("abilityScore");
-			chModel.getAbilityScore().setStrength(Integer.parseInt(abiScorElement.selectSingleNode("strength").getText()));
-			chModel.getAbilityScore().setConstitution(Integer.parseInt(abiScorElement.selectSingleNode("constitution").getText()));
-			chModel.getAbilityScore().setDexterity(Integer.parseInt(abiScorElement.selectSingleNode("dexterity").getText()));
-			chModel.getAbilityScore().setIntelligence(Integer.parseInt(abiScorElement.selectSingleNode("intelligence").getText()));
-			chModel.getAbilityScore().setWisdom(Integer.parseInt(abiScorElement.selectSingleNode("wisdom").getText()));
-			chModel.getAbilityScore().setCharisma(Integer.parseInt(abiScorElement.selectSingleNode("charisma").getText()));
+			abilityScore.setStrength(Integer.parseInt(abiScorElement.selectSingleNode("strength").getText()));
+			abilityScore.setConstitution(Integer.parseInt(abiScorElement.selectSingleNode("constitution").getText()));
+			abilityScore.setDexterity(Integer.parseInt(abiScorElement.selectSingleNode("dexterity").getText()));
+			abilityScore.setIntelligence(Integer.parseInt(abiScorElement.selectSingleNode("intelligence").getText()));
+			abilityScore.setWisdom(Integer.parseInt(abiScorElement.selectSingleNode("wisdom").getText()));
+			abilityScore.setCharisma(Integer.parseInt(abiScorElement.selectSingleNode("charisma").getText()));
 			
+			chModel.setAbilityModifier(abilityModifier);
+			chModel.setAbilityScore(abilityScore);
 			
 			chModel.setBackPackCounter(Integer.parseInt(rootElement.selectSingleNode("backPackCounter").getText()));
 			Element backPackElement = rootElement.element("backPackItems");
@@ -293,7 +333,9 @@ public class FileOperationModel {
 				backPackList.add(item.getText());
 				//System.out.println(backPackList.toString());
 			}
+			
 			chModel.setBackPackItems(backPackList);
+			
 		}catch (NumberFormatException e) {
 			// TODO: handle exception
 			System.out.println("Exception");
@@ -302,8 +344,7 @@ public class FileOperationModel {
 		
 	}
 
-	public String writeCharacter(CharacterScene characterScene) throws IOException {
-		CharacterModel characterModel = characterScene.characterViewModel;
+	public String writeCharacter(CharacterModel characterModel) throws IOException {
 		File file = new File("characters/" + characterModel.getName() + ".xml");
 		Document document = DocumentHelper.createDocument();
 		Element root = document.addElement("Character");

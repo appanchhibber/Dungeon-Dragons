@@ -150,10 +150,9 @@ public class CharacterSceneController implements ActionListener {
 			characterScreen.characterTypeRadio[1].setVisible(true);
 			characterScreen.characterTypeRadio[2].setVisible(true);
 			characterScreen.characterTypeRadio[3].setVisible(true);
-
-			fileModel.setCharacterModel(characterScreen.characterViewModel);
+			fileModel.setCharacterModel(characterModel);
 			try {
-				characterScreen.characterViewModel = fileModel.loadCharacter(file.getName().replace(".xml", ""));
+				fileModel.loadCharacter(file.getName().replace(".xml", ""));
 			} catch (DocumentException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -187,7 +186,7 @@ public class CharacterSceneController implements ActionListener {
 			} else {
 				characterModel.setName(characterScreen.nameText.getText());
 				try {
-					JOptionPane.showMessageDialog(null, fileModel.writeCharacter(characterScreen));
+					JOptionPane.showMessageDialog(null, fileModel.writeCharacter(characterScreen.characterViewModel));
 				} catch (HeadlessException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -412,44 +411,7 @@ public class CharacterSceneController implements ActionListener {
 
 	}
 
-	public void readAllItems() {
-		Map<String, ArrayList<String>> items;
-		for (itemTypeList s : ItemModel.itemTypeList.values()) {
-			File f1 = new File("itemSave/" + s.toString() + ".xml");
-			items = new FileOperationModel().readSaveItemFile(f1);
-			switch (s.toString()) {
-			case "Helmet": {
-				itemAssignView.items[0] = items;
-				break;
-			}
-			case "Armor": {
-				itemAssignView.items[1] = items;
-				break;
-			}
-			case "Shield": {
-				itemAssignView.items[2] = items;
-				break;
-			}
-			case "Belt": {
-				itemAssignView.items[3] = items;
-				break;
-			}
-			case "Boots": {
-				itemAssignView.items[4] = items;
-				break;
-			}
-			case "Ring": {
-				itemAssignView.items[5] = items;
-				break;
-			}
-			case "Weapon": {
-				itemAssignView.items[6] = items;
-				break;
-			}
-			}
-
-		}
-	}
+	
 
 	public void createCharacter(String charType) {
 

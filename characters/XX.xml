@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Character>
+  <name id="1">XX</name>
+  <type>Dwarf</type>
+  <level>1</level>
+  <image>image/Dwarf.jpg</image>
+  <characteristics>
+    <hitPoint>12</hitPoint>
+    <armorClass>6</armorClass>
+    <attackBonus>1</attackBonus>
+    <damageBonus>1</damageBonus>
+  </characteristics>
+  <itemEquip>
+    <helmetFlag>My Helm</helmetFlag>
+    <armorFlag>My Arm</armorFlag>
+    <shieldFlag>My Shield</shieldFlag>
+    <beltFlag>My Belt</beltFlag>
+    <bootFlag>My Boot</bootFlag>
+    <ringFlag>My Ring</ringFlag>
+    <weaponFlag>My Axe2</weaponFlag>
+  </itemEquip>
+  <abilityScore>
+    <strength>10</strength>
+    <dexterity>13</dexterity>
+    <constitution>8</constitution>
+    <intelligence>15</intelligence>
+    <wisdom>16</wisdom>
+    <charisma>7</charisma>
+  </abilityScore>
+  <abilityModifier>
+    <strength>0</strength>
+    <dexterity>1</dexterity>
+    <constitution>1</constitution>
+    <intelligence>0</intelligence>
+    <wisdom>2</wisdom>
+    <charisma>-1</charisma>
+  </abilityModifier>
+  <backPackCounter>2</backPackCounter>
+  <backPackItems>
+    <item>My Axe</item>
+    <item>My Ring</item>
+  </backPackItems>
+</Character>

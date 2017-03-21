@@ -65,7 +65,7 @@ public class PlayArenaController implements ActionListener {
 		}
 	}
 	else if(e.getSource()==playArena.playInfoPanel.inventoryBtn){
-		new CharacterInventoryView();
+		playArena.charInventory.setInventory();
 	}
 	}
 }

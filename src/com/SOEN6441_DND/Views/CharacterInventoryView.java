@@ -6,18 +6,25 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Model.CharacterModel;
 
-public class CharacterInventoryView extends JFrame {
+public class CharacterInventoryView extends JFrame{
 private Container container;
-	public CharacterInventoryView(){		
+private ItemAssignView view;
+	public CharacterInventoryView(CharacterModel player){	
 		container=getContentPane();
-		ItemAssignView view=new ItemAssignView();
+		view=new ItemAssignView();
+		container.add(view);
+		player.addObserver(view); 
+		
+	}
+	public void setInventory()
+	{
+
 		view.itemPanel.setVisible(false);
 		view.navPanel.setVisible(false);
 		view.setVisible(true);
 		view.backpackPanel.setLocation(0, 0);
-		container.add(view);
-
 		setPreferredSize(new Dimension(500, 500));
 		setMaximumSize(new Dimension(500, 500));
 		setMinimumSize(new Dimension(500, 500));

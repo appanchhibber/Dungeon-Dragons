@@ -48,7 +48,6 @@ public class CharacterModel extends Observable {
 	private AbilityModel abilityScore;
 	private AbilityModel abilityModifier;
 	private int speed;
-	
 	public String getShieldFlag() {
 		return shieldFlag;
 	}
@@ -98,6 +97,8 @@ public class CharacterModel extends Observable {
 	public CharacterModel() {
 		backPackItems = new ArrayList<String>();
 		backPackCounter = 0;
+		setAbilityModifier(new AbilityModel());
+		setAbilityScore(new AbilityModel());
 	}
 
 	public String[] getLevelListValues() {
@@ -238,10 +239,12 @@ public class CharacterModel extends Observable {
 
 	public AbilityModel getAbilityScore() {
 		return abilityScore;
+		
 	}
 
 	public void setAbilityScore(AbilityModel abilityModel) {
 		this.abilityScore = abilityModel;
+		notifyCharacterView();
 	}
 
 	public AbilityModel getAbilityModifier() {
