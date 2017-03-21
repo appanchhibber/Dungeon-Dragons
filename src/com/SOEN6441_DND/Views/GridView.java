@@ -21,10 +21,12 @@ import com.SOEN6441_DND.Controller.TransferHandlerController;
 import com.SOEN6441_DND.Model.MapModel;
 
 /**
+ * This class is responsible for creating the grid map that is being rendered in
+ * mapView
  * 
  * @author Appan Chhibber
  * @author Punit Trivedi
- * @author Parasm Malik
+ * 
  *
  */
 public class GridView extends JPanel {
@@ -35,8 +37,19 @@ public class GridView extends JPanel {
 	public MapView mapView;
 	public MapModel mapModel;
 	public TransferHandlerController transferHandler;
-	private int count=0;
+	private int count = 0;
 	public PlayArena playArena;
+
+	/**
+	 * Constructor for passing the model from the controller to MapView and the
+	 * mode of working as well ie create and edit
+	 * 
+	 * @param mapModel
+	 * @param mapView
+	 * @param mode
+	 * @author Appan Chhibber
+	 * @author Punit Trivedi
+	 */
 	public GridView(MapModel mapModel, MapView mapView, String mode) {
 		this.mapModel = mapModel;
 		this.mapHeight = mapModel.getMapHeight();
@@ -57,8 +70,15 @@ public class GridView extends JPanel {
 		}
 
 	}
-	
-	public GridView(MapModel mapModel,PlayArena playArena){
+
+	/**
+	 * Constructor for creating the gridMap for the play Arean view
+	 * 
+	 * @param mapModel
+	 * @param playArena
+	 * @author Appan Chhibber
+	 */
+	public GridView(MapModel mapModel, PlayArena playArena) {
 		this.mapModel = mapModel;
 		this.mapHeight = mapModel.getMapHeight();
 		this.mapWidth = mapModel.getMapWidth();
@@ -73,8 +93,13 @@ public class GridView extends JPanel {
 		this.setSize(620, 530);
 		playGridView();
 	}
-	
-	public void playGridView(){
+
+	/**
+	 * Method to create gridmap for playarena screen
+	 * 
+	 * @author Appan Chhibber
+	 */
+	public void playGridView() {
 		mapButtonsGrid = new JButton[mapHeight][mapWidth];
 		for (int i = 0; i < mapHeight; i++) {
 			for (int j = 0; j < mapWidth; j++) {
@@ -90,23 +115,33 @@ public class GridView extends JPanel {
 				} else {
 					value = 1 + j + (i * multiple);
 				}
-				if ((int) mapModel.getEntry().getWidth() == i && (int) mapModel.getEntry().getHeight() == j) {
+				if ((int) mapModel.getEntry().getWidth() == i
+						&& (int) mapModel.getEntry().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("EntryDoor");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/EntryDoor.jpg").getImage()
-							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri",
+							Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
+							"image/EntryDoor.jpg").getImage()
+							.getScaledInstance(50, 50,
+									java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getChest().getWidth() == i && (int) mapModel.getChest().getHeight() == j) {
+				} else if ((int) mapModel.getChest().getWidth() == i
+						&& (int) mapModel.getChest().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("Chest");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/Chest.jpg").getImage()
-							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri",
+							Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
+							"image/Chest.jpg").getImage().getScaledInstance(50,
+							50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getExit().getWidth() == i && (int) mapModel.getExit().getHeight() == j) {
+				} else if ((int) mapModel.getExit().getWidth() == i
+						&& (int) mapModel.getExit().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("ExitDoor");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/ExitDoor.jpg").getImage()
-							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri",
+							Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
+							"image/ExitDoor.jpg").getImage().getScaledInstance(
+							50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
 				} else {
 					mapButtonsGrid[i][j].setName(i + "," + j);
@@ -121,28 +156,45 @@ public class GridView extends JPanel {
 		}
 		for (Dimension dimension : mapModel.getWalls()) {
 			// System.out.println((int)dimension.getWidth());
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()].setName("Wall");
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()]
-					.setFont(new Font("Calibri", Font.PLAIN, 0));
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()].setIcon(new ImageIcon(
-					new ImageIcon("image/Wall.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()]
-					.setText((int) dimension.getWidth() + "," + (int) dimension.getHeight());
+			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
+					.getHeight()].setName("Wall");
+			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
+					.getHeight()].setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
+					.getHeight()].setIcon(new ImageIcon(new ImageIcon(
+					"image/Wall.jpg").getImage().getScaledInstance(50, 50,
+					java.awt.Image.SCALE_SMOOTH)));
+			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
+					.getHeight()].setText((int) dimension.getWidth() + ","
+					+ (int) dimension.getHeight());
 		}
-		for (Map.Entry<String ,MapModel> character:mapModel.getCharacters().entrySet()){
-		int characterX=(int)character.getValue().getCharacterLocation().getWidth();
-		int characterY=(int)character.getValue().getCharacterLocation().getHeight();
-	mapButtonsGrid[characterX][characterY].setName("_"+character.getKey());
-	mapButtonsGrid[characterX][characterY].setFont(new Font("Calibri", Font.PLAIN, 0));
-	mapButtonsGrid[characterX][characterY].setText(characterX+","+characterY);
-	mapButtonsGrid[characterX][characterY].setToolTipText(character.getValue().getCharacterBehavior());
-	mapButtonsGrid[characterX][characterY].setIcon(new ImageIcon(
-					new ImageIcon(character.getValue().getCharacterImage()).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		for (Map.Entry<String, MapModel> character : mapModel.getCharacters()
+				.entrySet()) {
+			int characterX = (int) character.getValue().getCharacterLocation()
+					.getWidth();
+			int characterY = (int) character.getValue().getCharacterLocation()
+					.getHeight();
+			mapButtonsGrid[characterX][characterY].setName("_"
+					+ character.getKey());
+			mapButtonsGrid[characterX][characterY].setFont(new Font("Calibri",
+					Font.PLAIN, 0));
+			mapButtonsGrid[characterX][characterY].setText(characterX + ","
+					+ characterY);
+			mapButtonsGrid[characterX][characterY].setToolTipText(character
+					.getValue().getCharacterBehavior());
+			mapButtonsGrid[characterX][characterY].setIcon(new ImageIcon(
+					new ImageIcon(character.getValue().getCharacterImage())
+							.getImage().getScaledInstance(50, 50,
+									java.awt.Image.SCALE_SMOOTH)));
 		}
 
 	}
 
-
+	/**
+	 * Method to create gridMap view in edit Mode
+	 * 
+	 * @author Appan Chhibber
+	 */
 	public void editGridView() {
 		mapButtonsGrid = new JButton[mapHeight][mapWidth];
 		for (int i = 0; i < mapHeight; i++) {
@@ -159,23 +211,33 @@ public class GridView extends JPanel {
 				} else {
 					value = 1 + j + (i * multiple);
 				}
-				if ((int) mapModel.getEntry().getWidth() == i && (int) mapModel.getEntry().getHeight() == j) {
+				if ((int) mapModel.getEntry().getWidth() == i
+						&& (int) mapModel.getEntry().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("EntryDoor");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/EntryDoor.jpg").getImage()
-							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri",
+							Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
+							"image/EntryDoor.jpg").getImage()
+							.getScaledInstance(50, 50,
+									java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getChest().getWidth() == i && (int) mapModel.getChest().getHeight() == j) {
+				} else if ((int) mapModel.getChest().getWidth() == i
+						&& (int) mapModel.getChest().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("Chest");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/Chest.jpg").getImage()
-							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri",
+							Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
+							"image/Chest.jpg").getImage().getScaledInstance(50,
+							50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getExit().getWidth() == i && (int) mapModel.getExit().getHeight() == j) {
+				} else if ((int) mapModel.getExit().getWidth() == i
+						&& (int) mapModel.getExit().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("ExitDoor");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/ExitDoor.jpg").getImage()
-							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri",
+							Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
+							"image/ExitDoor.jpg").getImage().getScaledInstance(
+							50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
 				} else {
 					mapButtonsGrid[i][j].setName(i + "," + j);
@@ -184,7 +246,9 @@ public class GridView extends JPanel {
 				mapButtonsGrid[i][j].setOpaque(true);
 				mapButtonsGrid[i][j].setBorderPainted(false);
 				mapButtonsGrid[i][j].setSize(40, 40);
-				mapButtonsGrid[i][j].setTransferHandler(new TransferHandlerController().valueImportCreator());
+				mapButtonsGrid[i][j]
+						.setTransferHandler(new TransferHandlerController()
+								.valueImportCreator());
 				mapButtonsGrid[i][j].addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
 						// System.out.println(e.getButton());
@@ -197,17 +261,18 @@ public class GridView extends JPanel {
 								button.setName(button.getText());
 
 							}
-						}else if(e.getButton()==MouseEvent.BUTTON1){
-							JButton button=(JButton)e.getSource();
-							if(button.getName().contains("_")){
+						} else if (e.getButton() == MouseEvent.BUTTON1) {
+							JButton button = (JButton) e.getSource();
+							if (button.getName().contains("_")) {
 								count++;
-								if(count%2==0)
-								{
-									mapView.inventView.selectBehavior.setText("Hostile");
+								if (count % 2 == 0) {
+									mapView.inventView.selectBehavior
+											.setText("Hostile");
 									button.setToolTipText("Hostile");
-								}else{
-								mapView.inventView.selectBehavior.setText("Friendly");
-								button.setToolTipText("Friendly");
+								} else {
+									mapView.inventView.selectBehavior
+											.setText("Friendly");
+									button.setToolTipText("Friendly");
 								}
 							}
 						}
@@ -220,26 +285,44 @@ public class GridView extends JPanel {
 		}
 		for (Dimension dimension : mapModel.getWalls()) {
 			// System.out.println((int)dimension.getWidth());
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()].setName("Wall");
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()]
-					.setFont(new Font("Calibri", Font.PLAIN, 0));
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()].setIcon(new ImageIcon(
-					new ImageIcon("image/Wall.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension.getHeight()]
-					.setText((int) dimension.getWidth() + "," + (int) dimension.getHeight());
+			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
+					.getHeight()].setName("Wall");
+			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
+					.getHeight()].setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
+					.getHeight()].setIcon(new ImageIcon(new ImageIcon(
+					"image/Wall.jpg").getImage().getScaledInstance(50, 50,
+					java.awt.Image.SCALE_SMOOTH)));
+			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
+					.getHeight()].setText((int) dimension.getWidth() + ","
+					+ (int) dimension.getHeight());
 		}
-		for (Map.Entry<String ,MapModel> character:mapModel.getCharacters().entrySet()){
-		int characterX=(int)character.getValue().getCharacterLocation().getWidth();
-		int characterY=(int)character.getValue().getCharacterLocation().getHeight();
-	mapButtonsGrid[characterX][characterY].setName("_"+character.getKey());
-	mapButtonsGrid[characterX][characterY].setFont(new Font("Calibri", Font.PLAIN, 0));
-	mapButtonsGrid[characterX][characterY].setText(characterX+","+characterY);
-	mapButtonsGrid[characterX][characterY].setToolTipText(character.getValue().getCharacterBehavior());
-	mapButtonsGrid[characterX][characterY].setIcon(new ImageIcon(
-					new ImageIcon(character.getValue().getCharacterImage()).getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+		for (Map.Entry<String, MapModel> character : mapModel.getCharacters()
+				.entrySet()) {
+			int characterX = (int) character.getValue().getCharacterLocation()
+					.getWidth();
+			int characterY = (int) character.getValue().getCharacterLocation()
+					.getHeight();
+			mapButtonsGrid[characterX][characterY].setName("_"
+					+ character.getKey());
+			mapButtonsGrid[characterX][characterY].setFont(new Font("Calibri",
+					Font.PLAIN, 0));
+			mapButtonsGrid[characterX][characterY].setText(characterX + ","
+					+ characterY);
+			mapButtonsGrid[characterX][characterY].setToolTipText(character
+					.getValue().getCharacterBehavior());
+			mapButtonsGrid[characterX][characterY].setIcon(new ImageIcon(
+					new ImageIcon(character.getValue().getCharacterImage())
+							.getImage().getScaledInstance(50, 50,
+									java.awt.Image.SCALE_SMOOTH)));
 		}
 	}
 
+	/**
+	 * Method for creation of gridmap in create mode
+	 * 
+	 * @author Appan Chhibber
+	 */
 	public void createGridView() {
 
 		mapButtonsGrid = new JButton[mapHeight][mapWidth];
@@ -261,7 +344,9 @@ public class GridView extends JPanel {
 				mapButtonsGrid[i][j].setOpaque(true);
 				mapButtonsGrid[i][j].setBorderPainted(false);
 				mapButtonsGrid[i][j].setSize(40, 40);
-				mapButtonsGrid[i][j].setTransferHandler(new TransferHandlerController().valueImportCreator());
+				mapButtonsGrid[i][j]
+						.setTransferHandler(new TransferHandlerController()
+								.valueImportCreator());
 				mapButtonsGrid[i][j].addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
 						// System.out.println(e.getButton());
@@ -274,17 +359,18 @@ public class GridView extends JPanel {
 								button.setName(button.getText());
 
 							}
-						}else if(e.getButton()==MouseEvent.BUTTON1){
-							JButton button=(JButton)e.getSource();
-							if(button.getName().contains("_")){
+						} else if (e.getButton() == MouseEvent.BUTTON1) {
+							JButton button = (JButton) e.getSource();
+							if (button.getName().contains("_")) {
 								count++;
-								if(count%2==0)
-								{
-									mapView.inventView.selectBehavior.setText("Hostile");
+								if (count % 2 == 0) {
+									mapView.inventView.selectBehavior
+											.setText("Hostile");
 									button.setToolTipText("Hostile");
-								}else{
-								mapView.inventView.selectBehavior.setText("Friendly");
-								button.setToolTipText("Friendly");
+								} else {
+									mapView.inventView.selectBehavior
+											.setText("Friendly");
+									button.setToolTipText("Friendly");
 								}
 							}
 						}

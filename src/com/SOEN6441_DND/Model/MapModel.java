@@ -9,6 +9,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
 
 /**
+ * This class is the model of the map screen which is responsible for handling
+ * all the data for the map
  * 
  * @author Appan Chhibber
  * @author Punit Trivedi
@@ -23,54 +25,106 @@ public class MapModel extends Observable {
 	public JPanel MapView;
 	public String message;
 	public Boolean characterChecked;
-	
-	public HashMap<String,MapModel> characters;
-	
-	
-	public HashMap<String,MapModel> getCharacters() {
-		return characters;
-	}
-	
-	
-	//Treasure Addition in the map //
+	// Treasure Addition in the map //
 	public String treasureName;
 	public DefaultListModel treasureList;
-	public HashMap<String,Dimension> treasures;
-	public HashMap<String,Dimension> getTreasures()
-	{
-		return treasures;
-	}
-	public String getTreasureName() {
-		return treasureName;
-	}
-
-	public void setTreasureName(String treasureName) {
-		this.treasureName = treasureName;
-	}
-
-	public DefaultListModel getTreasureList() {
-		return treasureList;
-	}
-
-	public void setTreasureList(DefaultListModel treasureList) {
-		this.treasureList = treasureList;
-		notifyMapView("TreasureList");
-	}
-
-	//------------------------------//
-	//Character Addition and Behavior//
+	public HashMap<String, Dimension> treasures;
+	public HashMap<String, MapModel> characters;
+	// Character Addition and Behavior//
 	public String characterName;
 	public String characterBehavior;
 	public DefaultListModel characterList;
 	public String characterImage;
 	public Dimension characterLocation;
-	
-	public void  setCharacterLocation(Dimension characterLocation){
-		this.characterLocation=characterLocation;
+	// -For saving of the map------//
+	public ArrayList<String> mapItemList;
+	public ArrayList<Dimension> walls;
+	public Dimension entry;
+	public Dimension exit;
+	public Dimension chest;
+
+	/*
+	 * Constructor responsible for intializing arraylist and hashmap objects
+	 * 
+	 * @author Appan Chhibber
+	 */
+	public MapModel() {
+		walls = new ArrayList<Dimension>();
+		mapItemList = new ArrayList<String>();
+		characters = new HashMap<String, MapModel>();
+		treasures = new HashMap<String, Dimension>();
 	}
-	public Dimension getCharacterLocation(){
+
+	/*
+	 * Getter method to get data of all the characters saved on the map
+	 * 
+	 * @return HashMap<String,MapModel
+	 * 
+	 * @author Appan Chhibber
+	 */
+	public HashMap<String, MapModel> getCharacters() {
+		return characters;
+	}
+
+	/**
+	 * Getter method to get all the treasures data saved on the map
+	 * 
+	 * @return HashMap<String,Dimension>
+	 * @author Appan Chhibber
+	 */
+	public HashMap<String, Dimension> getTreasures() {
+		return treasures;
+	}
+
+	/**
+	 * Getter method for treasure name
+	 * 
+	 * @return treasureName
+	 * @author Appan Chhibber
+	 */
+	public String getTreasureName() {
+		return treasureName;
+	}
+
+	/**
+	 * Setter method to set the name of the treasure
+	 * 
+	 * @param treasureName
+	 * @author Appan Chhibber
+	 */
+	public void setTreasureName(String treasureName) {
+		this.treasureName = treasureName;
+	}
+
+	/**
+	 * Getter method to return all the list of treasures created
+	 * 
+	 * @return
+	 * @author Appan Chhibber
+	 */
+	public DefaultListModel getTreasureList() {
+		return treasureList;
+	}
+
+	/**
+	 * Setter method to set the list of treaures
+	 * 
+	 * @param treasureList
+	 * @author Appan Chhibber
+	 */
+	public void setTreasureList(DefaultListModel treasureList) {
+		this.treasureList = treasureList;
+		notifyMapView("TreasureList");
+	}
+
+	public void setCharacterLocation(Dimension characterLocation) {
+		this.characterLocation = characterLocation;
+	}
+
+	public Dimension getCharacterLocation() {
 		return characterLocation;
 	}
+
 	public DefaultListModel getCharacterList() {
 		return characterList;
 	}
@@ -85,8 +139,8 @@ public class MapModel extends Observable {
 	}
 
 	public void setCharacterList(DefaultListModel characterList) {
-		this.characterList = characterList; 
-		 notifyMapView("characterList");
+		this.characterList = characterList;
+		notifyMapView("characterList");
 	}
 
 	public String getCharacterName() {
@@ -105,21 +159,6 @@ public class MapModel extends Observable {
 		this.characterBehavior = characterBehavior;
 	}
 
-	//-For saving of the map------//
-	public ArrayList<String> mapItemList;
-    public ArrayList<Dimension> walls;
-    public Dimension entry;
-    public Dimension exit;
-    public Dimension chest;
-    
-    public MapModel()
-	{
-	walls=new ArrayList<Dimension>();	
-	mapItemList=new ArrayList<String>();
-	characters=new HashMap<String,MapModel>();
-	treasures=new HashMap<String,Dimension>();
-	}
-    
 	public ArrayList<Dimension> getWalls() {
 		return walls;
 	}
@@ -152,7 +191,6 @@ public class MapModel extends Observable {
 		this.chest = chest;
 	}
 
-	//----------------------------//
 	public int getMapWidth() {
 		return mapWidth;
 	}
@@ -185,9 +223,8 @@ public class MapModel extends Observable {
 		MapView = mapView;
 	}
 
-	public void notifyMapView(String message)
-	{
-		this.message=message;
+	public void notifyMapView(String message) {
+		this.message = message;
 		setChanged();
 		notifyObservers(this);
 	}

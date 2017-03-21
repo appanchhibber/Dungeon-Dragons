@@ -16,7 +16,14 @@ import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.PlayArena;
 import com.SOEN6441_DND.Views.StartGameView;
 
-public class StartGameController implements ActionListener{
+/**
+ * This controller is responsible for handling the events and the data being
+ * generated in the StartGame View
+ * 
+ * @author Appan Chhibber
+ *
+ */
+public class StartGameController implements ActionListener {
 
 	public StartGameView startView;
 	public StartGameModel startModel;
@@ -25,31 +32,51 @@ public class StartGameController implements ActionListener{
 	public CampaignModel campaignModel;
 	public CharacterModel characterModel;
 	public FileOperationModel ioModel;
-	public StartGameController(StartGameView view){
-		startView=view;
-		startModel=view.startModel;
-		gameController=GameController.getInstance();
-		ioModel=new FileOperationModel();
-		characterModel=new CharacterModel();
+
+	/**
+	 * Constructor for initializing the local variables to the instances
+	 * available in the view or create new instances
+	 * 
+	 * @param view
+	 * @author Appan Chhibber
+	 */
+	public StartGameController(StartGameView view) {
+		startView = view;
+		startModel = view.startModel;
+		gameController = GameController.getInstance();
+		ioModel = new FileOperationModel();
+		characterModel = new CharacterModel();
 	}
+
+	/**
+	 * Action Listener for listening to the events
+	 * 
+	 * @author Appan Chhibber
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==startView.startBtn){
-			if(startView.selectCampaign.getSelectedItem().equals("Select")||startView.selectCharacter.getSelectedItem().equals("Select")){
-				JOptionPane.showMessageDialog(null,"Campaign and Character Cant be Null!");
+		if (e.getSource() == startView.startBtn) {
+			if (startView.selectCampaign.getSelectedItem().equals("Select")
+					|| startView.selectCharacter.getSelectedItem().equals(
+							"Select")) {
+				JOptionPane.showMessageDialog(null,
+						"Campaign and Character Cant be Null!");
+			} else {
+				campaignModel = ioModel.readCampaignFile(new File("campaign/"
+						+ startView.selectCampaign.getSelectedItem() + ".xml"));
+				characterModel.setName(startView.selectCharacter
+						.getSelectedItem().toString());
+				characterModel.setImage(ioModel
+						.getCharacterImagePath(characterModel.getName()));
+				mapModel = ioModel.readMapFile(new File("maps/"
+						+ campaignModel.getCampMapList().get(0)));
+				gameController.mainFrame.setView(new PlayArena(mapModel,
+						campaignModel, characterModel));
 			}
-			else{
-				campaignModel=ioModel.readCampaignFile(new File("campaign/"+startView.selectCampaign.getSelectedItem()+".xml"));
-				characterModel.setName(startView.selectCharacter.getSelectedItem().toString());
-				characterModel.setImage(ioModel.getCharacterImagePath(characterModel.getName()));
-				mapModel=ioModel.readMapFile(new File("maps/"+campaignModel.getCampMapList().get(0)));
-				gameController.mainFrame.setView(new PlayArena(mapModel,campaignModel,characterModel));
-			}
-		}
-		else if(e.getSource()==startView.backBtn){
+		} else if (e.getSource() == startView.backBtn) {
 			gameController.mainFrame.setView(new MainScene());
 		}
-		
+
 	}
 
 }

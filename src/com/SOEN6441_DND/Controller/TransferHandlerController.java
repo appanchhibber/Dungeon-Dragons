@@ -18,55 +18,70 @@ import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 
 /**
+ * This controller is responsible for handling the drag and drop data in the map
+ * View
  * 
  * @author Punit Trivedi
  * @author Appan Chhibber
  *
  */
 public class TransferHandlerController {
-	
 
-	public ValueExportTransferHandler valueExportCreator(String value){
-		 return new ValueExportTransferHandler(value);
+	public ValueExportTransferHandler valueExportCreator(String value) {
+		return new ValueExportTransferHandler(value);
 	}
-	public ValueExportTransferHandler valueExportCreator(String value,String parent){
-		 return new ValueExportTransferHandler(value,parent);
+
+	public ValueExportTransferHandler valueExportCreator(String value,
+			String parent) {
+		return new ValueExportTransferHandler(value, parent);
 	}
-	public ValueImportTransferHandler valueImportCreator(){
-	return	new ValueImportTransferHandler();
+
+	public ValueImportTransferHandler valueImportCreator() {
+		return new ValueImportTransferHandler();
 	}
+
+	/**
+	 * This is a static class that extends TransferHandler and allows the value
+	 * to be exported from one component to the other
+	 * 
+	 * @author Appan Chhibber
+	 * @author Punit Trivedi
+	 */
 	public static class ValueExportTransferHandler extends TransferHandler {
 
 		public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
 		private String value;
 		private String parentValue;
+
 		public ValueExportTransferHandler(String value) {
 			this.value = value;
 		}
-		public ValueExportTransferHandler(String value,String parent) {
+
+		public ValueExportTransferHandler(String value, String parent) {
 			this.value = value;
-			this.parentValue=parent;
+			this.parentValue = parent;
 		}
+
 		public String getValue() {
 			return value;
 		}
+
 		public String getParentValue() {
 			return parentValue;
 		}
+
 		@Override
-		public int getSourceActions(JComponent c) {			
+		public int getSourceActions(JComponent c) {
 			return DnDConstants.ACTION_COPY_OR_MOVE;
 		}
 
 		@Override
 		protected Transferable createTransferable(JComponent c) {
-			Transferable t=null;
-			if(c.getName()==null)
-			{
+			Transferable t = null;
+			if (c.getName() == null) {
 				t = new StringSelection(getValue());
-			}
-			else{
-				t = new StringSelection(getValue()+":"+getParentValue());
+			} else {
+				t = new StringSelection(getValue() + ":" + getParentValue());
 			}
 			return t;
 		}
@@ -80,6 +95,14 @@ public class TransferHandlerController {
 
 	}
 
+	/**
+	 * This is a static class and extends TransferHandler and is responsible for
+	 * importing the value from the dragged and dropped component
+	 * 
+	 * @author Appan Chhibber
+	 * @author Punit Trivedi
+	 *
+	 */
 	public static class ValueImportTransferHandler extends TransferHandler {
 
 		public static final DataFlavor SUPPORTED_DATE_FLAVOR = DataFlavor.stringFlavor;
@@ -102,34 +125,54 @@ public class TransferHandlerController {
 					if (value instanceof String) {
 						Component component = support.getComponent();
 						if (component instanceof JButton) {
-							if(!component.getName().contains(","))
-							{
-								accept=false;
-							}
-							else{
-								if(value.toString().contains(":")){
-									String[]  arr=value.toString().split(":");
-									String btnName=arr[1];
-									String imagePath=arr[0];
-									ImageIcon	image= new ImageIcon(new ImageIcon(imagePath).getImage().getScaledInstance(component.getWidth(), component.getHeight(),java.awt.Image.SCALE_SMOOTH ));
+							if (!component.getName().contains(",")) {
+								accept = false;
+							} else {
+								if (value.toString().contains(":")) {
+									String[] arr = value.toString().split(":");
+									String btnName = arr[1];
+									String imagePath = arr[0];
+									ImageIcon image = new ImageIcon(
+											new ImageIcon(imagePath)
+													.getImage()
+													.getScaledInstance(
+															component
+																	.getWidth(),
+															component
+																	.getHeight(),
+															java.awt.Image.SCALE_SMOOTH));
 									((JButton) component).setIcon(image);
-									((JButton) component).setText(((JButton) component).getName());
-									((JButton) component).setFont(new Font("Calibri", Font.PLAIN,0));
+									((JButton) component)
+											.setText(((JButton) component)
+													.getName());
+									((JButton) component).setFont(new Font(
+											"Calibri", Font.PLAIN, 0));
 									((JButton) component).setName(btnName);
-									
-										accept = true;
-								}
-								else{
-									ImageIcon	image= new ImageIcon(new ImageIcon(value.toString()).getImage().getScaledInstance(component.getWidth(), component.getHeight(),java.awt.Image.SCALE_SMOOTH ));
+
+									accept = true;
+								} else {
+									ImageIcon image = new ImageIcon(
+											new ImageIcon(value.toString())
+													.getImage()
+													.getScaledInstance(
+															component
+																	.getWidth(),
+															component
+																	.getHeight(),
+															java.awt.Image.SCALE_SMOOTH));
 									((JButton) component).setIcon(image);
-									((JButton) component).setText(((JButton) component).getName());
-									((JButton) component).setFont(new Font("Calibri", Font.PLAIN,0));
-									
-									String[] name=value.toString().split("/");
-									((JButton) component).setName(name[1].replaceAll(".jpg","").trim());
-										accept = true;
+									((JButton) component)
+											.setText(((JButton) component)
+													.getName());
+									((JButton) component).setFont(new Font(
+											"Calibri", Font.PLAIN, 0));
+
+									String[] name = value.toString().split("/");
+									((JButton) component).setName(name[1]
+											.replaceAll(".jpg", "").trim());
+									accept = true;
 								}
-					
+
 							}
 						}
 					}

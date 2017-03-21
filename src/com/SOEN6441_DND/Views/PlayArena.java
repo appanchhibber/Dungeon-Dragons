@@ -27,6 +27,13 @@ import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.sun.glass.events.KeyEvent;
 
+/**
+ * This view is the parent view of gridmap and the character ability panel and
+ * displays the play scene of the game
+ * 
+ * @author Appan Chhibber
+ *
+ */
 public class PlayArena extends View implements Observer {
 	public PlayArenaController playController;
 	public MapModel mapModel;
@@ -56,18 +63,27 @@ public class PlayArena extends View implements Observer {
 
 	}
 
-	public PlayArena(MapModel mapModel, CampaignModel campaignModel, CharacterModel charModel) {
+	/**
+	 * constructor for passing the model from controller to the view
+	 * 
+	 * @param mapModel
+	 * @param campaignModel
+	 * @param charModel
+	 * @author Appan Chhibber
+	 */
+	public PlayArena(MapModel mapModel, CampaignModel campaignModel,
+			CharacterModel charModel) {
 		this.mapModel = mapModel;
 		this.campaignModel = campaignModel;
 		ioModel = new FileOperationModel();
 		gameController = GameController.getInstance();
 		this.charModel = charModel;
 		try {
-			playInfoPanel.player= new CharacterModel();
+			playInfoPanel.player = new CharacterModel();
 			playInfoPanel.player.addObserver(playInfoPanel);
-			charInventory=new CharacterInventoryView(playInfoPanel.player);
+			charInventory = new CharacterInventoryView(playInfoPanel.player);
 			ioModel.setCharacterModel(playInfoPanel.player);
-			ioModel.loadCharacter(charModel.getName());	
+			ioModel.loadCharacter(charModel.getName());
 		} catch (DocumentException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -80,14 +96,19 @@ public class PlayArena extends View implements Observer {
 				// TODO Auto-generated method stub
 				super.paintComponent(g);
 
-				mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(new ImageIcon(charModel.getImage()).getImage()
-						.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+				mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(
+						new ImageIcon(charModel.getImage()).getImage()
+								.getScaledInstance(50, 50,
+										java.awt.Image.SCALE_SMOOTH)));
 
-				mapButtonsGrid[charLocY][charLocX].setText(mapButtonsGrid[charLocY][charLocX].getName());
-				mapButtonsGrid[charLocY][charLocX].setFont(new Font("Calibri", Font.PLAIN, 0));
+				mapButtonsGrid[charLocY][charLocX]
+						.setText(mapButtonsGrid[charLocY][charLocX].getName());
+				mapButtonsGrid[charLocY][charLocX].setFont(new Font("Calibri",
+						Font.PLAIN, 0));
 				mapButtonsGrid[charLocY][charLocX].setName(charModel.getName());
 
-				mapButtonsGrid[charLocY][charLocX].addActionListener(playController);
+				mapButtonsGrid[charLocY][charLocX]
+						.addActionListener(playController);
 
 				revalidate();
 			}
@@ -100,14 +121,22 @@ public class PlayArena extends View implements Observer {
 		// for key Binding
 		InputMap inputMap = this.gridView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
 		ActionMap actionMap = this.gridView.getActionMap();
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false), "pressed.Left");
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false), "pressed.Right");
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, true), "released.Left");
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, true), "released.Right");
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false), "pressed.Up");
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false), "pressed.Down");
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "released.Up");
-		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "released.Down");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false),
+				"pressed.Left");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false),
+				"pressed.Right");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, true),
+				"released.Left");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, true),
+				"released.Right");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false),
+				"pressed.Up");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false),
+				"pressed.Down");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true),
+				"released.Up");
+		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true),
+				"released.Down");
 
 		actionMap.put("pressed.Left", new MoveAction(-1, 0, true));
 		actionMap.put("pressed.Right", new MoveAction(1, 0, true));
@@ -138,49 +167,64 @@ public class PlayArena extends View implements Observer {
 					nextY = 1;
 					nextX = charLocX + xDelta;
 				}
-				if (gridView.mapButtonsGrid[nextY + yDelta][nextX + xDelta].getName().contains(",")) {
+				if (gridView.mapButtonsGrid[nextY + yDelta][nextX + xDelta]
+						.getName().contains(",")) {
 					gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
 					gridView.mapButtonsGrid[charLocY][charLocX]
-							.setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
+							.setName(gridView.mapButtonsGrid[charLocY][charLocX]
+									.getText());
 					charLocX += xDelta;
 					charLocY += yDelta;
 
-				} else if (gridView.mapButtonsGrid[nextY + yDelta][nextX + xDelta].getName().contains("EntryDoor")) {
+				} else if (gridView.mapButtonsGrid[nextY + yDelta][nextX
+						+ xDelta].getName().contains("EntryDoor")) {
 					gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
 					gridView.mapButtonsGrid[charLocY][charLocX]
-							.setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
-				} else if (gridView.mapButtonsGrid[nextY + yDelta][nextX + xDelta].getName().contains("Wall")) {
+							.setName(gridView.mapButtonsGrid[charLocY][charLocX]
+									.getText());
+				} else if (gridView.mapButtonsGrid[nextY + yDelta][nextX
+						+ xDelta].getName().contains("Wall")) {
 					gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
 					gridView.mapButtonsGrid[charLocY][charLocX]
-							.setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
-				} else if (gridView.mapButtonsGrid[nextY + yDelta][nextX + xDelta].getName().contains("Chest")) {
+							.setName(gridView.mapButtonsGrid[charLocY][charLocX]
+									.getText());
+				} else if (gridView.mapButtonsGrid[nextY + yDelta][nextX
+						+ xDelta].getName().contains("Chest")) {
 					gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
-					gridView.mapButtonsGrid[charLocY][charLocX].setName(charLocY + "," + charLocX);
-					gridView.mapButtonsGrid[charLocY][charLocX].setText(charLocY + "," + charLocX);
+					gridView.mapButtonsGrid[charLocY][charLocX]
+							.setName(charLocY + "," + charLocX);
+					gridView.mapButtonsGrid[charLocY][charLocX]
+							.setText(charLocY + "," + charLocX);
 					charLocX += xDelta;
 					charLocY += yDelta;
 					chestFlag = true;
-				} else if (gridView.mapButtonsGrid[nextY + yDelta][nextX + xDelta].getName().contains("ExitDoor")) {
+				} else if (gridView.mapButtonsGrid[nextY + yDelta][nextX
+						+ xDelta].getName().contains("ExitDoor")) {
 					gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
 					repaintTimer.stop();
 					gridView.mapButtonsGrid[charLocY][charLocX]
-							.setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
+							.setName(gridView.mapButtonsGrid[charLocY][charLocX]
+									.getText());
 					if (chestFlag) {
-						campaignModel.getCampMapList().removeElement(mapModel.mapName);
+						campaignModel.getCampMapList().removeElement(
+								mapModel.mapName);
 						if (campaignModel.getCampMapList().size() == 0) {
 							gameController.mainFrame.setView(new MainScene());
 						} else {
-							loadNextMap(campaignModel.getCampMapList().get(0).toString());
+							loadNextMap(campaignModel.getCampMapList().get(0)
+									.toString());
 						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Collect Chest First");
+						JOptionPane.showMessageDialog(null,
+								"Collect Chest First");
 					}
 				}
 
 				else {
 					gridView.mapButtonsGrid[charLocY][charLocX].setIcon(null);
 					gridView.mapButtonsGrid[charLocY][charLocX]
-							.setName(gridView.mapButtonsGrid[charLocY][charLocX].getText());
+							.setName(gridView.mapButtonsGrid[charLocY][charLocX]
+									.getText());
 				}
 
 				gridView.revalidate();
@@ -191,6 +235,11 @@ public class PlayArena extends View implements Observer {
 
 	}
 
+	/**
+	 * Observer update method to allow changes to be displayed on the map
+	 * 
+	 * @author Appan Chhibber
+	 */
 	@Override
 	public void update(Observable o, Object arg) {
 		this.charModel = (CharacterModel) o;
@@ -205,11 +254,26 @@ public class PlayArena extends View implements Observer {
 
 	}
 
+	/**
+	 * Method responsible for loading the next map from the list of maps in
+	 * campaign list
+	 * 
+	 * @param mapName
+	 * @author Appan Chhibber
+	 */
 	public void loadNextMap(String mapName) {
 		mapModel = ioModel.readMapFile(new File("maps/" + mapName));
-		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel, charModel));
+		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel,
+				charModel));
 	}
 
+	/**
+	 * This inner class extends AbstractButton and is responsible for passing
+	 * the key press value to the constructor for player to move on the map
+	 * 
+	 * @author Appan Chhibber
+	 *
+	 */
 	class MoveAction extends javax.swing.AbstractAction {
 
 		private int x = 0;
