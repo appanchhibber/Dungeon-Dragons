@@ -210,6 +210,7 @@ public class CharacterScene extends View implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		setCharacterType();
 		setImagePanel();
 		setModifier();
 		setAbilityScore();
@@ -221,10 +222,28 @@ public class CharacterScene extends View implements Observer {
 		this.nameText.setText(characterViewModel.getName());
 		this.levels.setSelectedItem(String.valueOf(characterViewModel.getLevel()));
 		this.nameText.setText(characterViewModel.getName());
-		
-
 	}
-
+	public void setCharacterType(){
+		switch(characterViewModel.getType())
+		{
+		case "Human": {
+			characterTypeRadio[0].setSelected(true);
+			break;
+		}
+		case "Dwarf": {
+			characterTypeRadio[1].setSelected(true);
+			break;
+		}
+		case "Elf": {
+			characterTypeRadio[2].setSelected(true);
+			break;
+		}
+		case "Orc": {
+			characterTypeRadio[3].setSelected(true);
+			break;
+		}
+		}
+	}
 	public void characterSkillUpdate() {
 		itemAssignView.levelsValueLabel.setText(String.valueOf(characterViewModel.getLevel()));
 		itemAssignView.hitValueLabel.setText(String.valueOf(characterViewModel.getHitPoints()));
