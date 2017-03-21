@@ -136,9 +136,19 @@ public class ItemSceneController implements ActionListener {
 	
 	}
 
+	/**
+	 * This function returns the list of item names from the item file.
+	 * @param file
+	 * @return
+	 */
 	public Map<String,ArrayList<String>> itemNameList(File file){
 		return fileModel.readSaveItemFile(new File("itemSave/"+file.getName()));
 	}
+	
+	/**
+	 * This function opens and returns the item file already saved in itemSave folder.
+	 * @return file
+	 */
 	public File openItemFile(){
 		JFileChooser fileChooser = new JFileChooser(new File("itemSave/"));
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",

@@ -5,6 +5,11 @@ import java.util.Arrays;
 import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 
+/**
+ * Type of charater to be build using the builder pattern.
+ * @author Paras Malik
+ *
+ */
 public class BullyCharacterBuilder extends CharacterBuilder{
 
 	int[] score;

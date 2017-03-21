@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import com.SOEN6441_DND.Controller.NavigationPanelController;
 
 /**
- * 
+ * This is the navigation view present at the bottom of the game.
  * @author Punit Trivedi
  *
  */

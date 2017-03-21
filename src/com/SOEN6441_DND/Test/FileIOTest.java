@@ -15,6 +15,11 @@ import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.ItemModel;
 import com.SOEN6441_DND.Views.CharacterScene;
 
+/**
+ * This test class contaons test cases from File IO class.
+ * @author Paras Malik
+ *
+ */
 public class FileIOTest {
 	FileOperationModel fileIo;
 	

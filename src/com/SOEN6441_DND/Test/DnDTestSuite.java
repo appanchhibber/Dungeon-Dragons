@@ -4,6 +4,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * This is the test suite class running all the test classes present.
+ * @author Paras Malik
+ *
+ */
 @RunWith(Suite.class)
 @SuiteClasses({CampaignControllerTest.class,
 				CharacterScControllerTest.class,

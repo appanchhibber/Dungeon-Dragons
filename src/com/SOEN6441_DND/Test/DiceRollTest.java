@@ -8,6 +8,11 @@ import org.junit.Test;
 
 import com.SOEN6441_DND.Controller.DiceRollController;
 
+/**
+ * This test class contains test cases related to dice roller class.
+ * @author Paras Malik
+ *
+ */
 public class DiceRollTest {
 	DiceRollController diceRollController;
 

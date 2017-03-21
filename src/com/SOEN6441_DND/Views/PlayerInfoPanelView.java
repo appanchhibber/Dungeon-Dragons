@@ -9,6 +9,12 @@ import javax.swing.JLabel;
 
 import com.SOEN6441_DND.Model.CharacterModel;
 
+/**
+ * This is the info panel for the play game window
+ * displaying characteristics of the player during gameplay.
+ * @author Paras Malik
+ *
+ */
 public class PlayerInfoPanelView extends View implements Observer {
 	public JLabel lblStrength;
 	public JLabel lblConstitution;

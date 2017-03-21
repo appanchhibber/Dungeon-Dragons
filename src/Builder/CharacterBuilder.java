@@ -6,6 +6,11 @@ import com.SOEN6441_DND.Controller.CharacterSceneController;
 import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 
+/**
+ * Abstract Builder class of the Builder Pattern
+ * @author Paras Malik
+ *
+ */
 public abstract class CharacterBuilder {
 
 	protected AbilityModel characterScore;
@@ -17,7 +22,9 @@ public abstract class CharacterBuilder {
 	}
 	
 		
-	
+	/**
+	 * Modifiers to be set by the Builder
+	 */
 	public abstract void buildStrength();
 	public abstract void buildDexterity();
 	public abstract void buildConstitution();

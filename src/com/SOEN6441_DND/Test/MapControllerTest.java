@@ -10,6 +10,11 @@ import org.junit.Test;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
 
+/**
+ * This class contains test cases related to map functionality.
+ * @author Paras Malik
+ *
+ */
 public class MapControllerTest {
 	
 	FileOperationModel operationModel;

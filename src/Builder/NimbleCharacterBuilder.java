@@ -2,6 +2,11 @@ package Builder;
 
 import com.SOEN6441_DND.Model.AbilityModel;
 
+/**
+ * Type of charater to be build using the builder pattern.
+ * @author Paras Malik
+ *
+ */
 public class NimbleCharacterBuilder extends CharacterBuilder{
 	int[] score;
 	public NimbleCharacterBuilder(AbilityModel scoreModel,int[] sc) {

@@ -12,6 +12,11 @@ import org.junit.Test;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.ItemModel;
 
+/**
+ * This class contaons test cases related to Item class.
+ * @author Paras Malik
+ *
+ */
 public class ItemControllerTest {
 	FileOperationModel fileOperationModel;
 	@Before

@@ -10,6 +10,11 @@ import com.SOEN6441_DND.Controller.CharacterSceneController;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 
+/**
+ * This test class contains test cases related to character class.
+ * @author Paras Malik
+ *
+ */
 public class CharacterScControllerTest {
 
 	CharacterSceneController characterController;

@@ -381,6 +381,9 @@ public class CharacterSceneController implements ActionListener {
 		}
 	}
 
+	/**
+	 * Calculate the ability scores
+	 */
 	public void calculateAbility() {
 		abilityScore.setStrength(score.getStrength() + abilityModifier.getStrength());
 		abilityScore.setDexterity(score.getDexterity() + abilityModifier.getDexterity());
@@ -396,6 +399,10 @@ public class CharacterSceneController implements ActionListener {
 		return ((score / 2) - 5);
 	}
 
+	/**
+	 * This function opens and returns the file character file already created.
+	 * @return
+	 */
 	public File openCharFile() {
 		JFileChooser fileChooser = new JFileChooser(new File("characters/"));
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML", "xml");
@@ -412,7 +419,10 @@ public class CharacterSceneController implements ActionListener {
 	}
 
 	
-
+/**
+ * Creates character of the fighter class beased on user selection
+ * @param charType Accepts the type of fighter user selected.
+ */
 	public void createCharacter(String charType) {
 
 		CharacterBuilder cb;

@@ -13,6 +13,11 @@ import com.SOEN6441_DND.Controller.CampaignViewController;
 import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 
+/**
+ * This test class contains test cases related to campaign.
+ * @author Paras Malik
+ *
+ */
 public class CampaignControllerTest {
 
 	CampaignViewController campaignController;

@@ -3,6 +3,11 @@ package com.SOEN6441_DND.Controller;
 import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 
+/**
+ * 
+ * @author Paras Malik
+ *
+ */
 public abstract class FighterBuilder {
 		private AbilityModel fighter;		
 		 abstract void buildStrength(int strength); 
