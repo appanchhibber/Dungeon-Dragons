@@ -8,7 +8,12 @@ import javax.swing.JOptionPane;
 
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Views.ItemAssignView;
-
+/**
+ * This class is a controller for the item assign view.
+ * It performs all Item related operations Like add enchantment bonus, add and remove item from character and back pack.
+ * @author i854141
+ *
+ */
 public class ItemAssignViewController implements ActionListener {
 	public CharacterModel characterModel;
 	public ItemAssignView itemAssignView;
@@ -17,7 +22,6 @@ public class ItemAssignViewController implements ActionListener {
 		// TODO Auto-generated constructor stub
 		itemAssignView = view;
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
