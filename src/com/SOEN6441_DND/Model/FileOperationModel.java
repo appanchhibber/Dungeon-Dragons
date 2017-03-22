@@ -312,8 +312,6 @@ public class FileOperationModel {
 			abilityModifier.setIntelligence(Integer.parseInt(abiModiElement.selectSingleNode("intelligence").getText()));
 			abilityModifier.setWisdom(Integer.parseInt(abiModiElement.selectSingleNode("wisdom").getText()));
 			abilityModifier.setCharisma(Integer.parseInt(abiModiElement.selectSingleNode("charisma").getText()));
-
-			
 			
 			Element abiScorElement = rootElement.element("abilityScore");
 			abilityScore.setStrength(Integer.parseInt(abiScorElement.selectSingleNode("strength").getText()));
@@ -329,12 +327,11 @@ public class FileOperationModel {
 			chModel.setBackPackCounter(Integer.parseInt(rootElement.selectSingleNode("backPackCounter").getText()));
 			Element backPackElement = rootElement.element("backPackItems");
 			List<Element> backPackItems=backPackElement.elements();
+			chModel.setBackPackItems(backPackList);
 			for (Element item : backPackItems) {
-				backPackList.add(item.getText());
+				chModel.addBackPackItems(item.getText());
 				//System.out.println(backPackList.toString());
 			}
-			
-			chModel.setBackPackItems(backPackList);
 			
 		}catch (NumberFormatException e) {
 			// TODO: handle exception

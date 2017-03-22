@@ -77,6 +77,7 @@ public class CharacterScene extends View implements Observer {
 		abilityScore = new AbilityModel();
 
 		itemAssignView = new ItemAssignView();
+		itemAssignView.setCharacterModel(characterViewModel);
 		
 		characterViewModel.setAbilityScore(abilityScore);
 		characterViewModel.setAbilityModifier(abilityModifier);
@@ -144,7 +145,7 @@ public class CharacterScene extends View implements Observer {
 		characterViewModel.setImage("image/Human.jpg");
 		characterViewModel.setType("Human");
 		characterViewModel.addObserver(this);
-		characterViewModel.addObserver(itemAssignView);
+		
 		characterImage = new ImageIcon(characterViewModel.getImage());
 		abilityModifier.setStrength(0);
 		abilityModifier.setDexterity(0);
@@ -180,9 +181,8 @@ public class CharacterScene extends View implements Observer {
 
 		itemAssignView.itemType.addActionListener(characterController);
 		itemAssignView.subItemType.addActionListener(characterController);
-		itemAssignView.backpackAssign.addActionListener(characterController);
 		itemAssignView.charBackButton.addActionListener(characterController);
-		itemAssignView.addItem.addActionListener(characterController);
+		
 
 		bully = new JButton("Bully");
 		bully.setSize(90, 30);
@@ -215,7 +215,7 @@ public class CharacterScene extends View implements Observer {
 		setModifier();
 		setAbilityScore();
 		setCharacter();
-		characterSkillUpdate();
+		
 	}
 
 	public void setCharacter() {
@@ -244,14 +244,6 @@ public class CharacterScene extends View implements Observer {
 		}
 		}
 	}
-	public void characterSkillUpdate() {
-		itemAssignView.levelsValueLabel.setText(String.valueOf(characterViewModel.getLevel()));
-		itemAssignView.hitValueLabel.setText(String.valueOf(characterViewModel.getHitPoints()));
-		itemAssignView.attackValueLabel.setText(String.valueOf(characterViewModel.getAttackBonus()));
-		itemAssignView.damageValueLabel.setText(String.valueOf(characterViewModel.getDamageBonus()));
-		itemAssignView.armorValueLabel.setText(String.valueOf(characterViewModel.getArmorClass()));
-	}
-
 	public void setImagePanel() {
 		characterImage.getImage().flush();
 		characterImage = new ImageIcon(new ImageIcon(characterViewModel.getImage()).getImage()

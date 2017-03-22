@@ -49,7 +49,8 @@ public class PlayerInfoPanelView extends View implements Observer {
 		this.setBackground(Color.BLACK);
 		this.setLocation(635, 10);
 		this.setSize(215, 530);
-
+		player = new CharacterModel();
+		player.addObserver(this);
 		lblCharName = new JLabel("Name:");
 		lblCharName.setSize(100, 20);
 		lblCharName.setForeground(Color.WHITE);

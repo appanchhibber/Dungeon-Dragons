@@ -153,8 +153,10 @@ public class CharacterSceneController implements ActionListener {
 			characterScreen.characterTypeRadio[2].setVisible(true);
 			characterScreen.characterTypeRadio[3].setVisible(true);
 			fileModel.setCharacterModel(characterModel);
+			itemAssignView.setCharacterModel(characterModel);
 			try {
 				fileModel.loadCharacter(file.getName().replace(".xml", ""));
+				
 			} catch (DocumentException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -202,144 +204,7 @@ public class CharacterSceneController implements ActionListener {
 			} else {
 				itemAssignView.subItemType.setModel(new DefaultComboBoxModel(items.keySet().toArray()));
 			}
-		} else if (e.getSource() == itemAssignView.backpackAssign) {
-			if (itemAssignView.subItemType.getSelectedItem() != null) {
-				String item = itemAssignView.subItemType.getSelectedItem().toString();
-				if (characterModel.getBackPackCounter() < 11) {
-					if (characterModel.getBackPackItems().contains(item)) {
-						JOptionPane.showMessageDialog(null, "This Item is already inside the Backpack");
-					} else {
-						characterModel.setBackPackCounter(characterModel.getBackPackCounter() + 1);
-						characterModel.addBackPackItems(item);
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "You can store only 10 items in your Backpack");
-				}
-			}
-
-		} else if (e.getSource() == itemAssignView.addItem) {
-			if (itemAssignView.backPackList.getSelectedValue() != null) {
-				String item = itemAssignView.backPackList.getSelectedValue().toString();
-				int enchantBonus = 0;
-				String itemType = "";
-				String image = "";
-				for (int i = 0; i < 7; i++) {
-					try {
-						if (itemAssignView.items[i].get(item).toArray() != null) {
-							itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
-							image = (itemAssignView.items[i].get(item).toArray()[2].toString()).replaceAll("\\s+", "");
-							enchantBonus = Integer
-									.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
-							break;
-						}
-					} catch (NullPointerException ex) {
-						// TODO: handle exception
-					}
-				}
-				if (!itemType.equals("")) {
-					ImageIcon itemImage = new ImageIcon("image/" + image + ".jpg");
-					switch (itemType) {
-					case "Helmet": {
-						if (characterModel.getHelmetFlag() == null) {
-							characterModel.setHelmetFlag(item);
-							itemAssignView.helmetButton.setIcon(new ImageIcon(
-									((itemImage.getImage().getScaledInstance(itemAssignView.helmetButton.getWidth(),
-											itemAssignView.helmetButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
-							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
-							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
-
-						} else {
-							JOptionPane.showMessageDialog(null, "This Item is already assign");
-						}
-						break;
-					}
-					case "Armor": {
-						if (characterModel.getArmorFlag() == null) {
-							characterModel.setArmorFlag(item);
-							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
-							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
-						} else {
-							JOptionPane.showMessageDialog(null, "This Item is already assign");
-						}
-						break;
-					}
-					case "Shield": {
-						if (characterModel.getShieldFlag() == null) {
-							characterModel.setShieldFlag(item);
-							itemAssignView.shieldButton.setIcon(new ImageIcon(
-									((itemImage.getImage().getScaledInstance(itemAssignView.shieldButton.getWidth(),
-											itemAssignView.shieldButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
-							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
-							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
-						} else {
-							JOptionPane.showMessageDialog(null, "This Item is already assign");
-						}
-						break;
-					}
-					case "Belt": {
-						if (characterModel.getBeltFlag() == null) {
-							characterModel.setBeltFlag(item);
-							itemAssignView.beltButton.setIcon(new ImageIcon(
-									((itemImage.getImage().getScaledInstance(itemAssignView.beltButton.getWidth(),
-											itemAssignView.beltButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
-							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
-							characterModel.getAbilityModifier().setConstitution(
-									characterModel.getAbilityModifier().getConstitution() + enchantBonus);
-						} else {
-							JOptionPane.showMessageDialog(null, "This Item is already assign");
-						}
-						break;
-					}
-					case "Boots": {
-						if (characterModel.getBootFlag() == null) {
-							characterModel.setBootFlag(item);
-							itemAssignView.bootButton.setIcon(new ImageIcon(
-									((itemImage.getImage().getScaledInstance(itemAssignView.bootButton.getWidth(),
-											itemAssignView.bootButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
-							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
-							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
-						} else {
-							JOptionPane.showMessageDialog(null, "This Item is already assign");
-						}
-						break;
-					}
-					case "Ring": {
-						if (characterModel.getRingFlag() == null) {
-							characterModel.setRingFlag(item);
-							itemAssignView.ringButton.setIcon(new ImageIcon(
-									((itemImage.getImage().getScaledInstance(itemAssignView.ringButton.getWidth(),
-											itemAssignView.ringButton.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
-							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
-							characterModel.setArmorClass(enchantBonus + characterModel.getArmorClass());
-						} else {
-							JOptionPane.showMessageDialog(null, "This Item is already assign");
-						}
-						break;
-					}
-					case "Weapon": {
-						if (characterModel.getWeaponFlag() == null) {
-							characterModel.setWeaponFlag(item);
-							characterModel.removeBackPackItems(item);
-							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
-							characterModel
-									.setDamageBonus(enchantBonus + characterModel.getAbilityModifier().getStrength());
-						} else {
-							JOptionPane.showMessageDialog(null, "This Item is already assign");
-						}
-						break;
-					}
-
-					}
-				}
-			}
-
-		}
+		}  
 	}
 
 	public void resetScore() {

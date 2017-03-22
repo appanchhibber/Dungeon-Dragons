@@ -243,18 +243,27 @@ public class CharacterModel extends Observable {
 		if(getDamageBonus()!=0)
 		{
 			tempDamageBonus=calculateEnchanment(this.level);
+			
 		}
 		this.level = level;
-		enchanmentBonus=calculateEnchanment(this.level);
-		setArmorClass((getArmorClass()-tempArmorBonus)+enchanmentBonus);
+		enchanmentBonus=calculateEnchanment(level);
+		if(helmetFlag!=null && armorFlag!=null && bootFlag!=null && shieldFlag !=null && ringFlag!=null )
+		{
+		setArmorClass((getArmorClass()-(tempArmorBonus*5))+(enchanmentBonus*5));
+		}
+		if(weaponFlag!=null)
+		{
 		setDamageBonus((getDamageBonus()-tempDamageBonus)+enchanmentBonus);
+		}
+		if(beltFlag!=null){
 		abilityModifier.setConstitution((abilityModifier.getConstitution()-tempConstitution)+enchanmentBonus);
-		notifyCharacterView();
+		}
+		calculateChar();
 	}
 
 	public void calculateChar() {
 		if (getAbilityModifier() != null && getAbilityScore() != null) {
-			setHitPoints((new Random().nextInt(10)+getAbilityScore().getConstitution()) * getLevel());
+			setHitPoints((getAbilityScore().getConstitution()) * getLevel());
 			setAttackBonus(getAbilityModifier().getStrength() + getLevel());
 			notifyCharacterView();
 		}

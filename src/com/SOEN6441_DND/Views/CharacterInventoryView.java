@@ -16,11 +16,10 @@ private ItemAssignView view;
 		view=new ItemAssignView();
 		container.add(view);
 		player.addObserver(view); 
-		
+		view.setCharacterModel(player);
 	}
 	public void setInventory()
 	{
-
 		view.itemPanel.setVisible(false);
 		view.navPanel.setVisible(false);
 		view.setVisible(true);

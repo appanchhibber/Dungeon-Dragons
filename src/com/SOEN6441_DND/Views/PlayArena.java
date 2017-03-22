@@ -79,8 +79,6 @@ public class PlayArena extends View implements Observer {
 		gameController = GameController.getInstance();
 		this.charModel = charModel;
 		try {
-			playInfoPanel.player = new CharacterModel();
-			playInfoPanel.player.addObserver(playInfoPanel);
 			charInventory = new CharacterInventoryView(playInfoPanel.player);
 			ioModel.setCharacterModel(playInfoPanel.player);
 			ioModel.loadCharacter(charModel.getName());

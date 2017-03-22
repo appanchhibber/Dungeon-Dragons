@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Character>
+  <name id="1">Rock</name>
+  <type>Elf</type>
+  <level>5</level>
+  <image>image/Elf.jpg</image>
+  <characteristics>
+    <hitPoint>125</hitPoint>
+    <armorClass>7</armorClass>
+    <attackBonus>8</attackBonus>
+    <damageBonus>5</damageBonus>
+  </characteristics>
+  <itemEquip>
+    <helmetFlag>My Helm</helmetFlag>
+    <armorFlag>My Arm</armorFlag>
+    <shieldFlag>My Shield</shieldFlag>
+    <beltFlag>My Belt</beltFlag>
+    <bootFlag>My Boot</bootFlag>
+    <ringFlag>My Ring</ringFlag>
+    <weaponFlag>My Axe2</weaponFlag>
+  </itemEquip>
+  <abilityScore>
+    <strength>20</strength>
+    <dexterity>19</dexterity>
+    <constitution>18</constitution>
+    <intelligence>14</intelligence>
+    <wisdom>13</wisdom>
+    <charisma>14</charisma>
+  </abilityScore>
+  <abilityModifier>
+    <strength>3</strength>
+    <dexterity>4</dexterity>
+    <constitution>3</constitution>
+    <intelligence>1</intelligence>
+    <wisdom>1</wisdom>
+    <charisma>1</charisma>
+  </abilityModifier>
+  <backPackCounter>2</backPackCounter>
+  <backPackItems>
+    <item>My Helm</item>
+    <item>My Arm</item>
+  </backPackItems>
+</Character>
