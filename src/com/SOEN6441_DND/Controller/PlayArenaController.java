@@ -18,6 +18,7 @@ import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.CharacterInventoryView;
 import com.SOEN6441_DND.Views.ItemAssignView;
 import com.SOEN6441_DND.Views.PlayArena;
+import javax.swing.JButton;
 
 /**
  * This controller is responsible for handling the play game aspect and
@@ -59,22 +60,22 @@ public class PlayArenaController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == playArena.gridView.mapButtonsGrid[playArena.charLocY][playArena.charLocX]) {
+		if (e.getSource() == playArena.playInfoPanel.inventoryBtn) {
+			playArena.charInventory.setInventory();
+		}
+		 else if (e.getSource() instanceof JButton) {
+			JButton button = (JButton)e.getSource();
+			if(button.getName().contains("_")){
 			try {
 				characterModel = ioModel
-						.loadCharacter(playArena.gridView.mapButtonsGrid[playArena.charLocY][playArena.charLocX]
-								.getName());
-				System.out.println(characterModel.getDamageBonus());
-				System.out.println(characterModel.getAbilityScore()
-						.getStrength());
+						.loadCharacter(button.getName().replace("_", "").trim());
 			} catch (DocumentException e1) {
 				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null,
 						"Unable to Load character Characteristics");
 				e1.printStackTrace();
 			}
-		} else if (e.getSource() == playArena.playInfoPanel.inventoryBtn) {
-			playArena.charInventory.setInventory();
 		}
+		} 
 	}
 }

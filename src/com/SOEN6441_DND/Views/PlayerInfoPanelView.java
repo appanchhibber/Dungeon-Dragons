@@ -166,10 +166,10 @@ public class PlayerInfoPanelView extends View implements Observer {
 		this.add(lblHitpoint);
 
 		hitpointValue = new JLabel();
-		hitpointValue.setSize(20, 20);
+		hitpointValue.setSize(50, 20);
 		hitpointValue.setForeground(Color.WHITE);
-		hitpointValue.setLocation(190, 185);
-		this.add(lblCharName);
+		hitpointValue.setLocation(170, 185);
+		this.add(hitpointValue);
 
 		inventoryBtn = new JButton("Inventory View");
 		inventoryBtn.setSize(150, 30);

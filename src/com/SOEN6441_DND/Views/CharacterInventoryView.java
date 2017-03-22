@@ -10,7 +10,7 @@ import com.SOEN6441_DND.Model.CharacterModel;
 
 public class CharacterInventoryView extends JFrame{
 private Container container;
-private ItemAssignView view;
+public ItemAssignView view;
 	public CharacterInventoryView(CharacterModel player){	
 		container=getContentPane();
 		view=new ItemAssignView();
