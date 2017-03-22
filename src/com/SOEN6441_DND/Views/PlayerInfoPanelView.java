@@ -179,16 +179,19 @@ public class PlayerInfoPanelView extends View implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		strengthValue.setText(String.valueOf(player.getAbilityScore().getStrength()));
-		constitutionValue.setText(String.valueOf(player.getAbilityScore().getConstitution()));
-		intelligenceValue.setText(String.valueOf(player.getAbilityScore().getIntelligence()));
-		wisdomValue.setText(String.valueOf(player.getAbilityScore().getStrength()));
-		charismaValue.setText(String.valueOf(player.getAbilityScore().getCharisma()));
-		dexterityValue.setText(String.valueOf(player.getAbilityScore().getDexterity()));
-		charNameValue.setText(String.valueOf(player.getName()));
-		charTypeValue.setText(String.valueOf(player.getType()));
-		hitpointValue.setText(String.valueOf(player.getHitPoints()));
-		charLevelValue.setText(String.valueOf(player.getLevel()));
+		CharacterModel model = (CharacterModel)o;
+		strengthValue.setText(String.valueOf(model.getAbilityScore().getStrength()));
+		constitutionValue.setText(String.valueOf(model.getAbilityScore().getConstitution()));
+		intelligenceValue.setText(String.valueOf(model.getAbilityScore().getIntelligence()));
+		wisdomValue.setText(String.valueOf(model.getAbilityScore().getStrength()));
+		charismaValue.setText(String.valueOf(model.getAbilityScore().getCharisma()));
+		dexterityValue.setText(String.valueOf(model.getAbilityScore().getDexterity()));
+		charNameValue.setText(String.valueOf(model.getName()));
+		charTypeValue.setText(String.valueOf(model.getType()));
+		hitpointValue.setText(String.valueOf(model.getHitPoints()));
+		charLevelValue.setText(String.valueOf(model.getLevel()));
+		//System.out.println(model.getName());
+		
 	}
 
 }

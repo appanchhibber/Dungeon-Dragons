@@ -57,12 +57,14 @@ public class CharacterSceneController implements ActionListener {
 
 	// public String
 
-	public CharacterSceneController(){
-		
-		}
-	public static CharacterSceneController getInstance(){
+	public CharacterSceneController() {
+
+	}
+
+	public static CharacterSceneController getInstance() {
 		return new CharacterSceneController();
 	}
+
 	public CharacterSceneController(CharacterScene view) {
 		this.characterScreen = view;
 		this.characterModel = view.characterViewModel;
@@ -323,11 +325,10 @@ public class CharacterSceneController implements ActionListener {
 					case "Weapon": {
 						if (characterModel.getWeaponFlag() == null) {
 							characterModel.setWeaponFlag(item);
-
-							characterModel
-									.setDamageBonus(enchantBonus + characterModel.getAbilityModifier().getStrength());
 							characterModel.removeBackPackItems(item);
 							characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+							characterModel
+									.setDamageBonus(enchantBonus + characterModel.getAbilityModifier().getStrength());
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}
@@ -401,6 +402,7 @@ public class CharacterSceneController implements ActionListener {
 
 	/**
 	 * This function opens and returns the file character file already created.
+	 * 
 	 * @return
 	 */
 	public File openCharFile() {
@@ -418,11 +420,12 @@ public class CharacterSceneController implements ActionListener {
 
 	}
 
-	
-/**
- * Creates character of the fighter class beased on user selection
- * @param charType Accepts the type of fighter user selected.
- */
+	/**
+	 * Creates character of the fighter class beased on user selection
+	 * 
+	 * @param charType
+	 *            Accepts the type of fighter user selected.
+	 */
 	public void createCharacter(String charType) {
 
 		CharacterBuilder cb;

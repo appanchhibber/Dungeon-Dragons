@@ -186,6 +186,7 @@ public class GridView extends JPanel {
 					new ImageIcon(character.getValue().getCharacterImage())
 							.getImage().getScaledInstance(50, 50,
 									java.awt.Image.SCALE_SMOOTH)));
+			mapButtonsGrid[characterX][characterY].addActionListener(playArena.playController);
 		}
 
 	}

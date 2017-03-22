@@ -37,7 +37,7 @@ public class CharacterModel extends Observable {
 	public ArrayList<String> backPackItems;
 
 	private int backPackCounter;
-	public String[] levelListValues = { "1", "2", "3", "4", "5", "6", "7", "8" };
+	public String[] levelListValues; 
 	// Get or set hit points
 	private int hitPoints;
 	private int attackBonus;
@@ -99,6 +99,10 @@ public class CharacterModel extends Observable {
 		backPackCounter = 0;
 		setAbilityModifier(new AbilityModel());
 		setAbilityScore(new AbilityModel());
+		levelListValues=new String[25];
+		for(int i=0;i<25;i++){
+			levelListValues[i]=String.valueOf(i+1);
+		}
 	}
 
 	public String[] getLevelListValues() {
@@ -225,7 +229,26 @@ public class CharacterModel extends Observable {
 	}
 
 	public void setLevel(int level) {
+		int tempArmorBonus=0;
+		int tempConstitution=0;
+		int tempDamageBonus=0;
+		int enchanmentBonus=0;
+		if(getArmorClass()!=0){
+			tempArmorBonus=calculateEnchanment(this.level);
+		}
+		if(abilityModifier.getConstitution()!=0)
+		{
+			tempConstitution=calculateEnchanment(this.level);
+		}
+		if(getDamageBonus()!=0)
+		{
+			tempDamageBonus=calculateEnchanment(this.level);
+		}
 		this.level = level;
+		enchanmentBonus=calculateEnchanment(this.level);
+		setArmorClass((getArmorClass()-tempArmorBonus)+enchanmentBonus);
+		setDamageBonus((getDamageBonus()-tempDamageBonus)+enchanmentBonus);
+		abilityModifier.setConstitution((abilityModifier.getConstitution()-tempConstitution)+enchanmentBonus);
 		notifyCharacterView();
 	}
 
@@ -236,7 +259,31 @@ public class CharacterModel extends Observable {
 			notifyCharacterView();
 		}
 	}
-
+	public int calculateEnchanment(int level)
+	{ 
+		int enchanmentBonus=0;
+		if(level<5)
+		{
+			enchanmentBonus=1;
+		}
+		else if(level<9)
+		{
+			enchanmentBonus=2;
+		}
+		else if(level<13)
+		{
+			enchanmentBonus=3;
+		}	
+		else if(level<17)
+		{
+			enchanmentBonus=4;
+		}
+		else if(level>17)
+		{
+			enchanmentBonus=5;
+		}
+		return enchanmentBonus;
+	}
 	public AbilityModel getAbilityScore() {
 		return abilityScore;
 		
