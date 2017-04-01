@@ -87,8 +87,8 @@ public class CharacterScene extends View implements Observer {
 		navMenuPanel = new NavigationPanelView();
 		characterController = new CharacterSceneController(this);
 		// Name Character
-		abilityScore.addObserver(abilityPanel);
-	    abilityModifier.addObserver(abilityPanel);
+		characterViewModel.getAbilityScore().addObserver(abilityPanel);
+		characterViewModel.getAbilityModifier().addObserver(abilityPanel);
 		nameLabel = new JLabel("Name :");
 		nameText = new JTextField();
 		nameLabel.setLocation(20, 40);
