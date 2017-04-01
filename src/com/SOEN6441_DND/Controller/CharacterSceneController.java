@@ -123,22 +123,23 @@ public class CharacterSceneController implements ActionListener {
 		}
 
 		else if (e.getSource() == abilityPanel.calculateButton) {
-			score.setStrength(diceRoll.getDiceRollResult());
-			score.setDexterity(diceRoll.getDiceRollResult());
-			score.setConstitution(diceRoll.getDiceRollResult());
-			score.setIntelligence(diceRoll.getDiceRollResult());
-			score.setWisdom(diceRoll.getDiceRollResult());
-			score.setCharisma(diceRoll.getDiceRollResult());
+			abilityScore.setStrength(diceRoll.getDiceRollResult());
+			abilityScore.setDexterity(diceRoll.getDiceRollResult());
+			abilityScore.setConstitution(diceRoll.getDiceRollResult());
+			abilityScore.setIntelligence(diceRoll.getDiceRollResult());
+			abilityScore.setWisdom(diceRoll.getDiceRollResult());
+			abilityScore.setCharisma(diceRoll.getDiceRollResult());
 			setModifer();
-			abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(score.getStrength()));
-			abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(score.getDexterity()));
+			abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(abilityScore.getStrength()));
+			abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(abilityScore.getDexterity()));
 			abilityModifier
-					.setConstitution(abilityModifier.getConstitution() + modifierCalculator(score.getConstitution()));
+					.setConstitution(abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
 			abilityModifier
-					.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(score.getIntelligence()));
-			abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(score.getWisdom()));
-			abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(score.getCharisma()));
-			calculateAbility();
+					.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
+			abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(abilityScore.getWisdom()));
+			abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(abilityScore.getCharisma()));
+			
+			
 		} else if (e.getSource() == characterScreen.levels) {
 			characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));
 			calculateAbility();
@@ -208,12 +209,12 @@ public class CharacterSceneController implements ActionListener {
 	}
 
 	public void resetScore() {
-		score.setStrength(0);
-		score.setDexterity(0);
-		score.setConstitution(0);
-		score.setIntelligence(0);
-		score.setWisdom(0);
-		score.setCharisma(0);
+		abilityScore.setStrength(0);
+		abilityScore.setDexterity(0);
+		abilityScore.setConstitution(0);
+		abilityScore.setIntelligence(0);
+		abilityScore.setWisdom(0);
+		abilityScore.setCharisma(0);
 	}
 
 	public void setModifer() {
@@ -251,12 +252,6 @@ public class CharacterSceneController implements ActionListener {
 	 * Calculate the ability scores
 	 */
 	public void calculateAbility() {
-		abilityScore.setStrength(score.getStrength() + abilityModifier.getStrength());
-		abilityScore.setDexterity(score.getDexterity() + abilityModifier.getDexterity());
-		abilityScore.setConstitution(score.getConstitution() + abilityModifier.getConstitution());
-		abilityScore.setIntelligence(score.getIntelligence() + abilityModifier.getIntelligence());
-		abilityScore.setCharisma(score.getCharisma() + abilityModifier.getCharisma());
-		abilityScore.setWisdom(score.getWisdom() + abilityModifier.getWisdom());
 		characterModel.calculateChar();
 	}
 
@@ -295,12 +290,12 @@ public class CharacterSceneController implements ActionListener {
 
 		CharacterBuilder cb;
 		int[] scoreArray = new int[6];
-		scoreArray[0] = score.getStrength();
-		scoreArray[1] = score.getConstitution();
-		scoreArray[2] = score.getDexterity();
-		scoreArray[3] = score.getIntelligence();
-		scoreArray[4] = score.getCharisma();
-		scoreArray[5] = score.getWisdom();
+		scoreArray[0] = abilityScore.getStrength();
+		scoreArray[1] = abilityScore.getConstitution();
+		scoreArray[2] = abilityScore.getDexterity();
+		scoreArray[3] = abilityScore.getIntelligence();
+		scoreArray[4] = abilityScore.getCharisma();
+		scoreArray[5] = abilityScore.getWisdom();
 
 		Arrays.sort(scoreArray);
 		for (int i = 0; i < scoreArray.length / 2; i++) {
@@ -309,13 +304,13 @@ public class CharacterSceneController implements ActionListener {
 			scoreArray[scoreArray.length - 1 - i] = temp;
 		}
 		if (charType.equals("bully")) {
-			characterBuilder = new BullyCharacterBuilder(score, scoreArray);
+			characterBuilder = new BullyCharacterBuilder(abilityScore, scoreArray);
 
 		} else if (charType.equals("nimble")) {
-			characterBuilder = new NimbleCharacterBuilder(score, scoreArray);
+			characterBuilder = new NimbleCharacterBuilder(abilityScore, scoreArray);
 
 		} else if (charType.equals("tank")) {
-			characterBuilder = new TankCharacterBuilder(score, scoreArray);
+			characterBuilder = new TankCharacterBuilder(abilityScore, scoreArray);
 
 		}
 
@@ -325,15 +320,16 @@ public class CharacterSceneController implements ActionListener {
 		characterBuilder.buildDexterity();
 		characterBuilder.buildWisdom();
 		characterBuilder.buildIntelligence();
+		
 		setModifer();
-		abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(score.getStrength()));
-		abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(score.getDexterity()));
+		abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(abilityScore.getStrength()));
+		abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(abilityScore.getDexterity()));
 		abilityModifier
-				.setConstitution(abilityModifier.getConstitution() + modifierCalculator(score.getConstitution()));
+				.setConstitution(abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
 		abilityModifier
-				.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(score.getIntelligence()));
-		abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(score.getWisdom()));
-		abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(score.getCharisma()));
+				.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
+		abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(abilityScore.getWisdom()));
+		abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(abilityScore.getCharisma()));
 
 	}
 

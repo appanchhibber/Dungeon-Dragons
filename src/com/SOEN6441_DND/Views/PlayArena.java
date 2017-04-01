@@ -261,6 +261,8 @@ public class PlayArena extends View implements Observer {
 	 */
 	public void loadNextMap(String mapName) {
 		mapModel = ioModel.readMapFile(new File("maps/" + mapName));
+		charModel=playInfoPanel.player;
+		charModel.setLevel(charModel.getLevel()+1);
 		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel,
 				charModel));
 	}

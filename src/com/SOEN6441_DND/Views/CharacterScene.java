@@ -83,10 +83,12 @@ public class CharacterScene extends View implements Observer {
 		characterViewModel.setAbilityModifier(abilityModifier);
 
 		// Panel Initialization
-		abilityPanel = new AbilityPanelView(abilityViewModel);
+		abilityPanel = new AbilityPanelView();
 		navMenuPanel = new NavigationPanelView();
 		characterController = new CharacterSceneController(this);
 		// Name Character
+		abilityScore.addObserver(abilityPanel);
+	    abilityModifier.addObserver(abilityPanel);
 		nameLabel = new JLabel("Name :");
 		nameText = new JTextField();
 		nameLabel.setLocation(20, 40);
@@ -170,8 +172,6 @@ public class CharacterScene extends View implements Observer {
 
 		// Add Action Listener
 		abilityPanel.calculateButton.addActionListener(characterController);
-		setModifier();
-		setAbilityScore();
 		this.setVisible(true);
 		this.add(navMenuPanel);
 
@@ -212,8 +212,6 @@ public class CharacterScene extends View implements Observer {
 		// TODO Auto-generated method stub
 		setCharacterType();
 		setImagePanel();
-		setModifier();
-		setAbilityScore();
 		setCharacter();
 		
 	}
@@ -221,7 +219,6 @@ public class CharacterScene extends View implements Observer {
 	public void setCharacter() {
 		this.nameText.setText(characterViewModel.getName());
 		this.levels.setSelectedItem(String.valueOf(characterViewModel.getLevel()));
-		this.nameText.setText(characterViewModel.getName());
 	}
 	public void setCharacterType(){
 		switch(characterViewModel.getType())
@@ -252,24 +249,6 @@ public class CharacterScene extends View implements Observer {
 		imageLabel.setIcon(characterImage);
 		imageLabel.revalidate();
 		imageLabel.repaint();
-	}
-
-	public void setModifier() {
-		abilityPanel.strengthModifierText.setText(String.valueOf(characterViewModel.getAbilityModifier().getStrength()));
-		abilityPanel.constitutionModifierText.setText(String.valueOf(characterViewModel.getAbilityModifier().getConstitution()));
-		abilityPanel.dexterityModifierText.setText(String.valueOf(characterViewModel.getAbilityModifier().getDexterity()));
-		abilityPanel.intelligenceModifierText.setText(String.valueOf(characterViewModel.getAbilityModifier().getIntelligence()));
-		abilityPanel.wisdomModifierText.setText(String.valueOf(characterViewModel.getAbilityModifier().getWisdom()));
-		abilityPanel.charismaModifierText.setText(String.valueOf(characterViewModel.getAbilityModifier().getCharisma()));
-	}
-
-	public void setAbilityScore() {
-		abilityPanel.strengthScoreText.setText(String.valueOf(characterViewModel.getAbilityScore().getStrength()));
-		abilityPanel.constitutionScoreText.setText(String.valueOf(characterViewModel.getAbilityScore().getConstitution()));
-		abilityPanel.dexterityScoreText.setText(String.valueOf(characterViewModel.getAbilityScore().getDexterity()));
-		abilityPanel.intelligenceScoreText.setText(String.valueOf(characterViewModel.getAbilityScore().getIntelligence()));
-		abilityPanel.wisdomScoreText.setText(String.valueOf(characterViewModel.getAbilityScore().getWisdom()));
-		abilityPanel.charismaScoreText.setText(String.valueOf(characterViewModel.getAbilityScore().getCharisma()));
 	}
 
 }

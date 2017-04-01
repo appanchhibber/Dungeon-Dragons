@@ -67,8 +67,11 @@ public class PlayArenaController implements ActionListener {
 			JButton button = (JButton)e.getSource();
 			if(button.getName().contains("_")){
 			try {
+				int level=playArena.playInfoPanel.player.getLevel();
 				characterModel = ioModel
 						.loadCharacter(button.getName().replace("_", "").trim());
+				System.out.println(playArena.playInfoPanel.player.getLevel());
+				characterModel.setLevel(level);
 			} catch (DocumentException e1) {
 				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null,

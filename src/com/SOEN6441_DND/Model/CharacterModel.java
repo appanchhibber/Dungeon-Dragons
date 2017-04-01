@@ -258,12 +258,13 @@ public class CharacterModel extends Observable {
 		if(beltFlag!=null){
 		abilityModifier.setConstitution((abilityModifier.getConstitution()-tempConstitution)+enchanmentBonus);
 		}
+		notifyCharacterView();
 		calculateChar();
 	}
 
 	public void calculateChar() {
 		if (getAbilityModifier() != null && getAbilityScore() != null) {
-			setHitPoints((getAbilityScore().getConstitution()) * getLevel());
+			setHitPoints((getAbilityModifier().getConstitution()) * getLevel());
 			setAttackBonus(getAbilityModifier().getStrength() + getLevel());
 			notifyCharacterView();
 		}
@@ -300,6 +301,7 @@ public class CharacterModel extends Observable {
 
 	public void setAbilityScore(AbilityModel abilityModel) {
 		this.abilityScore = abilityModel;
+		abilityScore.setType("abilityScore");
 		notifyCharacterView();
 	}
 
@@ -310,6 +312,7 @@ public class CharacterModel extends Observable {
 
 	public void setAbilityModifier(AbilityModel abilitiyModifier) {
 		this.abilityModifier = abilitiyModifier;
+		abilityModifier.setType("abilityModifier");
 		notifyCharacterView();
 	}
 
