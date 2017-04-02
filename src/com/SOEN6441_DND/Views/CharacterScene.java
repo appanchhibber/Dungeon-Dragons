@@ -57,7 +57,6 @@ public class CharacterScene extends View implements Observer {
 	// Character View Model
 	public CharacterModel characterViewModel;
 
-	public AbilityModel abilityViewModel;
 	public AbilityModel abilityModifier;
 	public AbilityModel abilityScore;
 
@@ -72,7 +71,6 @@ public class CharacterScene extends View implements Observer {
 
 		// Model Initialization
 		characterViewModel = new CharacterModel();
-		abilityViewModel = new AbilityModel();
 		abilityModifier = new AbilityModel();
 		abilityScore = new AbilityModel();
 
@@ -149,12 +147,6 @@ public class CharacterScene extends View implements Observer {
 		characterViewModel.addObserver(this);
 		
 		characterImage = new ImageIcon(characterViewModel.getImage());
-		abilityModifier.setStrength(0);
-		abilityModifier.setDexterity(0);
-		abilityModifier.setConstitution(0);
-		abilityModifier.setIntelligence(0);
-		abilityModifier.setWisdom(0);
-		abilityModifier.setCharisma(0);
 		// characterViewModel.setAbilityModifier(abilitiyModifier);
 
 		// Image Panel

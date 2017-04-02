@@ -272,14 +272,10 @@ public class FileOperationModel {
 	}
 	public CharacterModel loadCharacter(String characteName) throws DocumentException
 	{
-		AbilityModel abilityScore;
-		AbilityModel abilityModifier;
 		ArrayList<String> backPackList=new ArrayList<String>();
 		if(chModel==null){
 			chModel = new CharacterModel();
 		}
-		abilityScore =new AbilityModel();
-		abilityModifier =new AbilityModel();
 		SAXReader reader = new SAXReader();
 		Document document = null;
 		try {
@@ -306,23 +302,21 @@ public class FileOperationModel {
 			chModel.setWeaponFlag(itemEquip.selectSingleNode("weaponFlag").getText());
 			
 			Element abiModiElement = rootElement.element("abilityModifier");
-			abilityModifier.setStrength(Integer.parseInt(abiModiElement.selectSingleNode("strength").getText()));
-			abilityModifier.setConstitution(Integer.parseInt(abiModiElement.selectSingleNode("constitution").getText()));
-			abilityModifier.setDexterity(Integer.parseInt(abiModiElement.selectSingleNode("dexterity").getText()));
-			abilityModifier.setIntelligence(Integer.parseInt(abiModiElement.selectSingleNode("intelligence").getText()));
-			abilityModifier.setWisdom(Integer.parseInt(abiModiElement.selectSingleNode("wisdom").getText()));
-			abilityModifier.setCharisma(Integer.parseInt(abiModiElement.selectSingleNode("charisma").getText()));
+			chModel.getAbilityModifier().setStrength(Integer.parseInt(abiModiElement.selectSingleNode("strength").getText()));
+			chModel.getAbilityModifier().setConstitution(Integer.parseInt(abiModiElement.selectSingleNode("constitution").getText()));
+			chModel.getAbilityModifier().setDexterity(Integer.parseInt(abiModiElement.selectSingleNode("dexterity").getText()));
+			chModel.getAbilityModifier().setIntelligence(Integer.parseInt(abiModiElement.selectSingleNode("intelligence").getText()));
+			chModel.getAbilityModifier().setWisdom(Integer.parseInt(abiModiElement.selectSingleNode("wisdom").getText()));
+			chModel.getAbilityModifier().setCharisma(Integer.parseInt(abiModiElement.selectSingleNode("charisma").getText()));
 			
 			Element abiScorElement = rootElement.element("abilityScore");
-			abilityScore.setStrength(Integer.parseInt(abiScorElement.selectSingleNode("strength").getText()));
-			abilityScore.setConstitution(Integer.parseInt(abiScorElement.selectSingleNode("constitution").getText()));
-			abilityScore.setDexterity(Integer.parseInt(abiScorElement.selectSingleNode("dexterity").getText()));
-			abilityScore.setIntelligence(Integer.parseInt(abiScorElement.selectSingleNode("intelligence").getText()));
-			abilityScore.setWisdom(Integer.parseInt(abiScorElement.selectSingleNode("wisdom").getText()));
-			abilityScore.setCharisma(Integer.parseInt(abiScorElement.selectSingleNode("charisma").getText()));
+			chModel.getAbilityScore().setStrength(Integer.parseInt(abiScorElement.selectSingleNode("strength").getText()));
+			chModel.getAbilityScore().setConstitution(Integer.parseInt(abiScorElement.selectSingleNode("constitution").getText()));
+			chModel.getAbilityScore().setDexterity(Integer.parseInt(abiScorElement.selectSingleNode("dexterity").getText()));
+			chModel.getAbilityScore().setIntelligence(Integer.parseInt(abiScorElement.selectSingleNode("intelligence").getText()));
+			chModel.getAbilityScore().setWisdom(Integer.parseInt(abiScorElement.selectSingleNode("wisdom").getText()));
+			chModel.getAbilityScore().setCharisma(Integer.parseInt(abiScorElement.selectSingleNode("charisma").getText()));
 			
-			chModel.setAbilityModifier(abilityModifier);
-			chModel.setAbilityScore(abilityScore);
 			
 			chModel.setBackPackCounter(Integer.parseInt(rootElement.selectSingleNode("backPackCounter").getText()));
 			Element backPackElement = rootElement.element("backPackItems");

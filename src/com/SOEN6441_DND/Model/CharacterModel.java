@@ -302,7 +302,6 @@ public class CharacterModel extends Observable {
 	public void setAbilityScore(AbilityModel abilityModel) {
 		this.abilityScore = abilityModel;
 		abilityScore.setType("abilityScore");
-		notifyCharacterView();
 	}
 
 	public AbilityModel getAbilityModifier() {
@@ -313,7 +312,6 @@ public class CharacterModel extends Observable {
 	public void setAbilityModifier(AbilityModel abilitiyModifier) {
 		this.abilityModifier = abilitiyModifier;
 		abilityModifier.setType("abilityModifier");
-		notifyCharacterView();
 	}
 
 	public int getSpeed() {

@@ -46,7 +46,6 @@ public class CharacterSceneController implements ActionListener {
 	public CharacterModel characterModel;
 	public CharacterScene characterScreen;
 	public DiceRollController diceRoll;
-	public AbilityModel score;
 	public AbilityModel abilityModifier;
 	public AbilityModel abilityScore;
 	public AbilityPanelView abilityPanel;
@@ -69,7 +68,6 @@ public class CharacterSceneController implements ActionListener {
 		this.characterScreen = view;
 		this.characterModel = view.characterViewModel;
 		fileModel = new FileOperationModel();
-		this.score = view.abilityViewModel;
 		this.abilityPanel = view.abilityPanel;
 		abilityModifier = view.characterViewModel.getAbilityModifier();
 		abilityScore = view.characterViewModel.getAbilityScore();
