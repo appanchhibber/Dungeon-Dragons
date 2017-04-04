@@ -2,23 +2,19 @@ package com.SOEN6441_DND.Controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.File;
 
-import javax.swing.JOptionPane;
-import javax.swing.Timer;
-
-import org.dom4j.DocumentException;
+import Strategy.ComputerStrategy;
+import Strategy.FriendlyStrategy;
+import Strategy.HostileStrategy;
+import Strategy.PlayerStrategy;
+import Strategy.Strategy;
 
 import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
-import com.SOEN6441_DND.Model.PlayModel;
-import com.SOEN6441_DND.Views.CharacterInventoryView;
-import com.SOEN6441_DND.Views.ItemAssignView;
 import com.SOEN6441_DND.Views.PlayArena;
+
 import javax.swing.JButton;
 
 /**
@@ -28,7 +24,7 @@ import javax.swing.JButton;
  * @author Appan Chhibber
  *
  */
-public class PlayArenaController implements ActionListener {
+public class PlayArenaController  implements ActionListener {
 
 	public MapModel mapModel;
 	public CampaignModel campaignModel;
@@ -40,6 +36,8 @@ public class PlayArenaController implements ActionListener {
 	public String turnCharacter;
 	public String turnBehaviour;
 	public int turnCounter;
+	
+	private Strategy strategy;
 
 	/**
 	 * Constructor for initializing the local variables to the instance
@@ -76,22 +74,26 @@ public class PlayArenaController implements ActionListener {
 			switch(turnBehaviour){
 			case "Player":{
 				System.out.println("Player Turn");
+				this.setStrategy(new PlayerStrategy());
 				playArena.keyBinding();
-				
 				break;
 			}
 			case "Hostile":{
 				System.out.println("Hostile Turn");
+				this.setStrategy(new HostileStrategy());
+				this.execute(playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
 				turn();
 				break;
 			}
 			case "Friendly":{
 				System.out.println("Friendly Turn");
+				this.setStrategy(new FriendlyStrategy());
 				turn();
 				break;
 			}
 			case "Computer":{
 				System.out.println("Computer Turn");
+				this.setStrategy(new ComputerStrategy());
 				turn();
 				break;
 			}
@@ -99,6 +101,12 @@ public class PlayArenaController implements ActionListener {
 		
 	}
 
+	public void  execute(CharacterModel charModel) {
+		 this.strategy.execute(charModel);
+	}
+	public void setStrategy(Strategy strategy) {
+		this.strategy = strategy;
+	}
 	/**
 	 * Action Listener for the events being generated on the View
 	 * 
