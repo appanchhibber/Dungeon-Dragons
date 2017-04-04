@@ -18,6 +18,7 @@ import javax.swing.text.IconView;
 
 import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Controller.TransferHandlerController;
+import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
 
 /**
@@ -186,6 +187,9 @@ public class GridView extends JPanel {
 					new ImageIcon(character.getValue().getCharacterImage())
 							.getImage().getScaledInstance(50, 50,
 									java.awt.Image.SCALE_SMOOTH)));
+	
+			playArena.playModel.addCharacter(character.getKey() + "-" + character.getValue().getCharacterBehavior(),
+					new FileOperationModel().loadCharacter(character.getKey()));
 			mapButtonsGrid[characterX][characterY].addActionListener(playArena.playController);
 		}
 

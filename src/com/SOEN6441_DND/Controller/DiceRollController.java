@@ -33,7 +33,7 @@ public class DiceRollController {
 		this.maxDiceValue = maxDiceValue;
 		this.maxTotal = maxDiceValue;
 		total=0;
-		this.diceResult= new int[4];
+		this.diceResult= new int[counter];
 	}
 
 	/**
@@ -46,8 +46,15 @@ public class DiceRollController {
 		total=0;
 		for (int i = 0; i < counter; i++) {
 			diceResult[i] = 1+ (int) (Math.random() * (maxTotal));
+			if(diceResult[i]>maxTotal)
+			{
+				diceResult[i] = maxTotal;
+			}
 		}
 		Arrays.sort(diceResult);
+		if(counter==1){
+			return diceResult[0];
+		}
 		for (int i = (counter-1); i > 0; i--) {
 			total+=diceResult[i];
 		}

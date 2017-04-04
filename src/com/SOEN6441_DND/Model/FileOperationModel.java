@@ -270,7 +270,7 @@ public class FileOperationModel {
 		}
 		return itemList;
 	}
-	public CharacterModel loadCharacter(String characteName) throws DocumentException
+	public CharacterModel loadCharacter(String characteName)
 	{
 		ArrayList<String> backPackList=new ArrayList<String>();
 		if(chModel==null){
@@ -327,7 +327,7 @@ public class FileOperationModel {
 				//System.out.println(backPackList.toString());
 			}
 			
-		}catch (NumberFormatException e) {
+		}catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Exception");
 		}

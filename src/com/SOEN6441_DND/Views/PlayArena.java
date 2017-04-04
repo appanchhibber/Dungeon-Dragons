@@ -25,6 +25,7 @@ import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
+import com.SOEN6441_DND.Model.PlayModel;
 import com.sun.glass.events.KeyEvent;
 
 /**
@@ -44,10 +45,12 @@ public class PlayArena extends View implements Observer {
 	public JButton playerPos;
 	public GridView gridView;
 	public Timer repaintTimer;
+	public PlayModel playModel;
 	public boolean chestFlag;
 	private int xDelta = 0;
 	private int yDelta = 0;
 	private int keyPressCount = 0;
+	private int stepCount;
 
 	public int charLocX = 0;
 	public int charLocY = 0;
@@ -60,7 +63,7 @@ public class PlayArena extends View implements Observer {
 		super.initSubviews();
 		playInfoPanel = new PlayerInfoPanelView();
 		this.add(playInfoPanel);
-
+		
 	}
 
 	/**
@@ -75,19 +78,18 @@ public class PlayArena extends View implements Observer {
 			CharacterModel charModel) {
 		this.mapModel = mapModel;
 		this.campaignModel = campaignModel;
+		this.charModel=charModel;
+		
+		playModel = new PlayModel();
 		ioModel = new FileOperationModel();
-		gameController = GameController.getInstance();
-		this.charModel = charModel;
-		try {
-			charInventory = new CharacterInventoryView(playInfoPanel.player);
-			ioModel.setCharacterModel(playInfoPanel.player);
-			ioModel.loadCharacter(charModel.getName());
-		} catch (DocumentException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		playInfoPanel= new PlayerInfoPanelView();
 		playController = new PlayArenaController(this);
+		
+		playModel.addCharacter((charModel.getName()+"-Player"), charModel);
 		playInfoPanel.inventoryBtn.addActionListener(playController);
+		charLocX = (int) (mapModel.getEntry().getWidth()) + 1;
+		charLocY = (int) (mapModel.getEntry().getHeight());
+		chestFlag = false;
 		gridView = new GridView(mapModel, this) {
 			@Override
 			protected void paintComponent(Graphics g) {
@@ -110,13 +112,50 @@ public class PlayArena extends View implements Observer {
 
 				revalidate();
 			}
-		};
+		};	
+		playModel.setPlayOrder();
+		playController.turn();
 		this.add(gridView);
-		charLocX = (int) (mapModel.getEntry().getWidth()) + 1;
-		charLocY = (int) (mapModel.getEntry().getHeight());
-		chestFlag = false;
+	}
+	/**
+	 * Observer update method to allow changes to be displayed on the map
+	 * 
+	 * @author Appan Chhibber
+	 */
+	@Override
+	public void update(Observable o, Object arg) {
+		this.charModel = (CharacterModel) o;
+		System.out.println("inside update method");
+		if (charModel.message == "character data") {
+			System.out.println("inside character data method");
+			System.out.println(charModel.getAbilityScore().getWisdom());
+			System.out.println(charModel.getAbilityScore().getCharisma());
+			System.out.println(charModel.getFighterType());
+			System.out.println(charModel.getName());
+		}
 
+	}
+
+	/**
+	 * Method responsible for loading the next map from the list of maps in
+	 * campaign list
+	 * 
+	 * @param mapName
+	 * @author Appan Chhibber
+	 */
+	public void loadNextMap(String mapName) {
+		playController.nextMapFlag=true;
+		gameController = GameController.getInstance();
+		mapModel = ioModel.readMapFile(new File("maps/" + mapName));
+		charModel.setLevel(charModel.getLevel()+1);
+		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel,
+				charModel));
+		
+	}
+
+	public void keyBinding(){
 		// for key Binding
+		stepCount=0;
 		InputMap inputMap = this.gridView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
 		ActionMap actionMap = this.gridView.getActionMap();
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false),
@@ -144,11 +183,16 @@ public class PlayArena extends View implements Observer {
 		actionMap.put("pressed.Down", new MoveAction(0, 1, true));
 		actionMap.put("released.Up", new MoveAction(0, 0, false));
 		actionMap.put("released.Down", new MoveAction(0, 0, false));
-		charModel.addObserver(this);
+		
 		repaintTimer = new Timer(100, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if(stepCount==3){
+					repaintTimer.stop();
+					playController.turn();
+				}
 				int nextX = charLocX;
 				int nextY = charLocY;
 				if (charLocX + xDelta > (mapModel.getMapWidth() - 1)) {
@@ -171,6 +215,7 @@ public class PlayArena extends View implements Observer {
 					gridView.mapButtonsGrid[charLocY][charLocX]
 							.setName(gridView.mapButtonsGrid[charLocY][charLocX]
 									.getText());
+					stepCount++;
 					charLocX += xDelta;
 					charLocY += yDelta;
 
@@ -230,43 +275,9 @@ public class PlayArena extends View implements Observer {
 
 			}
 		});
-
 	}
-
-	/**
-	 * Observer update method to allow changes to be displayed on the map
-	 * 
-	 * @author Appan Chhibber
-	 */
-	@Override
-	public void update(Observable o, Object arg) {
-		this.charModel = (CharacterModel) o;
-		System.out.println("inside update method");
-		if (charModel.message == "character data") {
-			System.out.println("inside character data method");
-			System.out.println(charModel.getAbilityScore().getWisdom());
-			System.out.println(charModel.getAbilityScore().getCharisma());
-			System.out.println(charModel.getFighterType());
-			System.out.println(charModel.getName());
-		}
-
-	}
-
-	/**
-	 * Method responsible for loading the next map from the list of maps in
-	 * campaign list
-	 * 
-	 * @param mapName
-	 * @author Appan Chhibber
-	 */
-	public void loadNextMap(String mapName) {
-		mapModel = ioModel.readMapFile(new File("maps/" + mapName));
-		charModel=playInfoPanel.player;
-		charModel.setLevel(charModel.getLevel()+1);
-		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel,
-				charModel));
-	}
-
+	
+	
 	/**
 	 * This inner class extends AbstractButton and is responsible for passing
 	 * the key press value to the constructor for player to move on the map
@@ -274,6 +285,7 @@ public class PlayArena extends View implements Observer {
 	 * @author Appan Chhibber
 	 *
 	 */
+	
 	class MoveAction extends javax.swing.AbstractAction {
 
 		private int x = 0;

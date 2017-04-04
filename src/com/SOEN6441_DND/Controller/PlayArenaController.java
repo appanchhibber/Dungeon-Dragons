@@ -15,6 +15,7 @@ import com.SOEN6441_DND.Model.CampaignModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
+import com.SOEN6441_DND.Model.PlayModel;
 import com.SOEN6441_DND.Views.CharacterInventoryView;
 import com.SOEN6441_DND.Views.ItemAssignView;
 import com.SOEN6441_DND.Views.PlayArena;
@@ -35,6 +36,10 @@ public class PlayArenaController implements ActionListener {
 	public PlayArena playArena;
 	public GameController gameController;
 	public FileOperationModel ioModel;
+	public boolean nextMapFlag;
+	public String turnCharacter;
+	public String turnBehaviour;
+	public int turnCounter;
 
 	/**
 	 * Constructor for initializing the local variables to the instance
@@ -50,6 +55,48 @@ public class PlayArenaController implements ActionListener {
 		gameController = playArena.gameController;
 		ioModel = playArena.ioModel;
 		characterModel = playArena.charModel;
+		nextMapFlag=false;
+		turnCounter=0;
+		
+	}
+	/**
+	 * Turn Mechanism
+	 * 
+	 */
+	public void turn() {
+			if(turnCounter>=playArena.playModel.getPlayOrder().length-1){
+				turnCounter=0;
+			}
+			else{
+				turnCounter++;
+			}
+			String[] tempTurn=playArena.playModel.getPlayOrder()[turnCounter].split("-");
+			turnCharacter=tempTurn[0];
+			turnBehaviour=tempTurn[1];
+			switch(turnBehaviour){
+			case "Player":{
+				System.out.println("Player Turn");
+				playArena.keyBinding();
+				
+				break;
+			}
+			case "Hostile":{
+				System.out.println("Hostile Turn");
+				turn();
+				break;
+			}
+			case "Friendly":{
+				System.out.println("Friendly Turn");
+				turn();
+				break;
+			}
+			case "Computer":{
+				System.out.println("Computer Turn");
+				turn();
+				break;
+			}
+			}
+		
 	}
 
 	/**
@@ -64,21 +111,6 @@ public class PlayArenaController implements ActionListener {
 			playArena.charInventory.setInventory();
 		}
 		 else if (e.getSource() instanceof JButton) {
-			JButton button = (JButton)e.getSource();
-			if(button.getName().contains("_")){
-			try {
-				int level=playArena.playInfoPanel.player.getLevel();
-				characterModel = ioModel
-						.loadCharacter(button.getName().replace("_", "").trim());
-				System.out.println(playArena.playInfoPanel.player.getLevel());
-				characterModel.setLevel(level);
-			} catch (DocumentException e1) {
-				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(null,
-						"Unable to Load character Characteristics");
-				e1.printStackTrace();
-			}
-		}
 		} 
 	}
 }

@@ -139,13 +139,8 @@ public class CharacterSceneController implements ActionListener {
 			characterScreen.characterTypeRadio[3].setVisible(true);
 			fileModel.setCharacterModel(characterModel);
 			itemAssignView.setCharacterModel(characterModel);
-			try {
-				fileModel.loadCharacter(file.getName().replace(".xml", ""));
-				
-			} catch (DocumentException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			fileModel.loadCharacter(file.getName().replace(".xml", ""));
+			
 		}
 
 		else if (e.getSource() == characterScreen.navMenuPanel.nextButton) {

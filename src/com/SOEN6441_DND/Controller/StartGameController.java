@@ -45,7 +45,6 @@ public class StartGameController implements ActionListener {
 		startModel = view.startModel;
 		gameController = GameController.getInstance();
 		ioModel = new FileOperationModel();
-		characterModel = new CharacterModel();
 	}
 
 	/**
@@ -64,10 +63,8 @@ public class StartGameController implements ActionListener {
 			} else {
 				campaignModel = ioModel.readCampaignFile(new File("campaign/"
 						+ startView.selectCampaign.getSelectedItem() + ".xml"));
-				characterModel.setName(startView.selectCharacter
+				this.characterModel=ioModel.loadCharacter(startView.selectCharacter
 						.getSelectedItem().toString());
-				characterModel.setImage(ioModel
-						.getCharacterImagePath(characterModel.getName()));
 				mapModel = ioModel.readMapFile(new File("maps/"
 						+ campaignModel.getCampMapList().get(0)));
 				gameController.mainFrame.setView(new PlayArena(mapModel,
