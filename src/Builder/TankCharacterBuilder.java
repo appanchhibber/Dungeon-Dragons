@@ -1,6 +1,7 @@
 package Builder;
 
 import com.SOEN6441_DND.Model.AbilityModel;
+import com.SOEN6441_DND.Model.CharacterModel;
 
 /**
  * Type of charater to be build using the builder pattern.
@@ -48,6 +49,11 @@ public class TankCharacterBuilder extends CharacterBuilder{
 	public void buildCharisma() {
 		// TODO Auto-generated method stub
 		characterScore.setCharisma(score[4]);
+	}
+	@Override
+	public CharacterModel getCharacter() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

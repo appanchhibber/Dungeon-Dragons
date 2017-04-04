@@ -23,15 +23,6 @@ public class CharacterScControllerTest {
 	public void initialize(){
 		characterController = CharacterSceneController.getInstance();
 	}
-
-	@Test
-	public void testModifierCalculator(){
-		int score = 13;
-		int output = characterController.modifierCalculator(score);
-		int expected = 1;
-		assertEquals(expected, output);
-	}
-
 	@Test
 	public void testLoadCharacter() throws DocumentException{
 		CharacterModel characterModel = new CharacterModel();

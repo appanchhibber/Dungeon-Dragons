@@ -202,10 +202,17 @@ public class CharacterScene extends View implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		setCharacterType();
-		setImagePanel();
-		setCharacter();
+		characterViewModel=(CharacterModel)o;
 		
+		if(characterViewModel.message=="image")
+		{
+		  characterViewModel.message="";
+		  setCharacterType();
+		  setImagePanel();
+		  
+		}
+		
+		setCharacter();
 	}
 
 	public void setCharacter() {

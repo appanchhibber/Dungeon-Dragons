@@ -31,4 +31,5 @@ public abstract class CharacterBuilder {
 	public abstract void buildIntelligence();
 	public abstract void buildWisdom();
 	public abstract void buildCharisma();
+	public abstract CharacterModel getCharacter();
 }

@@ -218,7 +218,6 @@ public class AbilityPanelView extends View implements Observer{
 	public void update(Observable o, Object arg) {
 		abilityViewModel=(AbilityModel)o;
 		// TODO Auto-generated method stub
-		System.out.println("Update"+abilityViewModel.getType());
 		if(((AbilityModel)o).getType()=="abilityScore"){
 			
 			setAbilityScorePanel();

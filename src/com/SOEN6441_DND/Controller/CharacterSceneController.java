@@ -32,6 +32,7 @@ import com.SOEN6441_DND.Views.ItemAssignView;
 
 import Builder.BullyCharacterBuilder;
 import Builder.CharacterBuilder;
+import Builder.Explorer;
 import Builder.NimbleCharacterBuilder;
 import Builder.TankCharacterBuilder;
 
@@ -104,20 +105,14 @@ public class CharacterSceneController implements ActionListener {
 			}
 
 			}
-			setModifer();
-			resetScore();
-			calculateAbility();
 		}
 
 		else if (e.getSource() == characterScreen.bully) {
 			createCharacter("bully");
-			calculateAbility();
 		} else if (e.getSource() == characterScreen.nimble) {
 			createCharacter("nimble");
-			calculateAbility();
 		} else if (e.getSource() == characterScreen.tank) {
 			createCharacter("tank");
-			calculateAbility();
 		}
 
 		else if (e.getSource() == abilityPanel.calculateButton) {
@@ -127,20 +122,11 @@ public class CharacterSceneController implements ActionListener {
 			abilityScore.setIntelligence(diceRoll.getDiceRollResult());
 			abilityScore.setWisdom(diceRoll.getDiceRollResult());
 			abilityScore.setCharisma(diceRoll.getDiceRollResult());
-			setModifer();
-			abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(abilityScore.getStrength()));
-			abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(abilityScore.getDexterity()));
-			abilityModifier
-					.setConstitution(abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
-			abilityModifier
-					.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
-			abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(abilityScore.getWisdom()));
-			abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(abilityScore.getCharisma()));
+			characterModel.calculateAbilityModifier();
 			
 			
 		} else if (e.getSource() == characterScreen.levels) {
 			characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));
-			calculateAbility();
 		} else if (e.getSource() == characterScreen.navMenuPanel.loadButton) {
 			File file = openCharFile();
 			abilityPanel.calculateButton.setVisible(true);
@@ -172,13 +158,6 @@ public class CharacterSceneController implements ActionListener {
 			characterScreen.characterTypeRadio[1].setVisible(false);
 			characterScreen.characterTypeRadio[2].setVisible(false);
 			characterScreen.characterTypeRadio[3].setVisible(false);
-			if (characterModel.getArmorClass() == 0) {
-				characterModel.setArmorClass(characterModel.getAbilityModifier().getDexterity());
-			}
-			if (characterModel.getDamageBonus() == 0) {
-				characterModel.setDamageBonus(0);
-			}
-			calculateAbility();
 		} else if (e.getSource() == itemAssignView.charBackButton) {
 			itemAssignView.setVisible(false);
 			GameController.getInstance().mainFrame.setView(characterScreen);
@@ -205,59 +184,6 @@ public class CharacterSceneController implements ActionListener {
 			}
 		}  
 	}
-
-	public void resetScore() {
-		abilityScore.setStrength(0);
-		abilityScore.setDexterity(0);
-		abilityScore.setConstitution(0);
-		abilityScore.setIntelligence(0);
-		abilityScore.setWisdom(0);
-		abilityScore.setCharisma(0);
-	}
-
-	public void setModifer() {
-		abilityModifier.setStrength(0);
-		abilityModifier.setDexterity(0);
-		abilityModifier.setConstitution(0);
-		abilityModifier.setIntelligence(0);
-		abilityModifier.setWisdom(0);
-		abilityModifier.setCharisma(0);
-		switch (characterModel.getType()) {
-		case "Human": {
-			break;
-		}
-		case "Dwarf": {
-			abilityModifier.setConstitution(2);
-			abilityModifier.setIntelligence(-2);
-			break;
-		}
-		case "Elf": {
-			abilityModifier.setDexterity(2);
-			abilityModifier.setConstitution(-2);
-			break;
-		}
-		case "Orc": {
-			abilityModifier.setStrength(2);
-			abilityModifier.setIntelligence(-2);
-			abilityModifier.setCharisma(-2);
-			break;
-		}
-
-		}
-	}
-
-	/**
-	 * Calculate the ability scores
-	 */
-	public void calculateAbility() {
-		characterModel.calculateChar();
-	}
-
-	public int modifierCalculator(int score) {
-
-		return ((score / 2) - 5);
-	}
-
 	/**
 	 * This function opens and returns the file character file already created.
 	 * 
@@ -286,7 +212,8 @@ public class CharacterSceneController implements ActionListener {
 	 */
 	public void createCharacter(String charType) {
 
-		CharacterBuilder cb;
+		CharacterBuilder characterBuilder;
+		Explorer explorer= new Explorer();
 		int[] scoreArray = new int[6];
 		scoreArray[0] = abilityScore.getStrength();
 		scoreArray[1] = abilityScore.getConstitution();
@@ -307,27 +234,11 @@ public class CharacterSceneController implements ActionListener {
 		} else if (charType.equals("nimble")) {
 			characterBuilder = new NimbleCharacterBuilder(abilityScore, scoreArray);
 
-		} else if (charType.equals("tank")) {
+		} else{
 			characterBuilder = new TankCharacterBuilder(abilityScore, scoreArray);
-
-		}
-
-		characterBuilder.buildStrength();
-		characterBuilder.buildCharisma();
-		characterBuilder.buildConstitution();
-		characterBuilder.buildDexterity();
-		characterBuilder.buildWisdom();
-		characterBuilder.buildIntelligence();
-		
-		setModifer();
-		abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(abilityScore.getStrength()));
-		abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(abilityScore.getDexterity()));
-		abilityModifier
-				.setConstitution(abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
-		abilityModifier
-				.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
-		abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(abilityScore.getWisdom()));
-		abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(abilityScore.getCharisma()));
+		}	
+		explorer.setBuilder(characterBuilder);
+		explorer.constructCharacter();
 
 	}
 

@@ -214,6 +214,8 @@ public class CharacterModel extends Observable {
 
 	public void setType(String type) {
 		this.type = type;
+		setModifer();
+		resetScore();
 	}
 
 	public int getHitPoints() {
@@ -258,7 +260,6 @@ public class CharacterModel extends Observable {
 		if(beltFlag!=null){
 		abilityModifier.setConstitution((abilityModifier.getConstitution()-tempConstitution)+enchanmentBonus);
 		}
-		notifyCharacterView();
 		calculateChar();
 	}
 
@@ -266,8 +267,69 @@ public class CharacterModel extends Observable {
 		if (getAbilityModifier() != null && getAbilityScore() != null) {
 			setHitPoints((getAbilityModifier().getConstitution()) * getLevel());
 			setAttackBonus(getAbilityModifier().getStrength() + getLevel());
+			if (getArmorClass() == 0) {
+				setArmorClass(abilityModifier.getDexterity());
+			}
+			if (getDamageBonus() == 0) {
+				setDamageBonus(0);
+			}
 			notifyCharacterView();
 		}
+	}
+	public void calculateAbilityModifier()
+	{
+		setModifer();
+		abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(abilityScore.getStrength()));
+		abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(abilityScore.getDexterity()));
+		abilityModifier
+				.setConstitution(abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
+		abilityModifier
+				.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
+		abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(abilityScore.getWisdom()));
+		abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(abilityScore.getCharisma()));
+		calculateChar();
+	}
+	public int modifierCalculator(int score) {
+
+		return ((score / 2) - 5);
+	}
+	public void setModifer() {
+		abilityModifier.setStrength(0);
+		abilityModifier.setDexterity(0);
+		abilityModifier.setConstitution(0);
+		abilityModifier.setIntelligence(0);
+		abilityModifier.setWisdom(0);
+		abilityModifier.setCharisma(0);
+		switch (this.getType()) {
+		case "Human": {
+			break;
+		}
+		case "Dwarf": {
+			abilityModifier.setConstitution(2);
+			abilityModifier.setIntelligence(-2);
+			break;
+		}
+		case "Elf": {
+			abilityModifier.setDexterity(2);
+			abilityModifier.setConstitution(-2);
+			break;
+		}
+		case "Orc": {
+			abilityModifier.setStrength(2);
+			abilityModifier.setIntelligence(-2);
+			abilityModifier.setCharisma(-2);
+			break;
+		}
+
+		}
+	}
+	public void resetScore() {
+		abilityScore.setStrength(0);
+		abilityScore.setDexterity(0);
+		abilityScore.setConstitution(0);
+		abilityScore.setIntelligence(0);
+		abilityScore.setWisdom(0);
+		abilityScore.setCharisma(0);
 	}
 	public int calculateEnchanment(int level)
 	{ 
@@ -302,6 +364,7 @@ public class CharacterModel extends Observable {
 	public void setAbilityScore(AbilityModel abilityModel) {
 		this.abilityScore = abilityModel;
 		abilityScore.setType("abilityScore");
+		calculateChar();
 	}
 
 	public AbilityModel getAbilityModifier() {
@@ -312,6 +375,7 @@ public class CharacterModel extends Observable {
 	public void setAbilityModifier(AbilityModel abilitiyModifier) {
 		this.abilityModifier = abilitiyModifier;
 		abilityModifier.setType("abilityModifier");
+		calculateChar();
 	}
 
 	public int getSpeed() {
@@ -328,6 +392,7 @@ public class CharacterModel extends Observable {
 
 	public void setImage(String image) {
 		this.image = image;
+		message="image";
 	}
 
 	/**

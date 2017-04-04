@@ -53,4 +53,9 @@ public class BullyCharacterBuilder extends CharacterBuilder{
 		// TODO Auto-generated method stub
 		characterScore.setCharisma(score[4]);
 	}
+	@Override
+	public CharacterModel getCharacter() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
