@@ -89,6 +89,8 @@ public class PlayArena extends View implements Observer {
 		charLocY = (int) (mapModel.getEntry().getHeight());
 		chestFlag = false;
 		charModel.setCharLocation(new Dimension(charLocX,charLocY));
+		playInfoPanel.player=charModel;
+		playInfoPanel.setPanel();
 		playModel.addCharacter((charModel.getName()+"-Player"), charModel);
 		mapModel.addCharLocation((charModel.getName()+"-Player"), new Dimension(charLocX,charLocY));
 		gridView = new GridView(mapModel, this);

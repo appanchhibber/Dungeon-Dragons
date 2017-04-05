@@ -153,7 +153,7 @@ public class PlayerInfoPanelView extends View implements Observer {
 		lblIntelligence.setLocation(5, 165);
 		this.add(lblIntelligence);
 
-		intelligenceValue = new JLabel();
+		intelligenceValue = new JLabel("0");
 		intelligenceValue.setSize(20, 20);
 		intelligenceValue.setForeground(Color.WHITE);
 		intelligenceValue.setLocation(190, 165);
@@ -180,18 +180,26 @@ public class PlayerInfoPanelView extends View implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		CharacterModel model = (CharacterModel)o;
-		strengthValue.setText(String.valueOf(model.getAbilityScore().getStrength()));
-		constitutionValue.setText(String.valueOf(model.getAbilityScore().getConstitution()));
-		intelligenceValue.setText(String.valueOf(model.getAbilityScore().getIntelligence()));
-		wisdomValue.setText(String.valueOf(model.getAbilityScore().getStrength()));
-		charismaValue.setText(String.valueOf(model.getAbilityScore().getCharisma()));
-		dexterityValue.setText(String.valueOf(model.getAbilityScore().getDexterity()));
-		charNameValue.setText(String.valueOf(model.getName()));
-		charTypeValue.setText(String.valueOf(model.getType()));
-		hitpointValue.setText(String.valueOf(model.getHitPoints()));
-		charLevelValue.setText(String.valueOf(model.getLevel()));
-		//System.out.println(model.getName());
+		player = (CharacterModel)o;
+		setPanel();
+		System.out.println(player.getName());
+		
+	}
+	public void setPanel(){
+		System.out.println("Panel Screen");
+		System.out.println(player.getAbilityScore().getStrength());
+		strengthValue.setText(String.valueOf(player.getAbilityScore().getStrength()));
+		constitutionValue.setText(String.valueOf(player.getAbilityScore().getConstitution()));
+		intelligenceValue.setText(String.valueOf(player.getAbilityScore().getIntelligence()));
+		wisdomValue.setText(String.valueOf(player.getAbilityScore().getStrength()));
+		charismaValue.setText(String.valueOf(player.getAbilityScore().getCharisma()));
+		dexterityValue.setText(String.valueOf(player.getAbilityScore().getDexterity()));
+		charNameValue.setText(player.getName());
+		charTypeValue.setText(player.getType());
+		hitpointValue.setText(String.valueOf(player.getHitPoints()));
+		charLevelValue.setText(String.valueOf(player.getLevel()));
+		revalidate();
+		repaint();
 		
 	}
 
