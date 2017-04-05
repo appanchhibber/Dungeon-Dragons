@@ -1,5 +1,6 @@
 package com.SOEN6441_DND.Model;
 
+import java.awt.Dimension;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -48,6 +49,27 @@ public class CharacterModel extends Observable {
 	private AbilityModel abilityScore;
 	private AbilityModel abilityModifier;
 	private int speed;
+	//character location for strategy by appan 
+	private Dimension charLocation;
+	private String behaviour;
+	public String getBehaviour() {
+		return behaviour;
+	}
+
+	public void setBehaviour(String behaviour) {
+		this.behaviour = behaviour;
+	}
+
+	public Dimension getCharLocation() {
+		return charLocation;
+	}
+
+	public void setCharLocation(Dimension charLocation) {
+		this.charLocation = charLocation;
+		notifyCharacterView();
+	}
+
+	//---------------------//
 	public String getShieldFlag() {
 		return shieldFlag;
 	}

@@ -8,6 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -18,6 +20,7 @@ import javax.swing.text.IconView;
 
 import com.SOEN6441_DND.Controller.MapViewController;
 import com.SOEN6441_DND.Controller.TransferHandlerController;
+import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
 
@@ -30,7 +33,7 @@ import com.SOEN6441_DND.Model.MapModel;
  * 
  *
  */
-public class GridView extends JPanel {
+public class GridView extends JPanel implements Observer {
 	private int mapWidth;
 	private int mapHeight;
 	public JButton mapButtonsGrid[][];
@@ -40,6 +43,8 @@ public class GridView extends JPanel {
 	public TransferHandlerController transferHandler;
 	private int count = 0;
 	public PlayArena playArena;
+	private int stepCounter;
+	CharacterModel	characterModel;
 
 	/**
 	 * Constructor for passing the model from the controller to MapView and the
@@ -56,6 +61,7 @@ public class GridView extends JPanel {
 		this.mapHeight = mapModel.getMapHeight();
 		this.mapWidth = mapModel.getMapWidth();
 		this.mapView = mapView;
+		
 		this.mapView.mapModel.setMapHeight(mapHeight);
 		this.mapView.mapModel.setMapWidth(mapWidth);
 		this.setLayout(new GridLayout(mapHeight, mapWidth, 3, 3));
@@ -86,6 +92,7 @@ public class GridView extends JPanel {
 		this.playArena = playArena;
 		this.playArena.mapModel.setMapHeight(mapHeight);
 		this.playArena.mapModel.setMapWidth(mapWidth);
+		this.stepCounter=0;
 		this.setLayout(new GridLayout(mapHeight, mapWidth, 3, 3));
 
 		this.setBackground(Color.BLACK);
@@ -155,6 +162,20 @@ public class GridView extends JPanel {
 				this.add(mapButtonsGrid[i][j]);
 			}
 		}
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setIcon(new ImageIcon(
+				new ImageIcon(playArena.charModel.getImage()).getImage()
+						.getScaledInstance(50, 50,
+								java.awt.Image.SCALE_SMOOTH)));
+
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX]
+				.setText(mapButtonsGrid[playArena.charLocY][playArena.charLocX].getName());
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setFont(new Font("Calibri",
+				Font.PLAIN, 0));
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setName(playArena.charModel.getName());
+
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX]
+				.addActionListener(playArena.playController);
+
 		for (Dimension dimension : mapModel.getWalls()) {
 			// System.out.println((int)dimension.getWidth());
 			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
@@ -187,9 +208,11 @@ public class GridView extends JPanel {
 					new ImageIcon(character.getValue().getCharacterImage())
 							.getImage().getScaledInstance(50, 50,
 									java.awt.Image.SCALE_SMOOTH)));
-	
+	CharacterModel model=new FileOperationModel().loadCharacter(character.getKey());
+	model.setCharLocation(character.getValue().getCharacterLocation());
 			playArena.playModel.addCharacter(character.getKey() + "-" + character.getValue().getCharacterBehavior(),
-					new FileOperationModel().loadCharacter(character.getKey()));
+					model);
+			mapModel.addCharLocation(character.getKey() + "-" + character.getValue().getCharacterBehavior(),character.getValue().getCharacterLocation());
 			mapButtonsGrid[characterX][characterY].addActionListener(playArena.playController);
 		}
 
@@ -385,6 +408,51 @@ public class GridView extends JPanel {
 				this.add(mapButtonsGrid[i][j]);
 			}
 		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+			characterModel=(CharacterModel)o;
+			
+				moveCharacter();
+				this.stepCounter++;
+				if(this.stepCounter>=3)
+				{
+
+					this.stepCounter=0;
+					playArena.playController.turn();
+					
+				}
+
+		
+	}
+	public void moveCharacter()
+	{
+		int oldX=(int)mapModel.getCharacterLocations().get(characterModel.getName()+"-"+characterModel.getBehaviour()).getWidth();
+		int oldY=(int)mapModel.getCharacterLocations().get(characterModel.getName()+"-"+characterModel.getBehaviour()).getHeight();
+		mapButtonsGrid[oldY][oldX].setIcon(null);
+		mapButtonsGrid[oldY][oldX]
+				.setName(mapButtonsGrid[oldY][oldX]
+						.getText());
+		int charLocY=(int)characterModel.getCharLocation().getHeight();
+		int charLocX=(int)characterModel.getCharLocation().getWidth();
+		mapModel.updateCharLocation(characterModel.getName()+"-"+characterModel.getBehaviour(), new Dimension(charLocX, charLocY));
+			mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(
+					new ImageIcon(characterModel.getImage()).getImage()
+							.getScaledInstance(50, 50,
+									java.awt.Image.SCALE_SMOOTH)));
+
+			mapButtonsGrid[charLocY][charLocX]
+					.setText(mapButtonsGrid[charLocY][charLocX].getName());
+			mapButtonsGrid[charLocY][charLocX].setFont(new Font("Calibri",
+					Font.PLAIN, 0));
+			mapButtonsGrid[charLocY][charLocX].setName(characterModel.getName());
+
+			mapButtonsGrid[charLocY][charLocX]
+					.addActionListener(playArena.playController);
+
+			revalidate();
 	}
 
 }

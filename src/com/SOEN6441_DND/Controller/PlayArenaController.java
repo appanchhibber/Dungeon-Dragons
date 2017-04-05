@@ -75,19 +75,23 @@ public class PlayArenaController  implements ActionListener {
 			case "Player":{
 				System.out.println("Player Turn");
 				this.setStrategy(new PlayerStrategy());
-				playArena.keyBinding();
+				synchronized (this) {
+					this.execute(playArena.gridView.mapModel,playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
+				}
+				System.out.println("Player Turn over");
 				break;
 			}
 			case "Hostile":{
 				System.out.println("Hostile Turn");
 				this.setStrategy(new HostileStrategy());
-				this.execute(playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
+				this.execute(playArena.gridView.mapModel,playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
 				turn();
 				break;
 			}
 			case "Friendly":{
 				System.out.println("Friendly Turn");
 				this.setStrategy(new FriendlyStrategy());
+				this.execute(playArena.gridView.mapModel,playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
 				turn();
 				break;
 			}
@@ -101,8 +105,8 @@ public class PlayArenaController  implements ActionListener {
 		
 	}
 
-	public void  execute(CharacterModel charModel) {
-		 this.strategy.execute(charModel);
+	public void  execute(MapModel mapModel ,CharacterModel charModel) {
+		 this.strategy.execute(mapModel,charModel);
 	}
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;

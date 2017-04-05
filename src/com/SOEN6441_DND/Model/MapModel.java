@@ -30,6 +30,21 @@ public class MapModel extends Observable {
 	public DefaultListModel treasureList;
 	public HashMap<String, Dimension> treasures;
 	public HashMap<String, MapModel> characters;
+	public HashMap<String,Dimension> characterLocations;
+	 
+    
+	public HashMap<String, Dimension> getCharacterLocations() {
+		return characterLocations;
+	}
+	public void addCharLocation(String name,Dimension location){
+		this.characterLocations.put(name, location);
+	}
+	public void updateCharLocation(String name,Dimension location){
+		this.characterLocations.get(name).setSize(location);
+	}
+	public void removeCharacterLocation(String name){
+		this.characterLocations.remove(name);
+	}
 	// Character Addition and Behavior//
 	public String characterName;
 	public String characterBehavior;
@@ -53,6 +68,7 @@ public class MapModel extends Observable {
 		mapItemList = new ArrayList<String>();
 		characters = new HashMap<String, MapModel>();
 		treasures = new HashMap<String, Dimension>();
+		characterLocations=new HashMap<String, Dimension>();
 	}
 
 	/*
