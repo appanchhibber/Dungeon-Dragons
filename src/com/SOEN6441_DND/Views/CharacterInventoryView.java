@@ -11,17 +11,25 @@ import com.SOEN6441_DND.Model.CharacterModel;
 public class CharacterInventoryView extends JFrame{
 private Container container;
 public ItemAssignView view;
-	public CharacterInventoryView(CharacterModel player){	
+
+	public CharacterInventoryView(){
 		container=getContentPane();
 		view=new ItemAssignView();
+		view.itemPanel.setVisible(false);
+		view.navPanel.setVisible(false);
 		container.add(view);
-		player.addObserver(view); 
+	}
+	
+	public void setcharModel(CharacterModel player){
+		
+		player.message="itemImage";
+		player.addObserver(view);
 		view.setCharacterModel(player);
+		view.update(player, "");
 	}
 	public void setInventory()
 	{
-		view.itemPanel.setVisible(false);
-		view.navPanel.setVisible(false);
+		
 		view.setVisible(true);
 		view.backpackPanel.setLocation(0, 0);
 		setPreferredSize(new Dimension(500, 500));

@@ -61,6 +61,7 @@ public class PlayArena extends View implements Observer {
 		super.initSubviews();
 		playInfoPanel = new PlayerInfoPanelView();
 		this.add(playInfoPanel);
+		charInventory = new CharacterInventoryView();
 		
 	}
 
@@ -80,7 +81,6 @@ public class PlayArena extends View implements Observer {
 		
 		playModel = new PlayModel();
 		ioModel = new FileOperationModel();
-		playInfoPanel= new PlayerInfoPanelView();
 		playController = new PlayArenaController(this);
 		
 
@@ -90,7 +90,9 @@ public class PlayArena extends View implements Observer {
 		chestFlag = false;
 		charModel.setCharLocation(new Dimension(charLocX,charLocY));
 		playInfoPanel.player=charModel;
+		playInfoPanel.player.setBehaviour("Player");
 		playInfoPanel.setPanel();
+		playInfoPanel.player.addObserver(playInfoPanel);
 		playModel.addCharacter((charModel.getName()+"-Player"), charModel);
 		mapModel.addCharLocation((charModel.getName()+"-Player"), new Dimension(charLocX,charLocY));
 		gridView = new GridView(mapModel, this);
@@ -100,8 +102,8 @@ public class PlayArena extends View implements Observer {
 		playController.turn();
 		this.add(gridView);
 		for(Map.Entry<String, CharacterModel> charact:playModel.characters.entrySet()){
+			charact.getValue().setLevel(charModel.getLevel());
 			charact.getValue().addObserver(gridView);
-			charact.getValue().addObserver(playInfoPanel);
 		}
 	}
 	/**

@@ -102,7 +102,6 @@ public class PlayerStrategy implements Strategy {
 				if(!(mapModel.getWalls().contains(validLoc)||mapModel.getChest()==validLoc||mapModel.getCharacterLocations().containsValue(validLoc))){
 					charLocX += xDelta;
 					charLocY += yDelta;
-					characterModel.setBehaviour("Player");
 					characterModel.setCharLocation(nextLoc);
 					stepCount++;
 					//mapModel.updateCharLocation(characterModel.getName()+"-Player", nextLoc);

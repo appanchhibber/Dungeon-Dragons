@@ -273,17 +273,21 @@ public class ItemAssignView extends View implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		
+		characterModel=(CharacterModel) o;
+		setBackPack();
+		setItemButtons();
+		characterSkillUpdate();
+	}
+	public void setBackPack(){
 		backPackModel.removeAllElements();
 		characterSkillUpdate();
-		characterModel=(CharacterModel) o;
 		for (String s : characterModel.getBackPackItems()) {
 			backPackModel.addElement(s);
 		}
 		backPackList.setModel(backPackModel);
 		backPackList.revalidate();
 		backPackList.repaint();
-		setItemButtons();
-		characterSkillUpdate();
 	}
 	public void characterSkillUpdate() {
 		levelsValueLabel.setText(String.valueOf(characterModel.getLevel()));
@@ -294,7 +298,7 @@ public class ItemAssignView extends View implements Observer {
 		
 	}
 	public void setItemButtons(){
-		if(characterModel.message=="weaponFlag") {
+		if(characterModel.message=="itemImage") {
 			if(characterModel.getWeaponFlag()==null)
 			{
 				weaponButton.setText("Weapon");
@@ -306,9 +310,10 @@ public class ItemAssignView extends View implements Observer {
 					+ items[6].get(characterModel.getWeaponFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(weaponButton.getWidth(), weaponButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
+			characterModel.message="";
 			}
-		}
-		else if (characterModel.message=="helmetFlag") {
+		
+	
 			if(characterModel.getHelmetFlag()==null)
 			{
 				helmetButton.setText("Helmet");
@@ -320,8 +325,8 @@ public class ItemAssignView extends View implements Observer {
 					+ ".jpg")).getImage().getScaledInstance(helmetButton.getWidth(), helmetButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 			}
-		}
-		else if (characterModel.message=="shieldFlag") {
+		
+		
 			if(characterModel.getShieldFlag()==null)
 			{
 				shieldButton.setText("Shield");
@@ -333,8 +338,8 @@ public class ItemAssignView extends View implements Observer {
 					+ ".jpg")).getImage().getScaledInstance(shieldButton.getWidth(), shieldButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 			}
-		}
-		else if (characterModel.message=="beltFlag") {
+		
+		
 			if(characterModel.getBeltFlag()==null)
 			{
 				beltButton.setText("Belt");
@@ -345,9 +350,9 @@ public class ItemAssignView extends View implements Observer {
 					+ items[3].get(characterModel.getBeltFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 					+ ".jpg")).getImage().getScaledInstance(beltButton.getWidth(), beltButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
-			}
+			
 		}
-		else if (characterModel.message=="bootFlag") {
+		
 			if(characterModel.getBootFlag()==null)
 			{
 				bootButton.setText("Boot");
@@ -359,8 +364,7 @@ public class ItemAssignView extends View implements Observer {
 					+ ".jpg")).getImage().getScaledInstance(bootButton.getWidth(), bootButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 			}
-		}
-		else if (characterModel.message=="ringFlag") {
+		
 			if(characterModel.getRingFlag()==null)
 			{
 				ringButton.setText("Ring");
@@ -372,8 +376,8 @@ public class ItemAssignView extends View implements Observer {
 					+ ".jpg")).getImage().getScaledInstance(ringButton.getWidth(), ringButton.getHeight(),
 							java.awt.Image.SCALE_SMOOTH)))));
 			}
-		}
-		else if (characterModel.message=="armorFlag") {
+		
+		
 			if(characterModel.getArmorFlag()==null)
 			{
 				armorButton.setText("Armor");

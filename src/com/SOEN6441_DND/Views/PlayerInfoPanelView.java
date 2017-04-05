@@ -26,6 +26,8 @@ public class PlayerInfoPanelView extends View implements Observer {
 	public JLabel lblCharType;
 	public JLabel lblHitpoint;
 	public JLabel lblCharLevel;
+	public JLabel armorClassLabel;
+	public JLabel attackBonusLabel;
 
 	public JLabel strengthValue;
 	public JLabel constitutionValue;
@@ -37,6 +39,8 @@ public class PlayerInfoPanelView extends View implements Observer {
 	public JLabel charTypeValue;
 	public JLabel hitpointValue;
 	public JLabel charLevelValue;
+	public JLabel armorClassValue;
+	public JLabel attackBonusValue;
 
 	public CharacterModel player;
 
@@ -168,12 +172,36 @@ public class PlayerInfoPanelView extends View implements Observer {
 		hitpointValue = new JLabel();
 		hitpointValue.setSize(50, 20);
 		hitpointValue.setForeground(Color.WHITE);
-		hitpointValue.setLocation(170, 185);
+		hitpointValue.setLocation(190, 185);
 		this.add(hitpointValue);
+		
+		armorClassLabel= new JLabel("Armor Class:");
+		armorClassLabel.setSize(180, 20);
+		armorClassLabel.setForeground(Color.WHITE);
+		armorClassLabel.setLocation(5, 205);
+		this.add(armorClassLabel);
+		
+		armorClassValue= new JLabel();
+		armorClassValue.setSize(180, 20);
+		armorClassValue.setForeground(Color.WHITE);
+		armorClassValue.setLocation(190, 205);
+		this.add(armorClassValue);
+		
+		attackBonusLabel= new JLabel("Attack Bonus:");
+		attackBonusLabel.setSize(180, 20);
+		attackBonusLabel.setForeground(Color.WHITE);
+		attackBonusLabel.setLocation(5, 225);
+		this.add(attackBonusLabel);
+		
+		attackBonusValue= new JLabel();
+		attackBonusValue.setSize(180, 20);
+		attackBonusValue.setForeground(Color.WHITE);
+		attackBonusValue.setLocation(190, 225);
+		this.add(attackBonusValue);
 
 		inventoryBtn = new JButton("Inventory View");
 		inventoryBtn.setSize(150, 30);
-		inventoryBtn.setLocation(50, 225);
+		inventoryBtn.setLocation(50, 255);
 		this.add(inventoryBtn);
 	}
 
@@ -181,13 +209,9 @@ public class PlayerInfoPanelView extends View implements Observer {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		player = (CharacterModel)o;
-		setPanel();
-		System.out.println(player.getName());
-		
+		setPanel();		
 	}
 	public void setPanel(){
-		System.out.println("Panel Screen");
-		System.out.println(player.getAbilityScore().getStrength());
 		strengthValue.setText(String.valueOf(player.getAbilityScore().getStrength()));
 		constitutionValue.setText(String.valueOf(player.getAbilityScore().getConstitution()));
 		intelligenceValue.setText(String.valueOf(player.getAbilityScore().getIntelligence()));
@@ -198,8 +222,9 @@ public class PlayerInfoPanelView extends View implements Observer {
 		charTypeValue.setText(player.getType());
 		hitpointValue.setText(String.valueOf(player.getHitPoints()));
 		charLevelValue.setText(String.valueOf(player.getLevel()));
-		revalidate();
-		repaint();
+		armorClassValue.setText(String.valueOf(player.getArmorClass()));
+		attackBonusValue.setText(String.valueOf(player.getAttackBonus()));
+		
 		
 	}
 

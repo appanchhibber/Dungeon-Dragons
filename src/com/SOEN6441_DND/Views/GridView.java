@@ -171,7 +171,7 @@ public class GridView extends JPanel implements Observer {
 				.setText(mapButtonsGrid[playArena.charLocY][playArena.charLocX].getName());
 		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setFont(new Font("Calibri",
 				Font.PLAIN, 0));
-		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setName(playArena.charModel.getName());
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setName(playArena.charModel.getName()+"-Player");
 
 		mapButtonsGrid[playArena.charLocY][playArena.charLocX]
 				.addActionListener(playArena.playController);
@@ -414,7 +414,8 @@ public class GridView extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		
 			characterModel=(CharacterModel)o;
-			
+			if(characterModel.message=="LocationUpdate")
+			{
 				moveCharacter();
 				this.stepCounter++;
 				if(this.stepCounter>=3)
@@ -424,6 +425,8 @@ public class GridView extends JPanel implements Observer {
 					playArena.playController.turn();
 					
 				}
+				characterModel.message="";
+			}	
 
 		
 	}
@@ -447,8 +450,9 @@ public class GridView extends JPanel implements Observer {
 					.setText(mapButtonsGrid[charLocY][charLocX].getName());
 			mapButtonsGrid[charLocY][charLocX].setFont(new Font("Calibri",
 					Font.PLAIN, 0));
-			mapButtonsGrid[charLocY][charLocX].setName(characterModel.getName());
-
+			if(characterModel.getBehaviour()=="Player"){
+			mapButtonsGrid[charLocY][charLocX].setName(characterModel.getName()+"-Player");
+			}
 			mapButtonsGrid[charLocY][charLocX]
 					.addActionListener(playArena.playController);
 
