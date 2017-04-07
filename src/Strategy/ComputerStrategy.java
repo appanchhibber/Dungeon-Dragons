@@ -7,7 +7,7 @@ import com.SOEN6441_DND.Views.PlayArena;
 public class ComputerStrategy implements Strategy {
 	@Override
 	public void execute(MapModel mapModel,CharacterModel charModel) {
-		// TODO Auto-generated method stub
+		System.out.println("Computer Strategy fired");
 
 	}
 

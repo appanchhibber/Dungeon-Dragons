@@ -6,19 +6,14 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.TransferHandler;
-import javax.swing.text.IconView;
-
-import com.SOEN6441_DND.Controller.MapViewController;
+import javax.swing.Timer;
 import com.SOEN6441_DND.Controller.TransferHandlerController;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
@@ -45,7 +40,7 @@ public class GridView extends JPanel implements Observer {
 	public PlayArena playArena;
 	private int stepCounter;
 	CharacterModel	characterModel;
-
+	Timer timer;
 	/**
 	 * Constructor for passing the model from the controller to MapView and the
 	 * mode of working as well ie create and edit
@@ -412,15 +407,19 @@ public class GridView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		
+		System.out.println("Observable recieved");
+		playArena.startGame.setVisible(false);
 			characterModel=(CharacterModel)o;
 			if(characterModel.message=="LocationUpdate")
 			{
-				moveCharacter();
+
+						moveCharacter();
+
+				
 				this.stepCounter++;
 				if(this.stepCounter>=3)
 				{
-
+							System.out.println("Move Completed");
 					this.stepCounter=0;
 					playArena.playController.turn();
 					

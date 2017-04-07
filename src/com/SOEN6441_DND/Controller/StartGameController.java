@@ -65,6 +65,12 @@ public class StartGameController implements ActionListener {
 						+ startView.selectCampaign.getSelectedItem() + ".xml"));
 				this.characterModel=ioModel.loadCharacter(startView.selectCharacter
 						.getSelectedItem().toString());
+				if(startView.computerBehavior.isSelected()){
+					characterModel.setBehaviour("Computer");
+				}
+				else{
+					characterModel.setBehaviour("Player");
+				}
 				mapModel = ioModel.readMapFile(new File("maps/"
 						+ campaignModel.getCampMapList().get(0)));
 				gameController.mainFrame.setView(new PlayArena(mapModel,

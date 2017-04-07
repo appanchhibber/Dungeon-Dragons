@@ -1,5 +1,6 @@
 package com.SOEN6441_DND.Views;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -54,14 +55,29 @@ public class PlayArena extends View implements Observer {
 
 	public PlayerInfoPanelView playInfoPanel;
 	public CharacterInventoryView charInventory;
+	public View navPanel;
 	public static  InputMap inputMap;
 	public static ActionMap actionMap;
+	
+	public JButton startGame;
 	@Override
 	protected void initSubviews() {
 		super.initSubviews();
 		playInfoPanel = new PlayerInfoPanelView();
 		this.add(playInfoPanel);
 		charInventory = new CharacterInventoryView();
+		navPanel=new View();
+		navPanel.setSize(845,60);
+		navPanel.setLocation(5, 545);
+		navPanel.setVisible(true);
+		navPanel.setBackground(Color.BLACK);
+		
+		startGame=new JButton("Start Game");
+		startGame.setSize(100,30);
+		startGame.setLocation(10,10);
+		startGame.setVisible(true);
+		navPanel.add(startGame);
+		this.add(navPanel);
 		
 	}
 
@@ -84,27 +100,28 @@ public class PlayArena extends View implements Observer {
 		playController = new PlayArenaController(this);
 		
 
+		
 		playInfoPanel.inventoryBtn.addActionListener(playController);
 		charLocX = (int) (mapModel.getEntry().getWidth()) + 1;
 		charLocY = (int) (mapModel.getEntry().getHeight());
 		chestFlag = false;
 		charModel.setCharLocation(new Dimension(charLocX,charLocY));
 		playInfoPanel.player=charModel;
-		playInfoPanel.player.setBehaviour("Player");
 		playInfoPanel.setPanel();
 		playInfoPanel.player.addObserver(playInfoPanel);
-		playModel.addCharacter((charModel.getName()+"-Player"), charModel);
-		mapModel.addCharLocation((charModel.getName()+"-Player"), new Dimension(charLocX,charLocY));
+		playModel.addCharacter((charModel.getName()+"-"+charModel.getBehaviour()), charModel);
+		mapModel.addCharLocation((charModel.getName()+"-"+charModel.getBehaviour()), new Dimension(charLocX,charLocY));
 		gridView = new GridView(mapModel, this);
 		inputMap = this.gridView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
 		actionMap = this.gridView.getActionMap();
-		playModel.setPlayOrder();
-		playController.turn();
-		this.add(gridView);
+		
 		for(Map.Entry<String, CharacterModel> charact:playModel.characters.entrySet()){
 			charact.getValue().setLevel(charModel.getLevel());
 			charact.getValue().addObserver(gridView);
 		}
+		this.add(gridView);
+
+		startGame.addActionListener(playController);
 	}
 	/**
 	 * Observer update method to allow changes to be displayed on the map

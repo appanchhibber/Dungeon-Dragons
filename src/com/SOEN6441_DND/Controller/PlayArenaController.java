@@ -88,7 +88,7 @@ public class PlayArenaController implements ActionListener {
 			this.setStrategy(new HostileStrategy());
 			this.execute(playArena.gridView.mapModel,
 					playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			turn();
+			//turn();
 			break;
 		}
 		case "Friendly": {
@@ -102,6 +102,8 @@ public class PlayArenaController implements ActionListener {
 		case "Computer": {
 			System.out.println("Computer Turn");
 			this.setStrategy(new ComputerStrategy());
+			this.execute(playArena.gridView.mapModel,
+					playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
 			turn();
 			break;
 		}
@@ -128,7 +130,12 @@ public class PlayArenaController implements ActionListener {
 		if (e.getSource() == playArena.playInfoPanel.inventoryBtn) {
 			playArena.charInventory.setcharModel(playArena.playInfoPanel.player);
 			playArena.charInventory.setInventory();
-		} else if (e.getSource() instanceof JButton) {
+		} else if(e.getSource()==playArena.startGame){
+			playArena.playModel.setPlayOrder();
+			mapModel.setCharacterName(characterModel.getName()+"-"+characterModel.getBehaviour());
+			turn();
+			
+		}else if (e.getSource() instanceof JButton) {
 			JButton btn = (JButton) e.getSource();
 			String name;
 				

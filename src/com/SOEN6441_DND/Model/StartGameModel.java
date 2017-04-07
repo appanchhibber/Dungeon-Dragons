@@ -6,6 +6,7 @@ import javax.swing.DefaultListModel;
 public class StartGameModel {
 	public String characterName;
 	public String campaignName;
+	public Boolean actAsComputer;
 	
 	public DefaultListModel characterList;
 	public DefaultListModel campaignList;

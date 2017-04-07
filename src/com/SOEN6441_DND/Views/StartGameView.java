@@ -1,10 +1,12 @@
 package com.SOEN6441_DND.Views;
 
 import java.awt.Button;
+import java.awt.Color;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
@@ -30,6 +32,8 @@ public class StartGameView extends View {
 
 	public JButton backBtn;
 	public JButton startBtn;
+	
+	public JCheckBox computerBehavior;
 
 	public StartGameController startGameController;
 	public StartGameModel startModel;
@@ -67,6 +71,11 @@ public class StartGameView extends View {
 		buttonView.add(selectCharacter);
 		buttonView.add(characterLabel);
 
+		computerBehavior=new JCheckBox("Act as Computer Player");
+		computerBehavior.setSize(200, 30);
+		computerBehavior.setLocation(350, 45);
+		computerBehavior.setOpaque(false);
+		buttonView.add(computerBehavior);
 		// add a exitGameButton in the mainscene
 		campaignLabel = new JLabel("Select Campaign:");
 		campaignLabel.setLocation(210, 85);
