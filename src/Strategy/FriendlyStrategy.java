@@ -8,7 +8,7 @@ public class FriendlyStrategy implements Strategy {
 
 	@Override
 	public void execute(MapModel mapModel,CharacterModel charModel) {
-		
+		return;
 
 	}
 

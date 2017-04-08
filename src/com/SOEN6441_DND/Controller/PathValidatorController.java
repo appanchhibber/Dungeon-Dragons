@@ -77,8 +77,6 @@ public class PathValidatorController {
     
     public static void AStar(){ 
         //add the start location to open list.
-    	System.out.println("start"+startI+","+startJ);
-    	System.out.println(grid[startI][startJ]);
         open.add(grid[startI][startJ]);
         Cell current;
         
@@ -218,7 +216,6 @@ public class PathValidatorController {
            }
 
            AStar(); 
-           System.out.println("closed"+closed[endI][endJ]);
            ArrayList<Dimension> path=new ArrayList<Dimension>();
            if(closed[endI][endJ]){
                //Trace back the path 
@@ -227,7 +224,7 @@ public class PathValidatorController {
                 while(current.parent!=null){
                 	//mapCell[current.parent.i][current.parent.j].setBackground(Color.BLUE);
                     current = current.parent;
-                    System.out.println("current:"+current.i+","+current.j);
+                    
                     path.add(new Dimension(current.i,current.j));
 
                 } 
@@ -235,4 +232,56 @@ public class PathValidatorController {
            }
            else return path;
     }
+    public static ArrayList<Dimension> computerPath(int tCase, int x, int y, int si, int sj, int ei, int ej, ArrayList<Dimension> blocked){
+        //Reset
+       grid = new Cell[x][y];
+       closed = new boolean[x][y];
+       open = new PriorityQueue<>((Object o1, Object o2) -> {
+            Cell c1 = (Cell)o1;
+            Cell c2 = (Cell)o2;
+
+            return c1.finalCost<c2.finalCost?-1:
+                    c1.finalCost>c2.finalCost?1:0;
+        });
+       //Set start position
+       setStartCell(si, sj);  //Setting to 0,0 by default. Will be useful for the UI part
+       
+       //Set End Location
+       setEndCell(ei, ej); 
+       
+       for(int i=0;i<x;++i){
+          for(int j=0;j<y;++j){
+              grid[i][j] = new Cell(i, j);
+              grid[i][j].heuristicCost = Math.abs(i-endI)+Math.abs(j-endJ);
+          }
+       }
+       grid[si][sj].finalCost = 0;
+       
+       /*
+         Set blocked cells. Simply set the cell values to null
+         for blocked cells.
+       */
+       for(Dimension dimension:blocked)
+       {
+    	   setBlocked((int)dimension.getWidth(),(int)dimension.getHeight());
+       }
+
+       AStar(); 
+       System.out.println("closed"+closed[endI][endJ]);
+       ArrayList<Dimension> path=new ArrayList<Dimension>();
+       if(closed[endI][endJ]){
+           //Trace back the path 
+            Cell current = grid[endI][endJ];
+           // System.out.print(current);
+            while(current.parent!=null){
+            	//mapCell[current.parent.i][current.parent.j].setBackground(Color.BLUE);
+                current = current.parent;
+                System.out.println("current:"+current.i+","+current.j);
+                path.add(new Dimension(current.i,current.j));
+
+            } 
+           return path;
+       }
+       else return path;
+}
 }

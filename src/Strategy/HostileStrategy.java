@@ -37,7 +37,18 @@ public class HostileStrategy implements Strategy {
 				 stepCount++;
 						charModel.setBehaviour("Hostile");
 					//	mapModel.updateCharLocation(charModel.getName()+"-Hostile", new Dimension(charLocY,charLocX));
-						charModel.setCharLocation(new Dimension(charLocX,charLocY));
+						try {
+							int sleepSeconds = 1;
+					        while(sleepSeconds==1) {
+					            //do your job...
+					            Thread.sleep(sleepSeconds * 1000);
+					            sleepSeconds=0;
+					        }
+							charModel.setCharLocation(new Dimension(charLocX,charLocY));
+						}catch(Exception e){
+							e.printStackTrace();
+						}
+						
 						
 				}else{
 					stepCount=0;

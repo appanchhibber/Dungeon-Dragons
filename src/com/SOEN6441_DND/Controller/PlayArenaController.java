@@ -80,7 +80,6 @@ public class PlayArenaController implements ActionListener {
 				this.execute(playArena.gridView.mapModel,
 						playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
 			}
-			System.out.println("Player Turn over");
 			break;
 		}
 		case "Hostile": {
@@ -96,7 +95,7 @@ public class PlayArenaController implements ActionListener {
 			this.setStrategy(new FriendlyStrategy());
 			this.execute(playArena.gridView.mapModel,
 					playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			turn();
+			//turn();
 			break;
 		}
 		case "Computer": {
@@ -104,7 +103,7 @@ public class PlayArenaController implements ActionListener {
 			this.setStrategy(new ComputerStrategy());
 			this.execute(playArena.gridView.mapModel,
 					playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			turn();
+			//turn();
 			break;
 		}
 		}
