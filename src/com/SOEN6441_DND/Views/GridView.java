@@ -173,17 +173,17 @@ public class GridView extends JPanel implements Observer {
 
 		for (Dimension dimension : mapModel.getWalls()) {
 			// System.out.println((int)dimension.getWidth());
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
-					.getHeight()].setName("Wall");
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
-					.getHeight()].setFont(new Font("Calibri", Font.PLAIN, 0));
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
-					.getHeight()].setIcon(new ImageIcon(new ImageIcon(
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
+					.getWidth()].setName("Wall");
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
+					.getWidth()].setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
+					.getWidth()].setIcon(new ImageIcon(new ImageIcon(
 					"image/Wall.jpg").getImage().getScaledInstance(50, 50,
 					java.awt.Image.SCALE_SMOOTH)));
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
-					.getHeight()].setText((int) dimension.getWidth() + ","
-					+ (int) dimension.getHeight());
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
+					.getWidth()].setText((int) dimension.getHeight() + ","
+					+ (int) dimension.getWidth());
 		}
 		for (Map.Entry<String, MapModel> character : mapModel.getCharacters()
 				.entrySet()) {
@@ -191,15 +191,15 @@ public class GridView extends JPanel implements Observer {
 					.getWidth();
 			int characterY = (int) character.getValue().getCharacterLocation()
 					.getHeight();
-			mapButtonsGrid[characterX][characterY].setName("_"
+			mapButtonsGrid[characterY][characterX].setName("_"
 					+ character.getKey());
-			mapButtonsGrid[characterX][characterY].setFont(new Font("Calibri",
+			mapButtonsGrid[characterY][characterX].setFont(new Font("Calibri",
 					Font.PLAIN, 0));
-			mapButtonsGrid[characterX][characterY].setText(characterX + ","
-					+ characterY);
-			mapButtonsGrid[characterX][characterY].setToolTipText(character
+			mapButtonsGrid[characterY][characterX].setText(characterY + ","
+					+ characterX);
+			mapButtonsGrid[characterY][characterX].setToolTipText(character
 					.getValue().getCharacterBehavior());
-			mapButtonsGrid[characterX][characterY].setIcon(new ImageIcon(
+			mapButtonsGrid[characterY][characterX].setIcon(new ImageIcon(
 					new ImageIcon(character.getValue().getCharacterImage())
 							.getImage().getScaledInstance(50, 50,
 									java.awt.Image.SCALE_SMOOTH)));
@@ -208,7 +208,7 @@ public class GridView extends JPanel implements Observer {
 			playArena.playModel.addCharacter(character.getKey() + "-" + character.getValue().getCharacterBehavior(),
 					model);
 			mapModel.addCharLocation(character.getKey() + "-" + character.getValue().getCharacterBehavior(),character.getValue().getCharacterLocation());
-			mapButtonsGrid[characterX][characterY].addActionListener(playArena.playController);
+			mapButtonsGrid[characterY][characterX].addActionListener(playArena.playController);
 		}
 
 	}
@@ -308,17 +308,17 @@ public class GridView extends JPanel implements Observer {
 		}
 		for (Dimension dimension : mapModel.getWalls()) {
 			// System.out.println((int)dimension.getWidth());
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
-					.getHeight()].setName("Wall");
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
-					.getHeight()].setFont(new Font("Calibri", Font.PLAIN, 0));
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
-					.getHeight()].setIcon(new ImageIcon(new ImageIcon(
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
+					.getWidth()].setName("Wall");
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
+					.getWidth()].setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
+					.getWidth()].setIcon(new ImageIcon(new ImageIcon(
 					"image/Wall.jpg").getImage().getScaledInstance(50, 50,
 					java.awt.Image.SCALE_SMOOTH)));
-			mapButtonsGrid[(int) dimension.getWidth()][(int) dimension
-					.getHeight()].setText((int) dimension.getWidth() + ","
-					+ (int) dimension.getHeight());
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
+					.getWidth()].setText((int) dimension.getHeight() + ","
+					+ (int) dimension.getWidth());
 		}
 		for (Map.Entry<String, MapModel> character : mapModel.getCharacters()
 				.entrySet()) {
@@ -326,15 +326,15 @@ public class GridView extends JPanel implements Observer {
 					.getWidth();
 			int characterY = (int) character.getValue().getCharacterLocation()
 					.getHeight();
-			mapButtonsGrid[characterX][characterY].setName("_"
+			mapButtonsGrid[characterY][characterX].setName("_"
 					+ character.getKey());
-			mapButtonsGrid[characterX][characterY].setFont(new Font("Calibri",
+			mapButtonsGrid[characterY][characterX].setFont(new Font("Calibri",
 					Font.PLAIN, 0));
-			mapButtonsGrid[characterX][characterY].setText(characterX + ","
-					+ characterY);
-			mapButtonsGrid[characterX][characterY].setToolTipText(character
+			mapButtonsGrid[characterY][characterX].setText(characterY + ","
+					+ characterX);
+			mapButtonsGrid[characterY][characterX].setToolTipText(character
 					.getValue().getCharacterBehavior());
-			mapButtonsGrid[characterX][characterY].setIcon(new ImageIcon(
+			mapButtonsGrid[characterY][characterX].setIcon(new ImageIcon(
 					new ImageIcon(character.getValue().getCharacterImage())
 							.getImage().getScaledInstance(50, 50,
 									java.awt.Image.SCALE_SMOOTH)));

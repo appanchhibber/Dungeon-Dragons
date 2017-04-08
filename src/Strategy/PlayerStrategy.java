@@ -98,8 +98,8 @@ public class PlayerStrategy implements Strategy {
 				}
 				
 				Dimension nextLoc=new Dimension(nextX+xDelta, nextY+yDelta);
-				Dimension validLoc=new Dimension(nextY+yDelta,nextX+xDelta);
-				if(!(mapModel.getWalls().contains(validLoc)||mapModel.getChest()==validLoc||mapModel.getCharacterLocations().containsValue(validLoc))){
+				//Dimension validLoc=new Dimension(nextY+yDelta,nextX+xDelta);
+				if(!(mapModel.getWalls().contains(nextLoc)||mapModel.getChest()==nextLoc||mapModel.getCharacterLocations().containsValue(nextLoc))){
 					charLocX += xDelta;
 					charLocY += yDelta;
 					stepCount++;

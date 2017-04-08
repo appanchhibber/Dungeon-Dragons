@@ -25,20 +25,19 @@ public class HostileStrategy implements Strategy {
 		hostilePath=PathValidatorController.hostilePath(1, mapModel.getMapWidth(),
 					mapModel.getMapHeight(), (int) charModel.getCharLocation().getWidth(),
 					(int) charModel.getCharLocation().getHeight(),
-					(int) playerLoc.getHeight(),
-					(int) playerLoc.getWidth(), mapModel.getWalls());
-		System.out.println(hostilePath);
+					(int) playerLoc.getWidth(),
+					(int) playerLoc.getHeight(), mapModel.getWalls());
 		Collections.reverse(hostilePath);
 		
 		for(Dimension d:hostilePath){
-			if(stepCount<=3){
+			if(stepCount<3){
 				charLocX=(int)d.getWidth();
 				 charLocY=(int)d.getHeight();
 				 System.out.println(d);
 				 stepCount++;
 						charModel.setBehaviour("Hostile");
 					//	mapModel.updateCharLocation(charModel.getName()+"-Hostile", new Dimension(charLocY,charLocX));
-						charModel.setCharLocation(new Dimension(charLocY,charLocX));
+						charModel.setCharLocation(new Dimension(charLocX,charLocY));
 						
 				}else{
 					stepCount=0;

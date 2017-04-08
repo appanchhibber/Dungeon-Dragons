@@ -10,20 +10,20 @@
   </EntryDoor>
   <Wall>
     <wall>
-      <X>4</X>
-      <Y>0</Y>
+      <X>0</X>
+      <Y>4</Y>
     </wall>
     <wall>
-      <X>4</X>
-      <Y>1</Y>
+      <X>1</X>
+      <Y>4</Y>
     </wall>
     <wall>
-      <X>4</X>
-      <Y>2</Y>
+      <X>2</X>
+      <Y>4</Y>
     </wall>
     <wall>
-      <X>4</X>
-      <Y>3</Y>
+      <X>3</X>
+      <Y>4</Y>
     </wall>
     <wall>
       <X>4</X>
@@ -41,13 +41,13 @@
   <Character>
     <character name="Paras">
       <Behavior>Hostile</Behavior>
-      <X>3</X>
-      <Y>6</Y>
+      <X>6</X>
+      <Y>3</Y>
     </character>
     <character name="xxx">
       <Behavior>Friendly</Behavior>
-      <X>6</X>
-      <Y>5</Y>
+      <X>5</X>
+      <Y>6</Y>
     </character>
   </Character>
   <Treasure/>

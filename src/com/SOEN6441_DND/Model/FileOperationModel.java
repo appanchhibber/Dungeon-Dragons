@@ -616,42 +616,42 @@ public class FileOperationModel {
 		rootElement.addElement("mapheight").addText(String.valueOf(mapModel.getMapHeight()));
 
 		Element entryDoorElement = new DefaultElement("EntryDoor");
-		entryDoorElement.addElement("X").addText(String.valueOf((int) mapModel.getEntry().getWidth()));
-		entryDoorElement.addElement("Y").addText(String.valueOf((int) mapModel.getEntry().getHeight()));
+		entryDoorElement.addElement("X").addText(String.valueOf((int) mapModel.getEntry().getHeight()));
+		entryDoorElement.addElement("Y").addText(String.valueOf((int) mapModel.getEntry().getWidth()));
 		rootElement.add(entryDoorElement);
 
 		Element wallElements = rootElement.addElement("Wall");
 		for (Dimension dimension : mapModel.getWalls()) {
 
 			Element wallElement = new DefaultElement("wall");
-			wallElement.addElement("X").addText(String.valueOf((int) dimension.getWidth()));
-			wallElement.addElement("Y").addText(String.valueOf((int) dimension.getHeight()));
+			wallElement.addElement("X").addText(String.valueOf((int) dimension.getHeight()));
+			wallElement.addElement("Y").addText(String.valueOf((int) dimension.getWidth()));
 			wallElements.add(wallElement);
 		}
 		Element chestElement = new DefaultElement("Chest");
-		chestElement.addElement("X").addText(String.valueOf((int) mapModel.getChest().getWidth()));
-		chestElement.addElement("Y").addText(String.valueOf((int) mapModel.getChest().getHeight()));
+		chestElement.addElement("X").addText(String.valueOf((int) mapModel.getChest().getHeight()));
+		chestElement.addElement("Y").addText(String.valueOf((int) mapModel.getChest().getWidth()));
 		rootElement.add(chestElement);
 
 		Element exitDoorElement = new DefaultElement("ExitDoor");
-		exitDoorElement.addElement("X").addText(String.valueOf((int) mapModel.getExit().getWidth()));
-		exitDoorElement.addElement("Y").addText(String.valueOf((int) mapModel.getExit().getHeight()));
+		exitDoorElement.addElement("X").addText(String.valueOf((int) mapModel.getExit().getHeight()));
+		exitDoorElement.addElement("Y").addText(String.valueOf((int) mapModel.getExit().getWidth()));
 		rootElement.add(exitDoorElement);
 
 		Element characterElements = rootElement.addElement("Character");
 		for (Map.Entry<String, MapModel> character : mapModel.getCharacters().entrySet()) {
 			Element characterElement = new DefaultElement("character").addAttribute("name", character.getKey());
 			characterElement.addElement("Behavior").addText(character.getValue().getCharacterBehavior());
-			characterElement.addElement("X").addText(String.valueOf((int) character.getValue().getCharacterLocation().getWidth()));
-			characterElement.addElement("Y").addText(String.valueOf((int) character.getValue().getCharacterLocation().getHeight()));
+			characterElement.addElement("X").addText(String.valueOf((int) character.getValue().getCharacterLocation().getHeight()));
+			characterElement.addElement("Y").addText(String.valueOf((int) character.getValue().getCharacterLocation().getWidth()));
 			characterElements.add(characterElement);
 		}
 
 		Element treasureElements = rootElement.addElement("Treasure");
 		for (Map.Entry<String, Dimension> treasure : mapModel.getTreasures().entrySet()) {
 			Element treasureElement = new DefaultElement("treasure").addAttribute("name", treasure.getKey());
-			treasureElement.addElement("X").addText(String.valueOf((int) treasure.getValue().getWidth()));
-			treasureElement.addElement("Y").addText(String.valueOf((int) treasure.getValue().getHeight()));
+			treasureElement.addElement("X").addText(String.valueOf((int) treasure.getValue().getHeight()));
+			treasureElement.addElement("Y").addText(String.valueOf((int) treasure.getValue().getWidth()));
 			treasureElements.add(treasureElement);
 		}
 		XMLWriter writer = null;
