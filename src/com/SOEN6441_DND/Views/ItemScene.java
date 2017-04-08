@@ -55,6 +55,7 @@ public class ItemScene extends View implements Observer {
 	public JLabel enchantLabel;
 	public JLabel itemInfoLabel;
 	public JLabel chestSelectLabel;
+	public JLabel weaponTypeLabel;
 	public JCheckBox addChest;
 	public JTextArea itemDescription;
 	public JLabel itemNewName;
@@ -62,6 +63,7 @@ public class ItemScene extends View implements Observer {
 	public JComboBox savedItemNames;
 	// TextField
 	public JTextField nameField;
+	public JTextField weaponType;
 
 	// Controllers
 	public ItemSceneController itemController;
@@ -120,20 +122,35 @@ public class ItemScene extends View implements Observer {
 		savedItemNames.setSize(140, 30);
 		savedItemNames.setLocation(150, 170);
 		savedItemNames.setVisible(false);
+		
+		weaponTypeLabel = new JLabel("Weapon Type : ");
+		weaponTypeLabel.setSize(100, 30);
+		weaponTypeLabel.setLocation(30, 250);
+		weaponTypeLabel.setForeground(Color.WHITE);
+		weaponTypeLabel.setVisible(false);
+		
+		weaponType = new JTextField();
+		weaponType.setSize(120, 20);
+		weaponType.setLocation(150, 260);
+		weaponType.setForeground(Color.BLUE);
+		weaponType.setEditable(false);
+		weaponType.setVisible(false);
+		
+		
 		enchantLabel = new JLabel("Enchantment Value:");
 		enchantLabel.setSize(210, 20);
-		enchantLabel.setLocation(30, 250);
+		enchantLabel.setLocation(30, 300);
 		enchantLabel.setForeground(Color.WHITE);
 		
 		enchantList = new JComboBox();
 		enchantList.setSize(60, 20);
-		enchantList.setLocation(180, 250);
+		enchantList.setLocation(180, 300);
 		
 		addChest=new JCheckBox("Add To Tressure");
 		addChest.setSize(210, 30);
 		addChest.setOpaque(false);
 		addChest.setForeground(Color.WHITE);
-		addChest.setLocation(30, 275);
+		addChest.setLocation(30, 330);
 		
 		
 		itemViewPanel.add(itemTypeLabel);
@@ -147,6 +164,8 @@ public class ItemScene extends View implements Observer {
 		itemViewPanel.add(addChest);
 		itemViewPanel.add(savedItemNames);
 		itemViewPanel.add(itemNewName);
+		itemViewPanel.add(weaponType);
+		itemViewPanel.add(weaponTypeLabel);
 
 		
 		imagePanel = new View();
@@ -207,6 +226,7 @@ public class ItemScene extends View implements Observer {
 					fileModel.readFile(fileModel.setFile("Helmet"));
 					itemViewModel.setSubItemList(fileModel.getItemsName());
 				}
+				
 				subItemType.setModel(new DefaultComboBoxModel(itemViewModel.subItemList.toArray()));
 				
 				enchantList.setModel(new DefaultComboBoxModel(itemViewModel.getEnchanListValues()));
@@ -219,7 +239,7 @@ public class ItemScene extends View implements Observer {
 							imagePanel.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
 			imageLabel.setSize(imagePanel.getWidth(), imagePanel.getHeight());
 			itemDescription.setText(fileModel.getItemDesription().get(0));
-		
+	
 			if(mode.equalsIgnoreCase("edit")){
 				itemType.setSelectedIndex(itemTypeList.valueOf(itemViewModel.getItemType()).ordinal());
 				subItemType.setModel(itemViewModel.getSavedItemTypeList());
@@ -236,7 +256,6 @@ public class ItemScene extends View implements Observer {
 							imagePanel.getHeight(), java.awt.Image.SCALE_SMOOTH)))));
 			imageLabel.setSize(imagePanel.getWidth(), imagePanel.getHeight());
 			}
-			
 			
 			
 		navMenuPanel.saveButton.addActionListener(itemController);
@@ -278,6 +297,10 @@ public class ItemScene extends View implements Observer {
 			chestSelectLabel.setVisible(false);
 			chestList.removeAllItems();
 			chestList.setVisible(false);
+		}
+
+		else if(itemViewModel.message == "weaponType changed"){
+			weaponType.setText(itemViewModel.getWeaponType());
 		}
 	}
 }

@@ -2,6 +2,8 @@
 	<type id="1">
 		<name>Steel Sword</name>
 		<image>image/SteelSword.jpg</image>
+		<weapontype>Melee</weapontype>
+		<range>1</range>
 		<description>The Steel Sword is a one-handed weapon.
 The sword has a steel blade as to be expected, with some rugged designs
 on the bottom edges.
@@ -17,6 +19,8 @@ Base Damage : 8, Weight : 10, Baase Value : 45</description>
 	<type id="2">
 		<name>Crossbow</name>
 		<image>image/Crossbow.jpg</image>
+		<weapontype>Ranged weapon</weapontype>
+		<range>2</range>
 		<description>Crossbows are projectile weapons in Dungeons and Dragons.
 Crossbows differ from bows in a number of ways. They use different
 ammunition, projectiles are loaded instead of nocked, and they
@@ -30,6 +34,8 @@ Crossbows have a built-in 50% chance to stagger opponents.
 	<type id="3">
 		<name>Thane Steel Battle Axe</name>
 		<image>image/ThaneSteelBattleAxe.jpg</image>
+		<weapontype>Melee</weapontype>
+		<range>1</range>
 		<description>Axe of Whiterun is one of a unique group of weapons found
 in Dungeons and Dragons.
 an identical version can be crafted with the generic material and a
@@ -44,6 +50,8 @@ material of the axe.
 	<type id="4">
 		<name>Dwarven Bow Skinned</name>
 		<image>image/DwarvenBowSkinned.jpg</image>
+		<weapontype>Ranged weapon</weapontype>
+		<range>2</range>
 		<description>Dwrven Bow is very powerful with a decent base damage and
 nice fire rate
 
@@ -54,6 +62,8 @@ Skin: Dwarven Bow coloured black</description>
 	<type id="5">
 		<name>Dragon Battle Axe</name>
 		<image>image/DragonBattleAxe.jpg</image>
+		<weapontype>Melee</weapontype>
+		<range>1</range>
 		<description>The Dragonbone Battleaxe is a two-handed weapon.
 It can be forged at a blacksmith's forge with the following components:
 3 x Dragon Bones

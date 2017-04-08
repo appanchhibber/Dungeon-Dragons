@@ -22,9 +22,24 @@ public class ItemModel extends Observable{
     public String itemType;
     public String subItemType;
     public int enchantValue;
+    public String weaponType;
+    public String weaponRange;
     
     
-    public ItemModel(){
+    public String getWeaponType() {
+		return weaponType;
+	}
+	public void setWeaponType(String weaponType) {
+		this.weaponType = weaponType;
+		notifyItemView("weaponType changed");
+	}
+	public String getWeaponRange() {
+		return weaponRange;
+	}
+	public void setWeaponRange(String weaponRange) {
+		this.weaponRange = weaponRange;
+	}
+	public ItemModel(){
     	savedItemTypeList=new DefaultComboBoxModel();
     	savedItemNameList=new DefaultComboBoxModel();
     	savedEnchantValueList=new HashMap<String,String>();

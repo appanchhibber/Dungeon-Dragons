@@ -85,6 +85,8 @@ public class ItemSceneController implements ActionListener {
 			case "Weapon": {
 				fileModel.readFile(fileModel.setFile("Weapon"));
 				itemModel.setSubItemList(fileModel.getItemsName());
+				itemScreen.weaponTypeLabel.setVisible(true);
+				itemScreen.weaponType.setVisible(true);
 				break;
 			}
 			}
@@ -95,10 +97,16 @@ public class ItemSceneController implements ActionListener {
 
 				itemModel.setItemDecsription(
 						fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
+				if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
+				itemModel.setWeaponType(fileModel.getWeaponType().get(itemScreen.subItemType.getSelectedIndex()));
+				itemModel.setWeaponRange(fileModel.getWeaponRange().get(itemScreen.subItemType.getSelectedIndex()));
+				}
 			} else {
 
 				itemModel.setImage(fileModel.getItemsImage().get(0));
 				itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
+				itemModel.setWeaponType(fileModel.getWeaponType().get(0));
+				itemModel.setWeaponRange(fileModel.getWeaponRange().get(0));
 			}
 
 		}

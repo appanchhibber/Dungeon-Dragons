@@ -46,7 +46,31 @@ public class FileOperationModel {
 	private ArrayList<String> itemsName;
 	private ArrayList<String> itemsImage;
 	private ArrayList<String> itemDesription;
+	private String rootElementName;
+	
+	public String getRootElementName() {
+		return rootElementName;
+	}
+
+
+	public void setRootElementName(String rootElementName) {
+		this.rootElementName = rootElementName;
+	}
+
+
+	public ArrayList<String> getWeaponType() {
+		return weaponType;
+	}
+
+
+	public ArrayList<String> getWeaponRange() {
+		return weaponRange;
+	}
+
+
 	private ArrayList<String> enchantValue;
+	private ArrayList<String> weaponType;
+	private ArrayList<String> weaponRange;
 	private DefaultListModel readFileList;
 	private DefaultListModel treasureList;
 
@@ -107,6 +131,8 @@ public class FileOperationModel {
 		itemsName = new ArrayList<String>();
 		itemsImage = new ArrayList<String>();
 		itemDesription = new ArrayList<String>();
+		weaponType = new ArrayList<String>();
+		weaponRange = new ArrayList<String>();
 		enchantValue = new ArrayList<String>();
 		SAXReader reader = new SAXReader();
 		Document document = null;
@@ -117,11 +143,18 @@ public class FileOperationModel {
 		}
 
 		Element rootElement = document.getRootElement();
+		rootElementName = rootElement.getName();
 		List<Element> typeElements = rootElement.elements();
 		for (Element item : typeElements) {
+			//System.out.println(item.selectSingleNode("weapontype").getText());
 			itemsName.add(item.selectSingleNode("name").getText());
 			itemsImage.add(item.selectSingleNode("image").getText());
 			itemDesription.add(item.selectSingleNode("description").getText());
+		
+			if(rootElement.getName().equalsIgnoreCase("weapon")){
+				weaponType.add(item.selectSingleNode("weapontype").getText());
+				weaponRange.add(item.selectSingleNode("range").getText());
+			}
 		}
 	}
 
