@@ -11,23 +11,34 @@ import com.SOEN6441_DND.Views.PlayArena;
 
 public class ComputerStrategy implements Strategy {
 	private int stepCount=0;
+	int charLocX=0;
+	int charLocY=0;
+	ArrayList<Dimension> computerPath=new ArrayList<Dimension>();
 	@Override
 	public void execute(MapModel mapModel,CharacterModel charModel) {
-		ArrayList<Dimension> computerPath=new ArrayList<Dimension>();
-		computerPath = PathValidatorController.computerPath(1, mapModel.getMapWidth(),
-				mapModel.getMapHeight(), (int)charModel.getCharLocation().getWidth(),
-				(int) charModel.getCharLocation().getHeight(),(int) mapModel.chest.getWidth(),
-				(int) mapModel.chest.getHeight(), mapModel.getWalls());
-		/*computerPath = PathValidatorController.computerPath(2, mapModel.getMapWidth(),
-				mapModel.getMapHeight(), (int)mapModel.chest.getWidth(),
-				(int) mapModel.chest.getHeight(),(int) mapModel.exit.getWidth(),
-				(int) mapModel.exit.getHeight(), mapModel.getWalls());*/
-		Collections.reverse(computerPath);
-		System.out.println("Complete Path is:"+computerPath);
-		for(Dimension d:computerPath){
+		if(computerPath.size()==0){
+			ArrayList<Dimension> pathToChest = PathValidatorController.computerPath(1, mapModel.getMapWidth(),
+					mapModel.getMapHeight(), (int)charModel.getCharLocation().getWidth(),
+					(int) charModel.getCharLocation().getHeight(),(int) mapModel.chest.getWidth(),
+					(int) mapModel.chest.getHeight(), mapModel.getWalls());
+			Collections.reverse(pathToChest);
+			computerPath.addAll(pathToChest);
+			ArrayList<Dimension> pathToExit = PathValidatorController.computerPath(2, mapModel.getMapWidth(),
+					mapModel.getMapHeight(), (int)mapModel.chest.getWidth(),
+					(int) mapModel.chest.getHeight(),(int) mapModel.exit.getWidth(),
+					(int) mapModel.exit.getHeight(), mapModel.getWalls());
+			Collections.reverse(pathToExit);
+			computerPath.addAll(pathToExit);
+		}
+		for(Dimension d:(ArrayList<Dimension>)computerPath.clone()){
 			if(stepCount<3){
-			System.out.println("3 movements are:"+d);
-			stepCount++;
+			charLocX=(int)d.getWidth();
+			 charLocY=(int)d.getHeight();
+			 System.out.println(d);
+			 stepCount++;
+					charModel.setBehaviour("Computer");
+					remove(d);
+					charModel.setCharLocation(new Dimension(charLocX,charLocY));
 			}
 			else{
 				stepCount=0;
@@ -36,7 +47,10 @@ public class ComputerStrategy implements Strategy {
 			
 		}
 	}
-
+	public void remove(Object dimension){
+		computerPath.remove(dimension);
+		System.out.println("updated computer path"+computerPath);
+	}
 	@Override
 	public String getStrategyName() {
 		return "ComputerStrategy";

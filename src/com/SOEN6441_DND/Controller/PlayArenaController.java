@@ -95,7 +95,7 @@ public class PlayArenaController implements ActionListener {
 			this.setStrategy(new FriendlyStrategy());
 			this.execute(playArena.gridView.mapModel,
 					playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			//turn();
+			turn();
 			break;
 		}
 		case "Computer": {
