@@ -266,6 +266,15 @@ public class ItemScene extends View implements Observer {
 				itemNewName.setVisible(true);
 				savedItemNames.setModel(itemViewModel.getSavedItemNameList());
 				savedItemNames.setVisible(true);
+				if(itemViewModel.getItemType().equalsIgnoreCase("weapon")){
+				weaponTypeLabel.setVisible(true);
+				weaponType.setText(itemViewModel.getWeaponType());
+				weaponType.setVisible(true);
+				weaponTypeLabel.setVisible(true);
+				weaponRangeLabel.setVisible(true);
+				weaponRange.setText(itemViewModel.getWeaponRange());
+				weaponRange.setVisible(true);
+				}
 				HashMap<String,String> enchantLists=itemViewModel.getSavedEnchantValueList();
 				enchantList.setSelectedItem(enchantLists.get(savedItemNames.getSelectedItem().toString()));
 				imageLabel.setIcon(new ImageIcon(

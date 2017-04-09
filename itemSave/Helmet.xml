@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Helmet>
-  <type id="1">
-    <itemTypeName>Imperial Helmet</itemTypeName>
-    <name>My Helm</name>
+<Helmet> 
+  <type id="1"> 
+    <itemTypeName>Imperial Helmet</itemTypeName>  
+    <name>My Helm</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="2">
+    <itemTypeName>Light Helm</itemTypeName>
+    <name>new hemlParas</name>
     <enchantValue>1</enchantValue>
   </type>
 </Helmet>

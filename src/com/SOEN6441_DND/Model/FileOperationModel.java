@@ -157,7 +157,6 @@ public class FileOperationModel {
 		}
 
 	}
-	
 	/**
 	 * This method is used to read the character file saved by the user
 	 * 
@@ -202,6 +201,13 @@ public class FileOperationModel {
 			itemModel.savedItemTypeList.addElement(itemType.getText());
 			Node itemName=item.selectSingleNode("name");
 			itemModel.savedItemNameList.addElement(itemName.getText());
+			if(file.getName().substring(0, 6).equals("Weapon")){
+				Node weaponType = item.selectSingleNode("weaponType");
+				//itemModel.weaponTypeList.addElement(weaponType.getText());
+				itemModel.weaponType = weaponType.getText();
+				Node weaponRange = item.selectSingleNode("weaponRange");
+				itemModel.weaponRange = weaponRange.getText();
+			}
 			Node enchantValue=item.selectSingleNode("enchantValue");
 			itemModel.savedEnchantValueList.put(itemName.getText(),enchantValue.getText());
 		}
@@ -483,6 +489,10 @@ public class FileOperationModel {
 						typeId.addElement("itemTypeName")
 								.addText(currentScene.subItemType.getSelectedItem().toString());
 						typeId.addElement("name").addText(currentScene.nameField.getText());
+						if(currentScene.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
+							typeId.addElement("weaponType").addText(currentScene.weaponType.getText());
+							typeId.addElement("weaponRange").addText(currentScene.weaponRange.getText());
+						}
 						typeId.addElement("enchantValue")
 								.addText(currentScene.enchantList.getSelectedItem().toString());
 						write(document, file);

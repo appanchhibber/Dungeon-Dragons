@@ -3,12 +3,23 @@
 <Weapon> 
   <type id="1"> 
     <itemTypeName>Thane Steel Battle Axe</itemTypeName>  
-    <name>My Axe</name>  
+    <name>My Axe</name>
+    <weaponType>Melee</weaponType>
+    <weaponRange>1</weaponRange>  
     <enchantValue>1</enchantValue> 
   </type>  
-  <type id="2">
-    <itemTypeName>Thane Steel Battle Axe</itemTypeName>
+  <type id="2"> 
+    <itemTypeName>Thane Steel Battle Axe</itemTypeName>  
     <name>My Axe2</name>
-    <enchantValue>2</enchantValue>
+    <weaponType>Melee</weaponType>
+    <weaponRange>1</weaponRange>  
+    <enchantValue>2</enchantValue> 
+  </type>  
+  <type id="3">
+    <itemTypeName>Steel Sword</itemTypeName>
+    <name>new swordParas</name>
+    <weaponType>Melee</weaponType>
+    <weaponRange>1</weaponRange>
+    <enchantValue>1</enchantValue>
   </type>
 </Weapon>

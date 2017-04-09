@@ -50,14 +50,22 @@ public class ItemModel extends Observable{
     public DefaultComboBoxModel savedItemTypeList;
     public DefaultComboBoxModel savedItemNameList;
     public HashMap<String,String> savedEnchantValueList;
+    public DefaultComboBoxModel weaponTypeList;
+    public DefaultComboBoxModel weaponRangeList;
     
-    public HashMap<String,String> getSavedEnchantValueList(){
+    public DefaultComboBoxModel getWeaponRangeList() {
+		return weaponRangeList;
+	}
+	public HashMap<String,String> getSavedEnchantValueList(){
     	return savedEnchantValueList;
     }
     public DefaultComboBoxModel getSavedItemTypeList() {
 		return savedItemTypeList;
 	}
 
+	public DefaultComboBoxModel getWeaponTypeList() {
+		return weaponTypeList;
+	}
 	public DefaultComboBoxModel getSavedItemNameList() {
 		return savedItemNameList;
 	}
