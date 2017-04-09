@@ -407,8 +407,6 @@ public class GridView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("Observable recieved");
-		playArena.startGame.setVisible(false);
 			characterModel=(CharacterModel)o;
 			if(characterModel.message=="LocationUpdate")
 			{

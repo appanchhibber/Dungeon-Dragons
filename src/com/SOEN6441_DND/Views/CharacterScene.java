@@ -71,7 +71,7 @@ public class CharacterScene extends View implements Observer {
 
 		// Model Initialization
 		characterViewModel = new CharacterModel();
-		characterViewModel.addObserver(this);
+		
 		abilityModifier = new AbilityModel();
 		abilityScore = new AbilityModel();
 
@@ -195,7 +195,7 @@ public class CharacterScene extends View implements Observer {
 		tank.setLocation(420, 220);
 		tank.addActionListener(characterController);
 		abilityPanel.add(tank);
-
+		characterViewModel.addObserver(this);
 		this.add(imagePanel);
 		this.add(abilityPanel);
 

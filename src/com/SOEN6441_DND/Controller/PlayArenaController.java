@@ -130,6 +130,7 @@ public class PlayArenaController implements ActionListener {
 			playArena.charInventory.setcharModel(playArena.playInfoPanel.player);
 			playArena.charInventory.setInventory();
 		} else if(e.getSource()==playArena.startGame){
+			playArena.startGame.setVisible(false);
 			playArena.playModel.setPlayOrder();
 			mapModel.setCharacterName(characterModel.getName()+"-"+characterModel.getBehaviour());
 			turn();
