@@ -38,6 +38,7 @@ public class ItemModel extends Observable{
 	}
 	public void setWeaponRange(String weaponRange) {
 		this.weaponRange = weaponRange;
+		notifyItemView("weaponRange changed");
 	}
 	public ItemModel(){
     	savedItemTypeList=new DefaultComboBoxModel();

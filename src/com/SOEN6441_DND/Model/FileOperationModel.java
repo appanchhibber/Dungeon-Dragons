@@ -146,7 +146,6 @@ public class FileOperationModel {
 		rootElementName = rootElement.getName();
 		List<Element> typeElements = rootElement.elements();
 		for (Element item : typeElements) {
-			//System.out.println(item.selectSingleNode("weapontype").getText());
 			itemsName.add(item.selectSingleNode("name").getText());
 			itemsImage.add(item.selectSingleNode("image").getText());
 			itemDesription.add(item.selectSingleNode("description").getText());
@@ -156,8 +155,9 @@ public class FileOperationModel {
 				weaponRange.add(item.selectSingleNode("range").getText());
 			}
 		}
-	}
 
+	}
+	
 	/**
 	 * This method is used to read the character file saved by the user
 	 * 

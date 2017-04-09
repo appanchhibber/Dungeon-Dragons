@@ -56,6 +56,8 @@ public class ItemScene extends View implements Observer {
 	public JLabel itemInfoLabel;
 	public JLabel chestSelectLabel;
 	public JLabel weaponTypeLabel;
+	public JLabel weaponRangeLabel;
+	
 	public JCheckBox addChest;
 	public JTextArea itemDescription;
 	public JLabel itemNewName;
@@ -64,6 +66,7 @@ public class ItemScene extends View implements Observer {
 	// TextField
 	public JTextField nameField;
 	public JTextField weaponType;
+	public JTextField weaponRange;
 
 	// Controllers
 	public ItemSceneController itemController;
@@ -131,26 +134,38 @@ public class ItemScene extends View implements Observer {
 		
 		weaponType = new JTextField();
 		weaponType.setSize(120, 20);
-		weaponType.setLocation(150, 260);
+		weaponType.setLocation(150, 250);
 		weaponType.setForeground(Color.BLUE);
 		weaponType.setEditable(false);
 		weaponType.setVisible(false);
 		
+		weaponRangeLabel = new JLabel("Weapon Range : ");
+		weaponRangeLabel.setSize(100, 30);
+		weaponRangeLabel.setLocation(30, 300);
+		weaponRangeLabel.setForeground(Color.WHITE);
+		weaponRangeLabel.setVisible(false);
+		
+		weaponRange = new JTextField();
+		weaponRange.setSize(120, 20);
+		weaponRange.setLocation(150, 310);
+		weaponRange.setForeground(Color.BLUE);
+		weaponRange.setEditable(false);
+		weaponRange.setVisible(false);
 		
 		enchantLabel = new JLabel("Enchantment Value:");
 		enchantLabel.setSize(210, 20);
-		enchantLabel.setLocation(30, 300);
+		enchantLabel.setLocation(30, 350);
 		enchantLabel.setForeground(Color.WHITE);
 		
 		enchantList = new JComboBox();
 		enchantList.setSize(60, 20);
-		enchantList.setLocation(180, 300);
+		enchantList.setLocation(180, 350);
 		
 		addChest=new JCheckBox("Add To Tressure");
 		addChest.setSize(210, 30);
 		addChest.setOpaque(false);
 		addChest.setForeground(Color.WHITE);
-		addChest.setLocation(30, 330);
+		addChest.setLocation(30, 390);
 		
 		
 		itemViewPanel.add(itemTypeLabel);
@@ -166,6 +181,8 @@ public class ItemScene extends View implements Observer {
 		itemViewPanel.add(itemNewName);
 		itemViewPanel.add(weaponType);
 		itemViewPanel.add(weaponTypeLabel);
+		itemViewPanel.add(weaponRangeLabel);
+		itemViewPanel.add(weaponRange);
 
 		
 		imagePanel = new View();
@@ -300,7 +317,15 @@ public class ItemScene extends View implements Observer {
 		}
 
 		else if(itemViewModel.message == "weaponType changed"){
+			weaponTypeLabel.setVisible(true);
+			weaponType.setVisible(true);
 			weaponType.setText(itemViewModel.getWeaponType());
+			}
+	
+		else if(itemViewModel.message == "weaponRange changed"){
+			weaponRangeLabel.setVisible(true);
+			weaponRange.setVisible(true);
+			weaponRange.setText(itemViewModel.getWeaponRange());
 		}
 	}
 }
