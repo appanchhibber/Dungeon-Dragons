@@ -32,6 +32,7 @@ public class ComputerStrategy implements Strategy,Runnable {
 			Collections.reverse(pathToExit);
 			computerPath.addAll(pathToExit);	
 		}
+		remove(computerPath.get(0));
 		this.charModel=charModel;
 		t1=new Thread(this);
 		t1.start();

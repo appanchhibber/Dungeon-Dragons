@@ -237,8 +237,9 @@ public class CharacterModel extends Observable {
 
 	public void setType(String type) {
 		this.type = type;
-		setModifer();
 		resetScore();
+		setModifer();
+		notifyCharacterView();
 	}
 
 	public int getHitPoints() {

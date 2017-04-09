@@ -71,14 +71,16 @@ public class CharacterScene extends View implements Observer {
 
 		// Model Initialization
 		characterViewModel = new CharacterModel();
+		characterViewModel.addObserver(this);
 		abilityModifier = new AbilityModel();
 		abilityScore = new AbilityModel();
 
 		itemAssignView = new ItemAssignView();
-		itemAssignView.setCharacterModel(characterViewModel);
 		
+		itemAssignView.setCharacterModel(characterViewModel);
 		characterViewModel.setAbilityScore(abilityScore);
 		characterViewModel.setAbilityModifier(abilityModifier);
+		
 
 		// Panel Initialization
 		abilityPanel = new AbilityPanelView();
@@ -144,7 +146,7 @@ public class CharacterScene extends View implements Observer {
 
 		characterViewModel.setImage("image/Human.jpg");
 		characterViewModel.setType("Human");
-		characterViewModel.addObserver(this);
+		
 		
 		characterImage = new ImageIcon(characterViewModel.getImage());
 		// characterViewModel.setAbilityModifier(abilitiyModifier);
@@ -203,7 +205,6 @@ public class CharacterScene extends View implements Observer {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		characterViewModel=(CharacterModel)o;
-		
 		if(characterViewModel.message=="image")
 		{
 		  characterViewModel.message="";
@@ -216,8 +217,11 @@ public class CharacterScene extends View implements Observer {
 	}
 
 	public void setCharacter() {
+		if(characterViewModel.getName()!=null){
 		this.nameText.setText(characterViewModel.getName());
 		this.levels.setSelectedItem(String.valueOf(characterViewModel.getLevel()));
+		}
+		
 	}
 	public void setCharacterType(){
 		switch(characterViewModel.getType())

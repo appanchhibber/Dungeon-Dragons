@@ -29,6 +29,7 @@ public class HostileStrategy implements Strategy,Runnable {
 					(int) playerLoc.getWidth(),
 					(int) playerLoc.getHeight(), mapModel.getWalls());
 		Collections.reverse(hostilePath);
+		hostilePath.remove(0);
 		t1=new Thread(this);
 		t1.start();
 
@@ -44,12 +45,12 @@ public class HostileStrategy implements Strategy,Runnable {
 			if(stepCount<3){
 				charLocX=(int)d.getWidth();
 				 charLocY=(int)d.getHeight();
-				 stepCount++;
 						charModel.setBehaviour("Hostile");
 					//	mapModel.updateCharLocation(charModel.getName()+"-Hostile", new Dimension(charLocY,charLocX));
 						try {
 							 t1.sleep(1000);
 					            charModel.setCharLocation(new Dimension(charLocX,charLocY));
+					            stepCount++;
 						}catch(Exception e){
 							e.printStackTrace();
 						}

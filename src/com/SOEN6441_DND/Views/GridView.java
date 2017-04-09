@@ -412,10 +412,7 @@ public class GridView extends JPanel implements Observer {
 			characterModel=(CharacterModel)o;
 			if(characterModel.message=="LocationUpdate")
 			{
-
-						moveCharacter();
-
-				
+				moveCharacter();
 				this.stepCounter++;
 				if(this.stepCounter>=3)
 				{

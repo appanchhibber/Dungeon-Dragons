@@ -76,10 +76,10 @@ public class PlayArenaController implements ActionListener {
 		case "Player": {
 			System.out.println("Player Turn");
 			this.setStrategy(new PlayerStrategy());
-			synchronized (this) {
+			
 				this.execute(playArena.gridView.mapModel,
 						playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			}
+			
 			break;
 		}
 		case "Hostile": {

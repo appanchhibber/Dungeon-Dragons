@@ -103,7 +103,7 @@ public class CharacterSceneController implements ActionListener {
 				characterModel.setType("Orc");
 				break;
 			}
-
+			
 			}
 		}
 

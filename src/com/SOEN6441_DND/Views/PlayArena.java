@@ -56,29 +56,30 @@ public class PlayArena extends View implements Observer {
 	public PlayerInfoPanelView playInfoPanel;
 	public CharacterInventoryView charInventory;
 	public View navPanel;
-	public static  InputMap inputMap;
+	public static InputMap inputMap;
 	public static ActionMap actionMap;
-	
+
 	public JButton startGame;
+
 	@Override
 	protected void initSubviews() {
 		super.initSubviews();
 		playInfoPanel = new PlayerInfoPanelView();
 		this.add(playInfoPanel);
 		charInventory = new CharacterInventoryView();
-		navPanel=new View();
-		navPanel.setSize(845,60);
+		navPanel = new View();
+		navPanel.setSize(845, 60);
 		navPanel.setLocation(5, 545);
 		navPanel.setVisible(true);
 		navPanel.setBackground(Color.BLACK);
-		
-		startGame=new JButton("Start Game");
-		startGame.setSize(100,30);
-		startGame.setLocation(10,10);
+
+		startGame = new JButton("Start Game");
+		startGame.setSize(100, 30);
+		startGame.setLocation(10, 10);
 		startGame.setVisible(true);
 		navPanel.add(startGame);
 		this.add(navPanel);
-		
+
 	}
 
 	/**
@@ -89,33 +90,31 @@ public class PlayArena extends View implements Observer {
 	 * @param charModel
 	 * @author Appan Chhibber
 	 */
-	public PlayArena(MapModel mapModel, CampaignModel campaignModel,
-			CharacterModel charModel) {
+	public PlayArena(MapModel mapModel, CampaignModel campaignModel, CharacterModel charModel) {
 		this.mapModel = mapModel;
 		this.campaignModel = campaignModel;
-		this.charModel=charModel;
-		
+		this.charModel = charModel;
+
 		playModel = new PlayModel();
 		ioModel = new FileOperationModel();
+		mapModel.addObserver(this);
 		playController = new PlayArenaController(this);
-		
 
-		
 		playInfoPanel.inventoryBtn.addActionListener(playController);
 		charLocX = (int) (mapModel.getEntry().getWidth()) + 1;
 		charLocY = (int) (mapModel.getEntry().getHeight());
-		chestFlag = false;
-		charModel.setCharLocation(new Dimension(charLocX,charLocY));
-		playInfoPanel.player=charModel;
+		charModel.setCharLocation(new Dimension(charLocX, charLocY));
+		playInfoPanel.player = charModel;
 		playInfoPanel.setPanel();
 		playInfoPanel.player.addObserver(playInfoPanel);
-		playModel.addCharacter((charModel.getName()+"-"+charModel.getBehaviour()), charModel);
-		mapModel.addCharLocation((charModel.getName()+"-"+charModel.getBehaviour()), new Dimension(charLocX,charLocY));
+		playModel.addCharacter((charModel.getName() + "-" + charModel.getBehaviour()), charModel);
+		mapModel.addCharLocation((charModel.getName() + "-" + charModel.getBehaviour()),
+				new Dimension(charLocX, charLocY));
 		gridView = new GridView(mapModel, this);
 		inputMap = this.gridView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
 		actionMap = this.gridView.getActionMap();
-		
-		for(Map.Entry<String, CharacterModel> charact:playModel.characters.entrySet()){
+
+		for (Map.Entry<String, CharacterModel> charact : playModel.characters.entrySet()) {
 			charact.getValue().setLevel(charModel.getLevel());
 			charact.getValue().addObserver(gridView);
 		}
@@ -123,6 +122,7 @@ public class PlayArena extends View implements Observer {
 
 		startGame.addActionListener(playController);
 	}
+
 	/**
 	 * Observer update method to allow changes to be displayed on the map
 	 * 
@@ -130,14 +130,13 @@ public class PlayArena extends View implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-		this.charModel = (CharacterModel) o;
-		System.out.println("inside update method");
-		if (charModel.message == "character data") {
-			System.out.println("inside character data method");
-			System.out.println(charModel.getAbilityScore().getWisdom());
-			System.out.println(charModel.getAbilityScore().getCharisma());
-			System.out.println(charModel.getFighterType());
-			System.out.println(charModel.getName());
+		mapModel = (MapModel) o;
+		if (mapModel.message == "Next Map") {
+			if (mapModel.isLoadNextMap()) {
+				loadNextMap();
+			} else {
+				JOptionPane.showMessageDialog(null, "Collect Chest First");
+			}
 		}
 
 	}
@@ -149,16 +148,17 @@ public class PlayArena extends View implements Observer {
 	 * @param mapName
 	 * @author Appan Chhibber
 	 */
-	public void loadNextMap(String mapName) {
-		playController.nextMapFlag=true;
+	public void loadNextMap() {
+
+		campaignModel.getCampMapList().removeElement(mapModel.mapName);
+		if (campaignModel.getCampMapList().size() == 0) {
+			gameController.mainFrame.setView(new MainScene());
+		}
 		gameController = GameController.getInstance();
-		mapModel = ioModel.readMapFile(new File("maps/" + mapName));
-		charModel.setLevel(charModel.getLevel()+1);
-		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel,
-				charModel));
-		
+		mapModel = ioModel.readMapFile(new File("maps/" + campaignModel.getCampMapList().get(0).toString()));
+		charModel.setLevel(charModel.getLevel() + 1);
+		gameController.mainFrame.setView(new PlayArena(mapModel, campaignModel, charModel));
+
 	}
-
-
 
 }
