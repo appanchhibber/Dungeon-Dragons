@@ -9,11 +9,13 @@ import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.PlayArena;
 
-public class ComputerStrategy implements Strategy {
+public class ComputerStrategy implements Strategy,Runnable {
 	private int stepCount=0;
 	int charLocX=0;
 	int charLocY=0;
 	ArrayList<Dimension> computerPath=new ArrayList<Dimension>();
+	CharacterModel charModel;
+	Thread t1;
 	@Override
 	public void execute(MapModel mapModel,CharacterModel charModel) {
 		if(computerPath.size()==0){
@@ -28,24 +30,11 @@ public class ComputerStrategy implements Strategy {
 					(int) mapModel.chest.getHeight(),(int) mapModel.exit.getWidth(),
 					(int) mapModel.exit.getHeight(), mapModel.getWalls());
 			Collections.reverse(pathToExit);
-			computerPath.addAll(pathToExit);
+			computerPath.addAll(pathToExit);	
 		}
-		for(Dimension d:(ArrayList<Dimension>)computerPath.clone()){
-			if(stepCount<3){
-			charLocX=(int)d.getWidth();
-			 charLocY=(int)d.getHeight();
-			 System.out.println(d);
-			 stepCount++;
-					charModel.setBehaviour("Computer");
-					remove(d);
-					charModel.setCharLocation(new Dimension(charLocX,charLocY));
-			}
-			else{
-				stepCount=0;
-				return ;
-			}
-			
-		}
+		this.charModel=charModel;
+		t1=new Thread(this);
+		t1.start();
 	}
 	public void remove(Object dimension){
 		computerPath.remove(dimension);
@@ -54,6 +43,33 @@ public class ComputerStrategy implements Strategy {
 	@Override
 	public String getStrategyName() {
 		return "ComputerStrategy";
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		for(Dimension d:(ArrayList<Dimension>)computerPath.clone()){
+			if(stepCount<3){
+			charLocX=(int)d.getWidth();
+			 charLocY=(int)d.getHeight();
+			 System.out.println(d);
+			 stepCount++;
+					charModel.setBehaviour("Computer");
+					remove(d);
+					try {
+						Thread.sleep(1000);
+						charModel.setCharLocation(new Dimension(charLocX,charLocY));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+			}
+			else{
+				stepCount=0;
+				return ;
+			}
+			
+		}
 	}
 
 }

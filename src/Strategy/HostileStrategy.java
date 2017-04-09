@@ -7,13 +7,14 @@ import com.SOEN6441_DND.Controller.PathValidatorController;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.MapModel;
 
-public class HostileStrategy implements Strategy {
+public class HostileStrategy implements Strategy,Runnable {
 	ArrayList<Dimension> hostilePath;
 	int stepCount=0;
 	CharacterModel charModel;
 	MapModel mapModel;
 	int charLocX=0;
 	int charLocY=0;
+	Thread t1;
 	@Override
 	public void execute(MapModel mapModel,CharacterModel charModel) {
 		System.out.println("Execute Hostile Strategy");
@@ -28,23 +29,27 @@ public class HostileStrategy implements Strategy {
 					(int) playerLoc.getWidth(),
 					(int) playerLoc.getHeight(), mapModel.getWalls());
 		Collections.reverse(hostilePath);
-		
+		t1=new Thread(this);
+		t1.start();
+
+	}
+	@Override
+	public String getStrategyName() {
+		return "HostileStrategy";
+	}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		for(Dimension d:hostilePath){
 			if(stepCount<3){
 				charLocX=(int)d.getWidth();
 				 charLocY=(int)d.getHeight();
-				 System.out.println(d);
 				 stepCount++;
 						charModel.setBehaviour("Hostile");
 					//	mapModel.updateCharLocation(charModel.getName()+"-Hostile", new Dimension(charLocY,charLocX));
 						try {
-							int sleepSeconds = 1;
-					        while(sleepSeconds==1) {
-					            //do your job...
-					            Thread.sleep(sleepSeconds * 1000);
-					            sleepSeconds=0;
-					        }
-							charModel.setCharLocation(new Dimension(charLocX,charLocY));
+							 t1.sleep(1000);
+					            charModel.setCharLocation(new Dimension(charLocX,charLocY));
 						}catch(Exception e){
 							e.printStackTrace();
 						}
@@ -55,13 +60,7 @@ public class HostileStrategy implements Strategy {
 					return;
 				}
 
-
 				}
-
-	}
-	@Override
-	public String getStrategyName() {
-		return "HostileStrategy";
 	}
 
 }
