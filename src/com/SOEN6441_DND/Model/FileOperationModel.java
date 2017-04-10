@@ -203,10 +203,11 @@ public class FileOperationModel {
 			itemModel.savedItemNameList.addElement(itemName.getText());
 			if(file.getName().substring(0, 6).equals("Weapon")){
 				Node weaponType = item.selectSingleNode("weaponType");
-				//itemModel.weaponTypeList.addElement(weaponType.getText());
-				itemModel.weaponType = weaponType.getText();
+				itemModel.weaponTypeList.addElement(weaponType.getText());
+				//itemModel.weaponType = weaponType.getText();
 				Node weaponRange = item.selectSingleNode("weaponRange");
-				itemModel.weaponRange = weaponRange.getText();
+				itemModel.weaponRangeList.addElement(weaponRange.getText());
+				//itemModel.weaponRange = weaponRange.getText();
 			}
 			Node enchantValue=item.selectSingleNode("enchantValue");
 			itemModel.savedEnchantValueList.put(itemName.getText(),enchantValue.getText());
@@ -433,15 +434,12 @@ public class FileOperationModel {
 
 	}
 
-	/**
-	 * This method is reponsible for saving the item created.
-	 * 
-	 * @param currentScene
-	 *            ItemScene
-	 * @author Paras Malik
-	 * @throws IOException
-	 */
-
+	
+/**
+ * This method is responsible for reading the contents of items saved in ItemSave folder
+ * @param file
+ * @return
+ */
 	public ItemModel readItemFile(File file) {
 
 		ItemModel itemModel = new ItemModel();
@@ -465,10 +463,18 @@ public class FileOperationModel {
 		return itemModel;
 	}
 
-	public String writeItemData(ItemScene currentScene) throws IOException {
+	/**
+	 * This method is responsible for saving contents of the itemScreen into file in itemSave folder.
+	 * @param writeItemModel
+	 * @return String type value
+	 * @throws IOException
+	 */
+	public String writeItemData(ItemModel writeItemModel) throws IOException {
+		
+		
 		File file = null;
 		
-			file = new File("itemSave/" + currentScene.itemType.getSelectedItem().toString() + ".xml");
+			file = new File("itemSave/" + writeItemModel.getItemType() + ".xml");
 
 			if (file.exists()) {
 					
@@ -482,21 +488,21 @@ public class FileOperationModel {
 					for (Element item : typeElements) {
 						itemsName.add(item.selectSingleNode("name").getText());
 					}
-					if (itemsName.contains(currentScene.nameField.getText())) {
+					if (itemsName.contains(writeItemModel.getName())) {
 						return "Item already Exist!!";
 					} else {
 						List<org.dom4j.Element> list = root.elements();
 						int total = list.size() + 1;
 						Element typeId = root.addElement("type").addAttribute("id", String.valueOf(total));
 						typeId.addElement("itemTypeName")
-								.addText(currentScene.subItemType.getSelectedItem().toString());
-						typeId.addElement("name").addText(currentScene.nameField.getText());
-						if(currentScene.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
-							typeId.addElement("weaponType").addText(currentScene.weaponType.getText());
-							typeId.addElement("weaponRange").addText(currentScene.weaponRange.getText());
+								.addText(writeItemModel.getSubItemType());
+						typeId.addElement("name").addText(writeItemModel.getName());
+						if(writeItemModel.getItemtype().equalsIgnoreCase("weapon")){
+							typeId.addElement("weaponType").addText(writeItemModel.getWeaponType());
+							typeId.addElement("weaponRange").addText(writeItemModel.getWeaponRange());
 						}
 						typeId.addElement("enchantValue")
-								.addText(currentScene.enchantList.getSelectedItem().toString());
+								.addText(Integer.toString(writeItemModel.getEnchantValue()));
 						write(document, file);
 					}
 				} catch (DocumentException e) {
@@ -507,25 +513,26 @@ public class FileOperationModel {
 				else {
 
 					Document document = DocumentHelper.createDocument();
-					Element root = document.addElement(currentScene.itemType.getSelectedItem().toString());
+					Element root = document.addElement(writeItemModel.getItemtype());
 					Element typeId = root.addElement("type").addAttribute("id", "1");
-					typeId.addElement("itemTypeName").addText(currentScene.subItemType.getSelectedItem().toString());
-					typeId.addElement("name").addText(currentScene.nameField.getText());
-					typeId.addElement("enchantValue").addText(currentScene.enchantList.getSelectedItem().toString());
+					typeId.addElement("itemTypeName").addText(writeItemModel.getSubItemType());
+					typeId.addElement("name").addText(writeItemModel.getName());
+					typeId.addElement("enchantValue").addText(Integer.toString(writeItemModel.getEnchantValue()));
 					write(document, file);
 				}
 	
 
 	 
-		return "File Saved!!";
+	return "File Saved!!";
 
 	}
+	
 	/**
 	 * This function add values in the treasure file in items folder
-	 * @param currentScene
+	 * @param writeChestModel
 	 * @author Paras Malik
 	 */
-	public void writeChestFile(ItemScene currentScene) {
+	public void writeChestFile(ItemModel writeChestModel) {
 		File file = new File("items/Treasure.xml");
 
 		if (file.exists()) {
@@ -538,9 +545,9 @@ public class FileOperationModel {
 				List<org.dom4j.Element> list = root.elements();
 				int total = list.size() + 1;
 
-				Element item = root.addElement("item").addAttribute("name", currentScene.nameField.getText());
-				item.addElement("type").addText(currentScene.itemType.getSelectedItem().toString());
-				item.addElement("name").addText(currentScene.nameField.getText());
+				Element item = root.addElement("item").addAttribute("name", writeChestModel.getName());
+				item.addElement("type").addText(writeChestModel.getItemType());
+				item.addElement("name").addText(writeChestModel.getName());
 				try {
 					write(document, file);
 				} catch (IOException e) {
@@ -559,9 +566,9 @@ public class FileOperationModel {
 
 			Element rootElement = document.addElement("treasure");
 			Element root = rootElement.addElement("item");
-			root.addAttribute("name", currentScene.nameField.getText());
-			root.addElement("type").addText(currentScene.itemType.getSelectedItem().toString());
-			root.addElement("name").addText(currentScene.nameField.getText());
+			root.addAttribute("name", writeChestModel.getName());
+			root.addElement("type").addText(writeChestModel.getItemtype());
+			root.addElement("name").addText(writeChestModel.getName());
 			try {
 				write(document, file);
 			} catch (IOException e) {

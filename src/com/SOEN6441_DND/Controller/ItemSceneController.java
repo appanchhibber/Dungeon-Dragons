@@ -54,42 +54,50 @@ public class ItemSceneController implements ActionListener {
 			case "Helmet": {
 				fileModel.readFile(fileModel.setFile("Helmet"));
 				itemModel.setSubItemList(fileModel.getItemsName());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
 				break;
 			}
 			case "Armor": {
 				fileModel.readFile(fileModel.setFile("Armor"));
 
 				itemModel.setSubItemList(fileModel.getItemsName());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
 				break;
 			}
 			case "Shield": {
 				fileModel.readFile(fileModel.setFile("Shield"));
 				itemModel.setSubItemList(fileModel.getItemsName());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
 				break;
 			}
 			case "Ring": {
 				fileModel.readFile(fileModel.setFile("Ring"));
 				itemModel.setSubItemList(fileModel.getItemsName());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
 				break;
 			}
 			case "Belt": {
 				fileModel.readFile(fileModel.setFile("Belt"));
 				itemModel.setSubItemList(fileModel.getItemsName());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
 				break;
 			}
 			case "Boots": {
 				fileModel.readFile(fileModel.setFile("Boots"));
 				itemModel.setSubItemList(fileModel.getItemsName());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
 				break;
 			}
 			case "Weapon": {
 				fileModel.readFile(fileModel.setFile("Weapon"));
 				itemModel.setSubItemList(fileModel.getItemsName());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
 				break;
 			}
 			}
 
 		} else if (e.getSource() == itemScreen.subItemType) {
+			if(itemScreen.mode.equalsIgnoreCase("create")){
 			if (itemScreen.subItemType.getSelectedIndex() != -1) {
 				itemModel.setImage(fileModel.getItemsImage().get(itemScreen.subItemType.getSelectedIndex()));
 
@@ -109,7 +117,30 @@ public class ItemSceneController implements ActionListener {
 				}
 			}
 
-		}
+			}
+			else{
+				if (itemScreen.subItemType.getSelectedIndex() != -1) {
+//					itemModel.setImage(fileModel.getItemsImage().get(itemScreen.subItemType.getSelectedIndex()));
+//
+//					itemModel.setItemDecsription(
+//							fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
+					itemModel.setImage("image/"+itemScreen.subItemType.getSelectedItem().toString().replaceAll("\\s", "")+".jpg");
+					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
+					itemModel.setWeaponType(itemModel.getWeaponTypeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString());
+					itemModel.setWeaponRange(itemModel.getWeaponRangeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString());
+					}
+				} else {
+
+					itemModel.setImage("image/"+itemScreen.subItemType.getSelectedItem().toString().replaceAll("\\s", "")+".jpg");
+					itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
+					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
+					itemModel.setWeaponType(fileModel.getWeaponType().get(0));
+					itemModel.setWeaponRange(fileModel.getWeaponRange().get(0));
+					}
+				}
+				
+			}
+			}
 
 		
 		else if (e.getSource() == itemScreen.navMenuPanel.saveButton) {
@@ -118,11 +149,19 @@ public class ItemSceneController implements ActionListener {
 			} else {
 				try {
 					
+					itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
+					itemModel.setSubItemType(itemScreen.subItemType.getSelectedItem().toString());
+					itemModel.setName(itemScreen.nameField.getText());
+					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
+						itemModel.setWeaponType(itemScreen.weaponType.getText());
+						itemModel.setWeaponRange(itemScreen.weaponRange.getText());
+					}
+					
+					itemModel.setEnchantValue(Integer.parseInt(itemScreen.enchantList.getSelectedItem().toString()));
 					if(itemScreen.addChest.isSelected()==true){
-						fileModel.writeChestFile(itemScreen);
-						
+						fileModel.writeChestFile(itemModel);
 						}
-			JOptionPane.showMessageDialog(null, fileModel.writeItemData(itemScreen));
+			JOptionPane.showMessageDialog(null, fileModel.writeItemData(itemModel));
 
 					
 				

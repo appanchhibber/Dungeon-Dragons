@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Armor>
-  <type id="1">
-    <itemTypeName>Leather Jacket</itemTypeName>
-    <name>My Arm</name>
+<Armor> 
+  <type id="1"> 
+    <itemTypeName>Leather Jacket</itemTypeName>  
+    <name>My Arm</name>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="2">
+    <itemTypeName>Kendo Armor</itemTypeName>
+    <name>my new armor</name>
     <enchantValue>1</enchantValue>
   </type>
 </Armor>

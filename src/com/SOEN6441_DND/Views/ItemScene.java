@@ -28,11 +28,11 @@ import com.SOEN6441_DND.Model.ItemModel.itemTypeList;
  * observe by Item Model.	
  * 
  * @author Paras Malik
- * @author Amirbabak Rahgozar
  *
  */
 public class ItemScene extends View implements Observer {
 
+	public String mode;
 	// Panels
 	public View imagePanel;
 	public NavigationPanelView navMenuPanel;
@@ -57,6 +57,7 @@ public class ItemScene extends View implements Observer {
 	public JLabel chestSelectLabel;
 	public JLabel weaponTypeLabel;
 	public JLabel weaponRangeLabel;
+	public JLabel weaponEnchantment;
 	
 	public JCheckBox addChest;
 	public JTextArea itemDescription;
@@ -74,6 +75,8 @@ public class ItemScene extends View implements Observer {
 	// ImageIcon
 	ImageIcon itemImage;
 	
+	//Checkbox
+	JCheckBox enchantCheck;
 
 	@Override
 	protected void initSubviews() {
@@ -88,69 +91,112 @@ public class ItemScene extends View implements Observer {
 
 		itemTypeLabel = new JLabel("Select Item Type:");
 		itemTypeLabel.setSize(100, 20);
-		itemTypeLabel.setLocation(30, 20);
+		itemTypeLabel.setLocation(30, 10);
 		itemTypeLabel.setForeground(Color.WHITE);
 
 		itemType = new JComboBox();
-		itemType.setSize(140, 40);
+		itemType.setSize(140, 25);
 		itemType.setLocation(150, 10);
 
 	
 		itemLabel = new JLabel("Select Item:");
 		itemLabel.setSize(80, 20);
-		itemLabel.setLocation(30, 90);
+		itemLabel.setLocation(30, 60);
 		itemLabel.setForeground(Color.WHITE);
 
 		subItemType = new JComboBox();
-		subItemType.setSize(140, 40);
-		subItemType.setLocation(150, 80);
+		subItemType.setSize(140, 25);
+		subItemType.setLocation(150, 60);
 
 		
 		nameLabel = new JLabel("Set Name :");
 		nameLabel.setSize(100, 30);
-		nameLabel.setLocation(30, 170);
+		nameLabel.setLocation(30, 120);
 		nameLabel.setForeground(Color.WHITE);
 		
 		nameField = new JTextField();
-		nameField.setSize(140, 30);
-		nameField.setLocation(150, 170);
+		nameField.setSize(140, 25);
+		nameField.setLocation(150, 120);
 		
 		itemNewName = new JLabel("Set new Name");
 		itemNewName.setSize(130, 30);
-		itemNewName.setLocation(30, 210);
+		itemNewName.setLocation(30, 165);
 		itemNewName.setForeground(Color.WHITE);
 		itemNewName.setVisible(false);
 		
 		savedItemNames=new JComboBox<>();
-		savedItemNames.setSize(140, 30);
-		savedItemNames.setLocation(150, 170);
+		savedItemNames.setSize(140, 25);
+		savedItemNames.setLocation(150, 120);
 		savedItemNames.setVisible(false);
 		
 		weaponTypeLabel = new JLabel("Weapon Type : ");
 		weaponTypeLabel.setSize(100, 30);
-		weaponTypeLabel.setLocation(30, 250);
+		weaponTypeLabel.setLocation(30, 175);
 		weaponTypeLabel.setForeground(Color.WHITE);
 		weaponTypeLabel.setVisible(false);
 		
 		weaponType = new JTextField();
 		weaponType.setSize(120, 20);
-		weaponType.setLocation(150, 250);
+		weaponType.setLocation(150, 175);
 		weaponType.setForeground(Color.BLUE);
 		weaponType.setEditable(false);
 		weaponType.setVisible(false);
 		
 		weaponRangeLabel = new JLabel("Weapon Range : ");
 		weaponRangeLabel.setSize(100, 30);
-		weaponRangeLabel.setLocation(30, 300);
+		weaponRangeLabel.setLocation(30, 210);
 		weaponRangeLabel.setForeground(Color.WHITE);
 		weaponRangeLabel.setVisible(false);
 		
 		weaponRange = new JTextField();
 		weaponRange.setSize(120, 20);
-		weaponRange.setLocation(150, 310);
+		weaponRange.setLocation(150, 210);
 		weaponRange.setForeground(Color.BLUE);
 		weaponRange.setEditable(false);
 		weaponRange.setVisible(false);
+		
+		weaponEnchantment = new JLabel("Add Weapon Enchantment");
+		weaponEnchantment.setSize(150, 30);
+		weaponEnchantment.setLocation(60, 240);
+		weaponEnchantment.setForeground(Color.MAGENTA);
+		weaponEnchantment.setVisible(false);
+		
+		enchantCheck = new JCheckBox("Freezing");
+		enchantCheck.setLocation(30, 280);
+		enchantCheck.setSize(100, 30);
+		enchantCheck.setOpaque(false);
+		enchantCheck.setForeground(Color.WHITE);
+		enchantCheck.setVisible(false);
+		itemViewPanel.add(enchantCheck);
+		
+		enchantCheck = new JCheckBox("Burning");
+		enchantCheck.setLocation(140, 280);
+		enchantCheck.setSize(210, 30);
+		enchantCheck.setOpaque(false);
+		enchantCheck.setForeground(Color.WHITE);
+		//enchantCheck.setVisible(false);
+		itemViewPanel.add(enchantCheck);
+		
+		enchantCheck = new JCheckBox("Slaying");
+		enchantCheck.setLocation(30, 280);
+		enchantCheck.setSize(210, 30);
+		enchantCheck.setOpaque(false);
+		enchantCheck.setForeground(Color.WHITE);
+		enchantCheck.setVisible(false);
+		
+		enchantCheck = new JCheckBox("Frightening");
+		enchantCheck.setLocation(30, 280);
+		enchantCheck.setSize(210, 30);
+		enchantCheck.setOpaque(false);
+		enchantCheck.setForeground(Color.WHITE);
+		enchantCheck.setVisible(false);
+		
+		enchantCheck = new JCheckBox("Pacifying");
+		enchantCheck.setLocation(30, 280);
+		enchantCheck.setSize(210, 30);
+		enchantCheck.setOpaque(false);
+		enchantCheck.setForeground(Color.WHITE);
+		enchantCheck.setVisible(false);
 		
 		enchantLabel = new JLabel("Enchantment Value:");
 		enchantLabel.setSize(210, 20);
@@ -183,6 +229,8 @@ public class ItemScene extends View implements Observer {
 		itemViewPanel.add(weaponTypeLabel);
 		itemViewPanel.add(weaponRangeLabel);
 		itemViewPanel.add(weaponRange);
+		itemViewPanel.add(weaponEnchantment);
+		itemViewPanel.add(enchantCheck);
 
 		
 		imagePanel = new View();
@@ -234,6 +282,7 @@ public class ItemScene extends View implements Observer {
 	}
 
 	 public ItemScene(ItemModel model,String mode) {
+		 this.mode = mode;
 			itemViewModel = model;
 			fileModel = new FileOperationModel();
 			itemController = new ItemSceneController(this);
@@ -258,22 +307,29 @@ public class ItemScene extends View implements Observer {
 			itemDescription.setText(fileModel.getItemDesription().get(0));
 	
 			if(mode.equalsIgnoreCase("edit")){
+				this.mode = mode;
 				itemType.setSelectedIndex(itemTypeList.valueOf(itemViewModel.getItemType()).ordinal());
+				itemType.setForeground(Color.BLACK);
+				itemType.setEnabled(false);
 				subItemType.setModel(itemViewModel.getSavedItemTypeList());
 				nameLabel.setText("Name");
-				nameField.setLocation(150, 210);
+				nameField.setLocation(150, 165);
 				nameField.setVisible(true);
 				itemNewName.setVisible(true);
 				savedItemNames.setModel(itemViewModel.getSavedItemNameList());
 				savedItemNames.setVisible(true);
 				if(itemViewModel.getItemType().equalsIgnoreCase("weapon")){
 				weaponTypeLabel.setVisible(true);
+				weaponTypeLabel.setLocation(20, 210);
 				weaponType.setText(itemViewModel.getWeaponType());
+				weaponType.setLocation(150, 210);
 				weaponType.setVisible(true);
-				weaponTypeLabel.setVisible(true);
-				weaponRangeLabel.setVisible(true);
+				weaponRangeLabel.setLocation(20, 240);
+				weaponRangeLabel.setVisible(true);			
 				weaponRange.setText(itemViewModel.getWeaponRange());
+				weaponRange.setLocation(150, 240);
 				weaponRange.setVisible(true);
+				weaponEnchantment.setVisible(true);
 				}
 				HashMap<String,String> enchantLists=itemViewModel.getSavedEnchantValueList();
 				enchantList.setSelectedItem(enchantLists.get(savedItemNames.getSelectedItem().toString()));
@@ -302,7 +358,17 @@ public class ItemScene extends View implements Observer {
 			subItemType.setModel(new DefaultComboBoxModel(list));
 			itemViewPanel.revalidate();
 			itemViewPanel.repaint();
-		} else if (itemViewModel.message == "ImageChanged") {
+		} 
+		else if(itemViewModel.message == "itemType changed"){
+		
+			if(!itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
+				weaponTypeLabel.setVisible(false);
+				weaponType.setVisible(false);
+				weaponRangeLabel.setVisible(false);
+				weaponRange.setVisible(false);
+			}
+		}
+		else if (itemViewModel.message == "ImageChanged") {
 			itemImage.getImage().flush();
 			itemImage = new ImageIcon(
 					new ImageIcon(itemViewModel.getImage()).getImage()
@@ -329,6 +395,8 @@ public class ItemScene extends View implements Observer {
 			weaponTypeLabel.setVisible(true);
 			weaponType.setVisible(true);
 			weaponType.setText(itemViewModel.getWeaponType());
+			weaponEnchantment.setVisible(true);
+			enchantCheck.setVisible(true);
 			}
 	
 		else if(itemViewModel.message == "weaponRange changed"){
