@@ -38,9 +38,10 @@ public class CharacterModel extends Observable {
 	public ArrayList<String> backPackItems;
 
 	private int backPackCounter;
-	public String[] levelListValues; 
+	public String[] levelListValues;
 	// Get or set hit points
 	private int hitPoints;
+	private int hitPointBase;
 	private int attackBonus;
 	private int damageBonus;
 	private int armorClass;
@@ -49,9 +50,10 @@ public class CharacterModel extends Observable {
 	private AbilityModel abilityScore;
 	private AbilityModel abilityModifier;
 	private int speed;
-	//character location for strategy by appan 
+	// character location for strategy by appan
 	private Dimension charLocation;
 	private String behaviour;
+
 	public String getBehaviour() {
 		return behaviour;
 	}
@@ -66,18 +68,18 @@ public class CharacterModel extends Observable {
 
 	public void setCharLocation(Dimension charLocation) {
 		this.charLocation = charLocation;
-		this.message="LocationUpdate";
+		this.message = "LocationUpdate";
 		notifyCharacterView();
 	}
 
-	//---------------------//
+	// ---------------------//
 	public String getShieldFlag() {
 		return shieldFlag;
 	}
 
 	public void setShieldFlag(String shieldFlag) {
 		this.shieldFlag = shieldFlag;
-		message="itemImage";
+		message = "itemImage";
 		notifyCharacterView();
 	}
 
@@ -97,7 +99,7 @@ public class CharacterModel extends Observable {
 	public void setDamageBonus(int damageBonus) {
 		this.damageBonus = damageBonus;
 		notifyCharacterView();
-		
+
 	}
 
 	public int getArmorClass() {
@@ -108,7 +110,7 @@ public class CharacterModel extends Observable {
 		this.armorClass = armorClass;
 		notifyCharacterView();
 	}
-	
+
 	public String getFighterType() {
 		return fighterType;
 	}
@@ -120,11 +122,12 @@ public class CharacterModel extends Observable {
 	public CharacterModel() {
 		backPackItems = new ArrayList<String>();
 		backPackCounter = 0;
+		hitPointBase= 1+new Random().nextInt(10);
 		setAbilityModifier(new AbilityModel());
 		setAbilityScore(new AbilityModel());
-		levelListValues=new String[25];
-		for(int i=0;i<25;i++){
-			levelListValues[i]=String.valueOf(i+1);
+		levelListValues = new String[25];
+		for (int i = 0; i < 25; i++) {
+			levelListValues[i] = String.valueOf(i + 1);
 		}
 	}
 
@@ -149,12 +152,12 @@ public class CharacterModel extends Observable {
 		this.backPackItems.add(item);
 		notifyCharacterView();
 	}
-	
+
 	public void removeBackPackItems(String item) {
 		this.backPackItems.remove(item);
 		notifyCharacterView();
 	}
-	
+
 	public int getBackPackCounter() {
 		return backPackCounter;
 	}
@@ -169,7 +172,7 @@ public class CharacterModel extends Observable {
 
 	public void setHelmetFlag(String helmetFlag) {
 		this.helmetFlag = helmetFlag;
-		message="itemImage";
+		message = "itemImage";
 		notifyCharacterView();
 	}
 
@@ -179,7 +182,7 @@ public class CharacterModel extends Observable {
 
 	public void setArmorFlag(String armorFlag) {
 		this.armorFlag = armorFlag;
-		message="itemImage";
+		message = "itemImage";
 		notifyCharacterView();
 	}
 
@@ -189,7 +192,7 @@ public class CharacterModel extends Observable {
 
 	public void setBeltFlag(String beltFlag) {
 		this.beltFlag = beltFlag;
-		message="itemImage";
+		message = "itemImage";
 		notifyCharacterView();
 	}
 
@@ -199,7 +202,7 @@ public class CharacterModel extends Observable {
 
 	public void setBootFlag(String bootsFlag) {
 		this.bootFlag = bootsFlag;
-		message="itemImage";
+		message = "itemImage";
 		notifyCharacterView();
 	}
 
@@ -209,7 +212,7 @@ public class CharacterModel extends Observable {
 
 	public void setRingFlag(String ringFlag) {
 		this.ringFlag = ringFlag;
-		message="itemImage";
+		message = "itemImage";
 		notifyCharacterView();
 	}
 
@@ -219,7 +222,7 @@ public class CharacterModel extends Observable {
 
 	public void setWeaponFlag(String weaponFlag) {
 		this.weaponFlag = weaponFlag;
-		message="itemImage";
+		message = "itemImage";
 		notifyCharacterView();
 	}
 
@@ -255,41 +258,37 @@ public class CharacterModel extends Observable {
 	}
 
 	public void setLevel(int level) {
-		int tempArmorBonus=0;
-		int tempConstitution=0;
-		int tempDamageBonus=0;
-		int enchanmentBonus=0;
-		if(getArmorClass()!=0){
-			tempArmorBonus=calculateEnchanment(this.level);
+		int tempArmorBonus = 0;
+		int tempConstitution = 0;
+		int tempDamageBonus = 0;
+		int enchanmentBonus = 0;
+		if (getArmorClass() != 0) {
+			tempArmorBonus = calculateEnchanment(this.level);
 		}
-		if(abilityModifier.getConstitution()!=0)
-		{
-			tempConstitution=calculateEnchanment(this.level);
+		if (abilityModifier.getConstitution() != 0) {
+			tempConstitution = calculateEnchanment(this.level);
 		}
-		if(getDamageBonus()!=0)
-		{
-			tempDamageBonus=calculateEnchanment(this.level);
-			
+		if (getDamageBonus() != 0) {
+			tempDamageBonus = calculateEnchanment(this.level);
+
 		}
 		this.level = level;
-		enchanmentBonus=calculateEnchanment(level);
-		if(helmetFlag!=null && armorFlag!=null && bootFlag!=null && shieldFlag !=null && ringFlag!=null )
-		{
-		setArmorClass((getArmorClass()-(tempArmorBonus*5))+(enchanmentBonus*5));
+		enchanmentBonus = calculateEnchanment(level);
+		if (helmetFlag != null && armorFlag != null && bootFlag != null && shieldFlag != null && ringFlag != null) {
+			setArmorClass((getArmorClass() - (tempArmorBonus * 5)) + (enchanmentBonus * 5));
 		}
-		if(weaponFlag!=null)
-		{
-		setDamageBonus((getDamageBonus()-tempDamageBonus)+enchanmentBonus);
+		if (weaponFlag != null) {
+			setDamageBonus((getDamageBonus() - tempDamageBonus) + enchanmentBonus);
 		}
-		if(beltFlag!=null){
-		abilityModifier.setConstitution((abilityModifier.getConstitution()-tempConstitution)+enchanmentBonus);
+		if (beltFlag != null) {
+			abilityModifier.setConstitution((abilityModifier.getConstitution() - tempConstitution) + enchanmentBonus);
 		}
 		calculateChar();
 	}
 
 	public void calculateChar() {
 		if (getAbilityModifier() != null && getAbilityScore() != null) {
-			setHitPoints((getAbilityModifier().getConstitution()) * getLevel());
+			setHitPoints((getAbilityModifier().getConstitution()+getHitPointBase()) * getLevel());
 			setAttackBonus(getAbilityModifier().getStrength() + getLevel());
 			if (getArmorClass() == 0) {
 				setArmorClass(abilityModifier.getDexterity());
@@ -300,23 +299,33 @@ public class CharacterModel extends Observable {
 			notifyCharacterView();
 		}
 	}
-	public void calculateAbilityModifier()
-	{
+
+	public int getHitPointBase() {
+		return hitPointBase;
+	}
+
+	public void setHitPointBase(int hitPointBase) {
+		this.hitPointBase = hitPointBase;
+	}
+
+	public void calculateAbilityModifier() {
 		setModifer();
 		abilityModifier.setStrength(abilityModifier.getStrength() + modifierCalculator(abilityScore.getStrength()));
 		abilityModifier.setDexterity(abilityModifier.getDexterity() + modifierCalculator(abilityScore.getDexterity()));
-		abilityModifier
-				.setConstitution(abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
-		abilityModifier
-				.setIntelligence(abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
+		abilityModifier.setConstitution(
+				abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
+		abilityModifier.setIntelligence(
+				abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
 		abilityModifier.setWisdom(abilityModifier.getWisdom() + modifierCalculator(abilityScore.getWisdom()));
 		abilityModifier.setCharisma(abilityModifier.getCharisma() + modifierCalculator(abilityScore.getCharisma()));
 		calculateChar();
 	}
+
 	public int modifierCalculator(int score) {
 
 		return ((score / 2) - 5);
 	}
+
 	public void setModifer() {
 		abilityModifier.setStrength(0);
 		abilityModifier.setDexterity(0);
@@ -347,6 +356,7 @@ public class CharacterModel extends Observable {
 
 		}
 	}
+
 	public void resetScore() {
 		abilityScore.setStrength(0);
 		abilityScore.setDexterity(0);
@@ -355,34 +365,26 @@ public class CharacterModel extends Observable {
 		abilityScore.setWisdom(0);
 		abilityScore.setCharisma(0);
 	}
-	public int calculateEnchanment(int level)
-	{ 
-		int enchanmentBonus=0;
-		if(level<5)
-		{
-			enchanmentBonus=1;
-		}
-		else if(level<9)
-		{
-			enchanmentBonus=2;
-		}
-		else if(level<13)
-		{
-			enchanmentBonus=3;
-		}	
-		else if(level<17)
-		{
-			enchanmentBonus=4;
-		}
-		else if(level>17)
-		{
-			enchanmentBonus=5;
+
+	public int calculateEnchanment(int level) {
+		int enchanmentBonus = 0;
+		if (level < 5) {
+			enchanmentBonus = 1;
+		} else if (level < 9) {
+			enchanmentBonus = 2;
+		} else if (level < 13) {
+			enchanmentBonus = 3;
+		} else if (level < 17) {
+			enchanmentBonus = 4;
+		} else if (level > 17) {
+			enchanmentBonus = 5;
 		}
 		return enchanmentBonus;
 	}
+
 	public AbilityModel getAbilityScore() {
 		return abilityScore;
-		
+
 	}
 
 	public void setAbilityScore(AbilityModel abilityModel) {
@@ -416,7 +418,7 @@ public class CharacterModel extends Observable {
 
 	public void setImage(String image) {
 		this.image = image;
-		message="image";
+		message = "image";
 	}
 
 	/**

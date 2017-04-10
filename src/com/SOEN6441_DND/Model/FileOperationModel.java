@@ -327,6 +327,7 @@ public class FileOperationModel {
 			
 			Element charCharacteristics = rootElement.element("characteristics");
 			chModel.setHitPoints(Integer.parseInt(charCharacteristics.selectSingleNode("hitPoint").getText()));
+			chModel.setHitPointBase(Integer.parseInt(charCharacteristics.selectSingleNode("hitPointBase").getText()));
 			chModel.setArmorClass(Integer.parseInt(charCharacteristics.selectSingleNode("armorClass").getText()));
 			chModel.setAttackBonus(Integer.parseInt(charCharacteristics.selectSingleNode("attackBonus").getText()));
 			chModel.setDamageBonus(Integer.parseInt(charCharacteristics.selectSingleNode("damageBonus").getText()));
@@ -385,6 +386,7 @@ public class FileOperationModel {
 		
 		Element characteristics=root.addElement("characteristics");
 		characteristics.addElement("hitPoint").addText(String.valueOf(characterModel.getHitPoints()));
+		characteristics.addElement("hitPointBase").addText(String.valueOf(characterModel.getHitPointBase()));
 		characteristics.addElement("armorClass").addText(String.valueOf(characterModel.getArmorClass()));
 		characteristics.addElement("attackBonus").addText(String.valueOf(characterModel.getAttackBonus()));
 		characteristics.addElement("damageBonus").addText(String.valueOf(characterModel.getDamageBonus()));
