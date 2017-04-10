@@ -75,9 +75,6 @@ public class ItemModel extends Observable{
 		return itemType;
 	}
 
-	public void setItemType(String itemType) {
-		this.itemType = itemType;
-	}
 
 	public String getSubItemType() {
 		return subItemType;
@@ -116,16 +113,17 @@ public class ItemModel extends Observable{
 	}
 	public enum itemTypeList{Helmet,Armor,Shield,Ring,Belt,Boots,Weapon};
 	public String[] enchanListValues = {"1","2","3","4","5"};
-	public itemTypeList itemtype;
 	public ArrayList subItemList;
 	public String itemDecsription;
 	
-	public itemTypeList getItemtype() {
-		return itemtype;
+	public String getItemtype() {
+		return itemType;
 	}
 
-	public void setItemtype(itemTypeList itemtype) {
-		this.itemtype = itemtype;
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
+		message = "itemType changed";
+		notifyItemView(message);
 	}
 
 	public String getItemDecsription() {

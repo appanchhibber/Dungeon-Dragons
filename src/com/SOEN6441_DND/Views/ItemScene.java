@@ -302,7 +302,10 @@ public class ItemScene extends View implements Observer {
 			subItemType.setModel(new DefaultComboBoxModel(list));
 			itemViewPanel.revalidate();
 			itemViewPanel.repaint();
-		} else if (itemViewModel.message == "ImageChanged") {
+		} 
+		else if(itemViewModel.message == "itemType changed"){
+		}
+		else if (itemViewModel.message == "ImageChanged") {
 			itemImage.getImage().flush();
 			itemImage = new ImageIcon(
 					new ImageIcon(itemViewModel.getImage()).getImage()
