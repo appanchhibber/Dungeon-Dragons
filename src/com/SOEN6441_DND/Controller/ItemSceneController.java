@@ -97,6 +97,7 @@ public class ItemSceneController implements ActionListener {
 			}
 
 		} else if (e.getSource() == itemScreen.subItemType) {
+			if(itemScreen.mode.equalsIgnoreCase("create")){
 			if (itemScreen.subItemType.getSelectedIndex() != -1) {
 				itemModel.setImage(fileModel.getItemsImage().get(itemScreen.subItemType.getSelectedIndex()));
 
@@ -116,7 +117,30 @@ public class ItemSceneController implements ActionListener {
 				}
 			}
 
-		}
+			}
+			else{
+				if (itemScreen.subItemType.getSelectedIndex() != -1) {
+//					itemModel.setImage(fileModel.getItemsImage().get(itemScreen.subItemType.getSelectedIndex()));
+//
+//					itemModel.setItemDecsription(
+//							fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
+					itemModel.setImage("image/"+itemScreen.subItemType.getSelectedItem().toString().replaceAll("\\s", "")+".jpg");
+					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
+					itemModel.setWeaponType(itemModel.getWeaponTypeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString());
+					itemModel.setWeaponRange(itemModel.getWeaponRangeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString());
+					}
+				} else {
+
+					itemModel.setImage("image/"+itemScreen.subItemType.getSelectedItem().toString().replaceAll("\\s", "")+".jpg");
+					itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
+					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
+					itemModel.setWeaponType(fileModel.getWeaponType().get(0));
+					itemModel.setWeaponRange(fileModel.getWeaponRange().get(0));
+					}
+				}
+				
+			}
+			}
 
 		
 		else if (e.getSource() == itemScreen.navMenuPanel.saveButton) {

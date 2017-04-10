@@ -203,10 +203,11 @@ public class FileOperationModel {
 			itemModel.savedItemNameList.addElement(itemName.getText());
 			if(file.getName().substring(0, 6).equals("Weapon")){
 				Node weaponType = item.selectSingleNode("weaponType");
-				//itemModel.weaponTypeList.addElement(weaponType.getText());
-				itemModel.weaponType = weaponType.getText();
+				itemModel.weaponTypeList.addElement(weaponType.getText());
+				//itemModel.weaponType = weaponType.getText();
 				Node weaponRange = item.selectSingleNode("weaponRange");
-				itemModel.weaponRange = weaponRange.getText();
+				itemModel.weaponRangeList.addElement(weaponRange.getText());
+				//itemModel.weaponRange = weaponRange.getText();
 			}
 			Node enchantValue=item.selectSingleNode("enchantValue");
 			itemModel.savedEnchantValueList.put(itemName.getText(),enchantValue.getText());
