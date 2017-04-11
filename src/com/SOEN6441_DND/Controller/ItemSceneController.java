@@ -47,8 +47,12 @@ public class ItemSceneController implements ActionListener {
 	}
 
 	@Override
+	/**
+	 * This method handles all the possible events occurring on item view page
+	 */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		Object enchatCheck = e.getSource();
 		if (e.getSource() == itemScreen.itemType) {
 			switch (itemScreen.itemType.getSelectedItem().toString()) {
 			case "Helmet": {
@@ -142,6 +146,31 @@ public class ItemSceneController implements ActionListener {
 			}
 			}
 
+		else if(itemScreen.freezing.isSelected() == true){
+			if(!itemModel.enchatCheckValues.contains("Freezing")){
+			itemModel.enchatCheckValues.add("Freezing");
+			}
+		}
+		else if(itemScreen.slaying.isSelected() == true){
+			if(!itemModel.enchatCheckValues.contains("Slaying")){
+				itemModel.enchatCheckValues.add("Slaying");
+				}
+		}
+		else if(itemScreen.frightening.isSelected() == true){
+			if(!itemModel.enchatCheckValues.contains("Frightening")){
+				itemModel.enchatCheckValues.add("Frightening");
+				}
+		}
+		else if(itemScreen.pacifying.isSelected() == true){
+			if(!itemModel.enchatCheckValues.contains("Pacifying")){
+				itemModel.enchatCheckValues.add("Pacifying");
+				}
+		}
+		else if(itemScreen.burning.isSelected() == true){
+			if(!itemModel.enchatCheckValues.contains("Burning")){
+				itemModel.enchatCheckValues.add("Burning");
+				}
+		}
 		
 		else if (e.getSource() == itemScreen.navMenuPanel.saveButton) {
 			if (itemScreen.nameField.getText().equals("")) {
