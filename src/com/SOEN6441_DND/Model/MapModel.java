@@ -27,6 +27,7 @@ public class MapModel extends Observable {
 	public Boolean characterChecked;
 	// Treasure Addition in the map //
 	public String treasureName;
+	public boolean treasurePresent;
 	public DefaultListModel treasureList;
 	public HashMap<String, Dimension> treasures;
 	public HashMap<String, MapModel> characters;

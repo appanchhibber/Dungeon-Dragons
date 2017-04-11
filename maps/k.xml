@@ -50,5 +50,10 @@
       <Y>6</Y>
     </character>
   </Character>
-  <Treasure/>
+  <Treasure>
+    <treasure name="my boot">
+      <X>9</X>
+      <Y>0</Y>
+    </treasure>
+  </Treasure>
 </Map>

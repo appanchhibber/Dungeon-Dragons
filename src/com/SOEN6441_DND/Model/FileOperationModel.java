@@ -804,6 +804,16 @@ public class FileOperationModel {
 			mapModel.characters.put(character.attributeValue("name"), model);
 		}
 		}
+		if(rootElement.element("Treasure")!=null){
+			Element treasureNode=rootElement.element("Treasure");
+			List<Element> treasures=treasureNode.elements();
+			for(Element treasure:treasures){
+				Node treasureX=treasure.selectSingleNode("X");
+			    Node treasureY=treasure.selectSingleNode("Y");
+			    mapModel.treasurePresent=true;
+				mapModel.treasures.put(treasure.attributeValue("name"), new Dimension(Integer.parseInt(treasureX.getText()), Integer.parseInt(treasureY.getText())));
+			}
+			}
 		return mapModel;
 	}
     /**

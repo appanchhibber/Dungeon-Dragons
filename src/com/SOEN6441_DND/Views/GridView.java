@@ -210,6 +210,21 @@ public class GridView extends JPanel implements Observer {
 			mapModel.addCharLocation(character.getKey() + "-" + character.getValue().getCharacterBehavior(),character.getValue().getCharacterLocation());
 			mapButtonsGrid[characterY][characterX].addActionListener(playArena.playController);
 		}
+		for (Map.Entry<String, Dimension> treasure : mapModel.getTreasures()
+				.entrySet()) {
+			int treasureX = (int) treasure.getValue().getWidth();
+			int treasureY = (int) treasure.getValue().getHeight();
+			mapButtonsGrid[treasureY][treasureX].setName(treasure.getKey());
+			mapButtonsGrid[treasureY][treasureX].setFont(new Font("Calibri",
+					Font.PLAIN, 0));
+			mapButtonsGrid[treasureY][treasureX].setText(treasureY + ","
+					+ treasureX);
+
+			mapButtonsGrid[treasureY][treasureX].setIcon(new ImageIcon(
+					new ImageIcon("image/Treasure.jpg")
+							.getImage().getScaledInstance(50, 50,
+									java.awt.Image.SCALE_SMOOTH)));
+		}
 
 	}
 
@@ -336,6 +351,21 @@ public class GridView extends JPanel implements Observer {
 					.getValue().getCharacterBehavior());
 			mapButtonsGrid[characterY][characterX].setIcon(new ImageIcon(
 					new ImageIcon(character.getValue().getCharacterImage())
+							.getImage().getScaledInstance(50, 50,
+									java.awt.Image.SCALE_SMOOTH)));
+		}
+		for (Map.Entry<String, Dimension> treasure : mapModel.getTreasures()
+				.entrySet()) {
+			int treasureX = (int) treasure.getValue().getWidth();
+			int treasureY = (int) treasure.getValue().getHeight();
+			mapButtonsGrid[treasureY][treasureX].setName(treasure.getKey());
+			mapButtonsGrid[treasureY][treasureX].setFont(new Font("Calibri",
+					Font.PLAIN, 0));
+			mapButtonsGrid[treasureY][treasureX].setText(treasureY + ","
+					+ treasureX);
+
+			mapButtonsGrid[treasureY][treasureX].setIcon(new ImageIcon(
+					new ImageIcon("image/Treasure.jpg")
 							.getImage().getScaledInstance(50, 50,
 									java.awt.Image.SCALE_SMOOTH)));
 		}
