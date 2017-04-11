@@ -105,8 +105,10 @@ public class PlayArena extends View implements Observer {
 		charLocY = (int) (mapModel.getEntry().getHeight());
 		charModel.setCharLocation(new Dimension(charLocX, charLocY));
 		playInfoPanel.player = charModel;
+		playInfoPanel.character=charModel;
 		playInfoPanel.setPanel();
 		playInfoPanel.player.addObserver(playInfoPanel);
+		playInfoPanel.character.addObserver(playInfoPanel);
 		playModel.addCharacter((charModel.getName() + "-" + charModel.getBehaviour()), charModel);
 		mapModel.addCharLocation((charModel.getName() + "-" + charModel.getBehaviour()),
 				new Dimension(charLocX, charLocY));
@@ -151,6 +153,7 @@ public class PlayArena extends View implements Observer {
 	public void loadNextMap() {
 
 		campaignModel.getCampMapList().removeElement(mapModel.mapName);
+		playInfoPanel.player.setLevel(+1);
 		if (campaignModel.getCampMapList().size() == 0) {
 			gameController.mainFrame.setView(new MainScene());
 		}

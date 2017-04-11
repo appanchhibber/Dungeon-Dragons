@@ -43,6 +43,7 @@ public class PlayerInfoPanelView extends View implements Observer {
 	public JLabel attackBonusValue;
 
 	public CharacterModel player;
+	public CharacterModel character;
 
 	public JButton inventoryBtn;
 
@@ -212,18 +213,19 @@ public class PlayerInfoPanelView extends View implements Observer {
 		setPanel();		
 	}
 	public void setPanel(){
-		strengthValue.setText(String.valueOf(player.getAbilityScore().getStrength()));
-		constitutionValue.setText(String.valueOf(player.getAbilityScore().getConstitution()));
-		intelligenceValue.setText(String.valueOf(player.getAbilityScore().getIntelligence()));
-		wisdomValue.setText(String.valueOf(player.getAbilityScore().getStrength()));
-		charismaValue.setText(String.valueOf(player.getAbilityScore().getCharisma()));
-		dexterityValue.setText(String.valueOf(player.getAbilityScore().getDexterity()));
-		charNameValue.setText(player.getName());
-		charTypeValue.setText(player.getType());
-		hitpointValue.setText(String.valueOf(player.getHitPoints()));
-		charLevelValue.setText(String.valueOf(player.getLevel()));
-		armorClassValue.setText(String.valueOf(player.getArmorClass()));
-		attackBonusValue.setText(String.valueOf(player.getAttackBonus()));
+		System.out.println(character.getName());
+		strengthValue.setText(String.valueOf(character.getAbilityScore().getStrength()));
+		constitutionValue.setText(String.valueOf(character.getAbilityScore().getConstitution()));
+		intelligenceValue.setText(String.valueOf(character.getAbilityScore().getIntelligence()));
+		wisdomValue.setText(String.valueOf(character.getAbilityScore().getStrength()));
+		charismaValue.setText(String.valueOf(character.getAbilityScore().getCharisma()));
+		dexterityValue.setText(String.valueOf(character.getAbilityScore().getDexterity()));
+		charNameValue.setText(character.getName());
+		charTypeValue.setText(character.getType());
+		hitpointValue.setText(String.valueOf(character.getHitPoints()));
+		charLevelValue.setText(String.valueOf(character.getLevel()));
+		armorClassValue.setText(String.valueOf(character.getArmorClass()));
+		attackBonusValue.setText(String.valueOf(character.getAttackBonus()));
 		
 		
 	}

@@ -72,6 +72,9 @@ public class PlayArenaController implements ActionListener {
 		String[] tempTurn = playArena.playModel.getPlayOrder()[turnCounter].split("-");
 		turnCharacter = tempTurn[0];
 		turnBehaviour = tempTurn[1];
+		playArena.playInfoPanel.character=playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]);
+		playArena.playInfoPanel.setPanel();
+		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 		switch (turnBehaviour) {
 		case "Player": {
 			System.out.println("Player Turn");
@@ -127,7 +130,7 @@ public class PlayArenaController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == playArena.playInfoPanel.inventoryBtn) {
-			playArena.charInventory.setcharModel(playArena.playInfoPanel.player);
+			playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 			playArena.charInventory.setInventory();
 		} else if(e.getSource()==playArena.startGame){
 			playArena.startGame.setVisible(false);
@@ -149,9 +152,9 @@ public class PlayArenaController implements ActionListener {
 				{
 					name=btn.getName();
 				}
-				playArena.playInfoPanel.player=playArena.playModel.getCharacters().get(name);
+				playArena.playInfoPanel.character=playArena.playModel.getCharacters().get(name);
 				playArena.playInfoPanel.setPanel();
-				playArena.charInventory.setcharModel(playArena.playInfoPanel.player);
+				playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 			}
 
 		}

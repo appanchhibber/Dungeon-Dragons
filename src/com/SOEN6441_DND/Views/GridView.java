@@ -432,6 +432,7 @@ public class GridView extends JPanel implements Observer {
 		mapButtonsGrid[oldY][oldX]
 				.setName(mapButtonsGrid[oldY][oldX]
 						.getText());
+		mapButtonsGrid[oldY][oldX].setToolTipText("");
 		int charLocY=(int)characterModel.getCharLocation().getHeight();
 		int charLocX=(int)characterModel.getCharLocation().getWidth();
 		mapModel.updateCharLocation(characterModel.getName()+"-"+characterModel.getBehaviour(), new Dimension(charLocX, charLocY));
@@ -446,6 +447,11 @@ public class GridView extends JPanel implements Observer {
 					Font.PLAIN, 0));
 			if(characterModel.getBehaviour()=="Player"){
 			mapButtonsGrid[charLocY][charLocX].setName(characterModel.getName()+"-Player");
+			mapButtonsGrid[charLocY][charLocX].setToolTipText("Player");
+			}
+			else{
+				mapButtonsGrid[charLocY][charLocX].setName("_"+characterModel.getName());
+				mapButtonsGrid[charLocY][charLocX].setToolTipText(characterModel.getBehaviour());
 			}
 			mapButtonsGrid[charLocY][charLocX]
 					.addActionListener(playArena.playController);
