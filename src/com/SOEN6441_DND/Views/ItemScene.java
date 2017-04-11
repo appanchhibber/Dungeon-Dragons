@@ -76,11 +76,11 @@ public class ItemScene extends View implements Observer {
 	ImageIcon itemImage;
 	
 	//Checkbox
-	JCheckBox freezing;
-	JCheckBox burning;
-	JCheckBox slaying;
-	JCheckBox frightening;
-	JCheckBox pacifying;
+	public JCheckBox freezing;
+	public JCheckBox burning;
+	public JCheckBox slaying;
+	public JCheckBox frightening;
+	public JCheckBox pacifying;
 
 	@Override
 	protected void initSubviews() {
@@ -170,20 +170,23 @@ public class ItemScene extends View implements Observer {
 		freezing.setSize(100, 30);
 		freezing.setOpaque(false);
 		freezing.setForeground(Color.WHITE);
+		freezing.setSelected(false);
 		freezing.setVisible(false);
 		
 		burning = new JCheckBox("Burning");
-		burning.setLocation(130, 280);
+		burning.setLocation(125, 280);
 		burning.setSize(100, 30);
 		burning.setOpaque(false);
 		burning.setForeground(Color.WHITE);
+		burning.setSelected(false);
 		burning.setVisible(false);
 		
 		slaying = new JCheckBox("Slaying");
-		slaying.setLocation(210, 280);
+		slaying.setLocation(230, 280);
 		slaying.setSize(100, 30);
 		slaying.setOpaque(false);
 		slaying.setForeground(Color.WHITE);
+		slaying.setSelected(false);
 		slaying.setVisible(false);
 		
 		frightening = new JCheckBox("Frightening");
@@ -191,13 +194,15 @@ public class ItemScene extends View implements Observer {
 		frightening.setSize(100, 30);
 		frightening.setOpaque(false);
 		frightening.setForeground(Color.WHITE);
+		frightening.setSelected(false);
 		frightening.setVisible(false);
 		
 		pacifying = new JCheckBox("Pacifying");
 		pacifying.setLocation(150, 300);
-		pacifying.setSize(210, 30);
+		pacifying.setSize(100, 30);
 		pacifying.setOpaque(false);
 		pacifying.setForeground(Color.WHITE);
+		pacifying.setSelected(false);
 		pacifying.setVisible(false);
 		
 		enchantLabel = new JLabel("Enchantment Value:");
@@ -363,6 +368,7 @@ public class ItemScene extends View implements Observer {
 		navMenuPanel.loadButton.addActionListener(itemController);
 		itemType.addActionListener(itemController);
 		subItemType.addActionListener(itemController);
+		freezing.addActionListener(itemController);
 		itemViewModel.addObserver(this);
 	}
 	@Override

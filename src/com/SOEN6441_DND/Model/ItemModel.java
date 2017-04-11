@@ -24,6 +24,7 @@ public class ItemModel extends Observable{
     public int enchantValue;
     public String weaponType;
     public String weaponRange;
+    public ArrayList<String> enchatCheckValues;
     
     /**
      * This method returns the type of Weapon of type String
@@ -68,6 +69,7 @@ public class ItemModel extends Observable{
     	savedEnchantValueList=new HashMap<String,String>();
     	weaponTypeList = new DefaultComboBoxModel();
     	weaponRangeList = new DefaultComboBoxModel();
+    	enchatCheckValues = new ArrayList<>();
     }
     
     public void setWeaponTypeList(DefaultComboBoxModel weaponTypeList) {
