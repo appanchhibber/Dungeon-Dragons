@@ -76,7 +76,11 @@ public class ItemScene extends View implements Observer {
 	ImageIcon itemImage;
 	
 	//Checkbox
-	JCheckBox enchantCheck;
+	JCheckBox freezing;
+	JCheckBox burning;
+	JCheckBox slaying;
+	JCheckBox frightening;
+	JCheckBox pacifying;
 
 	@Override
 	protected void initSubviews() {
@@ -157,46 +161,44 @@ public class ItemScene extends View implements Observer {
 		
 		weaponEnchantment = new JLabel("Add Weapon Enchantment");
 		weaponEnchantment.setSize(150, 30);
-		weaponEnchantment.setLocation(60, 240);
+		weaponEnchantment.setLocation(60, 260);
 		weaponEnchantment.setForeground(Color.MAGENTA);
 		weaponEnchantment.setVisible(false);
 		
-		enchantCheck = new JCheckBox("Freezing");
-		enchantCheck.setLocation(30, 280);
-		enchantCheck.setSize(100, 30);
-		enchantCheck.setOpaque(false);
-		enchantCheck.setForeground(Color.WHITE);
-		enchantCheck.setVisible(false);
-		itemViewPanel.add(enchantCheck);
+		freezing = new JCheckBox("Freezing");
+		freezing.setLocation(20, 280);
+		freezing.setSize(100, 30);
+		freezing.setOpaque(false);
+		freezing.setForeground(Color.WHITE);
+		freezing.setVisible(false);
 		
-		enchantCheck = new JCheckBox("Burning");
-		enchantCheck.setLocation(140, 280);
-		enchantCheck.setSize(210, 30);
-		enchantCheck.setOpaque(false);
-		enchantCheck.setForeground(Color.WHITE);
-		//enchantCheck.setVisible(false);
-		itemViewPanel.add(enchantCheck);
+		burning = new JCheckBox("Burning");
+		burning.setLocation(130, 280);
+		burning.setSize(100, 30);
+		burning.setOpaque(false);
+		burning.setForeground(Color.WHITE);
+		burning.setVisible(false);
 		
-		enchantCheck = new JCheckBox("Slaying");
-		enchantCheck.setLocation(30, 280);
-		enchantCheck.setSize(210, 30);
-		enchantCheck.setOpaque(false);
-		enchantCheck.setForeground(Color.WHITE);
-		enchantCheck.setVisible(false);
+		slaying = new JCheckBox("Slaying");
+		slaying.setLocation(210, 280);
+		slaying.setSize(100, 30);
+		slaying.setOpaque(false);
+		slaying.setForeground(Color.WHITE);
+		slaying.setVisible(false);
 		
-		enchantCheck = new JCheckBox("Frightening");
-		enchantCheck.setLocation(30, 280);
-		enchantCheck.setSize(210, 30);
-		enchantCheck.setOpaque(false);
-		enchantCheck.setForeground(Color.WHITE);
-		enchantCheck.setVisible(false);
+		frightening = new JCheckBox("Frightening");
+		frightening.setLocation(40, 300);
+		frightening.setSize(100, 30);
+		frightening.setOpaque(false);
+		frightening.setForeground(Color.WHITE);
+		frightening.setVisible(false);
 		
-		enchantCheck = new JCheckBox("Pacifying");
-		enchantCheck.setLocation(30, 280);
-		enchantCheck.setSize(210, 30);
-		enchantCheck.setOpaque(false);
-		enchantCheck.setForeground(Color.WHITE);
-		enchantCheck.setVisible(false);
+		pacifying = new JCheckBox("Pacifying");
+		pacifying.setLocation(150, 300);
+		pacifying.setSize(210, 30);
+		pacifying.setOpaque(false);
+		pacifying.setForeground(Color.WHITE);
+		pacifying.setVisible(false);
 		
 		enchantLabel = new JLabel("Enchantment Value:");
 		enchantLabel.setSize(210, 20);
@@ -230,8 +232,11 @@ public class ItemScene extends View implements Observer {
 		itemViewPanel.add(weaponRangeLabel);
 		itemViewPanel.add(weaponRange);
 		itemViewPanel.add(weaponEnchantment);
-		itemViewPanel.add(enchantCheck);
-
+		itemViewPanel.add(freezing);
+		itemViewPanel.add(burning);
+		itemViewPanel.add(pacifying);
+		itemViewPanel.add(frightening);
+		itemViewPanel.add(slaying);
 		
 		imagePanel = new View();
 		imagePanel.setBackground(Color.WHITE);
@@ -321,16 +326,30 @@ public class ItemScene extends View implements Observer {
 				if(itemViewModel.getItemType().equalsIgnoreCase("weapon")){
 				weaponTypeLabel.setVisible(true);
 				weaponTypeLabel.setLocation(20, 210);
-				weaponType.setText(itemViewModel.getWeaponType());
+				weaponType.setText((String) itemViewModel.getWeaponTypeList().getElementAt(savedItemNames.getSelectedIndex()));
 				weaponType.setLocation(150, 210);
 				weaponType.setVisible(true);
 				weaponRangeLabel.setLocation(20, 240);
 				weaponRangeLabel.setVisible(true);			
-				weaponRange.setText(itemViewModel.getWeaponRange());
+				weaponRange.setText((String) itemViewModel.getWeaponRangeList().getElementAt(savedItemNames.getSelectedIndex()));
 				weaponRange.setLocation(150, 240);
 				weaponRange.setVisible(true);
 				weaponEnchantment.setVisible(true);
+				weaponEnchantment.setLocation(60, 280);
+				freezing.setVisible(true);
+				freezing.setLocation(30, 300);
+				pacifying.setVisible(true);
+				pacifying.setLocation(60, 320);
+				frightening.setVisible(true);
+				frightening.setLocation(160, 320);
+				slaying.setVisible(true);
+				slaying.setLocation(220, 300);
+				burning.setVisible(true);
+				burning.setLocation(140, 300);
 				}
+				enchantLabel.setLocation(30, 380);
+				enchantList.setLocation(180, 380);
+				addChest.setLocation(30, 410);
 				HashMap<String,String> enchantLists=itemViewModel.getSavedEnchantValueList();
 				enchantList.setSelectedItem(enchantLists.get(savedItemNames.getSelectedItem().toString()));
 				imageLabel.setIcon(new ImageIcon(
@@ -366,6 +385,12 @@ public class ItemScene extends View implements Observer {
 				weaponType.setVisible(false);
 				weaponRangeLabel.setVisible(false);
 				weaponRange.setVisible(false);
+				weaponEnchantment.setVisible(false);
+				freezing.setVisible(false);
+				burning.setVisible(false);
+				frightening.setVisible(false);
+				slaying.setVisible(false);
+				pacifying.setVisible(false);
 			}
 		}
 		else if (itemViewModel.message == "ImageChanged") {
@@ -396,7 +421,11 @@ public class ItemScene extends View implements Observer {
 			weaponType.setVisible(true);
 			weaponType.setText(itemViewModel.getWeaponType());
 			weaponEnchantment.setVisible(true);
-			enchantCheck.setVisible(true);
+			freezing.setVisible(true);
+			burning.setVisible(true);
+			frightening.setVisible(true);
+			slaying.setVisible(true);
+			pacifying.setVisible(true);
 			}
 	
 		else if(itemViewModel.message == "weaponRange changed"){
