@@ -267,7 +267,6 @@ public class PathValidatorController {
        }
 
        AStar(); 
-       System.out.println("closed"+closed[endI][endJ]);
        ArrayList<Dimension> path=new ArrayList<Dimension>();
        if(closed[endI][endJ]){
            //Trace back the path 
@@ -276,7 +275,6 @@ public class PathValidatorController {
             while(current.parent!=null){
             	//mapCell[current.parent.i][current.parent.j].setBackground(Color.BLUE);
                 current = current.parent;
-                System.out.println("current:"+current.i+","+current.j);
                 path.add(new Dimension(current.i,current.j));
 
             } 

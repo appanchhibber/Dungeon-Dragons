@@ -21,8 +21,6 @@ public class HostileStrategy implements Strategy,Runnable {
 	 this.mapModel=mapModel;
 	 this.charModel=charModel;
 	 Dimension playerLoc=mapModel.getCharacterLocations().get(mapModel.getCharacterName());
-	 System.out.println("player position:"+playerLoc);
-	 System.out.println("Hostile Position:"+charModel.getCharLocation());
 		hostilePath=PathValidatorController.hostilePath(1, mapModel.getMapWidth(),
 					mapModel.getMapHeight(), (int) charModel.getCharLocation().getWidth(),
 					(int) charModel.getCharLocation().getHeight(),

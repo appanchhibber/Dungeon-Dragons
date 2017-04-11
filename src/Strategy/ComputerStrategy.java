@@ -3,6 +3,9 @@ package Strategy;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.SOEN6441_DND.Controller.PathValidatorController;
 import com.SOEN6441_DND.Model.CharacterModel;
@@ -13,7 +16,7 @@ public class ComputerStrategy implements Strategy,Runnable {
 	private int stepCount=0;
 	int charLocX=0;
 	int charLocY=0;
-	ArrayList<Dimension> computerPath=new ArrayList<Dimension>();
+	static ArrayList<Dimension> computerPath=new ArrayList<Dimension>();
 	CharacterModel charModel;
 	Thread t1;
 	@Override
@@ -31,15 +34,16 @@ public class ComputerStrategy implements Strategy,Runnable {
 					(int) mapModel.exit.getHeight(), mapModel.getWalls());
 			Collections.reverse(pathToExit);
 			computerPath.addAll(pathToExit);	
+			remove(computerPath.get(0));
 		}
-		remove(computerPath.get(0));
+		
 		this.charModel=charModel;
 		t1=new Thread(this);
 		t1.start();
 	}
+
 	public void remove(Object dimension){
 		computerPath.remove(dimension);
-		System.out.println("updated computer path"+computerPath);
 	}
 	@Override
 	public String getStrategyName() {
@@ -47,15 +51,14 @@ public class ComputerStrategy implements Strategy,Runnable {
 	}
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		for(Dimension d:(ArrayList<Dimension>)computerPath.clone()){
 			if(stepCount<3){
 			charLocX=(int)d.getWidth();
 			 charLocY=(int)d.getHeight();
-			 System.out.println(d);
+				remove(d);
 			 stepCount++;
 					charModel.setBehaviour("Computer");
-					remove(d);
+
 					try {
 						Thread.sleep(1000);
 						charModel.setCharLocation(new Dimension(charLocX,charLocY));
