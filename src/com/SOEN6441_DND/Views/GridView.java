@@ -403,8 +403,6 @@ public class GridView extends JPanel implements Observer {
 		int range=characterModel.getOwnedItems().get("Weapon").getWeaponRange();
 		charLocX = (int) characterModel.getCharLocation().getWidth();
 		charLocY = (int) characterModel.getCharLocation().getHeight();
-		System.out.println("In Range:"+range);
-		
 		for (Map.Entry<String, CharacterModel> charact : playArena.playModel.characters.entrySet()) {
 			if (characterModel.getBehaviour() != charact.getValue().getBehaviour()) {
 				
