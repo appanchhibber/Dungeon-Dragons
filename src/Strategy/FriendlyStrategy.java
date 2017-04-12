@@ -18,6 +18,7 @@ public class FriendlyStrategy implements Strategy,Runnable {
 	int charLocX=0;
 	int charLocY=0;
 	int stepCount=0;
+	static int toggle=1;
 	Thread t1;
 	@Override
 	public void execute(MapModel mapModel, CharacterModel charModel) {
@@ -33,20 +34,31 @@ public class FriendlyStrategy implements Strategy,Runnable {
 						(int) mapModel.treasures.get(key).getHeight(), mapModel.getWalls());
 			 Collections.reverse(friendlyPath);
 			 if(friendlyPath.size()==1){
-				 for(int i=0;i<=4;i++){
+				 for(int i=0;i<=3;i++){
 				 friendlyPath.add(new Dimension((int)(charModel.getCharLocation().getWidth())-i,(int)(charModel.getCharLocation().getHeight())));
 				 
 				 }
+				 friendlyPath.remove(0);
 			 }
 
 			 friendlyPath.remove(0);
 			 }
 
 		 else{
-			 for(int i=0;i<=4;i++){
+			 
+			 if(toggle%2==0){
+			 for(int i=0;i<=3;i++){
 				 friendlyPath.add(new Dimension((int)(charModel.getCharLocation().getWidth())+i,(int)(charModel.getCharLocation().getHeight())));
 				 
 				 }
+			 toggle++;
+			 }else{
+				 for(int i=0;i<=3;i++){
+					 friendlyPath.add(new Dimension((int)(charModel.getCharLocation().getWidth())-i,(int)(charModel.getCharLocation().getHeight())));
+					 
+					 }
+				 toggle++;
+			 }
 			 friendlyPath.remove(0);
 		 }
 		 t1=new Thread(this);
