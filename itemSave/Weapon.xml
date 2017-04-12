@@ -22,11 +22,35 @@
     <weaponRange>1</weaponRange>  
     <enchantValue>1</enchantValue> 
   </type>  
-  <type id="4">
-    <itemTypeName>Dwarven Bow Skinned</itemTypeName>
-    <name>my bow check</name>
-    <weaponType>Ranged weapon</weaponType>
-    <weaponRange>2</weaponRange>
-    <enchantValue>2</enchantValue>
+  <type id="4"> 
+    <itemTypeName>Dwarven Bow Skinned</itemTypeName>  
+    <name>my bow check</name>  
+    <weaponType>Ranged weapon</weaponType>  
+    <weaponRange>2</weaponRange>  
+    <enchantValue>2</enchantValue> 
+  </type>  
+  <type id="5"> 
+    <itemTypeName>Steel Sword</itemTypeName>  
+    <name>test</name>  
+    <weaponType>Melee</weaponType>  
+    <weaponRange>1</weaponRange>  
+    <Burning>true</Burning>  
+    <Pacifying>true</Pacifying>  
+    <Frightening>true</Frightening>  
+    <Slaying>true</Slaying>  
+    <Freezing>true</Freezing>  
+    <enchantValue>1</enchantValue> 
+  </type>  
+  <type id="6">
+    <itemTypeName>Steel Sword</itemTypeName>
+    <name>test1</name>
+    <weaponType>Melee</weaponType>
+    <weaponRange>1</weaponRange>
+    <Burning>false</Burning>
+    <Pacifying>true</Pacifying>
+    <Frightening>false</Frightening>
+    <Slaying>true</Slaying>
+    <Freezing>false</Freezing>
+    <enchantValue>1</enchantValue>
   </type>
 </Weapon>

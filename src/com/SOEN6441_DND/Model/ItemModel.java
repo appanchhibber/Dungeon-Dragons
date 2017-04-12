@@ -24,9 +24,54 @@ public class ItemModel extends Observable{
     public int enchantValue;
     public String weaponType;
     public int weaponRange;
-    public ArrayList<String> enchatCheckValues;
     
-    /**
+    public boolean burning;
+    public boolean pacifying;
+    public boolean frightening;
+    public boolean freezing;
+    public boolean slaying;
+    
+    public boolean isBurning() {
+		return burning;
+	}
+
+	public void setBurning(boolean burning) {
+		this.burning = burning;
+	}
+
+	public boolean isPacifying() {
+		return pacifying;
+	}
+
+	public void setPacifying(boolean pacifying) {
+		this.pacifying = pacifying;
+	}
+
+	public boolean isFrightening() {
+		return frightening;
+	}
+
+	public void setFrightening(boolean frightening) {
+		this.frightening = frightening;
+	}
+
+	public boolean isFreezing() {
+		return freezing;
+	}
+
+	public void setFreezing(boolean freezing) {
+		this.freezing = freezing;
+	}
+
+	public boolean isSlaying() {
+		return slaying;
+	}
+
+	public void setSlaying(boolean slaying) {
+		this.slaying = slaying;
+	}
+
+	/**
      * This method returns the type of Weapon of type String
      * @return String weaponType
      */
@@ -69,7 +114,6 @@ public class ItemModel extends Observable{
     	savedEnchantValueList=new HashMap<String,String>();
     	weaponTypeList = new DefaultComboBoxModel();
     	weaponRangeList = new DefaultComboBoxModel();
-    	enchatCheckValues = new ArrayList<>();
     }
     
     public void setWeaponTypeList(DefaultComboBoxModel weaponTypeList) {
