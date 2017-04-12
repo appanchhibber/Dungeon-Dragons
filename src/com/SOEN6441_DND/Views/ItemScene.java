@@ -437,7 +437,7 @@ public class ItemScene extends View implements Observer {
 		else if(itemViewModel.message == "weaponRange changed"){
 			weaponRangeLabel.setVisible(true);
 			weaponRange.setVisible(true);
-			weaponRange.setText(itemViewModel.getWeaponRange());
+			weaponRange.setText(String.valueOf(itemViewModel.getWeaponRange()));
 		}
 	}
 }

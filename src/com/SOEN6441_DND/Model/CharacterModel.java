@@ -3,6 +3,8 @@ package com.SOEN6441_DND.Model;
 import java.awt.Dimension;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Random;
 
@@ -33,6 +35,17 @@ public class CharacterModel extends Observable {
 	private String ringFlag;
 	private String weaponFlag;
 	private String shieldFlag;
+	private boolean attackFlag;
+	
+	public boolean isAttackFlag() {
+		return attackFlag;
+	}
+
+	public void setAttackFlag(boolean attackFlag) {
+		this.attackFlag = attackFlag;
+	}
+
+	public HashMap<String, ItemModel> ownedItems;
 	public String message;
 
 	public ArrayList<String> backPackItems;
@@ -122,7 +135,9 @@ public class CharacterModel extends Observable {
 	public CharacterModel() {
 		backPackItems = new ArrayList<String>();
 		backPackCounter = 0;
+		ownedItems= new HashMap<String,ItemModel>();
 		hitPointBase= 1+new Random().nextInt(10);
+		attackFlag=false;
 		setAbilityModifier(new AbilityModel());
 		setAbilityScore(new AbilityModel());
 		levelListValues = new String[25];
@@ -131,8 +146,22 @@ public class CharacterModel extends Observable {
 		}
 	}
 
+
 	public String[] getLevelListValues() {
 		return levelListValues;
+	}
+
+	public HashMap<String, ItemModel> getOwnedItems() {
+		return ownedItems;
+	}
+	public void addOwnedItems(String itemName, ItemModel item){
+		this.ownedItems.put(itemName, item);
+	}
+	public void removeOwnedItems(String itemName){
+		this.ownedItems.remove(itemName);
+	}
+	public void setOwnedItems(HashMap<String, ItemModel> ownedItems) {
+		this.ownedItems = ownedItems;
 	}
 
 	public void setLevelListValues(String[] levelListValues) {
@@ -261,6 +290,7 @@ public class CharacterModel extends Observable {
 		int tempArmorBonus = 0;
 		int tempConstitution = 0;
 		int tempDamageBonus = 0;
+		int oldLevel=getLevel();
 		int enchanmentBonus = 0;
 		if (getArmorClass() != 0) {
 			tempArmorBonus = calculateEnchanment(this.level);
@@ -279,6 +309,10 @@ public class CharacterModel extends Observable {
 		}
 		if (weaponFlag != null) {
 			setDamageBonus((getDamageBonus() - tempDamageBonus) + enchanmentBonus);
+			for(Map.Entry<String, ItemModel> item:getOwnedItems().entrySet()){
+				item.getValue().setEnchantValue(-calculateEnchanment(oldLevel));
+				item.getValue().setEnchantValue(+calculateEnchanment(getLevel()));
+			}
 		}
 		if (beltFlag != null) {
 			abilityModifier.setConstitution((abilityModifier.getConstitution() - tempConstitution) + enchanmentBonus);

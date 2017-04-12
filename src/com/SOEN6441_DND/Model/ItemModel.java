@@ -23,7 +23,7 @@ public class ItemModel extends Observable{
     public String subItemType;
     public int enchantValue;
     public String weaponType;
-    public String weaponRange;
+    public int weaponRange;
     public ArrayList<String> enchatCheckValues;
     
     /**
@@ -47,7 +47,7 @@ public class ItemModel extends Observable{
 	 * This method returns the range of the weapon of type String.
 	 * @return weaponRange String
 	 */
-	public String getWeaponRange() {
+	public int getWeaponRange() {
 		return weaponRange;
 	}
 	
@@ -55,7 +55,7 @@ public class ItemModel extends Observable{
 	 * This method sets the range of the weapon
 	 * @param weaponRange
 	 */
-	public void setWeaponRange(String weaponRange) {
+	public void setWeaponRange(int weaponRange) {
 		this.weaponRange = weaponRange;
 		notifyItemView("weaponRange changed");
 	}

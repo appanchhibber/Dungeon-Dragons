@@ -304,7 +304,6 @@ public class PlayerInfoPanelView extends View implements Observer {
 		setPanel();		
 	}
 	public void setPanel(){
-		System.out.println(character.getName());
 		strengthValue.setText(String.valueOf(character.getAbilityScore().getStrength()));
 		constitutionValue.setText(String.valueOf(character.getAbilityScore().getConstitution()));
 		intelligenceValue.setText(String.valueOf(character.getAbilityScore().getIntelligence()));
