@@ -3,6 +3,8 @@ package com.SOEN6441_DND.Controller;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+import com.sun.media.jfxmedia.logging.Logger;
+
 /**
  * This Class calculates Dice Rolls Value based on different types of dice Ex.
  * 4d6, 6d8 etc..
@@ -20,6 +22,8 @@ public class DiceRollController {
 	public int total;
 	public int diceResult[];
 	public int sortedRevDiceList[] = new int[6];
+	
+	org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(DiceRollController.class);
 
 	/**
 	 * This constructor inputs takes input the dice value and counter to be used
@@ -43,6 +47,7 @@ public class DiceRollController {
 	 * @return diceResult Returns the calculated the dice rolled value.
 	 */
 	public int getDiceRollResult() {
+		logger.info("Getting Dice Result !!");
 		total = 0;
 		for (int i = 0; i < counter; i++) {
 			diceResult[i] = 1 + (int) (Math.random() * (maxTotal));
@@ -57,6 +62,7 @@ public class DiceRollController {
 		for (int i = (counter - 1); i > 0; i--) {
 			total += diceResult[i];
 		}
+		logger.info("Dice result fetched !!");
 		return total;
 	}
 

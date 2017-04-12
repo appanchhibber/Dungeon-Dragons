@@ -784,4 +784,8 @@ public class CharacterModel extends Observable {
 		notifyObservers(this);
 	}
 
+	public String characterMovecheck(Dimension newLocation){
+		return "LocationUpdate";
+		
+	}
 }

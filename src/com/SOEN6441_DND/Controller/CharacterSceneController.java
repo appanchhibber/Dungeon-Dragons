@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.apache.log4j.Logger;
 import org.dom4j.DocumentException;
 
 import com.SOEN6441_DND.Model.AbilityModel;
@@ -55,6 +56,7 @@ public class CharacterSceneController implements ActionListener {
 	public Array backPackItems;
 	public CharacterBuilder characterBuilder;
 
+	Logger logger = Logger.getLogger(CharacterSceneController.class);
 	// public String
 /**
  * Constructor for the character Screnn controller 
@@ -80,6 +82,7 @@ public class CharacterSceneController implements ActionListener {
 		this.abilityPanel = view.abilityPanel;
 		abilityModifier = view.characterViewModel.getAbilityModifier();
 		abilityScore = view.characterViewModel.getAbilityScore();
+		logger.info("Dice 4D6 will be rolled.");
 		diceRoll = new DiceRollController(4, 6); // Dice type 4d6
 		itemAssignView = view.itemAssignView;
 	}
@@ -127,6 +130,8 @@ public class CharacterSceneController implements ActionListener {
 		}
 
 		else if (e.getSource() == abilityPanel.calculateButton) {
+			logger.info("Calulate button clicked !");
+			logger.info("Fetching dice result");
 			abilityScore.setStrength(diceRoll.getDiceRollResult());
 			abilityScore.setDexterity(diceRoll.getDiceRollResult());
 			abilityScore.setConstitution(diceRoll.getDiceRollResult());
@@ -134,7 +139,7 @@ public class CharacterSceneController implements ActionListener {
 			abilityScore.setWisdom(diceRoll.getDiceRollResult());
 			abilityScore.setCharisma(diceRoll.getDiceRollResult());
 			characterModel.calculateAbilityModifier();
-			
+			logger.info("Values fecthed and ability scoer generated");
 			
 		} else if (e.getSource() == characterScreen.levels) {
 			characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));

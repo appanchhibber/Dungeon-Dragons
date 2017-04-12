@@ -22,6 +22,10 @@ public class ItemAssignViewController implements ActionListener {
 	public ItemAssignView itemAssignView;
 
 	/**
+	 * Default construtor for item assign view.
+	 */
+	public ItemAssignViewController(){}
+	/**
 	 * Constructor for item assign View
 	 * 
 	 * @param view
@@ -314,6 +318,480 @@ public class ItemAssignViewController implements ActionListener {
 		}
 	}
 
+	public String characterHelmetWearCheck(){
+		int enchantBonus =0;
+		String item = "new hemlParas";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Helmet"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return "Helmet is already assigned";
+						}
+				}
+				}
+	return "Helmet assigned";	
+	}
+			
+	public String characterArmorWearCheck(){
+		int enchantBonus =0;
+		String item = "My Arm";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Armor"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return "Armor is already assigned";
+						}
+				}
+				}
+	return "Armor assigned";	
+	}
+
+	public String characterShieldWearCheck(){
+		int enchantBonus =0;
+		String item = "My Shield";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Shield"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return "Shield is already assigned";
+						}
+				}
+				}
+	return "Shield assigned";	
+	}
+
+	public String characterBeltWearCheck(){
+		int enchantBonus =0;
+		String item = "My Belt";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Belt"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return "Belt is already assigned";
+						}
+				}
+				}
+	return "Belt assigned";	
+	}
+
+	public String characterBootsWearCheck(){
+		int enchantBonus =0;
+		String item = "My Boot";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Boots"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return "Boots is already assigned";
+						}
+				}
+				}
+	return "Boots assigned";	
+	}
+
+	public String characterRingWearCheck(){
+		int enchantBonus =0;
+		String item = "My Ring";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Ring"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return "Ring is already assigned";
+						}
+				}
+				}
+	return "Ring assigned";	
+	}
+	public CharacterModel characterWeaponCheckAbility(){
+		int enchantBonus =0;
+		String item = "My Axe2";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Weapon"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return characterModel;
+						}
+				}
+				}
+	return characterModel;	
+	}
+
+	public CharacterModel characterHelmetCheckAbility(){
+		int enchantBonus =0;
+		String item = "new hemlParas";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Helmet"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return characterModel;
+						}
+				}
+				}
+	return characterModel;	
+	}
+			
+	public CharacterModel characterArmorCheckAbility(){
+		int enchantBonus =0;
+		String item = "My Arm";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Armor"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return characterModel;
+						}
+				}
+				}
+	return characterModel;	
+	}
+
+	public CharacterModel characterShieldCheckAbility(){
+		int enchantBonus =0;
+		String item = "My Shield";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Shield"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return characterModel;
+						}
+				}
+				}
+	return characterModel;	
+	}
+
+	public CharacterModel characterBeltCheckAbility(){
+		int enchantBonus =0;
+		String item = "My Belt";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Belt"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return characterModel;
+						}
+				}
+				}
+	return characterModel;	
+	}
+
+	public CharacterModel characterBootsCheckAbility(){
+		int enchantBonus =0;
+		String item = "My Boot";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Boots"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return characterModel;
+						}
+				}
+				}
+	return characterModel;	
+	}
+
+	public CharacterModel characterRingCheckAbility(){
+		int enchantBonus =0;
+		String item = "My Ring";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Ring"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return characterModel;
+						}
+				}
+				}
+	return characterModel;	
+	}
+	public String characterWeaponWearCheck(){
+		int enchantBonus =0;
+		String item = "My Axe2";
+		String itemType = "";
+		  for (int i = 0; i < 7; i++) {
+				try {
+					if (itemAssignView.items[i].get(item).toArray() != null) {
+						itemType = itemAssignView.items[i].get(item).toArray()[1].toString();
+						enchantBonus = Integer
+								.parseInt((itemAssignView.items[i].get(item).toArray()[3].toString()));
+						break;
+					}
+				} catch (NullPointerException ex) {
+					// TODO: handle exception
+				}
+				
+				if(itemType.equals("Weapon"))
+						{
+					if (characterModel.getHelmetFlag() == null) {
+						characterModel.setHelmetFlag(item);
+						characterModel.removeBackPackItems(item);
+						characterModel.setBackPackCounter((characterModel.getBackPackCounter() - 1));
+						characterModel.setArmorClass((enchantBonus+characterModel.calculateEnchanment(characterModel.getLevel())) + characterModel.getArmorClass());
+
+					} 
+					
+					 else {
+							return "Weapon is already assigned";
+						}
+				}
+				}
+	return "Weapon assigned";	
+	}
+	
 	/**
 	 * This method removes assigned item
 	 * 
