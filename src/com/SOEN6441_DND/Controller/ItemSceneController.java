@@ -109,7 +109,7 @@ public class ItemSceneController implements ActionListener {
 						fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
 				if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
 				itemModel.setWeaponType(fileModel.getWeaponType().get(itemScreen.subItemType.getSelectedIndex()));
-				itemModel.setWeaponRange(fileModel.getWeaponRange().get(itemScreen.subItemType.getSelectedIndex()));
+				itemModel.setWeaponRange(Integer.parseInt(fileModel.getWeaponRange().get(itemScreen.subItemType.getSelectedIndex())));
 				}
 			} else {
 
@@ -117,7 +117,7 @@ public class ItemSceneController implements ActionListener {
 				itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
 				if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
 				itemModel.setWeaponType(fileModel.getWeaponType().get(0));
-				itemModel.setWeaponRange(fileModel.getWeaponRange().get(0));
+				itemModel.setWeaponRange(Integer.parseInt(fileModel.getWeaponRange().get(0)));
 				}
 			}
 
@@ -131,7 +131,7 @@ public class ItemSceneController implements ActionListener {
 					itemModel.setImage("image/"+itemScreen.subItemType.getSelectedItem().toString().replaceAll("\\s", "")+".jpg");
 					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
 					itemModel.setWeaponType(itemModel.getWeaponTypeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString());
-					itemModel.setWeaponRange(itemModel.getWeaponRangeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString());
+					itemModel.setWeaponRange(Integer.parseInt(itemModel.getWeaponRangeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString()));
 					}
 				} else {
 
@@ -139,7 +139,7 @@ public class ItemSceneController implements ActionListener {
 					itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
 					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
 					itemModel.setWeaponType(fileModel.getWeaponType().get(0));
-					itemModel.setWeaponRange(fileModel.getWeaponRange().get(0));
+					itemModel.setWeaponRange(Integer.parseInt(fileModel.getWeaponRange().get(0)));
 					}
 				}
 				
@@ -183,7 +183,7 @@ public class ItemSceneController implements ActionListener {
 					itemModel.setName(itemScreen.nameField.getText());
 					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
 						itemModel.setWeaponType(itemScreen.weaponType.getText());
-						itemModel.setWeaponRange(itemScreen.weaponRange.getText());
+						itemModel.setWeaponRange(Integer.parseInt(itemScreen.weaponRange.getText()));
 					}
 					
 					itemModel.setEnchantValue(Integer.parseInt(itemScreen.enchantList.getSelectedItem().toString()));

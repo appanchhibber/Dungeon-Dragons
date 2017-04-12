@@ -215,7 +215,12 @@ public class FileOperationModel {
 		itemModel.itemType=rootElement.getName();
 		return itemModel;
 	}
-	
+	/**
+	 * This method reads all the items from the file.
+	 * @param file
+	 * @return
+	 * @author Punit Trivedi
+	 */
 	public Map<String, ArrayList<String>> readSaveItemFile(File file) {
 		Map<String,ArrayList<String>> hm = new HashMap<String,ArrayList<String>>();
 		this.file = file;
@@ -233,6 +238,10 @@ public class FileOperationModel {
 				itemsName.add(filename);//Type of Item
 				itemsName.add(item.selectSingleNode("itemTypeName").getText());//Sub Type
 				itemsName.add(item.selectSingleNode("enchantValue").getText());//Enchanment Value
+				if(filename.equals("Weapon")){
+				  itemsName.add(item.selectSingleNode("weaponRange").getText());
+				}
+				
 				hm.put(item.selectSingleNode("name").getText(),itemsName);
 			}
 			return hm;
@@ -275,7 +284,7 @@ public class FileOperationModel {
 		Map<String, ArrayList<String>> items;
 		for (itemTypeList s : ItemModel.itemTypeList.values()) {
 			File f1 = new File("itemSave/" + s.toString() + ".xml");
-			items = new FileOperationModel().readSaveItemFile(f1);
+			items = readSaveItemFile(f1);
 			switch (s.toString()) {
 			case "Helmet": {
 				itemList[0] = items;
@@ -310,6 +319,27 @@ public class FileOperationModel {
 		}
 		return itemList;
 	}
+	/**
+	 * Read character's assigned Item.
+	 * @param characteName
+	 * @return
+	 */
+	public ItemModel readSingleItem(String itemName, String itemType){
+		ItemModel item= new ItemModel();
+		Map<String, ArrayList<String>> items = readSaveItemFile(new File("itemSave/"+itemType+".xml"));
+		
+		item.setName(itemName);
+		item.setItemType(itemType);
+		item.setSubItemType(items.get(itemName).toArray()[2].toString());
+		item.setImage(items.get(itemName).toArray()[2].toString().replaceAll("\\s+", "")+".jpg");
+		item.setEnchantValue(Integer.parseInt(items.get(itemName).toArray()[3].toString()));
+		if(itemType.equals("Weapon")){
+			item.setWeaponRange(Integer.parseInt(items.get(itemName).toArray()[4].toString()));
+		}
+			
+		return item;
+	}
+	
 	public CharacterModel loadCharacter(String characteName)
 	{
 		ArrayList<String> backPackList=new ArrayList<String>();
@@ -334,12 +364,20 @@ public class FileOperationModel {
 			
 			Element itemEquip = rootElement.element("itemEquip");
 			chModel.setHelmetFlag(itemEquip.selectSingleNode("helmetFlag").getText());
+			chModel.addOwnedItems(chModel.getHelmetFlag(),readSingleItem(chModel.getHelmetFlag(),"Helmet"));
 			chModel.setArmorFlag(itemEquip.selectSingleNode("armorFlag").getText());
+			chModel.addOwnedItems(chModel.getArmorFlag(),readSingleItem(chModel.getArmorFlag(),"Armor"));
 			chModel.setBeltFlag(itemEquip.selectSingleNode("beltFlag").getText());
+			chModel.addOwnedItems(chModel.getBeltFlag(),readSingleItem(chModel.getBeltFlag(),"Belt"));
 			chModel.setBootFlag(itemEquip.selectSingleNode("bootFlag").getText());
+			chModel.addOwnedItems(chModel.getBootFlag(),readSingleItem(chModel.getBootFlag(),"Boots"));
 			chModel.setRingFlag(itemEquip.selectSingleNode("ringFlag").getText());
+			chModel.addOwnedItems(chModel.getRingFlag(),readSingleItem(chModel.getRingFlag(),"Ring"));
 			chModel.setShieldFlag(itemEquip.selectSingleNode("shieldFlag").getText());
+			chModel.addOwnedItems(chModel.getShieldFlag(),readSingleItem(chModel.getShieldFlag(),"Shield"));
 			chModel.setWeaponFlag(itemEquip.selectSingleNode("weaponFlag").getText());
+			chModel.addOwnedItems(chModel.getWeaponFlag(),readSingleItem(chModel.getWeaponFlag(),"Weapon"));
+			
 			
 			Element abiModiElement = rootElement.element("abilityModifier");
 			chModel.getAbilityModifier().setStrength(Integer.parseInt(abiModiElement.selectSingleNode("strength").getText()));
@@ -366,10 +404,13 @@ public class FileOperationModel {
 				chModel.addBackPackItems(item.getText());
 				//System.out.println(backPackList.toString());
 			}
+			for(Map.Entry<String, ItemModel> item:chModel.getOwnedItems().entrySet()){
+				item.getValue().setEnchantValue(+chModel.calculateEnchanment(chModel.getLevel()));
+			}
 			
 		}catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("Exception");
+			System.out.println(e);
 		}
 		return chModel;
 		
@@ -497,7 +538,7 @@ public class FileOperationModel {
 						typeId.addElement("name").addText(writeItemModel.getName());
 						if(writeItemModel.getItemtype().equalsIgnoreCase("weapon")){
 							typeId.addElement("weaponType").addText(writeItemModel.getWeaponType());
-							typeId.addElement("weaponRange").addText(writeItemModel.getWeaponRange());
+							typeId.addElement("weaponRange").addText(String.valueOf(writeItemModel.getWeaponRange()));
 						}
 						typeId.addElement("enchantValue")
 								.addText(Integer.toString(writeItemModel.getEnchantValue()));
