@@ -364,19 +364,19 @@ public class FileOperationModel {
 			
 			Element itemEquip = rootElement.element("itemEquip");
 			chModel.setHelmetFlag(itemEquip.selectSingleNode("helmetFlag").getText());
-			chModel.addOwnedItems(chModel.getHelmetFlag(),readSingleItem(chModel.getHelmetFlag(),"Helmet"));
+			chModel.addOwnedItems("Helmet",readSingleItem(chModel.getHelmetFlag(),"Helmet"));
 			chModel.setArmorFlag(itemEquip.selectSingleNode("armorFlag").getText());
-			chModel.addOwnedItems(chModel.getArmorFlag(),readSingleItem(chModel.getArmorFlag(),"Armor"));
+			chModel.addOwnedItems("Armor",readSingleItem(chModel.getArmorFlag(),"Armor"));
 			chModel.setBeltFlag(itemEquip.selectSingleNode("beltFlag").getText());
-			chModel.addOwnedItems(chModel.getBeltFlag(),readSingleItem(chModel.getBeltFlag(),"Belt"));
+			chModel.addOwnedItems("Belt",readSingleItem(chModel.getBeltFlag(),"Belt"));
 			chModel.setBootFlag(itemEquip.selectSingleNode("bootFlag").getText());
-			chModel.addOwnedItems(chModel.getBootFlag(),readSingleItem(chModel.getBootFlag(),"Boots"));
+			chModel.addOwnedItems("Boots",readSingleItem(chModel.getBootFlag(),"Boots"));
 			chModel.setRingFlag(itemEquip.selectSingleNode("ringFlag").getText());
-			chModel.addOwnedItems(chModel.getRingFlag(),readSingleItem(chModel.getRingFlag(),"Ring"));
+			chModel.addOwnedItems("Ring",readSingleItem(chModel.getRingFlag(),"Ring"));
 			chModel.setShieldFlag(itemEquip.selectSingleNode("shieldFlag").getText());
-			chModel.addOwnedItems(chModel.getShieldFlag(),readSingleItem(chModel.getShieldFlag(),"Shield"));
+			chModel.addOwnedItems("Shield",readSingleItem(chModel.getShieldFlag(),"Shield"));
 			chModel.setWeaponFlag(itemEquip.selectSingleNode("weaponFlag").getText());
-			chModel.addOwnedItems(chModel.getWeaponFlag(),readSingleItem(chModel.getWeaponFlag(),"Weapon"));
+			chModel.addOwnedItems("Weapon",readSingleItem(chModel.getWeaponFlag(),"Weapon"));
 			
 			
 			Element abiModiElement = rootElement.element("abilityModifier");

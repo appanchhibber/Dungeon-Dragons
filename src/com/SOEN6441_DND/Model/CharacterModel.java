@@ -35,7 +35,16 @@ public class CharacterModel extends Observable {
 	private String ringFlag;
 	private String weaponFlag;
 	private String shieldFlag;
+	private boolean attackFlag;
 	
+	public boolean isAttackFlag() {
+		return attackFlag;
+	}
+
+	public void setAttackFlag(boolean attackFlag) {
+		this.attackFlag = attackFlag;
+	}
+
 	public HashMap<String, ItemModel> ownedItems;
 	public String message;
 
@@ -128,6 +137,7 @@ public class CharacterModel extends Observable {
 		backPackCounter = 0;
 		ownedItems= new HashMap<String,ItemModel>();
 		hitPointBase= 1+new Random().nextInt(10);
+		attackFlag=false;
 		setAbilityModifier(new AbilityModel());
 		setAbilityScore(new AbilityModel());
 		levelListValues = new String[25];

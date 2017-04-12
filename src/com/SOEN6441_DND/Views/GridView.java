@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import com.SOEN6441_DND.Controller.PathValidatorController;
 import com.SOEN6441_DND.Controller.TransferHandlerController;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
@@ -39,8 +42,9 @@ public class GridView extends JPanel implements Observer {
 	private int count = 0;
 	public PlayArena playArena;
 	private int stepCounter;
-	CharacterModel	characterModel;
+	CharacterModel characterModel;
 	Timer timer;
+
 	/**
 	 * Constructor for passing the model from the controller to MapView and the
 	 * mode of working as well ie create and edit
@@ -56,7 +60,7 @@ public class GridView extends JPanel implements Observer {
 		this.mapHeight = mapModel.getMapHeight();
 		this.mapWidth = mapModel.getMapWidth();
 		this.mapView = mapView;
-		
+
 		this.mapView.mapModel.setMapHeight(mapHeight);
 		this.mapView.mapModel.setMapWidth(mapWidth);
 		this.setLayout(new GridLayout(mapHeight, mapWidth, 3, 3));
@@ -87,7 +91,7 @@ public class GridView extends JPanel implements Observer {
 		this.playArena = playArena;
 		this.playArena.mapModel.setMapHeight(mapHeight);
 		this.playArena.mapModel.setMapWidth(mapWidth);
-		this.stepCounter=0;
+		this.stepCounter = 0;
 		this.setLayout(new GridLayout(mapHeight, mapWidth, 3, 3));
 
 		this.setBackground(Color.BLACK);
@@ -118,33 +122,23 @@ public class GridView extends JPanel implements Observer {
 				} else {
 					value = 1 + j + (i * multiple);
 				}
-				if ((int) mapModel.getEntry().getWidth() == i
-						&& (int) mapModel.getEntry().getHeight() == j) {
+				if ((int) mapModel.getEntry().getWidth() == i && (int) mapModel.getEntry().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("EntryDoor");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri",
-							Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
-							"image/EntryDoor.jpg").getImage()
-							.getScaledInstance(50, 50,
-									java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/EntryDoor.jpg").getImage()
+							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getChest().getWidth() == i
-						&& (int) mapModel.getChest().getHeight() == j) {
+				} else if ((int) mapModel.getChest().getWidth() == i && (int) mapModel.getChest().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("Chest");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri",
-							Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
-							"image/Chest.jpg").getImage().getScaledInstance(50,
-							50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/Chest.jpg").getImage()
+							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getExit().getWidth() == i
-						&& (int) mapModel.getExit().getHeight() == j) {
+				} else if ((int) mapModel.getExit().getWidth() == i && (int) mapModel.getExit().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("ExitDoor");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri",
-							Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
-							"image/ExitDoor.jpg").getImage().getScaledInstance(
-							50, 50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/ExitDoor.jpg").getImage()
+							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
 				} else {
 					mapButtonsGrid[i][j].setName(i + "," + j);
@@ -157,73 +151,54 @@ public class GridView extends JPanel implements Observer {
 				this.add(mapButtonsGrid[i][j]);
 			}
 		}
-		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setIcon(new ImageIcon(
-				new ImageIcon(playArena.charModel.getImage()).getImage()
-						.getScaledInstance(50, 50,
-								java.awt.Image.SCALE_SMOOTH)));
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX]
+				.setIcon(new ImageIcon(new ImageIcon(playArena.charModel.getImage()).getImage().getScaledInstance(50,
+						50, java.awt.Image.SCALE_SMOOTH)));
 
 		mapButtonsGrid[playArena.charLocY][playArena.charLocX]
 				.setText(mapButtonsGrid[playArena.charLocY][playArena.charLocX].getName());
-		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setFont(new Font("Calibri",
-				Font.PLAIN, 0));
-		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setName(playArena.charModel.getName()+"-Player");
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setFont(new Font("Calibri", Font.PLAIN, 0));
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX].setName(playArena.charModel.getName() + "-Player");
 
-		mapButtonsGrid[playArena.charLocY][playArena.charLocX]
-				.addActionListener(playArena.playController);
+		mapButtonsGrid[playArena.charLocY][playArena.charLocX].addActionListener(playArena.playController);
 
 		for (Dimension dimension : mapModel.getWalls()) {
 			// System.out.println((int)dimension.getWidth());
-			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
-					.getWidth()].setName("Wall");
-			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
-					.getWidth()].setFont(new Font("Calibri", Font.PLAIN, 0));
-			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
-					.getWidth()].setIcon(new ImageIcon(new ImageIcon(
-					"image/Wall.jpg").getImage().getScaledInstance(50, 50,
-					java.awt.Image.SCALE_SMOOTH)));
-			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
-					.getWidth()].setText((int) dimension.getHeight() + ","
-					+ (int) dimension.getWidth());
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension.getWidth()].setName("Wall");
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension.getWidth()]
+					.setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension.getWidth()].setIcon(new ImageIcon(
+					new ImageIcon("image/Wall.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension.getWidth()]
+					.setText((int) dimension.getHeight() + "," + (int) dimension.getWidth());
 		}
-		for (Map.Entry<String, MapModel> character : mapModel.getCharacters()
-				.entrySet()) {
-			int characterX = (int) character.getValue().getCharacterLocation()
-					.getWidth();
-			int characterY = (int) character.getValue().getCharacterLocation()
-					.getHeight();
-			mapButtonsGrid[characterY][characterX].setName("_"
-					+ character.getKey());
-			mapButtonsGrid[characterY][characterX].setFont(new Font("Calibri",
-					Font.PLAIN, 0));
-			mapButtonsGrid[characterY][characterX].setText(characterY + ","
-					+ characterX);
-			mapButtonsGrid[characterY][characterX].setToolTipText(character
-					.getValue().getCharacterBehavior());
-			mapButtonsGrid[characterY][characterX].setIcon(new ImageIcon(
-					new ImageIcon(character.getValue().getCharacterImage())
-							.getImage().getScaledInstance(50, 50,
-									java.awt.Image.SCALE_SMOOTH)));
-	CharacterModel model=new FileOperationModel().loadCharacter(character.getKey());
-	model.setCharLocation(character.getValue().getCharacterLocation());
+		for (Map.Entry<String, MapModel> character : mapModel.getCharacters().entrySet()) {
+			int characterX = (int) character.getValue().getCharacterLocation().getWidth();
+			int characterY = (int) character.getValue().getCharacterLocation().getHeight();
+			mapButtonsGrid[characterY][characterX].setName("_" + character.getKey());
+			mapButtonsGrid[characterY][characterX].setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[characterY][characterX].setText(characterY + "," + characterX);
+			mapButtonsGrid[characterY][characterX].setToolTipText(character.getValue().getCharacterBehavior());
+			mapButtonsGrid[characterY][characterX]
+					.setIcon(new ImageIcon(new ImageIcon(character.getValue().getCharacterImage()).getImage()
+							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+			CharacterModel model = new FileOperationModel().loadCharacter(character.getKey());
+			model.setCharLocation(character.getValue().getCharacterLocation());
 			playArena.playModel.addCharacter(character.getKey() + "-" + character.getValue().getCharacterBehavior(),
 					model);
-			mapModel.addCharLocation(character.getKey() + "-" + character.getValue().getCharacterBehavior(),character.getValue().getCharacterLocation());
+			mapModel.addCharLocation(character.getKey() + "-" + character.getValue().getCharacterBehavior(),
+					character.getValue().getCharacterLocation());
 			mapButtonsGrid[characterY][characterX].addActionListener(playArena.playController);
 		}
-		for (Map.Entry<String, Dimension> treasure : mapModel.getTreasures()
-				.entrySet()) {
+		for (Map.Entry<String, Dimension> treasure : mapModel.getTreasures().entrySet()) {
 			int treasureX = (int) treasure.getValue().getWidth();
 			int treasureY = (int) treasure.getValue().getHeight();
 			mapButtonsGrid[treasureY][treasureX].setName(treasure.getKey());
-			mapButtonsGrid[treasureY][treasureX].setFont(new Font("Calibri",
-					Font.PLAIN, 0));
-			mapButtonsGrid[treasureY][treasureX].setText(treasureY + ","
-					+ treasureX);
+			mapButtonsGrid[treasureY][treasureX].setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[treasureY][treasureX].setText(treasureY + "," + treasureX);
 
-			mapButtonsGrid[treasureY][treasureX].setIcon(new ImageIcon(
-					new ImageIcon("image/Treasure.jpg")
-							.getImage().getScaledInstance(50, 50,
-									java.awt.Image.SCALE_SMOOTH)));
+			mapButtonsGrid[treasureY][treasureX].setIcon(new ImageIcon(new ImageIcon("image/Treasure.jpg").getImage()
+					.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		}
 
 	}
@@ -249,33 +224,23 @@ public class GridView extends JPanel implements Observer {
 				} else {
 					value = 1 + j + (i * multiple);
 				}
-				if ((int) mapModel.getEntry().getWidth() == i
-						&& (int) mapModel.getEntry().getHeight() == j) {
+				if ((int) mapModel.getEntry().getWidth() == i && (int) mapModel.getEntry().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("EntryDoor");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri",
-							Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
-							"image/EntryDoor.jpg").getImage()
-							.getScaledInstance(50, 50,
-									java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/EntryDoor.jpg").getImage()
+							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getChest().getWidth() == i
-						&& (int) mapModel.getChest().getHeight() == j) {
+				} else if ((int) mapModel.getChest().getWidth() == i && (int) mapModel.getChest().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("Chest");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri",
-							Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
-							"image/Chest.jpg").getImage().getScaledInstance(50,
-							50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/Chest.jpg").getImage()
+							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getExit().getWidth() == i
-						&& (int) mapModel.getExit().getHeight() == j) {
+				} else if ((int) mapModel.getExit().getWidth() == i && (int) mapModel.getExit().getHeight() == j) {
 					mapButtonsGrid[i][j].setName("ExitDoor");
-					mapButtonsGrid[i][j].setFont(new Font("Calibri",
-							Font.PLAIN, 0));
-					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon(
-							"image/ExitDoor.jpg").getImage().getScaledInstance(
-							50, 50, java.awt.Image.SCALE_SMOOTH)));
+					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
+					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/ExitDoor.jpg").getImage()
+							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
 				} else {
 					mapButtonsGrid[i][j].setName(i + "," + j);
@@ -284,9 +249,7 @@ public class GridView extends JPanel implements Observer {
 				mapButtonsGrid[i][j].setOpaque(true);
 				mapButtonsGrid[i][j].setBorderPainted(false);
 				mapButtonsGrid[i][j].setSize(40, 40);
-				mapButtonsGrid[i][j]
-						.setTransferHandler(new TransferHandlerController()
-								.valueImportCreator());
+				mapButtonsGrid[i][j].setTransferHandler(new TransferHandlerController().valueImportCreator());
 				mapButtonsGrid[i][j].addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
 						// System.out.println(e.getButton());
@@ -304,12 +267,10 @@ public class GridView extends JPanel implements Observer {
 							if (button.getName().contains("_")) {
 								count++;
 								if (count % 2 == 0) {
-									mapView.inventView.selectBehavior
-											.setText("Hostile");
+									mapView.inventView.selectBehavior.setText("Hostile");
 									button.setToolTipText("Hostile");
 								} else {
-									mapView.inventView.selectBehavior
-											.setText("Friendly");
+									mapView.inventView.selectBehavior.setText("Friendly");
 									button.setToolTipText("Friendly");
 								}
 							}
@@ -323,51 +284,34 @@ public class GridView extends JPanel implements Observer {
 		}
 		for (Dimension dimension : mapModel.getWalls()) {
 			// System.out.println((int)dimension.getWidth());
-			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
-					.getWidth()].setName("Wall");
-			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
-					.getWidth()].setFont(new Font("Calibri", Font.PLAIN, 0));
-			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
-					.getWidth()].setIcon(new ImageIcon(new ImageIcon(
-					"image/Wall.jpg").getImage().getScaledInstance(50, 50,
-					java.awt.Image.SCALE_SMOOTH)));
-			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension
-					.getWidth()].setText((int) dimension.getHeight() + ","
-					+ (int) dimension.getWidth());
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension.getWidth()].setName("Wall");
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension.getWidth()]
+					.setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension.getWidth()].setIcon(new ImageIcon(
+					new ImageIcon("image/Wall.jpg").getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+			mapButtonsGrid[(int) dimension.getHeight()][(int) dimension.getWidth()]
+					.setText((int) dimension.getHeight() + "," + (int) dimension.getWidth());
 		}
-		for (Map.Entry<String, MapModel> character : mapModel.getCharacters()
-				.entrySet()) {
-			int characterX = (int) character.getValue().getCharacterLocation()
-					.getWidth();
-			int characterY = (int) character.getValue().getCharacterLocation()
-					.getHeight();
-			mapButtonsGrid[characterY][characterX].setName("_"
-					+ character.getKey());
-			mapButtonsGrid[characterY][characterX].setFont(new Font("Calibri",
-					Font.PLAIN, 0));
-			mapButtonsGrid[characterY][characterX].setText(characterY + ","
-					+ characterX);
-			mapButtonsGrid[characterY][characterX].setToolTipText(character
-					.getValue().getCharacterBehavior());
-			mapButtonsGrid[characterY][characterX].setIcon(new ImageIcon(
-					new ImageIcon(character.getValue().getCharacterImage())
-							.getImage().getScaledInstance(50, 50,
-									java.awt.Image.SCALE_SMOOTH)));
+		for (Map.Entry<String, MapModel> character : mapModel.getCharacters().entrySet()) {
+			int characterX = (int) character.getValue().getCharacterLocation().getWidth();
+			int characterY = (int) character.getValue().getCharacterLocation().getHeight();
+			mapButtonsGrid[characterY][characterX].setName("_" + character.getKey());
+			mapButtonsGrid[characterY][characterX].setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[characterY][characterX].setText(characterY + "," + characterX);
+			mapButtonsGrid[characterY][characterX].setToolTipText(character.getValue().getCharacterBehavior());
+			mapButtonsGrid[characterY][characterX]
+					.setIcon(new ImageIcon(new ImageIcon(character.getValue().getCharacterImage()).getImage()
+							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		}
-		for (Map.Entry<String, Dimension> treasure : mapModel.getTreasures()
-				.entrySet()) {
+		for (Map.Entry<String, Dimension> treasure : mapModel.getTreasures().entrySet()) {
 			int treasureX = (int) treasure.getValue().getWidth();
 			int treasureY = (int) treasure.getValue().getHeight();
 			mapButtonsGrid[treasureY][treasureX].setName(treasure.getKey());
-			mapButtonsGrid[treasureY][treasureX].setFont(new Font("Calibri",
-					Font.PLAIN, 0));
-			mapButtonsGrid[treasureY][treasureX].setText(treasureY + ","
-					+ treasureX);
+			mapButtonsGrid[treasureY][treasureX].setFont(new Font("Calibri", Font.PLAIN, 0));
+			mapButtonsGrid[treasureY][treasureX].setText(treasureY + "," + treasureX);
 
-			mapButtonsGrid[treasureY][treasureX].setIcon(new ImageIcon(
-					new ImageIcon("image/Treasure.jpg")
-							.getImage().getScaledInstance(50, 50,
-									java.awt.Image.SCALE_SMOOTH)));
+			mapButtonsGrid[treasureY][treasureX].setIcon(new ImageIcon(new ImageIcon("image/Treasure.jpg").getImage()
+					.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 		}
 	}
 
@@ -397,9 +341,7 @@ public class GridView extends JPanel implements Observer {
 				mapButtonsGrid[i][j].setOpaque(true);
 				mapButtonsGrid[i][j].setBorderPainted(false);
 				mapButtonsGrid[i][j].setSize(40, 40);
-				mapButtonsGrid[i][j]
-						.setTransferHandler(new TransferHandlerController()
-								.valueImportCreator());
+				mapButtonsGrid[i][j].setTransferHandler(new TransferHandlerController().valueImportCreator());
 				mapButtonsGrid[i][j].addMouseListener(new MouseAdapter() {
 					public void mousePressed(MouseEvent e) {
 						// System.out.println(e.getButton());
@@ -417,12 +359,10 @@ public class GridView extends JPanel implements Observer {
 							if (button.getName().contains("_")) {
 								count++;
 								if (count % 2 == 0) {
-									mapView.inventView.selectBehavior
-											.setText("Hostile");
+									mapView.inventView.selectBehavior.setText("Hostile");
 									button.setToolTipText("Hostile");
 								} else {
-									mapView.inventView.selectBehavior
-											.setText("Friendly");
+									mapView.inventView.selectBehavior.setText("Friendly");
 									button.setToolTipText("Friendly");
 								}
 							}
@@ -437,56 +377,76 @@ public class GridView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-			characterModel=(CharacterModel)o;
-			if(characterModel.message=="LocationUpdate")
-			{
-				moveCharacter();
-				this.stepCounter++;
-				if(this.stepCounter>=3)
-				{
-							System.out.println("Move Completed");
-					this.stepCounter=0;
-					playArena.playController.turn();
-					
-				}
-				characterModel.message="";
-			}	
+		characterModel = (CharacterModel) o;
+		if (characterModel.message == "LocationUpdate") {
+			if (this.stepCounter == 0) {
 
-		
+			}
+			moveCharacter();
+			this.stepCounter++;
+			if (this.stepCounter >= 3) {
+
+				System.out.println("Move Completed");
+				setRange();
+				this.stepCounter = 0;
+				playArena.playController.turn();
+			}
+			characterModel.message = "";
+		}
+
 	}
-	public void moveCharacter()
-	{
-		int oldX=(int)mapModel.getCharacterLocations().get(characterModel.getName()+"-"+characterModel.getBehaviour()).getWidth();
-		int oldY=(int)mapModel.getCharacterLocations().get(characterModel.getName()+"-"+characterModel.getBehaviour()).getHeight();
+
+	public void setRange() {
+		Color c;
+		int charLocX;
+		int charLocY;
+		int range=characterModel.getOwnedItems().get("Weapon").getWeaponRange();
+		charLocX = (int) characterModel.getCharLocation().getWidth();
+		charLocY = (int) characterModel.getCharLocation().getHeight();
+		System.out.println("In Range:"+range);
+		
+		for (Map.Entry<String, CharacterModel> charact : playArena.playModel.characters.entrySet()) {
+			if (characterModel.getBehaviour() != charact.getValue().getBehaviour()) {
+				
+				
+				if (PathValidatorController.computerPath(1, mapModel.getMapWidth(), mapModel.getMapHeight(), charLocX,
+						charLocY, (int) charact.getValue().getCharLocation().getWidth(),
+						(int) charact.getValue().getCharLocation().getHeight(), new ArrayList<>()).size()<=range) {
+					characterModel.setAttackFlag(true);
+					System.out.println("Attack Set");
+				}
+			}
+		}
+
+	}
+
+	public void moveCharacter() {
+		int oldX = (int) mapModel.getCharacterLocations()
+				.get(characterModel.getName() + "-" + characterModel.getBehaviour()).getWidth();
+		int oldY = (int) mapModel.getCharacterLocations()
+				.get(characterModel.getName() + "-" + characterModel.getBehaviour()).getHeight();
 		mapButtonsGrid[oldY][oldX].setIcon(null);
-		mapButtonsGrid[oldY][oldX]
-				.setName(mapButtonsGrid[oldY][oldX]
-						.getText());
+		mapButtonsGrid[oldY][oldX].setName(mapButtonsGrid[oldY][oldX].getText());
 		mapButtonsGrid[oldY][oldX].setToolTipText("");
-		int charLocY=(int)characterModel.getCharLocation().getHeight();
-		int charLocX=(int)characterModel.getCharLocation().getWidth();
-		mapModel.updateCharLocation(characterModel.getName()+"-"+characterModel.getBehaviour(), new Dimension(charLocX, charLocY));
-			mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(
-					new ImageIcon(characterModel.getImage()).getImage()
-							.getScaledInstance(50, 50,
-									java.awt.Image.SCALE_SMOOTH)));
+		int charLocY = (int) characterModel.getCharLocation().getHeight();
+		int charLocX = (int) characterModel.getCharLocation().getWidth();
+		mapModel.updateCharLocation(characterModel.getName() + "-" + characterModel.getBehaviour(),
+				new Dimension(charLocX, charLocY));
+		mapButtonsGrid[charLocY][charLocX].setIcon(new ImageIcon(new ImageIcon(characterModel.getImage()).getImage()
+				.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 
-			mapButtonsGrid[charLocY][charLocX]
-					.setText(mapButtonsGrid[charLocY][charLocX].getName());
-			mapButtonsGrid[charLocY][charLocX].setFont(new Font("Calibri",
-					Font.PLAIN, 0));
-			if(characterModel.getBehaviour()=="Player"){
-			mapButtonsGrid[charLocY][charLocX].setName(characterModel.getName()+"-Player");
+		mapButtonsGrid[charLocY][charLocX].setText(mapButtonsGrid[charLocY][charLocX].getName());
+		mapButtonsGrid[charLocY][charLocX].setFont(new Font("Calibri", Font.PLAIN, 0));
+		if (characterModel.getBehaviour() == "Player") {
+			mapButtonsGrid[charLocY][charLocX].setName(characterModel.getName() + "-Player");
 			mapButtonsGrid[charLocY][charLocX].setToolTipText("Player");
-			}
-			else{
-				mapButtonsGrid[charLocY][charLocX].setName("_"+characterModel.getName());
-				mapButtonsGrid[charLocY][charLocX].setToolTipText(characterModel.getBehaviour());
-			}
-			mapButtonsGrid[charLocY][charLocX]
-					.addActionListener(playArena.playController);
+		} else {
+			mapButtonsGrid[charLocY][charLocX].setName("_" + characterModel.getName());
+			mapButtonsGrid[charLocY][charLocX].setToolTipText(characterModel.getBehaviour());
+		}
+		mapButtonsGrid[charLocY][charLocX].addActionListener(playArena.playController);
 
-			revalidate();
+		revalidate();
 	}
 
 }
