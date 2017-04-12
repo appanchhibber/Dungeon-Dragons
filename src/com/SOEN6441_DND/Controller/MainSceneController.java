@@ -22,7 +22,11 @@ import com.SOEN6441_DND.Views.ItemScene;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.MapView;
 import com.SOEN6441_DND.Views.StartGameView;
-
+/**
+ * Main menu controller class
+ * @author Appan Chhibber
+ *
+ */
 public class MainSceneController implements ActionListener {
 
 	private MainScene homeScreen;
@@ -30,7 +34,10 @@ public class MainSceneController implements ActionListener {
 	public FileOperationModel ioModel;
 	public MapModel mapModel;
 	public ItemModel itemModel;
-
+/**
+ * Constructor for main scene controller 
+ * @param view
+ */
 	public MainSceneController(MainScene view) {
 		this.homeScreen = view;
 		gameController = GameController.getInstance();
@@ -39,6 +46,9 @@ public class MainSceneController implements ActionListener {
 		itemModel = new ItemModel();
 	}
 
+	/**
+	 * Action Listener
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == homeScreen.exitGameButton) {

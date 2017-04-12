@@ -63,12 +63,12 @@ public class StartGameController implements ActionListener {
 			} else {
 				campaignModel = ioModel.readCampaignFile(new File("campaign/"
 						+ startView.selectCampaign.getSelectedItem() + ".xml"));
-				this.characterModel=ioModel.loadCharacter(startView.selectCharacter
-						.getSelectedItem().toString());
-				if(startView.computerBehavior.isSelected()){
+				this.characterModel = ioModel
+						.loadCharacter(startView.selectCharacter
+								.getSelectedItem().toString());
+				if (startView.computerBehavior.isSelected()) {
 					characterModel.setBehaviour("Computer");
-				}
-				else{
+				} else {
 					characterModel.setBehaviour("Player");
 				}
 				mapModel = ioModel.readMapFile(new File("maps/"

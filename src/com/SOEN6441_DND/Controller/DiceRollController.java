@@ -32,8 +32,8 @@ public class DiceRollController {
 		this.counter = counter;
 		this.maxDiceValue = maxDiceValue;
 		this.maxTotal = maxDiceValue;
-		total=0;
-		this.diceResult= new int[counter];
+		total = 0;
+		this.diceResult = new int[counter];
 	}
 
 	/**
@@ -43,43 +43,43 @@ public class DiceRollController {
 	 * @return diceResult Returns the calculated the dice rolled value.
 	 */
 	public int getDiceRollResult() {
-		total=0;
+		total = 0;
 		for (int i = 0; i < counter; i++) {
-			diceResult[i] = 1+ (int) (Math.random() * (maxTotal));
-			if(diceResult[i]>maxTotal)
-			{
+			diceResult[i] = 1 + (int) (Math.random() * (maxTotal));
+			if (diceResult[i] > maxTotal) {
 				diceResult[i] = maxTotal;
 			}
 		}
 		Arrays.sort(diceResult);
-		if(counter==1){
+		if (counter == 1) {
 			return diceResult[0];
 		}
-		for (int i = (counter-1); i > 0; i--) {
-			total+=diceResult[i];
+		for (int i = (counter - 1); i > 0; i--) {
+			total += diceResult[i];
 		}
 		return total;
 	}
-	
+
 	/**
 	 * This function returns array of dice result in descending order
 	 * 
-	 * @return sortedRevDiceResult  dice result in descending order.
+	 * @return sortedRevDiceResult dice result in descending order.
 	 */
-public int[] getDescSortedDiceResult(){
-		
-		for(int i=0;i<6;i++){
-		int value = getDiceRollResult();
-		sortedRevDiceList[i] = value;
+	public int[] getDescSortedDiceResult() {
+
+		for (int i = 0; i < 6; i++) {
+			int value = getDiceRollResult();
+			sortedRevDiceList[i] = value;
 		}
 		Arrays.sort(sortedRevDiceList);
 		for (int i = 0; i < sortedRevDiceList.length / 2; i++) {
-			  int temp = sortedRevDiceList[i];
-			  sortedRevDiceList[i] = sortedRevDiceList[sortedRevDiceList.length - 1 - i];
-			  sortedRevDiceList[sortedRevDiceList.length - 1 - i] = temp;
-			}
-		return sortedRevDiceList;
+			int temp = sortedRevDiceList[i];
+			sortedRevDiceList[i] = sortedRevDiceList[sortedRevDiceList.length
+					- 1 - i];
+			sortedRevDiceList[sortedRevDiceList.length - 1 - i] = temp;
 		}
+		return sortedRevDiceList;
+	}
 
 	/**
 	 * 

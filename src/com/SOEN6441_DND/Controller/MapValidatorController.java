@@ -128,6 +128,12 @@ public class MapValidatorController {
 		return result;
 	}
 
+	/**
+	 * to check number of exit door
+	 * 
+	 * @param exitDoorCount
+	 * @return
+	 */
 	public String checkExitDoor(int exitDoorCount) {
 		if (exitDoorCount > 1) {
 
@@ -146,6 +152,12 @@ public class MapValidatorController {
 		}
 	}
 
+	/**
+	 * To check number of entry door
+	 * 
+	 * @param entryDoorCount
+	 * @return
+	 */
 	public String checkEntryDoor(int entryDoorCount) {
 		if (entryDoorCount > 1) {
 
@@ -165,6 +177,12 @@ public class MapValidatorController {
 		}
 	}
 
+	/**
+	 * to check the number of chest on map
+	 * 
+	 * @param chestCount
+	 * @return
+	 */
 	public String checkChestCount(int chestCount) {
 		if (chestCount > 1) {
 

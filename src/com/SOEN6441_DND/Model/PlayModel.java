@@ -15,6 +15,7 @@ import com.SOEN6441_DND.Controller.DiceRollController;
 import com.sun.java.swing.plaf.windows.WindowsTreeUI.CollapsedIcon;
 
 /**
+ * Model for play arena
  * 
  * @author Appan Chhibber
  *
@@ -25,34 +26,53 @@ public class PlayModel {
 	private String[] playOrder;
 	DiceRollController diceController;
 
+	/**
+	 * constructor for play model
+	 */
 	public PlayModel() {
 		characters = new HashMap<String, CharacterModel>();
 		diceController = new DiceRollController(1, 20);
 		characterTurn = new HashMap<String, Integer>();
 	}
 
+	/**
+	 * getter for play order
+	 * 
+	 * @return
+	 */
 	public String[] getPlayOrder() {
 		return playOrder;
 	}
 
+	/**
+	 * setter for play order
+	 */
 	public void setPlayOrder() {
-		for (Map.Entry<String, CharacterModel> character : characters.entrySet()) {
+		for (Map.Entry<String, CharacterModel> character : characters
+				.entrySet()) {
 			int result = diceController.getDiceRollResult();
 			// System.out.println(character.getValue().getName()+" :
 			// "+character.getValue().getAbilityModifier().getDexterity()+" + "+
 			// result);
-			characterTurn.put(character.getKey(), (character.getValue().getAbilityModifier().getDexterity() + result));
-			
-		}
-		
-		characterTurn=(HashMap<String, Integer>) sortByValue(characterTurn);
-		System.out.println(characterTurn.keySet());
-		playOrder= characterTurn.keySet().toArray(new String[characterTurn.keySet().size()]);
-	}
-	
-	
+			characterTurn.put(character.getKey(), (character.getValue()
+					.getAbilityModifier().getDexterity() + result));
 
-	public <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+		}
+
+		characterTurn = (HashMap<String, Integer>) sortByValue(characterTurn);
+		System.out.println(characterTurn.keySet());
+		playOrder = characterTurn.keySet().toArray(
+				new String[characterTurn.keySet().size()]);
+	}
+
+	/**
+	 * method for sorting the hashmap
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public <K, V extends Comparable<? super V>> Map<K, V> sortByValue(
+			Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
 			@Override
@@ -60,23 +80,39 @@ public class PlayModel {
 				return (o2.getValue()).compareTo(o1.getValue());
 			}
 		});
-		
+
 		Map<K, V> result = new LinkedHashMap<>();
 		for (Map.Entry<K, V> entry : list) {
 			result.put(entry.getKey(), entry.getValue());
 		}
-		
+
 		return result;
 	}
 
+	/**
+	 * getter for characters
+	 * 
+	 * @return
+	 */
 	public HashMap<String, CharacterModel> getCharacters() {
 		return characters;
 	}
 
+	/**
+	 * method to add characters
+	 * 
+	 * @param name
+	 * @param charModel
+	 */
 	public void addCharacter(String name, CharacterModel charModel) {
 		this.characters.put(name, charModel);
 	}
 
+	/**
+	 * method to remove characters
+	 * 
+	 * @param name
+	 */
 	public void removeCharacter(String name) {
 		this.characters.remove(name);
 	}

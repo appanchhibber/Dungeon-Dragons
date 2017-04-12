@@ -56,15 +56,23 @@ public class CharacterSceneController implements ActionListener {
 	public CharacterBuilder characterBuilder;
 
 	// public String
-
+/**
+ * Constructor for the character Screnn controller 
+ */
 	public CharacterSceneController() {
 
 	}
-
+/**
+ * static method for getting the instance of character screen controller
+ * @return
+ */
 	public static CharacterSceneController getInstance() {
 		return new CharacterSceneController();
 	}
-
+/**
+ * overloaded constructor for initializing value from the view 
+ * @param view
+ */
 	public CharacterSceneController(CharacterScene view) {
 		this.characterScreen = view;
 		this.characterModel = view.characterViewModel;
@@ -76,6 +84,9 @@ public class CharacterSceneController implements ActionListener {
 		itemAssignView = view.itemAssignView;
 	}
 
+	/**
+	 * Action listener for the view
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

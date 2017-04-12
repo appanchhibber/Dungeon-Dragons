@@ -26,16 +26,33 @@ import javax.swing.TransferHandler;
  *
  */
 public class TransferHandlerController {
-
+	/**
+	 * method for handling the export of dragged component
+	 * 
+	 * @param value
+	 * @return
+	 */
 	public ValueExportTransferHandler valueExportCreator(String value) {
 		return new ValueExportTransferHandler(value);
 	}
 
+	/**
+	 * method for handling the export of dragged component
+	 * 
+	 * @param value
+	 * @param parent
+	 * @return
+	 */
 	public ValueExportTransferHandler valueExportCreator(String value,
 			String parent) {
 		return new ValueExportTransferHandler(value, parent);
 	}
 
+	/**
+	 * method for handling the import of dragged component
+	 * 
+	 * @return
+	 */
 	public ValueImportTransferHandler valueImportCreator() {
 		return new ValueImportTransferHandler();
 	}

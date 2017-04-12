@@ -4,7 +4,7 @@ import com.SOEN6441_DND.Model.AbilityModel;
 import com.SOEN6441_DND.Model.CharacterModel;
 
 /**
- * 
+ * The class for the fighter class
  * @author Paras Malik
  *
  */

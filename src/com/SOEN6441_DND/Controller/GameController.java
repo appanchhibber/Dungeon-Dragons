@@ -41,6 +41,9 @@ public class GameController {
 		}
 		return gameController;
 	}
+	/**
+	 * constructor for game controller
+	 */
 	public GameController()
 	{
 		gameController=this;

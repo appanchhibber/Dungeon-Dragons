@@ -10,6 +10,7 @@ import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.Windows;
 
 /**
+ * The main method for starting the game 
  * @author Appan Chhibber
  * @author Ehab Amar
  */

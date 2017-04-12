@@ -34,8 +34,8 @@ public class ItemSceneController implements ActionListener {
 	File file;
 
 	/**
-	 * This constructor is passed with the current item view to be used
-	 * for event handling.
+	 * This constructor is passed with the current item view to be used for
+	 * event handling.
 	 * 
 	 * @param view
 	 */
@@ -58,153 +58,202 @@ public class ItemSceneController implements ActionListener {
 			case "Helmet": {
 				fileModel.readFile(fileModel.setFile("Helmet"));
 				itemModel.setSubItemList(fileModel.getItemsName());
-				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem()
+						.toString());
 				break;
 			}
 			case "Armor": {
 				fileModel.readFile(fileModel.setFile("Armor"));
 
 				itemModel.setSubItemList(fileModel.getItemsName());
-				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem()
+						.toString());
 				break;
 			}
 			case "Shield": {
 				fileModel.readFile(fileModel.setFile("Shield"));
 				itemModel.setSubItemList(fileModel.getItemsName());
-				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem()
+						.toString());
 				break;
 			}
 			case "Ring": {
 				fileModel.readFile(fileModel.setFile("Ring"));
 				itemModel.setSubItemList(fileModel.getItemsName());
-				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem()
+						.toString());
 				break;
 			}
 			case "Belt": {
 				fileModel.readFile(fileModel.setFile("Belt"));
 				itemModel.setSubItemList(fileModel.getItemsName());
-				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem()
+						.toString());
 				break;
 			}
 			case "Boots": {
 				fileModel.readFile(fileModel.setFile("Boots"));
 				itemModel.setSubItemList(fileModel.getItemsName());
-				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem()
+						.toString());
 				break;
 			}
 			case "Weapon": {
 				fileModel.readFile(fileModel.setFile("Weapon"));
 				itemModel.setSubItemList(fileModel.getItemsName());
-				itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
+				itemModel.setItemType(itemScreen.itemType.getSelectedItem()
+						.toString());
 				break;
 			}
 			}
 
 		} else if (e.getSource() == itemScreen.subItemType) {
-			if(itemScreen.mode.equalsIgnoreCase("create")){
-			if (itemScreen.subItemType.getSelectedIndex() != -1) {
-				itemModel.setImage(fileModel.getItemsImage().get(itemScreen.subItemType.getSelectedIndex()));
-
-				itemModel.setItemDecsription(
-						fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
-				if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
-				itemModel.setWeaponType(fileModel.getWeaponType().get(itemScreen.subItemType.getSelectedIndex()));
-				itemModel.setWeaponRange(Integer.parseInt(fileModel.getWeaponRange().get(itemScreen.subItemType.getSelectedIndex())));
-				}
-			} else {
-
-				itemModel.setImage(fileModel.getItemsImage().get(0));
-				itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
-				if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
-				itemModel.setWeaponType(fileModel.getWeaponType().get(0));
-				itemModel.setWeaponRange(Integer.parseInt(fileModel.getWeaponRange().get(0)));
-				}
-			}
-
-			}
-			else{
+			if (itemScreen.mode.equalsIgnoreCase("create")) {
 				if (itemScreen.subItemType.getSelectedIndex() != -1) {
-//					itemModel.setImage(fileModel.getItemsImage().get(itemScreen.subItemType.getSelectedIndex()));
-//
-//					itemModel.setItemDecsription(
-//							fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
-					itemModel.setImage("image/"+itemScreen.subItemType.getSelectedItem().toString().replaceAll("\\s", "")+".jpg");
-					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
-					itemModel.setWeaponType(itemModel.getWeaponTypeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString());
-					itemModel.setWeaponRange(Integer.parseInt(itemModel.getWeaponRangeList().getElementAt(itemScreen.subItemType.getSelectedIndex()).toString()));
+					itemModel.setImage(fileModel.getItemsImage().get(
+							itemScreen.subItemType.getSelectedIndex()));
+
+					itemModel.setItemDecsription(fileModel.getItemDesription()
+							.get(itemScreen.subItemType.getSelectedIndex()));
+					if (itemScreen.itemType.getSelectedItem().toString()
+							.equalsIgnoreCase("weapon")) {
+						itemModel.setWeaponType(fileModel.getWeaponType().get(
+								itemScreen.subItemType.getSelectedIndex()));
+						itemModel.setWeaponRange(Integer.parseInt(fileModel
+								.getWeaponRange().get(
+										itemScreen.subItemType
+												.getSelectedIndex())));
 					}
 				} else {
 
-					itemModel.setImage("image/"+itemScreen.subItemType.getSelectedItem().toString().replaceAll("\\s", "")+".jpg");
-					itemModel.setItemDecsription(fileModel.getItemDesription().get(0));
-					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
-					itemModel.setWeaponType(fileModel.getWeaponType().get(0));
-					itemModel.setWeaponRange(Integer.parseInt(fileModel.getWeaponRange().get(0)));
+					itemModel.setImage(fileModel.getItemsImage().get(0));
+					itemModel.setItemDecsription(fileModel.getItemDesription()
+							.get(0));
+					if (itemScreen.itemType.getSelectedItem().toString()
+							.equalsIgnoreCase("weapon")) {
+						itemModel.setWeaponType(fileModel.getWeaponType()
+								.get(0));
+						itemModel.setWeaponRange(Integer.parseInt(fileModel
+								.getWeaponRange().get(0)));
 					}
 				}
-				
+
+			} else {
+				if (itemScreen.subItemType.getSelectedIndex() != -1) {
+					// itemModel.setImage(fileModel.getItemsImage().get(itemScreen.subItemType.getSelectedIndex()));
+					//
+					// itemModel.setItemDecsription(
+					// fileModel.getItemDesription().get(itemScreen.subItemType.getSelectedIndex()));
+					itemModel.setImage("image/"
+							+ itemScreen.subItemType.getSelectedItem()
+									.toString().replaceAll("\\s", "") + ".jpg");
+					if (itemScreen.itemType.getSelectedItem().toString()
+							.equalsIgnoreCase("weapon")) {
+						itemModel
+								.setWeaponType(itemModel
+										.getWeaponTypeList()
+										.getElementAt(
+												itemScreen.subItemType
+														.getSelectedIndex())
+										.toString());
+						itemModel
+								.setWeaponRange(Integer.parseInt(itemModel
+										.getWeaponRangeList()
+										.getElementAt(
+												itemScreen.subItemType
+														.getSelectedIndex())
+										.toString()));
+					}
+				} else {
+
+					itemModel.setImage("image/"
+							+ itemScreen.subItemType.getSelectedItem()
+									.toString().replaceAll("\\s", "") + ".jpg");
+					itemModel.setItemDecsription(fileModel.getItemDesription()
+							.get(0));
+					if (itemScreen.itemType.getSelectedItem().toString()
+							.equalsIgnoreCase("weapon")) {
+						itemModel.setWeaponType(fileModel.getWeaponType()
+								.get(0));
+						itemModel.setWeaponRange(Integer.parseInt(fileModel
+								.getWeaponRange().get(0)));
+					}
+				}
+
 			}
-			}
-		
+		}
+
 		else if (e.getSource() == itemScreen.navMenuPanel.saveButton) {
 			if (itemScreen.nameField.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Please enter Item name.");
 			} else {
 				try {
-					
-					itemModel.setItemType(itemScreen.itemType.getSelectedItem().toString());
-					itemModel.setSubItemType(itemScreen.subItemType.getSelectedItem().toString());
+
+					itemModel.setItemType(itemScreen.itemType.getSelectedItem()
+							.toString());
+					itemModel.setSubItemType(itemScreen.subItemType
+							.getSelectedItem().toString());
 					itemModel.setName(itemScreen.nameField.getText());
-					if(itemScreen.itemType.getSelectedItem().toString().equalsIgnoreCase("weapon")){
-						itemModel.setWeaponType(itemScreen.weaponType.getText());
-						itemModel.setWeaponRange(Integer.parseInt(itemScreen.weaponRange.getText()));
-						
+					if (itemScreen.itemType.getSelectedItem().toString()
+							.equalsIgnoreCase("weapon")) {
+						itemModel
+								.setWeaponType(itemScreen.weaponType.getText());
+						itemModel.setWeaponRange(Integer
+								.parseInt(itemScreen.weaponRange.getText()));
+
 						itemModel.setBurning(itemScreen.burning.isSelected());
 						itemModel.setFreezing(itemScreen.freezing.isSelected());
-						itemModel.setPacifying(itemScreen.pacifying.isSelected());
-						itemModel.setFrightening(itemScreen.frightening.isSelected());
+						itemModel.setPacifying(itemScreen.pacifying
+								.isSelected());
+						itemModel.setFrightening(itemScreen.frightening
+								.isSelected());
 						itemModel.setSlaying(itemScreen.slaying.isSelected());
 					}
-					
-					itemModel.setEnchantValue(Integer.parseInt(itemScreen.enchantList.getSelectedItem().toString()));
-					if(itemScreen.addChest.isSelected()==true){
-						fileModel.writeChestFile(itemModel);
-						}
-			JOptionPane.showMessageDialog(null, fileModel.writeItemData(itemModel));
 
-					
-				
+					itemModel.setEnchantValue(Integer
+							.parseInt(itemScreen.enchantList.getSelectedItem()
+									.toString()));
+					if (itemScreen.addChest.isSelected() == true) {
+						fileModel.writeChestFile(itemModel);
+					}
+					JOptionPane.showMessageDialog(null,
+							fileModel.writeItemData(itemModel));
+
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		}
-		
-		else if(e.getSource() == itemScreen.navMenuPanel.loadButton){
-			
+
+		else if (e.getSource() == itemScreen.navMenuPanel.loadButton) {
+
 			File file = openItemFile();
-			itemModel=fileModel.readItemSaveFile(file);
-			gameController.mainFrame.setView(new ItemScene(itemModel,"edit") );
-			
+			itemModel = fileModel.readItemSaveFile(file);
+			gameController.mainFrame.setView(new ItemScene(itemModel, "edit"));
+
 		}
-	
+
 	}
 
 	/**
 	 * This function returns the list of item names from the item file.
+	 * 
 	 * @param file
 	 * @return
 	 */
-	public Map<String,ArrayList<String>> itemNameList(File file){
-		return fileModel.readSaveItemFile(new File("itemSave/"+file.getName()));
+	public Map<String, ArrayList<String>> itemNameList(File file) {
+		return fileModel
+				.readSaveItemFile(new File("itemSave/" + file.getName()));
 	}
-	
+
 	/**
-	 * This function opens and returns the item file already saved in itemSave folder.
+	 * This function opens and returns the item file already saved in itemSave
+	 * folder.
+	 * 
 	 * @return file
 	 */
-	public File openItemFile(){
+	public File openItemFile() {
 		JFileChooser fileChooser = new JFileChooser(new File("itemSave/"));
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("XML",
 				"xml");

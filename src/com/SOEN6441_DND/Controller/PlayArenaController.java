@@ -69,54 +69,71 @@ public class PlayArenaController implements ActionListener {
 		} else {
 			turnCounter++;
 		}
-		String[] tempTurn = playArena.playModel.getPlayOrder()[turnCounter].split("-");
+		String[] tempTurn = playArena.playModel.getPlayOrder()[turnCounter]
+				.split("-");
 		turnCharacter = tempTurn[0];
 		turnBehaviour = tempTurn[1];
-		playArena.playInfoPanel.character=playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]);
+		playArena.playInfoPanel.character = playArena.playModel.characters
+				.get(playArena.playModel.getPlayOrder()[turnCounter]);
 		playArena.playInfoPanel.setPanel();
 		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 		switch (turnBehaviour) {
 		case "Player": {
 			System.out.println("Player Turn");
 			this.setStrategy(new PlayerStrategy());
-			
-				this.execute(playArena.gridView.mapModel,
-						playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			
+
+			this.execute(playArena.gridView.mapModel,
+					playArena.playModel.characters.get(playArena.playModel
+							.getPlayOrder()[turnCounter]));
+
 			break;
 		}
 		case "Hostile": {
 			System.out.println("Hostile Turn");
 			this.setStrategy(new HostileStrategy());
 			this.execute(playArena.gridView.mapModel,
-					playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			//turn();
+					playArena.playModel.characters.get(playArena.playModel
+							.getPlayOrder()[turnCounter]));
+			// turn();
 			break;
 		}
 		case "Friendly": {
 			System.out.println("Friendly Turn");
 			this.setStrategy(new FriendlyStrategy());
 			this.execute(playArena.gridView.mapModel,
-					playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			//turn();
+					playArena.playModel.characters.get(playArena.playModel
+							.getPlayOrder()[turnCounter]));
+			// turn();
 			break;
 		}
 		case "Computer": {
 			System.out.println("Computer Turn");
 			this.setStrategy(new ComputerStrategy());
 			this.execute(playArena.gridView.mapModel,
-					playArena.playModel.characters.get(playArena.playModel.getPlayOrder()[turnCounter]));
-			//turn();
+					playArena.playModel.characters.get(playArena.playModel
+							.getPlayOrder()[turnCounter]));
+			// turn();
 			break;
 		}
 		}
 
 	}
 
+	/**
+	 * method for executing the strategy
+	 * 
+	 * @param mapModel
+	 * @param charModel
+	 */
 	public void execute(MapModel mapModel, CharacterModel charModel) {
 		this.strategy.execute(mapModel, charModel);
 	}
 
+	/**
+	 * method for setting the strategy
+	 * 
+	 * @param strategy
+	 */
 	public void setStrategy(Strategy strategy) {
 		this.strategy = strategy;
 	}
@@ -130,31 +147,33 @@ public class PlayArenaController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == playArena.playInfoPanel.inventoryBtn) {
-			playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
+			playArena.charInventory
+					.setcharModel(playArena.playInfoPanel.character);
 			playArena.charInventory.setInventory();
-		} else if(e.getSource()==playArena.startGame){
+		} else if (e.getSource() == playArena.startGame) {
 			playArena.startGame.setVisible(false);
 			playArena.playModel.setPlayOrder();
-			mapModel.setCharacterName(characterModel.getName()+"-"+characterModel.getBehaviour());
+			mapModel.setCharacterName(characterModel.getName() + "-"
+					+ characterModel.getBehaviour());
 			turn();
-			
-		}else if (e.getSource() instanceof JButton) {
+
+		} else if (e.getSource() instanceof JButton) {
 			JButton btn = (JButton) e.getSource();
 			String name;
-				
+
 			if (btn.getName().contains("_") || btn.getName().contains("Player")) {
-				if(btn.getName().contains("_"))
-				{
-					name=btn.getName().replace("_", "").trim()+"-"+btn.getToolTipText();
-					
+				if (btn.getName().contains("_")) {
+					name = btn.getName().replace("_", "").trim() + "-"
+							+ btn.getToolTipText();
+
+				} else {
+					name = btn.getName();
 				}
-				else
-				{
-					name=btn.getName();
-				}
-				playArena.playInfoPanel.character=playArena.playModel.getCharacters().get(name);
+				playArena.playInfoPanel.character = playArena.playModel
+						.getCharacters().get(name);
 				playArena.playInfoPanel.setPanel();
-				playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
+				playArena.charInventory
+						.setcharModel(playArena.playInfoPanel.character);
 			}
 
 		}

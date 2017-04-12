@@ -20,19 +20,26 @@ public class NavigationPanelController implements ActionListener {
 	NavigationPanelView navigationView;
 	private GameController gameController;
 
+	/**
+	 * Constructor for navigation panel controller
+	 * 
+	 * @param view
+	 */
 	public NavigationPanelController(NavigationPanelView view) {
-		navigationView=view;
-		gameController=GameController.getInstance();
+		navigationView = view;
+		gameController = GameController.getInstance();
 	}
 
+	/**
+	 * Action Listener
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == navigationView.homeButton) {
 			gameController.mainFrame.setView(new MainScene());
-		}		
+		}
 
 	}
-	
 
 }
