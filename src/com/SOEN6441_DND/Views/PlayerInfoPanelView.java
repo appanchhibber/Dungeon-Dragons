@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -46,7 +47,22 @@ public class PlayerInfoPanelView extends View implements Observer {
 	public CharacterModel character;
 
 	public JButton inventoryBtn;
-
+	
+	
+	public JLabel playerImage;
+	public JLabel lblPlayer;
+	public JLabel playerName;
+	public JLabel lblHp;
+	public JLabel playerHp;
+	public JLabel lblplayArmor;
+	public JLabel playerArmor;
+	public JLabel attackerImage;
+	public JLabel atkHp;
+	public JLabel attackerHp;
+	public JLabel lblAtkArmor;
+	public JLabel attackerArmor;
+	public JLabel lblAtkName;
+	public JLabel attackerName;
 	@Override
 	protected void initSubviews() {
 		// TODO Auto-generated method stub
@@ -204,6 +220,81 @@ public class PlayerInfoPanelView extends View implements Observer {
 		inventoryBtn.setSize(150, 30);
 		inventoryBtn.setLocation(50, 255);
 		this.add(inventoryBtn);
+		
+		 playerImage=new JLabel(new ImageIcon(new ImageIcon(
+					"image/Chest.jpg").getImage().getScaledInstance(50,
+					50, java.awt.Image.SCALE_SMOOTH)));
+		 playerImage.setLocation(5,300);
+		 playerImage.setSize(50,50);
+		 this.add(playerImage);
+		 lblPlayer=new JLabel("player");
+		 lblPlayer.setLocation(5, 360);
+		 lblPlayer.setSize(60, 20);
+		 lblPlayer.setForeground(Color.WHITE);
+		 this.add(lblPlayer);
+		 playerName=new JLabel();
+		 playerName.setLocation(65, 360);
+		 playerName.setSize(60, 20);
+		 playerName.setForeground(Color.WHITE);
+		 this.add(playerName);
+		 lblHp=new JLabel("Hitpoint");
+		 lblHp.setLocation(5,390);
+		 lblHp.setSize(60,20);
+		 lblHp.setForeground(Color.WHITE);
+		 this.add(lblHp);
+		 playerHp=new JLabel();
+		 playerHp.setLocation(65, 390);
+		 playerHp.setSize(60, 20);
+		 playerHp.setForeground(Color.WHITE);
+		 this.add(playerHp);
+		 lblplayArmor=new JLabel("Armor");
+		 lblplayArmor.setSize(60,20);
+		 lblplayArmor.setLocation(5, 415);
+		 lblplayArmor.setForeground(Color.WHITE);
+		 this.add(lblplayArmor);
+		 
+		 playerArmor=new JLabel();
+		 playerArmor.setLocation(65, 415);
+		 playerArmor.setSize(60, 20);
+		 playerArmor.setForeground(Color.WHITE);
+		 this.add(playerArmor);
+		 
+		 attackerImage=new JLabel(new ImageIcon(new ImageIcon(
+					"image/Chest.jpg").getImage().getScaledInstance(50,
+					50, java.awt.Image.SCALE_SMOOTH)));
+		 attackerImage.setLocation(120, 300);
+		 attackerImage.setSize(50, 50);
+		 this.add(attackerImage);
+		 lblAtkName=new JLabel("Character");
+		 lblAtkName.setSize(60, 20);
+		 lblAtkName.setLocation(120, 360);
+		 lblAtkName.setForeground(Color.WHITE);
+		 this.add(lblAtkName);
+		 attackerName=new JLabel();
+		 attackerName.setSize(60,20 );
+		 attackerName.setLocation(185, 360);
+		 attackerName.setForeground(Color.WHITE);
+		 this.add(attackerName);
+		 atkHp=new JLabel("Hitpoint");
+		 atkHp.setLocation(120, 390);
+		 atkHp.setSize(60, 20);
+		 atkHp.setForeground(Color.WHITE);
+		 this.add(atkHp);
+		 attackerHp=new JLabel();
+		 attackerHp.setSize(60, 20);
+		 attackerHp.setLocation(185, 390);
+		 attackerHp.setForeground(Color.WHITE);
+		 this.add(attackerHp);
+		 lblAtkArmor=new JLabel("Armor");
+		 lblAtkArmor.setSize(60,20);
+		 lblAtkArmor.setLocation(120, 415);
+		 lblAtkArmor.setForeground(Color.WHITE);
+		 this.add(lblAtkArmor);
+		 attackerArmor=new JLabel();
+		 attackerArmor.setSize(60, 20);
+		 attackerArmor.setLocation(185, 415);
+		 attackerArmor.setForeground(Color.WHITE);
+		 this.add(attackerArmor);
 	}
 
 	@Override
