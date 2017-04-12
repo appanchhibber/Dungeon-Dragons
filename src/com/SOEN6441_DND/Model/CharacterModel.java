@@ -32,6 +32,7 @@ public class CharacterModel extends Observable {
 	private String weaponFlag;
 	private String shieldFlag;
 	private boolean attackFlag;
+	private CharacterModel enemy;
 	private int backPackCounter;
 	public String[] levelListValues;
 	private int hitPoints;
@@ -68,7 +69,20 @@ public class CharacterModel extends Observable {
 	public void setAttackFlag(boolean attackFlag) {
 		this.attackFlag = attackFlag;
 	}
-
+	/**
+	 * getter for enemy
+	 * @return
+	 */
+	public CharacterModel getEnemy() {
+		return enemy;
+	}
+	/**
+	 * Setter for enemy
+	 * @param enemy
+	 */
+	public void setEnemy(CharacterModel enemy) {
+		this.enemy = enemy;
+	}
 	/**
 	 * getter for character behavior
 	 * 
@@ -575,8 +589,9 @@ public class CharacterModel extends Observable {
 			if (getDamageBonus() == 0) {
 				setDamageBonus(0);
 			}
-			notifyCharacterView();
+			
 		}
+		notifyCharacterView();
 	}
 
 	/**
@@ -602,17 +617,17 @@ public class CharacterModel extends Observable {
 	 */
 	public void calculateAbilityModifier() {
 		setModifer();
-		abilityModifier.setStrength(abilityModifier.getStrength()
+		getAbilityModifier().setStrength(abilityModifier.getStrength()
 				+ modifierCalculator(abilityScore.getStrength()));
-		abilityModifier.setDexterity(abilityModifier.getDexterity()
+		getAbilityModifier().setDexterity(abilityModifier.getDexterity()
 				+ modifierCalculator(abilityScore.getDexterity()));
-		abilityModifier.setConstitution(abilityModifier.getConstitution()
+		getAbilityModifier().setConstitution(abilityModifier.getConstitution()
 				+ modifierCalculator(abilityScore.getConstitution()));
-		abilityModifier.setIntelligence(abilityModifier.getIntelligence()
+		getAbilityModifier().setIntelligence(abilityModifier.getIntelligence()
 				+ modifierCalculator(abilityScore.getIntelligence()));
-		abilityModifier.setWisdom(abilityModifier.getWisdom()
+		getAbilityModifier().setWisdom(abilityModifier.getWisdom()
 				+ modifierCalculator(abilityScore.getWisdom()));
-		abilityModifier.setCharisma(abilityModifier.getCharisma()
+		getAbilityModifier().setCharisma(abilityModifier.getCharisma()
 				+ modifierCalculator(abilityScore.getCharisma()));
 		calculateChar();
 	}

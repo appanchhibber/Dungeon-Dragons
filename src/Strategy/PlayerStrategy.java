@@ -45,7 +45,7 @@ public class PlayerStrategy implements Strategy {
 	}
 	
 	public String checkNext(Dimension nextLoc){ 
-		if(mapModel.getWalls().contains(nextLoc))
+		if(mapModel.getWalls().contains(nextLoc)  || mapModel.getEntry().equals(nextLoc) )
 		{
 			return "Wall";
 		}

@@ -25,27 +25,7 @@ public class FriendlyStrategy implements Strategy,Runnable {
 		System.out.println("Execute Friendly Strategy");
 		this.mapModel = mapModel;
 		this.charModel = charModel;
-		
-		 if(mapModel.treasurePresent==true){
-			 Object key=mapModel.getTreasures().keySet().toArray()[0];
-			 friendlyPath = PathValidatorController.friendlyPath(1, mapModel.getMapWidth(),
-						mapModel.getMapHeight(), (int)charModel.getCharLocation().getWidth(),
-						(int) charModel.getCharLocation().getHeight(),(int) mapModel.getTreasures().get(key).getWidth(),
-						(int) mapModel.treasures.get(key).getHeight(), mapModel.getWalls());
-			 Collections.reverse(friendlyPath);
-			 if(friendlyPath.size()==1){
-				 for(int i=0;i<=3;i++){
-				 friendlyPath.add(new Dimension((int)(charModel.getCharLocation().getWidth())-i,(int)(charModel.getCharLocation().getHeight())));
-				 
-				 }
-				 friendlyPath.remove(0);
-			 }
-
-			 friendlyPath.remove(0);
-			 }
-
-		 else{
-			 
+					 
 			 if(toggle%2==0){
 			 for(int i=0;i<=3;i++){
 				 friendlyPath.add(new Dimension((int)(charModel.getCharLocation().getWidth())+i,(int)(charModel.getCharLocation().getHeight())));
@@ -60,7 +40,7 @@ public class FriendlyStrategy implements Strategy,Runnable {
 				 toggle++;
 			 }
 			 friendlyPath.remove(0);
-		 }
+		 
 		 t1=new Thread(this);
 		 t1.start();
 	}

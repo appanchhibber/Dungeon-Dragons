@@ -120,10 +120,13 @@ public class CharacterSceneController implements ActionListener {
 
 		else if (e.getSource() == characterScreen.bully) {
 			createCharacter("bully");
+			characterModel.calculateAbilityModifier();
 		} else if (e.getSource() == characterScreen.nimble) {
 			createCharacter("nimble");
+			characterModel.calculateAbilityModifier();
 		} else if (e.getSource() == characterScreen.tank) {
 			createCharacter("tank");
+			characterModel.calculateAbilityModifier();
 		}
 
 		else if (e.getSource() == abilityPanel.calculateButton) {
