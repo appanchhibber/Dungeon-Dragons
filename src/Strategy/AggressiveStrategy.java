@@ -27,8 +27,8 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		this.charModel = charModel;
 		System.out.println("Execute Hostile Strategy");
 		if (charModel.isAttackFlag()) {
-			attack();
 			charModel.setCharLocation(charModel.getCharLocation());
+			charModel.setAttackFlag(false);
 		}
 
 		else {
@@ -70,7 +70,6 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		int distance = hostilePath.size();
 		if (distance <= charModel.getOwnedItems().get("Weapon").getWeaponRange()) {
 			for (int i = stepCount; i < 3; i++) {
-				attack();
 				charModel.setCharLocation(charModel.getCharLocation());
 			}
 		}

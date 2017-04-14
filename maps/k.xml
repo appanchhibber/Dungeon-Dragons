@@ -40,9 +40,9 @@
   </ExitDoor>
   <Character>
     <character name="XX">
-      <Behavior>Hostile</Behavior>
-      <X>5</X>
-      <Y>6</Y>
+      <Behavior>Friendly</Behavior>
+      <X>7</X>
+      <Y>7</Y>
     </character>
     <character name="Paras">
       <Behavior>Hostile</Behavior>
@@ -50,5 +50,10 @@
       <Y>9</Y>
     </character>
   </Character>
-  <Treasure/>
+  <Treasure>
+    <treasure name="my boot">
+      <X>8</X>
+      <Y>0</Y>
+    </treasure>
+  </Treasure>
 </Map>
