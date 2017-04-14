@@ -2,29 +2,22 @@ package Decorator;
 
 import java.util.ArrayList;
 
-public  abstract class WeaponDecorator extends WeaponEnchanment {
+import com.SOEN6441_DND.Model.CharacterModel;
 
-	protected final  WeaponEnchanment decoratedWeapon;
+public  abstract class WeaponDecorator extends Weapon {
+
+	protected final  Weapon decoratedWeapon;
 	
-	public WeaponDecorator(WeaponEnchanment weaponEnchanment){
-		this.decoratedWeapon=weaponEnchanment;
-	}
-	@Override
-	public ArrayList<String> addToEnchantList(String enchantment) {
-		return decoratedWeapon.addToEnchantList(enchantment);
+	public WeaponDecorator(Weapon weapon){
+		this.decoratedWeapon=weapon;
 	}
 
 	@Override
-	public int getEnchantmentValue() {
-		return decoratedWeapon.getEnchantmentValue();
+	public ArrayList<String> getEffects() {
+		// TODO Auto-generated method stub
+		return decoratedWeapon.getEffects();
 	}
-	@Override
-	public WeaponEnchanment adaptToLevel(int level) {
-		return decoratedWeapon.adaptToLevel(level);
-	}
-	@Override
-	public String lastWeaponID() {
-		return decoratedWeapon.lastWeaponID();
-	}
+
+	
 
 }

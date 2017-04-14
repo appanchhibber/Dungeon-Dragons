@@ -54,7 +54,7 @@ public class CharacterModel extends Observable {
 	public HashMap<String, ItemModel> ownedItems;
 	public String message;
 	private Strategy strategy;
-
+	private  ArrayList<String> weaponEffects;
 	public ArrayList<String> backPackItems;
 
 	/**
@@ -67,6 +67,7 @@ public class CharacterModel extends Observable {
 		hitPointBase = 1 + new Random().nextInt(10);
 		baseAttackBonus=1 + new Random().nextInt(8);
 		attackFlag = false;
+		weaponEffects=new ArrayList<String>();
 		setAbilityModifier(new AbilityModel());
 		setAbilityScore(new AbilityModel());
 		levelListValues = new String[25];
@@ -74,6 +75,30 @@ public class CharacterModel extends Observable {
 			levelListValues[i] = String.valueOf(i + 1);
 		}
 	}
+
+	/**
+	 * getter for weapon effects
+	 * @return
+	 */
+	public ArrayList<String> getWeaponEffects() {
+		return weaponEffects;
+	}
+
+	/**
+	 * setter for weapon effects
+	 * @param weaponEffects
+	 */
+	public void setWeaponEffects(ArrayList<String> weaponEffect) {
+		this.weaponEffects=weaponEffect;
+	}
+	/**
+	 * method to add weapon effects
+	 * @param weaponEffects
+	 */
+	public void addWeaponEffects(String weaponEffect) {
+		this.weaponEffects.add(weaponEffect);
+	}
+
 
 	/**
 	 * getter for character behavior
