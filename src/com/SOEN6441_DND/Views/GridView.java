@@ -406,12 +406,11 @@ public class GridView extends JPanel implements Observer {
 		charLocY = (int) characterModel.getCharLocation().getHeight();
 		for (Map.Entry<String, CharacterModel> charact : playArena.playModel.characters.entrySet()) {
 			if (characterModel.getBehaviour() != charact.getValue().getBehaviour()) {
-				
-				
 				if (PathValidatorController.computerPath(1, mapModel.getMapWidth(), mapModel.getMapHeight(), charLocX,
 						charLocY, (int) charact.getValue().getCharLocation().getWidth(),
-						(int) charact.getValue().getCharLocation().getHeight(), new ArrayList<>()).size()<=range) {
+						(int) charact.getValue().getCharLocation().getHeight(), mapModel.getWalls()).size()<=range) {
 					characterModel.setAttackFlag(true);
+					characterModel.setEnemy(charact.getValue());
 					System.out.println("Attack Set");
 				}
 			}

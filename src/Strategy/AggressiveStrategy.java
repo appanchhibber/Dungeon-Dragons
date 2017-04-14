@@ -28,6 +28,7 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		System.out.println("Execute Hostile Strategy");
 		if (charModel.isAttackFlag()) {
 			attack();
+			charModel.setCharLocation(charModel.getCharLocation());
 		}
 
 		else {
@@ -56,6 +57,7 @@ public class AggressiveStrategy implements Strategy, Runnable {
 	}
 
 	public void attack() {
+		charModel.setAttackFlag(false);
 		int diceresult=rollDice();
 		
 	}

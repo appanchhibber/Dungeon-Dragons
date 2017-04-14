@@ -203,6 +203,7 @@ public class CharacterModel extends Observable {
 	 */
 	public void setShieldFlag(String shieldFlag) {
 		this.shieldFlag = shieldFlag;
+		
 		message = "itemImage";
 		notifyCharacterView();
 	}
@@ -308,6 +309,11 @@ public class CharacterModel extends Observable {
 	 * @param item
 	 */
 	public void addOwnedItems(String itemName, ItemModel item) {
+		item.setEnchantValue(item.getEnchantValue()+calculateEnchanment(getLevel()));
+		if(backPackItems.contains(item)){
+		removeBackPackItems(item.getName());
+		setBackPackCounter((getBackPackCounter() - 1));
+		}
 		this.ownedItems.put(itemName, item);
 	}
 
