@@ -9,7 +9,7 @@ import com.SOEN6441_DND.Controller.PathValidatorController;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.MapModel;
 
-public class HostileStrategy implements Strategy, Runnable {
+public class AggressiveStrategy implements Strategy, Runnable {
 	ArrayList<Dimension> hostilePath;
 	ArrayList<Dimension> blockedPath;
 	int stepCount = 0;
@@ -80,8 +80,6 @@ public class HostileStrategy implements Strategy, Runnable {
 				} else {
 					charLocX = (int) d.getWidth();
 					charLocY = (int) d.getHeight();
-					charModel.setBehaviour("Hostile");
-
 					// mapModel.updateCharLocation(charModel.getName()+"-Hostile",
 					// new Dimension(charLocY,charLocX));
 					try {

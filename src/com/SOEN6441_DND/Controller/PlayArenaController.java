@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import Strategy.ComputerStrategy;
 import Strategy.FriendlyStrategy;
-import Strategy.HostileStrategy;
-import Strategy.PlayerStrategy;
+import Strategy.AggressiveStrategy;
+import Strategy.HumanStrategy;
 import Strategy.Strategy;
 
 import com.SOEN6441_DND.Model.CampaignModel;
@@ -77,46 +77,7 @@ public class PlayArenaController implements ActionListener {
 				.get(playArena.playModel.getPlayOrder()[turnCounter]);
 		playArena.playInfoPanel.setPanel();
 		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
-		switch (turnBehaviour) {
-		case "Player": {
-			System.out.println("Player Turn");
-			this.setStrategy(new PlayerStrategy());
-
-			this.execute(playArena.gridView.mapModel,
-					playArena.playModel.characters.get(playArena.playModel
-							.getPlayOrder()[turnCounter]));
-
-			break;
-		}
-		case "Hostile": {
-			System.out.println("Hostile Turn");
-			this.setStrategy(new HostileStrategy());
-			this.execute(playArena.gridView.mapModel,
-					playArena.playModel.characters.get(playArena.playModel
-							.getPlayOrder()[turnCounter]));
-			// turn();
-			break;
-		}
-		case "Friendly": {
-			System.out.println("Friendly Turn");
-			this.setStrategy(new FriendlyStrategy());
-			this.execute(playArena.gridView.mapModel,
-					playArena.playModel.characters.get(playArena.playModel
-							.getPlayOrder()[turnCounter]));
-			// turn();
-			break;
-		}
-		case "Computer": {
-			System.out.println("Computer Turn");
-			this.setStrategy(new ComputerStrategy());
-			this.execute(playArena.gridView.mapModel,
-					playArena.playModel.characters.get(playArena.playModel
-							.getPlayOrder()[turnCounter]));
-			// turn();
-			break;
-		}
-		}
-
+		playArena.playInfoPanel.character.execute(mapModel);
 	}
 
 	/**

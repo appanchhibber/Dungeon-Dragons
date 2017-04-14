@@ -74,7 +74,7 @@ public class PlayArena extends View implements Observer {
 		navPanel.setVisible(true);
 		navPanel.setBackground(Color.BLACK);
 		navigation= new NavigationPanelView();
-		this.add(navigation);
+
 		startGame = new JButton("Start Game");
 		startGame.setSize(100, 30);
 		startGame.setLocation(10, 10);

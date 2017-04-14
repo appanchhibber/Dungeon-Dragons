@@ -16,7 +16,7 @@ import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.PlayArena;
 import com.sun.glass.events.KeyEvent;
 
-public class PlayerStrategy implements Strategy {
+public class HumanStrategy implements Strategy {
 	public Timer repaintTimer;
 	private int xDelta = 0;
 	private int yDelta = 0;

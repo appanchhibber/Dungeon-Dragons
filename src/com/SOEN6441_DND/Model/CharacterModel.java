@@ -8,6 +8,12 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Random;
 
+import Strategy.AggressiveStrategy;
+import Strategy.ComputerStrategy;
+import Strategy.FriendlyStrategy;
+import Strategy.HumanStrategy;
+import Strategy.Strategy;
+
 /**
  * This Class Defines all the characteristics and property of the character.
  * This class extends Observable.
@@ -19,11 +25,8 @@ import java.util.Random;
 public class CharacterModel extends Observable {
 
 	private String name;
-
 	private String type;
-
 	private String fighterType;
-
 	private String helmetFlag;
 	private String armorFlag;
 	private String beltFlag;
@@ -49,9 +52,87 @@ public class CharacterModel extends Observable {
 	private String behaviour;
 	public HashMap<String, ItemModel> ownedItems;
 	public String message;
+	private Strategy strategy;
 
 	public ArrayList<String> backPackItems;
-
+	
+	
+	/**
+	 * constructor for character model
+	 */
+	public CharacterModel() {
+		backPackItems = new ArrayList<String>();
+		backPackCounter = 0;
+		ownedItems = new HashMap<String, ItemModel>();
+		hitPointBase = 1 + new Random().nextInt(10);
+		attackFlag = false;
+		setAbilityModifier(new AbilityModel());
+		setAbilityScore(new AbilityModel());
+		levelListValues = new String[25];
+		for (int i = 0; i < 25; i++) {
+			levelListValues[i] = String.valueOf(i + 1);
+		}
+	}
+	/**
+	 * getter for character behavior
+	 * 
+	 * @return
+	 */
+	public String getBehaviour() {
+		return behaviour;
+	}
+	/**
+	 * setter for character behavior
+	 * 
+	 * @param behaviour
+	 */
+	public void setBehaviour(String behaviour) {
+		this.behaviour = behaviour;
+		switch(this.behaviour){
+		case "Hostile":{
+			setStrategy(new AggressiveStrategy());
+			break;
+		}
+		case "Player":{
+			setStrategy(new HumanStrategy());
+			break;
+		}
+		case "Friendly":{
+			setStrategy(new FriendlyStrategy());
+			break;
+		}
+		case "Computer":{
+			setStrategy(new ComputerStrategy());
+			break;
+		}
+		}
+		
+	}
+	/**
+	 * method for executing the strategy
+	 * 
+	 * @param mapModel
+	 * @param charModel
+	 */
+	public void execute(MapModel mapModel) {
+		this.strategy.execute(mapModel,this);
+	}
+	/**
+	 * getter for strategy flag
+	 * 
+	 * @return
+	 */
+	public Strategy getStrategy() {
+		return strategy;
+	}
+	/**
+	 * setter for strategy flag
+	 * 
+	 * @return
+	 */
+	public void setStrategy(Strategy charStrategy) {
+		this.strategy = charStrategy;
+	}
 	/**
 	 * getter for attack flag
 	 * 
@@ -83,24 +164,9 @@ public class CharacterModel extends Observable {
 	public void setEnemy(CharacterModel enemy) {
 		this.enemy = enemy;
 	}
-	/**
-	 * getter for character behavior
-	 * 
-	 * @return
-	 */
-	public String getBehaviour() {
-		return behaviour;
-	}
+	
 
-	/**
-	 * setter for character behavior
-	 * 
-	 * @param behaviour
-	 */
-	public void setBehaviour(String behaviour) {
-		this.behaviour = behaviour;
-	}
-
+	
 	/**
 	 * getter for character location
 	 * 
@@ -215,23 +281,6 @@ public class CharacterModel extends Observable {
 	 */
 	public void setFighterType(String fighterType) {
 		this.fighterType = fighterType;
-	}
-
-	/**
-	 * constructor for character model
-	 */
-	public CharacterModel() {
-		backPackItems = new ArrayList<String>();
-		backPackCounter = 0;
-		ownedItems = new HashMap<String, ItemModel>();
-		hitPointBase = 1 + new Random().nextInt(10);
-		attackFlag = false;
-		setAbilityModifier(new AbilityModel());
-		setAbilityScore(new AbilityModel());
-		levelListValues = new String[25];
-		for (int i = 0; i < 25; i++) {
-			levelListValues[i] = String.valueOf(i + 1);
-		}
 	}
 
 	/**

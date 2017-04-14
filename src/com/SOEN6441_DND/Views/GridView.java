@@ -183,6 +183,7 @@ public class GridView extends JPanel implements Observer {
 					.setIcon(new ImageIcon(new ImageIcon(character.getValue().getCharacterImage()).getImage()
 							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 			CharacterModel model = new FileOperationModel().loadCharacter(character.getKey());
+			model.setBehaviour(character.getValue().getCharacterBehavior());
 			model.setCharLocation(character.getValue().getCharacterLocation());
 			playArena.playModel.addCharacter(character.getKey() + "-" + character.getValue().getCharacterBehavior(),
 					model);

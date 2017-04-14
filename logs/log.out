@@ -1,0 +1,4 @@
+=0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
+=11421 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=11422 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=11422 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!

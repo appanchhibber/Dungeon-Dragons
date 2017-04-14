@@ -15,3 +15,16 @@
 =5502 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
 =5502 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Dice result fetched !!
 =5722 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.CharacterSceneController  - Values fecthed and ability scoer generated
+=0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
+=14531 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=14531 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=14531 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
+=8724 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=8724 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=8724 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
+=0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
+=11936 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=11936 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=11936 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
