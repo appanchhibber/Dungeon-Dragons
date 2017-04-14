@@ -41,6 +41,7 @@ public class CharacterModel extends Observable {
 	private int hitPoints;
 	private int hitPointBase;
 	private int attackBonus;
+	private int baseAttackBonus;
 	private int damageBonus;
 	private int armorClass;
 	private String image;
@@ -55,8 +56,7 @@ public class CharacterModel extends Observable {
 	private Strategy strategy;
 
 	public ArrayList<String> backPackItems;
-	
-	
+
 	/**
 	 * constructor for character model
 	 */
@@ -65,6 +65,7 @@ public class CharacterModel extends Observable {
 		backPackCounter = 0;
 		ownedItems = new HashMap<String, ItemModel>();
 		hitPointBase = 1 + new Random().nextInt(10);
+		baseAttackBonus=1 + new Random().nextInt(8);
 		attackFlag = false;
 		setAbilityModifier(new AbilityModel());
 		setAbilityScore(new AbilityModel());
@@ -73,6 +74,7 @@ public class CharacterModel extends Observable {
 			levelListValues[i] = String.valueOf(i + 1);
 		}
 	}
+
 	/**
 	 * getter for character behavior
 	 * 
@@ -81,6 +83,7 @@ public class CharacterModel extends Observable {
 	public String getBehaviour() {
 		return behaviour;
 	}
+
 	/**
 	 * setter for character behavior
 	 * 
@@ -88,26 +91,27 @@ public class CharacterModel extends Observable {
 	 */
 	public void setBehaviour(String behaviour) {
 		this.behaviour = behaviour;
-		switch(this.behaviour){
-		case "Hostile":{
+		switch (this.behaviour) {
+		case "Hostile": {
 			setStrategy(new AggressiveStrategy());
 			break;
 		}
-		case "Player":{
+		case "Player": {
 			setStrategy(new HumanStrategy());
 			break;
 		}
-		case "Friendly":{
+		case "Friendly": {
 			setStrategy(new FriendlyStrategy());
 			break;
 		}
-		case "Computer":{
+		case "Computer": {
 			setStrategy(new ComputerStrategy());
 			break;
 		}
 		}
-		
+
 	}
+
 	/**
 	 * method for executing the strategy
 	 * 
@@ -115,8 +119,9 @@ public class CharacterModel extends Observable {
 	 * @param charModel
 	 */
 	public void execute(MapModel mapModel) {
-		this.strategy.execute(mapModel,this);
+		this.strategy.execute(mapModel, this);
 	}
+
 	/**
 	 * getter for strategy flag
 	 * 
@@ -125,6 +130,7 @@ public class CharacterModel extends Observable {
 	public Strategy getStrategy() {
 		return strategy;
 	}
+
 	/**
 	 * setter for strategy flag
 	 * 
@@ -133,6 +139,7 @@ public class CharacterModel extends Observable {
 	public void setStrategy(Strategy charStrategy) {
 		this.strategy = charStrategy;
 	}
+
 	/**
 	 * getter for attack flag
 	 * 
@@ -150,23 +157,25 @@ public class CharacterModel extends Observable {
 	public void setAttackFlag(boolean attackFlag) {
 		this.attackFlag = attackFlag;
 	}
+
 	/**
 	 * getter for enemy
+	 * 
 	 * @return
 	 */
 	public CharacterModel getEnemy() {
 		return enemy;
 	}
+
 	/**
 	 * Setter for enemy
+	 * 
 	 * @param enemy
 	 */
 	public void setEnemy(CharacterModel enemy) {
 		this.enemy = enemy;
 	}
-	
 
-	
 	/**
 	 * getter for character location
 	 * 
@@ -203,7 +212,7 @@ public class CharacterModel extends Observable {
 	 */
 	public void setShieldFlag(String shieldFlag) {
 		this.shieldFlag = shieldFlag;
-		
+
 		message = "itemImage";
 		notifyCharacterView();
 	}
@@ -309,10 +318,10 @@ public class CharacterModel extends Observable {
 	 * @param item
 	 */
 	public void addOwnedItems(String itemName, ItemModel item) {
-		item.setEnchantValue(item.getEnchantValue()+calculateEnchanment(getLevel()));
-		if(backPackItems.contains(item)){
-		removeBackPackItems(item.getName());
-		setBackPackCounter((getBackPackCounter() - 1));
+		item.setEnchantValue(item.getEnchantValue() + calculateEnchanment(getLevel()));
+		if (backPackItems.contains(item.getName())) {
+			removeBackPackItems(item.getName());
+			setBackPackCounter((getBackPackCounter() - 1));
 		}
 		this.ownedItems.put(itemName, item);
 	}
@@ -515,6 +524,13 @@ public class CharacterModel extends Observable {
 	 */
 	public void setWeaponFlag(String weaponFlag) {
 		this.weaponFlag = weaponFlag;
+		if (getOwnedItems().get("Weapon").getWeaponRange() == 1) {
+			//Melee Weapon
+			setAttackBonus(getLevel()+abilityModifier.getStrength()+baseAttackBonus);
+		}
+		else if (getOwnedItems().get("Weapon").getWeaponRange() == 2) {
+			setAttackBonus(getLevel()+abilityModifier.getDexterity()+baseAttackBonus);
+		}
 		message = "itemImage";
 		notifyCharacterView();
 	}
@@ -608,24 +624,18 @@ public class CharacterModel extends Observable {
 		}
 		this.level = level;
 		enchanmentBonus = calculateEnchanment(level);
-		if (helmetFlag != null && armorFlag != null && bootFlag != null
-				&& shieldFlag != null && ringFlag != null) {
-			setArmorClass((getArmorClass() - (tempArmorBonus * 5))
-					+ (enchanmentBonus * 5));
+		if (helmetFlag != null && armorFlag != null && bootFlag != null && shieldFlag != null && ringFlag != null) {
+			setArmorClass((getArmorClass() - (tempArmorBonus * 5)) + (enchanmentBonus * 5));
 		}
 		if (weaponFlag != null) {
-			setDamageBonus((getDamageBonus() - tempDamageBonus)
-					+ enchanmentBonus);
+			setDamageBonus((getDamageBonus() - tempDamageBonus) + enchanmentBonus);
 			for (Map.Entry<String, ItemModel> item : getOwnedItems().entrySet()) {
 				item.getValue().setEnchantValue(-calculateEnchanment(oldLevel));
-				item.getValue().setEnchantValue(
-						+calculateEnchanment(getLevel()));
+				item.getValue().setEnchantValue(+calculateEnchanment(getLevel()));
 			}
 		}
 		if (beltFlag != null) {
-			abilityModifier
-					.setConstitution((abilityModifier.getConstitution() - tempConstitution)
-							+ enchanmentBonus);
+			abilityModifier.setConstitution((abilityModifier.getConstitution() - tempConstitution) + enchanmentBonus);
 		}
 		calculateChar();
 	}
@@ -635,16 +645,12 @@ public class CharacterModel extends Observable {
 	 */
 	public void calculateChar() {
 		if (getAbilityModifier() != null && getAbilityScore() != null) {
-			setHitPoints((getAbilityModifier().getConstitution() + getHitPointBase())
-					* getLevel());
-			setAttackBonus(getAbilityModifier().getStrength() + getLevel());
-			if (getArmorClass() == 0) {
-				setArmorClass(abilityModifier.getDexterity());
-			}
+			setHitPoints((getAbilityModifier().getConstitution() + getHitPointBase()) * getLevel());
+			setAttackBonus(getLevel());
 			if (getDamageBonus() == 0) {
 				setDamageBonus(0);
 			}
-			
+
 		}
 		notifyCharacterView();
 	}
@@ -672,18 +678,17 @@ public class CharacterModel extends Observable {
 	 */
 	public void calculateAbilityModifier() {
 		setModifer();
-		getAbilityModifier().setStrength(abilityModifier.getStrength()
-				+ modifierCalculator(abilityScore.getStrength()));
-		getAbilityModifier().setDexterity(abilityModifier.getDexterity()
-				+ modifierCalculator(abilityScore.getDexterity()));
-		getAbilityModifier().setConstitution(abilityModifier.getConstitution()
-				+ modifierCalculator(abilityScore.getConstitution()));
-		getAbilityModifier().setIntelligence(abilityModifier.getIntelligence()
-				+ modifierCalculator(abilityScore.getIntelligence()));
-		getAbilityModifier().setWisdom(abilityModifier.getWisdom()
-				+ modifierCalculator(abilityScore.getWisdom()));
-		getAbilityModifier().setCharisma(abilityModifier.getCharisma()
-				+ modifierCalculator(abilityScore.getCharisma()));
+		getAbilityModifier()
+				.setStrength(abilityModifier.getStrength() + modifierCalculator(abilityScore.getStrength()));
+		getAbilityModifier()
+				.setDexterity(abilityModifier.getDexterity() + modifierCalculator(abilityScore.getDexterity()));
+		getAbilityModifier().setConstitution(
+				abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
+		getAbilityModifier().setIntelligence(
+				abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
+		getAbilityModifier().setWisdom(abilityModifier.getWisdom() + modifierCalculator(abilityScore.getWisdom()));
+		getAbilityModifier()
+				.setCharisma(abilityModifier.getCharisma() + modifierCalculator(abilityScore.getCharisma()));
 		calculateChar();
 	}
 
@@ -854,8 +859,8 @@ public class CharacterModel extends Observable {
 		notifyObservers(this);
 	}
 
-	public String characterMovecheck(Dimension newLocation){
+	public String characterMovecheck(Dimension newLocation) {
 		return "LocationUpdate";
-		
+
 	}
 }

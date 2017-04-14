@@ -172,6 +172,9 @@ public class CharacterSceneController implements ActionListener {
 			characterScreen.characterTypeRadio[1].setVisible(false);
 			characterScreen.characterTypeRadio[2].setVisible(false);
 			characterScreen.characterTypeRadio[3].setVisible(false);
+			if (characterModel.getArmorClass() == 0) {
+				characterModel.setArmorClass(abilityModifier.getDexterity()+10);
+			}
 		} else if (e.getSource() == itemAssignView.charBackButton) {
 			itemAssignView.setVisible(false);
 			GameController.getInstance().mainFrame.setView(characterScreen);
