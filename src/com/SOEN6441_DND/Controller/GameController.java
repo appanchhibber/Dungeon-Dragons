@@ -14,6 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
 import com.SOEN6441_DND.Views.CharacterScene;
+import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.View;
 import com.SOEN6441_DND.Views.Windows;
@@ -26,6 +27,7 @@ import com.SOEN6441_DND.Views.Windows;
 public class GameController {
 	public 
 	Windows mainFrame;
+	LogWindow logScreen;
 	CharacterScene character;
 	MainScene homeScreen;
 	
@@ -60,6 +62,15 @@ public class GameController {
 		homeScreen = new MainScene();
 		mainFrame.setView(homeScreen);
 		
+	
+		logScreen = new LogWindow();
+		int width1 = 20;
+		int height1 = 20;
+		logScreen.setVisible(true);
+		logScreen.setSize(500, 700);
+		logScreen.setResizable(true);
+		logScreen.setLocationRelativeTo(mainFrame); // center window on the screen
+		logScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 }

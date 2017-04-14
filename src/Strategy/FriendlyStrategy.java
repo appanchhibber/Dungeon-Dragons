@@ -15,6 +15,7 @@ public class FriendlyStrategy implements Strategy,Runnable {
 	MapModel mapModel;
 	CharacterModel charModel;
 	ArrayList<Dimension> friendlyPath=new ArrayList<Dimension>();
+	ArrayList<Dimension> blockedPath;
 	int charLocX=0;
 	int charLocY=0;
 	int stepCount=0;
@@ -22,23 +23,35 @@ public class FriendlyStrategy implements Strategy,Runnable {
 	Thread t1;
 	@Override
 	public void execute(MapModel mapModel, CharacterModel charModel) {
+		blockedPath = new ArrayList<Dimension>();
 		System.out.println("Execute Friendly Strategy");
 		this.mapModel = mapModel;
 		this.charModel = charModel;
-					 
-			 if(toggle%2==0){
-			 for(int i=0;i<=3;i++){
-				 friendlyPath.add(new Dimension((int)(charModel.getCharLocation().getWidth())+i,(int)(charModel.getCharLocation().getHeight())));
-				 
-				 }
+		
+		blockedPath.addAll(mapModel.getWalls());
+		blockedPath.add(mapModel.getChest());
+		blockedPath.addAll(mapModel.getCharacterLocations().values());
+		blockedPath.remove(charModel.getCharLocation());
+		
+		if(mapModel.treasurePresent==true){	
+		if(toggle%2==0){
+			Object key=mapModel.getTreasures().keySet().toArray()[0];
+			 friendlyPath = PathValidatorController.friendlyPath(1, mapModel.getMapWidth(),
+						mapModel.getMapHeight(), (int)charModel.getCharLocation().getWidth(),
+						(int) charModel.getCharLocation().getHeight(),(int) mapModel.getTreasures().get(key).getWidth(),
+						(int) mapModel.treasures.get(key).getHeight(), mapModel.getWalls());
+			 Collections.reverse(friendlyPath);
 			 toggle++;
 			 }else{
-				 for(int i=0;i<=3;i++){
-					 friendlyPath.add(new Dimension((int)(charModel.getCharLocation().getWidth())-i,(int)(charModel.getCharLocation().getHeight())));
-					 
-					 }
+				 Object key=mapModel.getTreasures().keySet().toArray()[0];
+				 friendlyPath = PathValidatorController.friendlyPath(1, mapModel.getMapWidth(),
+							mapModel.getMapHeight(),(int) mapModel.getTreasures().get(key).getWidth(),
+							(int) mapModel.treasures.get(key).getHeight(), (int)charModel.getCharLocation().getWidth(),
+							(int) charModel.getCharLocation().getHeight(), blockedPath);
+				 Collections.reverse(friendlyPath);
 				 toggle++;
 			 }
+		}
 			 friendlyPath.remove(0);
 		 
 		 t1=new Thread(this);

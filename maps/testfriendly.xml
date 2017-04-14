@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Map>
+  <mapfilename>testfriendly.xml</mapfilename>
+  <mapwidth>10</mapwidth>
+  <mapheight>10</mapheight>
+  <EntryDoor>
+    <X>8</X>
+    <Y>8</Y>
+  </EntryDoor>
+  <Wall>
+    <wall>
+      <X>6</X>
+      <Y>2</Y>
+    </wall>
+    <wall>
+      <X>7</X>
+      <Y>2</Y>
+    </wall>
+  </Wall>
+  <Chest>
+    <X>1</X>
+    <Y>7</Y>
+  </Chest>
+  <ExitDoor>
+    <X>2</X>
+    <Y>0</Y>
+  </ExitDoor>
+  <Character>
+    <character name="Paras">
+      <Behavior>Hostile</Behavior>
+      <X>4</X>
+      <Y>5</Y>
+    </character>
+  </Character>
+  <Treasure/>
+</Map>
