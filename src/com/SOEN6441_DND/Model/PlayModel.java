@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.SOEN6441_DND.Controller.DiceRollController;
+import com.SOEN6441_DND.Views.LogWindow;
 import com.sun.java.swing.plaf.windows.WindowsTreeUI.CollapsedIcon;
 
 /**
@@ -23,7 +24,7 @@ import com.sun.java.swing.plaf.windows.WindowsTreeUI.CollapsedIcon;
 public class PlayModel {
 	public HashMap<String, CharacterModel> characters;
 	public HashMap<String, Integer> characterTurn;
-	private String[] playOrder;
+	public String[] playOrder;
 	DiceRollController diceController;
 
 	/**
@@ -31,6 +32,7 @@ public class PlayModel {
 	 */
 	public PlayModel() {
 		characters = new HashMap<String, CharacterModel>();
+		LogWindow.setLogDisplay("Rolling 1d20 for setting the order of play.");
 		diceController = new DiceRollController(1, 20);
 		characterTurn = new HashMap<String, Integer>();
 	}

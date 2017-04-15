@@ -9,19 +9,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
+/**
+ * This class displays the log window showing the real time logs for the game.
+ * @author Paras Malik
+ *
+ */
 public class LogWindow extends JFrame{
 	
 	JPanel logPanel;
-	JTextArea logArea;
+	public static JTextArea logArea = new JTextArea(40,40);
 	JLabel heading;
 		/**
 		 * Create the frame.
 		 */
 		public LogWindow() {
 			logPanel = new JPanel();
-			heading = new JLabel("Welcome to DnD !");
-			logArea = new JTextArea(40,40); 
+			heading = new JLabel("Welcome to DnD !"); 
 			logArea.setLocation(10, 110);
 			heading.setVisible(true);
 			heading.setSize(110,110);
@@ -29,8 +32,25 @@ public class LogWindow extends JFrame{
 			logPanel.add(heading);
 			logArea.setEditable(false);
 			logArea.setBackground(Color.CYAN);
+			logArea.setText("Game logs - ");
 			logPanel.add(new JScrollPane(logArea));
 			this.add(logPanel);
 		}
-		
+	
+		/**
+		 * Displaying the real time battle information in log file
+		 * @param logText
+		 */
+		public static void setLogDisplay(String logText){
+			logArea.append("\n"+logText);
+		}
+
+		/**
+	     * Get current info in the display panel to save it.
+	     * @return The String for the current information on log window.
+	     */
+	    public static String getBattleInfo (){
+	        String battleInfo = logArea.getText();
+	        return battleInfo;
+	    }
 }

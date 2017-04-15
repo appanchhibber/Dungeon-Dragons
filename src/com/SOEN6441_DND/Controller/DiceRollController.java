@@ -3,6 +3,7 @@ package com.SOEN6441_DND.Controller;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
+import com.SOEN6441_DND.Views.LogWindow;
 import com.sun.media.jfxmedia.logging.Logger;
 
 /**
@@ -33,6 +34,7 @@ public class DiceRollController {
 	 * @param maxDiceValue
 	 */
 	public DiceRollController(int counter, int maxDiceValue) {
+		LogWindow.setLogDisplay("Starting "+counter+"d"+maxDiceValue+" Dice Roll");
 		this.counter = counter;
 		this.maxDiceValue = maxDiceValue;
 		this.maxTotal = maxDiceValue;
@@ -63,7 +65,9 @@ public class DiceRollController {
 			total += diceResult[i];
 		}
 		logger.info("Dice result fetched !!");
+		LogWindow.setLogDisplay("Dice rolled ! Fetched result : "+total);
 		return total;
+	
 	}
 
 	/**

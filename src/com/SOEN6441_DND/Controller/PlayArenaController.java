@@ -14,6 +14,7 @@ import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.FileOperationModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.CharacterInventoryView;
+import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.PlayArena;
 
 import javax.swing.JButton;
@@ -113,6 +114,11 @@ public class PlayArenaController implements ActionListener {
 			playArena.playModel.setPlayOrder();
 			mapModel.setCharacterName(characterModel.getName() + "-"
 					+ characterModel.getBehaviour());
+			LogWindow.setLogDisplay("Below is the order of the turns");
+			for(int i=0;i<playArena.playModel.playOrder.length;i++){
+				LogWindow.setLogDisplay(playArena.playModel.playOrder[i]);
+			}
+			LogWindow.setLogDisplay(characterModel.getName()+"'s turn"+" with "+characterModel.getBehaviour()+" behaviour");
 			turn();
 
 		} else if (e.getSource() instanceof JButton) {

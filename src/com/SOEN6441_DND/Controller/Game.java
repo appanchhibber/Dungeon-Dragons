@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.SOEN6441_DND.ConfigFiles.ApplicationStatics;
+import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.Windows;
 

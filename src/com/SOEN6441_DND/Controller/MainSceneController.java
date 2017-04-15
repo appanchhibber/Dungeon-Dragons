@@ -19,6 +19,7 @@ import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.CampaignView;
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemScene;
+import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.MapView;
 import com.SOEN6441_DND.Views.StartGameView;
@@ -78,6 +79,7 @@ public class MainSceneController implements ActionListener {
 
 		}
 		if (e.getSource() == homeScreen.itemCreation) {
+			LogWindow.setLogDisplay("You are Item creation screen !!");
 			String mode = "create";
 			gameController.mainFrame.setView(new ItemScene(new ItemModel(),"create"));
 		}
