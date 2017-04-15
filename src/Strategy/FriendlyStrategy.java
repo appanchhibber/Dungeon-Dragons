@@ -29,17 +29,15 @@ public class FriendlyStrategy implements Strategy,Runnable {
 		this.mapModel = mapModel;
 		this.charModel = charModel;
 		if(toggle==1){
-			System.out.println(toggle);
 		this.setHomeLocation(charModel.getCharLocation());
 		toggle++;
 		}
-		System.out.println("Toggle:"+toggle);
 		
 		blockedPath.addAll(mapModel.getWalls());
 		blockedPath.add(mapModel.getChest());
 		blockedPath.addAll(mapModel.getCharacterLocations().values());
 		blockedPath.remove(charModel.getCharLocation());
-		System.out.println(mapModel.treasurePresent);
+		
 		//System.out.println(home);
 		if(mapModel.treasurePresent==true){	
 		
@@ -52,8 +50,6 @@ public class FriendlyStrategy implements Strategy,Runnable {
 			 
 		}
 		else{
-			System.out.println("Moving back");
-			System.out.println(home);
 			 Object key=mapModel.getTreasures().keySet().toArray()[0];
 			 friendlyPath = PathValidatorController.friendlyPath(1, mapModel.getMapWidth(),
 						mapModel.getMapHeight(),(int) charModel.getCharLocation().getWidth(),
@@ -62,7 +58,6 @@ public class FriendlyStrategy implements Strategy,Runnable {
 			 Collections.reverse(friendlyPath);
 			 toggle++;
 		 }
-		System.out.println(friendlyPath.size());
 		if(friendlyPath.size()>=1){
 			 friendlyPath.remove(0);
 		}
@@ -107,9 +102,8 @@ public class FriendlyStrategy implements Strategy,Runnable {
 		return "FriendlyStrategy";
 	}
 	public void setHomeLocation(Dimension d){
-		if(toggle==1){
+	
 		home= new Dimension((int)d.getWidth(),(int)d.getHeight());
-		System.out.println(home);
-		}
+		
 	}
 }

@@ -26,7 +26,10 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		Dimension playerLoc = mapModel.getCharacterLocations().get(mapModel.getCharacterName());
 		this.charModel = charModel;
 		System.out.println("Execute Hostile Strategy");
+		System.out.println(charModel.isAttackFlag());
 		if (charModel.isAttackFlag()) {
+			System.out.println("Aggresive calling Attack");
+			attack();			
 			charModel.setCharLocation(charModel.getCharLocation());
 			charModel.setAttackFlag(false);
 		}
@@ -57,9 +60,15 @@ public class AggressiveStrategy implements Strategy, Runnable {
 	}
 
 	public void attack() {
-		charModel.setAttackFlag(false);
-		int diceresult=rollDice();
-		
+		CharacterModel enemy=charModel.getEnemy();
+		int diceresult=rollDice()+charModel.getAttackBonus();
+		System.out.println("Attack Roll"+diceresult);
+		if(enemy.getArmorClass()<diceresult){
+			System.out.println("Attack Started");
+			enemy.setHitPoints(enemy.getHitPoints()-charModel.getDamageBonus());
+			charModel.moveCompleted=true;
+			charModel.setCharLocation(charModel.getCharLocation());
+		}
 	}
 	public int rollDice(){
 		return new Random().nextInt(20)+1;
@@ -67,18 +76,9 @@ public class AggressiveStrategy implements Strategy, Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		int distance = hostilePath.size();
-		if (distance <= charModel.getOwnedItems().get("Weapon").getWeaponRange()) {
-			for (int i = stepCount; i < 3; i++) {
-				charModel.setCharLocation(charModel.getCharLocation());
-			}
-		}
 		for (Dimension d : hostilePath) {
 			if (stepCount < 3) {
-				if (distance <= charModel.getOwnedItems().get("Weapon").getWeaponRange()) {
-					System.out.println("Attacking on Player");
-					charModel.setCharLocation(charModel.getCharLocation());
-				} else {
+				
 					charLocX = (int) d.getWidth();
 					charLocY = (int) d.getHeight();
 					// mapModel.updateCharLocation(charModel.getName()+"-Hostile",
@@ -86,14 +86,13 @@ public class AggressiveStrategy implements Strategy, Runnable {
 					try {
 						t1.sleep(1000);
 						charModel.setCharLocation(new Dimension(charLocX, charLocY));
-						distance--;
 						stepCount++;
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
 
-			} else {
+			 else {
 				stepCount = 0;
 				return;
 			}

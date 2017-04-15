@@ -468,10 +468,13 @@ public class FileOperationModel {
 					.getText());
 			chModel.addOwnedItems("Shield",
 					readSingleItem(chModel.getShieldFlag(), "Shield"));
+			
+			chModel.addOwnedItems("Weapon",
+					readSingleItem(itemEquip.selectSingleNode("weaponFlag")
+							.getText(), "Weapon"));
+
 			chModel.setWeaponFlag(itemEquip.selectSingleNode("weaponFlag")
 					.getText());
-			chModel.addOwnedItems("Weapon",
-					readSingleItem(chModel.getWeaponFlag(), "Weapon"));
 
 			Element abiModiElement = rootElement.element("abilityModifier");
 			chModel.getAbilityModifier().setStrength(
@@ -530,7 +533,7 @@ public class FileOperationModel {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e);
+			e.printStackTrace();
 		}
 		return chModel;
 

@@ -56,7 +56,7 @@ public class CharacterModel extends Observable {
 	private Strategy strategy;
 	private  ArrayList<String> weaponEffects;
 	public ArrayList<String> backPackItems;
-
+	public boolean moveCompleted;
 	/**
 	 * constructor for character model
 	 */
@@ -344,10 +344,6 @@ public class CharacterModel extends Observable {
 	 */
 	public void addOwnedItems(String itemName, ItemModel item) {
 		item.setEnchantValue(item.getEnchantValue() + calculateEnchanment(getLevel()));
-		if (backPackItems.contains(item.getName())) {
-			removeBackPackItems(item.getName());
-			setBackPackCounter((getBackPackCounter() - 1));
-		}
 		this.ownedItems.put(itemName, item);
 	}
 

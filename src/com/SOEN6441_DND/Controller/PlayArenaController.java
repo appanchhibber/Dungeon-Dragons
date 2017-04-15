@@ -69,12 +69,9 @@ public class PlayArenaController implements ActionListener {
 		} else {
 			turnCounter++;
 		}
-		String[] tempTurn = playArena.playModel.getPlayOrder()[turnCounter]
-				.split("-");
-		turnCharacter = tempTurn[0];
-		turnBehaviour = tempTurn[1];
 		playArena.playInfoPanel.character = playArena.playModel.characters
 				.get(playArena.playModel.getPlayOrder()[turnCounter]);
+		System.out.println(playArena.playInfoPanel.character.getName());
 		playArena.playInfoPanel.setPanel();
 		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 		playArena.playInfoPanel.character.execute(mapModel);
