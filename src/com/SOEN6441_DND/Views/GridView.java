@@ -380,17 +380,19 @@ public class GridView extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		characterModel = (CharacterModel) o;
 		if (characterModel.message == "Move Completed") {
-			playArena.playController.turn();
+			this.stepCounter = 0;
+			playArena.playController.turn();	
 		}
 
 		if (characterModel.message == "LocationUpdate") {
 			moveCharacter();
+			if(!characterModel.getBehaviour().equals("Friendly")){
+				setRange();
+			}
 			this.stepCounter++;
 			if (this.stepCounter >= 3) {
 				System.out.println("Move Completed");
-				if(!characterModel.getBehaviour().equals("Friendly")){
-				setRange();
-				}
+				
 				this.stepCounter = 0;
 				playArena.playController.turn();
 			}
@@ -406,7 +408,7 @@ public class GridView extends JPanel implements Observer {
 		charLocX = (int) characterModel.getCharLocation().getWidth();
 		charLocY = (int) characterModel.getCharLocation().getHeight();
 		for (Map.Entry<String, CharacterModel> charact : playArena.playModel.characters.entrySet()) {
-			if(characterModel.getBehaviour()=="Hostile" && charact.getValue().getBehaviour()=="Friendly"){
+			if(characterModel.getBehaviour()=="Hostile" && charact.getValue().getBehaviour()=="Friendly" || charact.getValue().getBehaviour()=="Hostile"){
 					continue;
 				}
 			if (characterModel.getBehaviour() != charact.getValue().getBehaviour()) {
@@ -417,8 +419,10 @@ public class GridView extends JPanel implements Observer {
 						.size() <= range) {
 					characterModel.setAttackFlag(true);
 					characterModel.setEnemy(charact.getValue());
+					if(stepCounter==2){
 					playArena.playController.turnCounter--;
-					System.out.println("Attack Set");
+					}
+					playArena.playController.turn();
 				}
 			
 			}

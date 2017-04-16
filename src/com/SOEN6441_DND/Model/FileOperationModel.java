@@ -299,6 +299,17 @@ public class FileOperationModel {
 				if (filename.equals("Weapon")) {
 					itemsName.add(item.selectSingleNode("weaponRange")
 							.getText());
+					itemsName.add(item.selectSingleNode("Burning")
+							.getText());
+					itemsName.add(item.selectSingleNode("Pacifying")
+							.getText());
+					itemsName.add(item.selectSingleNode("Frightening")
+							.getText());
+					itemsName.add(item.selectSingleNode("Slaying")
+							.getText());
+					itemsName.add(item.selectSingleNode("Freezing")
+							.getText());
+					
 				}
 
 				hm.put(item.selectSingleNode("name").getText(), itemsName);
@@ -404,6 +415,11 @@ public class FileOperationModel {
 		if (itemType.equals("Weapon")) {
 			item.setWeaponRange(Integer
 					.parseInt(items.get(itemName).toArray()[4].toString()));
+			item.setBurning(Boolean.valueOf(items.get(itemName).toArray()[5].toString()));
+			item.setPacifying(Boolean.valueOf(items.get(itemName).toArray()[6].toString()));
+			item.setFrightening(Boolean.valueOf(items.get(itemName).toArray()[7].toString()));
+			item.setSlaying(Boolean.valueOf(items.get(itemName).toArray()[8].toString()));
+			item.setFreezing(Boolean.valueOf(items.get(itemName).toArray()[9].toString()));
 		}
 
 		return item;

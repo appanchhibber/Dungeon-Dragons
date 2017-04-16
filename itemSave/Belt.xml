@@ -2,8 +2,8 @@
 
 <Belt>
   <type id="1">
-    <itemTypeName>High Lords Belt</itemTypeName>
-    <name>My Belt</name>
-    <enchantValue>1</enchantValue>
+    <itemTypeName>Hindsight</itemTypeName>
+    <name>Hindsight</name>
+    <enchantValue>4</enchantValue>
   </type>
 </Belt>

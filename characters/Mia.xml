@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Character>
-  <name id="1">Rock</name>
-  <type>Elf</type>
-  <level>1</level>
-  <image>image/Elf.jpg</image>
+  <name id="1">Mia</name>
+  <type>Dwarf</type>
+  <level>4</level>
+  <image>image/Dwarf.jpg</image>
   <characteristics>
-    <hitPoint>10</hitPoint>
-    <armorClass>34</armorClass>
-    <attackBonus>11</attackBonus>
+    <hitPoint>36</hitPoint>
+    <armorClass>30</armorClass>
+    <attackBonus>14</attackBonus>
     <damageBonus>8</damageBonus>
   </characteristics>
   <itemEquip>
@@ -18,23 +18,23 @@
     <beltFlag>Hindsight</beltFlag>
     <bootFlag>Steel</bootFlag>
     <ringFlag>Magic</ringFlag>
-    <weaponFlag>Sword</weaponFlag>
+    <weaponFlag>DBow</weaponFlag>
   </itemEquip>
   <abilityScore>
     <strength>16</strength>
-    <dexterity>13</dexterity>
-    <constitution>14</constitution>
-    <intelligence>12</intelligence>
-    <wisdom>7</wisdom>
-    <charisma>11</charisma>
+    <dexterity>9</dexterity>
+    <constitution>13</constitution>
+    <intelligence>9</intelligence>
+    <wisdom>8</wisdom>
+    <charisma>8</charisma>
   </abilityScore>
   <abilityModifier>
     <strength>3</strength>
-    <dexterity>3</dexterity>
-    <constitution>5</constitution>
-    <intelligence>1</intelligence>
-    <wisdom>-2</wisdom>
-    <charisma>0</charisma>
+    <dexterity>-1</dexterity>
+    <constitution>8</constitution>
+    <intelligence>-3</intelligence>
+    <wisdom>-1</wisdom>
+    <charisma>-1</charisma>
   </abilityModifier>
   <backPackCounter>0</backPackCounter>
   <backPackItems/>

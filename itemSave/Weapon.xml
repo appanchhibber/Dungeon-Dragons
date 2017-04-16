@@ -2,55 +2,50 @@
 
 <Weapon> 
   <type id="1"> 
-    <itemTypeName>Thane Steel Battle Axe</itemTypeName>  
-    <name>My Axe</name>  
-    <weaponType>Melee</weaponType>  
-    <weaponRange>2</weaponRange>  
-    <enchantValue>1</enchantValue> 
+    <itemTypeName>Steel Sword</itemTypeName>  
+    <name>Steel</name>  
+    <weaponRange>1</weaponRange>  
+    <Burning>true</Burning>  
+    <Pacifying>true</Pacifying>  
+    <Frightening>true</Frightening>  
+    <Slaying>false</Slaying>  
+    <Freezing>true</Freezing> 
+    <enchantValue>4</enchantValue> 
   </type>  
   <type id="2"> 
-    <itemTypeName>Thane Steel Battle Axe</itemTypeName>  
-    <name>My Axe2</name>  
-    <weaponType>Melee</weaponType>  
-    <weaponRange>1</weaponRange>  
-    <enchantValue>2</enchantValue> 
-  </type>  
-  <type id="3"> 
     <itemTypeName>Steel Sword</itemTypeName>  
-    <name>new swordParas</name>  
-    <weaponType>Melee</weaponType>  
-    <weaponRange>1</weaponRange>  
-    <enchantValue>1</enchantValue> 
-  </type>  
-  <type id="4"> 
-    <itemTypeName>Dwarven Bow Skinned</itemTypeName>  
-    <name>my bow check</name>  
-    <weaponType>Ranged weapon</weaponType>  
-    <weaponRange>2</weaponRange>  
-    <enchantValue>2</enchantValue> 
-  </type>  
-  <type id="5"> 
-    <itemTypeName>Steel Sword</itemTypeName>  
-    <name>test</name>  
+    <name>Sword</name>  
     <weaponType>Melee</weaponType>  
     <weaponRange>1</weaponRange>  
     <Burning>true</Burning>  
     <Pacifying>true</Pacifying>  
     <Frightening>true</Frightening>  
+    <Slaying>false</Slaying>  
+    <Freezing>true</Freezing>  
+    <enchantValue>4</enchantValue> 
+  </type>  
+  <type id="3"> 
+    <itemTypeName>Crossbow</itemTypeName>  
+    <name>Bow</name>  
+    <weaponType>Ranged weapon</weaponType>  
+    <weaponRange>2</weaponRange>  
+    <Burning>false</Burning>  
+    <Pacifying>true</Pacifying>  
+    <Frightening>true</Frightening>  
     <Slaying>true</Slaying>  
     <Freezing>true</Freezing>  
-    <enchantValue>1</enchantValue> 
+    <enchantValue>5</enchantValue> 
   </type>  
-  <type id="6">
-    <itemTypeName>Steel Sword</itemTypeName>
-    <name>test1</name>
-    <weaponType>Melee</weaponType>
-    <weaponRange>1</weaponRange>
+  <type id="4">
+    <itemTypeName>Dwarven Bow Skinned</itemTypeName>
+    <name>DBow</name>
+    <weaponType>Ranged weapon</weaponType>
+    <weaponRange>2</weaponRange>
     <Burning>false</Burning>
     <Pacifying>true</Pacifying>
-    <Frightening>false</Frightening>
+    <Frightening>true</Frightening>
     <Slaying>true</Slaying>
-    <Freezing>false</Freezing>
-    <enchantValue>1</enchantValue>
+    <Freezing>true</Freezing>
+    <enchantValue>5</enchantValue>
   </type>
 </Weapon>

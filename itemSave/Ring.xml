@@ -3,7 +3,7 @@
 <Ring>
   <type id="1">
     <itemTypeName>Magic Clutch Ring</itemTypeName>
-    <name>My Ring</name>
-    <enchantValue>1</enchantValue>
+    <name>Magic</name>
+    <enchantValue>3</enchantValue>
   </type>
 </Ring>

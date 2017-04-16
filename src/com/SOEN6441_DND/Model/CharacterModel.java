@@ -344,6 +344,10 @@ public class CharacterModel extends Observable {
 	 */
 	public void addOwnedItems(String itemName, ItemModel item) {
 		item.setEnchantValue(item.getEnchantValue() + calculateEnchanment(getLevel()));
+		if(backPackItems.contains(item.getName())){
+			backPackItems.remove(item.getName());
+			backPackCounter--;
+		}
 		this.ownedItems.put(itemName, item);
 	}
 

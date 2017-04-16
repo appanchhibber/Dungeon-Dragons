@@ -3,7 +3,10 @@
 <Campaign>
   <Maps>
     <map id="1">
-      <name>testfriendly.xml</name>
+      <name>B.xml</name>
+    </map>
+    <map id="2">
+      <name>A.xml</name>
     </map>
   </Maps>
 </Campaign>

@@ -17,6 +17,7 @@ public class AggressiveStrategy implements Strategy, Runnable {
 	MapModel mapModel;
 	int charLocX = 0;
 	int charLocY = 0;
+	int distance;
 	Thread t1;
 
 	@Override
@@ -26,6 +27,7 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		Dimension playerLoc = mapModel.getCharacterLocations().get(mapModel.getCharacterName());
 		this.charModel = charModel;
 		System.out.println("Execute Hostile Strategy");
+		stepCount = 0;
 		if (charModel.isAttackFlag()) {
 			System.out.println("Aggresive calling Attack");
 			attack();			
@@ -44,10 +46,11 @@ public class AggressiveStrategy implements Strategy, Runnable {
 					(int) charModel.getCharLocation().getWidth(), (int) charModel.getCharLocation().getHeight(),
 					(int) playerLoc.getWidth(), (int) playerLoc.getHeight(), blockedPath);
 			Collections.reverse(hostilePath);
-			if (hostilePath.size() > 1) {
+			if (hostilePath.size() > 2) {
 				hostilePath.remove(0);
 			}
-
+			distance=hostilePath.size();
+			System.out.println("Distance:"+distance);
 			t1 = new Thread(this);
 			t1.start();
 		}
@@ -73,9 +76,16 @@ public class AggressiveStrategy implements Strategy, Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		if (distance <= charModel.getOwnedItems().get("Weapon").getWeaponRange()) {
+			charModel.setCharLocation(charModel.getCharLocation());
+		}
 		for (Dimension d : hostilePath) {
+			
 			if (stepCount < 3) {
-				
+				System.out.println("Step Count:"+stepCount);
+				if (distance <= charModel.getOwnedItems().get("Weapon").getWeaponRange()) {
+					attack();
+				}
 					charLocX = (int) d.getWidth();
 					charLocY = (int) d.getHeight();
 					// mapModel.updateCharLocation(charModel.getName()+"-Hostile",

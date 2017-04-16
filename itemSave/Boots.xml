@@ -2,8 +2,8 @@
 
 <Boots>
   <type id="1">
-    <itemTypeName>Dwarven Boots</itemTypeName>
-    <name>My Boot</name>
-    <enchantValue>1</enchantValue>
+    <itemTypeName>Steel Plate Boots</itemTypeName>
+    <name>Steel</name>
+    <enchantValue>4</enchantValue>
   </type>
 </Boots>

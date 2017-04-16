@@ -13,8 +13,72 @@
     <type>Boots</type>  
     <name>my boot</name> 
   </item>  
-  <item name="my ring">
-    <type>Ring</type>
-    <name>my ring</name>
+  <item name="my ring"> 
+    <type>Ring</type>  
+    <name>my ring</name> 
+  </item>  
+  <item name="Mighty Sword"> 
+    <type>Weapon</type>  
+    <name>Mighty Sword</name> 
+  </item>  
+  <item name="Mighty Sword"> 
+    <type>Weapon</type>  
+    <name>Mighty Sword</name> 
+  </item>  
+  <item name="Mighty Sword"> 
+    <type>Weapon</type>  
+    <name>Mighty Sword</name> 
+  </item>  
+  <item name="Mighty Sword"> 
+    <type>Weapon</type>  
+    <name>Mighty Sword</name> 
+  </item>  
+  <item name="Mighty Sword"> 
+    <type>Weapon</type>  
+    <name>Mighty Sword</name> 
+  </item>  
+  <item name="My Sword"> 
+    <type>Weapon</type>  
+    <name>My Sword</name> 
+  </item>  
+  <item name="Dukaan"> 
+    <type>Helmet</type>  
+    <name>Dukaan</name> 
+  </item>  
+  <item name="Lotus"> 
+    <type>Armor</type>  
+    <name>Lotus</name> 
+  </item>  
+  <item name="Dragon"> 
+    <type>Shield</type>  
+    <name>Dragon</name> 
+  </item>  
+  <item name="Magic"> 
+    <type>Ring</type>  
+    <name>Magic</name> 
+  </item>  
+  <item name="Hindsight"> 
+    <type>Belt</type>  
+    <name>Hindsight</name> 
+  </item>  
+  <item name="Steel"> 
+    <type>Boots</type>  
+    <name>Steel</name> 
+  </item>  
+  <item name="Steel"> 
+    <type>Weapon</type>  
+    <name>Steel</name> 
+  </item>  
+  <item name="Sword"> 
+    <type>Weapon</type>  
+    <name>Sword</name> 
+  </item>  
+  <item name="Bow"> 
+    <type>Weapon</type>  
+    <name>Bow</name> 
+  </item>  
+  <item name="DBow">
+    <type>Weapon</type>
+    <name>DBow</name>
   </item>
 </treasure>

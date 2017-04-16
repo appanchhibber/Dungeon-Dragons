@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Character>
-  <name id="1">Rock</name>
-  <type>Elf</type>
-  <level>1</level>
-  <image>image/Elf.jpg</image>
+  <name id="1">Brian</name>
+  <type>Orc</type>
+  <level>5</level>
+  <image>image/Orc.jpg</image>
   <characteristics>
-    <hitPoint>10</hitPoint>
-    <armorClass>34</armorClass>
-    <attackBonus>11</attackBonus>
-    <damageBonus>8</damageBonus>
+    <hitPoint>50</hitPoint>
+    <armorClass>37</armorClass>
+    <attackBonus>14</attackBonus>
+    <damageBonus>11</damageBonus>
   </characteristics>
   <itemEquip>
     <helmetFlag>Dukaan</helmetFlag>
@@ -21,20 +21,20 @@
     <weaponFlag>Sword</weaponFlag>
   </itemEquip>
   <abilityScore>
-    <strength>16</strength>
+    <strength>17</strength>
     <dexterity>13</dexterity>
-    <constitution>14</constitution>
+    <constitution>15</constitution>
     <intelligence>12</intelligence>
-    <wisdom>7</wisdom>
-    <charisma>11</charisma>
+    <wisdom>10</wisdom>
+    <charisma>10</charisma>
   </abilityScore>
   <abilityModifier>
-    <strength>3</strength>
-    <dexterity>3</dexterity>
-    <constitution>5</constitution>
-    <intelligence>1</intelligence>
-    <wisdom>-2</wisdom>
-    <charisma>0</charisma>
+    <strength>5</strength>
+    <dexterity>1</dexterity>
+    <constitution>8</constitution>
+    <intelligence>-1</intelligence>
+    <wisdom>0</wisdom>
+    <charisma>-2</charisma>
   </abilityModifier>
   <backPackCounter>0</backPackCounter>
   <backPackItems/>

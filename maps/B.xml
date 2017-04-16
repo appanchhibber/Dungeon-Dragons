@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Map>
+  <mapfilename>B.xml</mapfilename>
+  <mapwidth>10</mapwidth>
+  <mapheight>10</mapheight>
+  <EntryDoor>
+    <X>1</X>
+    <Y>0</Y>
+  </EntryDoor>
+  <Wall>
+    <wall>
+      <X>5</X>
+      <Y>0</Y>
+    </wall>
+    <wall>
+      <X>5</X>
+      <Y>1</Y>
+    </wall>
+    <wall>
+      <X>5</X>
+      <Y>2</Y>
+    </wall>
+    <wall>
+      <X>5</X>
+      <Y>3</Y>
+    </wall>
+    <wall>
+      <X>5</X>
+      <Y>4</Y>
+    </wall>
+    <wall>
+      <X>5</X>
+      <Y>5</Y>
+    </wall>
+    <wall>
+      <X>5</X>
+      <Y>9</Y>
+    </wall>
+  </Wall>
+  <Chest>
+    <X>4</X>
+    <Y>9</Y>
+  </Chest>
+  <ExitDoor>
+    <X>9</X>
+    <Y>1</Y>
+  </ExitDoor>
+  <Character>
+    <character name="Brian">
+      <Behavior>Hostile</Behavior>
+      <X>9</X>
+      <Y>2</Y>
+    </character>
+    <character name="Mia">
+      <Behavior>Hostile</Behavior>
+      <X>3</X>
+      <Y>9</Y>
+    </character>
+  </Character>
+  <Treasure/>
+</Map>

@@ -2,8 +2,8 @@
 
 <Shield>
   <type id="1">
-    <itemTypeName>Iron Shield</itemTypeName>
-    <name>My Shield</name>
-    <enchantValue>1</enchantValue>
+    <itemTypeName>Dragon Scale Shield</itemTypeName>
+    <name>Dragon</name>
+    <enchantValue>3</enchantValue>
   </type>
 </Shield>
