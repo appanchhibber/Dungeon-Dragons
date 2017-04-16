@@ -26,12 +26,11 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		Dimension playerLoc = mapModel.getCharacterLocations().get(mapModel.getCharacterName());
 		this.charModel = charModel;
 		System.out.println("Execute Hostile Strategy");
-		System.out.println(charModel.isAttackFlag());
 		if (charModel.isAttackFlag()) {
 			System.out.println("Aggresive calling Attack");
 			attack();			
-			charModel.setCharLocation(charModel.getCharLocation());
 			charModel.setAttackFlag(false);
+			charModel.setMoveCompleted(true);
 		}
 
 		else {
@@ -66,8 +65,6 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		if(enemy.getArmorClass()<diceresult){
 			System.out.println("Attack Started");
 			enemy.setHitPoints(enemy.getHitPoints()-charModel.getDamageBonus());
-			charModel.moveCompleted=true;
-			charModel.setCharLocation(charModel.getCharLocation());
 		}
 	}
 	public int rollDice(){

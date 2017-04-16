@@ -3,6 +3,7 @@ package Strategy;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
@@ -31,12 +32,35 @@ public class HumanStrategy implements Strategy {
 	@Override
 	public void execute(MapModel mapModel, CharacterModel charModel) {
 
+		System.out.println("Execute Human Strategy");
 		this.mapModel = mapModel;
 		this.characterModel = charModel;
 		this.charLocX = (int) characterModel.getCharLocation().getWidth();
 		this.charLocY = (int) characterModel.getCharLocation().getHeight();
 		stepCount = 0;
-		keyBinding();
+		if (charModel.isAttackFlag()) {
+			System.out.println("Human calling Attack");
+			attack();			
+			charModel.setAttackFlag(false);
+			charModel.setMoveCompleted(true);
+		}
+		else{
+			keyBinding();
+		}
+		
+	}
+	
+	public void attack() {
+		CharacterModel enemy=characterModel.getEnemy();
+		int diceresult=rollDice()+characterModel.getAttackBonus();
+		System.out.println("Attack Roll"+diceresult);
+		if(enemy.getArmorClass()<diceresult){
+			System.out.println("Attack Started");
+			enemy.setHitPoints(enemy.getHitPoints()-characterModel.getDamageBonus());
+		}
+	}
+	public int rollDice(){
+		return new Random().nextInt(20)+1;
 	}
 
 	@Override

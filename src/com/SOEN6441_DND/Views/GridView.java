@@ -379,39 +379,50 @@ public class GridView extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		characterModel = (CharacterModel) o;
+		if (characterModel.message == "Move Completed") {
+			playArena.playController.turn();
+		}
+
 		if (characterModel.message == "LocationUpdate") {
 			moveCharacter();
 			this.stepCounter++;
 			if (this.stepCounter >= 3) {
 				System.out.println("Move Completed");
+				if(!characterModel.getBehaviour().equals("Friendly")){
 				setRange();
+				}
 				this.stepCounter = 0;
 				playArena.playController.turn();
 			}
-			characterModel.message = "";
+			
 		}
-
+		characterModel.message = "";
 	}
 
 	public void setRange() {
 		int charLocX;
 		int charLocY;
-		int range=characterModel.getOwnedItems().get("Weapon").getWeaponRange();
+		int range = characterModel.getOwnedItems().get("Weapon").getWeaponRange();
 		charLocX = (int) characterModel.getCharLocation().getWidth();
 		charLocY = (int) characterModel.getCharLocation().getHeight();
 		for (Map.Entry<String, CharacterModel> charact : playArena.playModel.characters.entrySet()) {
+			if(characterModel.getBehaviour()=="Hostile" && charact.getValue().getBehaviour()=="Friendly"){
+					continue;
+				}
 			if (characterModel.getBehaviour() != charact.getValue().getBehaviour()) {
-				if (PathValidatorController.computerPath(1, mapModel.getMapWidth(), mapModel.getMapHeight(), charLocX,
-						charLocY, (int) charact.getValue().getCharLocation().getWidth(),
-						(int) charact.getValue().getCharLocation().getHeight(), mapModel.getWalls()).size()<=range) {
+				if (PathValidatorController
+						.computerPath(1, mapModel.getMapWidth(), mapModel.getMapHeight(), charLocX, charLocY,
+								(int) charact.getValue().getCharLocation().getWidth(),
+								(int) charact.getValue().getCharLocation().getHeight(), mapModel.getWalls())
+						.size() <= range) {
 					characterModel.setAttackFlag(true);
 					characterModel.setEnemy(charact.getValue());
 					playArena.playController.turnCounter--;
 					System.out.println("Attack Set");
 				}
+			
 			}
 		}
-
 	}
 
 	public void moveCharacter() {

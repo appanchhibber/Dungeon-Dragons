@@ -757,6 +757,24 @@ public class CharacterModel extends Observable {
 
 		}
 	}
+	/**
+	 * Get Move Complete flag
+	 * @return
+	 */
+
+	public boolean isMoveCompleted() {
+		return moveCompleted;
+	}
+	/**
+	 * Set Move Complete flag
+	 * @param moveCompleted
+	 */
+
+	public void setMoveCompleted(boolean moveCompleted) {
+		this.moveCompleted = moveCompleted;
+		message="Move Completed";
+		notifyCharacterView();
+	}
 
 	/**
 	 * method for reseting the score
