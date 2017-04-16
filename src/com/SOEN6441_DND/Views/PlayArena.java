@@ -61,6 +61,8 @@ public class PlayArena extends View implements Observer {
 	public static ActionMap actionMap;
 
 	public JButton startGame;
+	public JButton playersAttack;
+	public JButton playerMove;
 
 	@Override
 	protected void initSubviews() {
@@ -80,6 +82,15 @@ public class PlayArena extends View implements Observer {
 		startGame.setLocation(10, 10);
 		startGame.setVisible(true);
 		navPanel.add(startGame);
+		playersAttack=new JButton("Attack");
+		playersAttack.setSize(100, 30);
+		playersAttack.setLocation(150, 10);
+		navPanel.add(playersAttack);
+		
+		playerMove=new JButton("Move");
+		playerMove.setSize(100, 30);
+		playerMove.setLocation(290, 10);
+		navPanel.add(playerMove);
 		this.add(navPanel);
 
 	}
