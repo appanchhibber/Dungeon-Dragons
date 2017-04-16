@@ -750,7 +750,25 @@ public class FileOperationModel {
 			typeId.addElement("itemTypeName").addText(
 					writeItemModel.getSubItemType());
 			typeId.addElement("name").addText(writeItemModel.getName());
-			typeId.addElement("enchantValue").addText(
+			if (writeItemModel.getItemtype().equalsIgnoreCase("weapon")) {
+				typeId.addElement("weaponType").addText(
+						writeItemModel.getWeaponType());
+				typeId.addElement("weaponRange")
+						.addText(
+								String.valueOf(writeItemModel
+										.getWeaponRange()));
+				typeId.addElement("Burning").addText(
+						String.valueOf(writeItemModel.isBurning()));
+				typeId.addElement("Pacifying").addText(
+						String.valueOf(writeItemModel.isPacifying()));
+				typeId.addElement("Frightening").addText(
+						String.valueOf(writeItemModel.isFrightening()));
+				typeId.addElement("Slaying").addText(
+						String.valueOf(writeItemModel.isSlaying()));
+				typeId.addElement("Freezing").addText(
+						String.valueOf(writeItemModel.isFreezing()));
+			}
+		typeId.addElement("enchantValue").addText(
 					Integer.toString(writeItemModel.getEnchantValue()));
 			write(document, file);
 		}

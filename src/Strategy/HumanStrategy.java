@@ -13,6 +13,7 @@ import javax.swing.Timer;
 
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.MapModel;
+import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.MainScene;
 import com.SOEN6441_DND.Views.PlayArena;
 import com.sun.glass.events.KeyEvent;
@@ -32,7 +33,8 @@ public class HumanStrategy implements Strategy {
 	@Override
 	public void execute(MapModel mapModel, CharacterModel charModel) {
 
-		System.out.println("Execute Human Strategy");
+		System.out.println("Execute Human Behaviour Strategy");
+		LogWindow.setLogDisplay("Execute Human Behaviour Strategy");
 		this.mapModel = mapModel;
 		this.characterModel = charModel;
 		this.charLocX = (int) characterModel.getCharLocation().getWidth();
@@ -40,6 +42,7 @@ public class HumanStrategy implements Strategy {
 		stepCount = 0;
 		if (charModel.isAttackFlag()) {
 			System.out.println("Human calling Attack");
+			LogWindow.setLogDisplay("Human calling Attack");
 			attack();			
 			charModel.setAttackFlag(false);
 			charModel.setMoveCompleted(true);
@@ -54,8 +57,11 @@ public class HumanStrategy implements Strategy {
 		CharacterModel enemy=characterModel.getEnemy();
 		int diceresult=rollDice()+characterModel.getAttackBonus();
 		System.out.println("Attack Roll"+diceresult);
+		LogWindow.setLogDisplay("Getting Attack Roll dice result : "+diceresult);
 		if(enemy.getArmorClass()<diceresult){
 			System.out.println("Attack Started");
+			LogWindow.setLogDisplay("Armor class is less than dice result - Attack started !");
+			LogWindow.setLogDisplay(enemy.getArmorClass()+" < "+diceresult);
 			enemy.setHitPoints(enemy.getHitPoints()-characterModel.getDamageBonus());
 		}
 	}

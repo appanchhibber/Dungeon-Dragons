@@ -53,7 +53,6 @@ public class MainSceneController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == homeScreen.exitGameButton) {
-			System.out.println("Exit Game button fired");
 			System.exit(0);
 		}
 		if (e.getSource() == homeScreen.startGameButton) {
@@ -84,9 +83,7 @@ public class MainSceneController implements ActionListener {
 			gameController.mainFrame.setView(new ItemScene(new ItemModel(),"create"));
 		}
 		if (e.getSource() == homeScreen.editItem) {
-			System.out.println("item editor fired");
 			File file = openItemFile();
-			System.out.println(file);
 
 			// gameController.mainFrame.setView(new ItemScene());
 		}
@@ -95,7 +92,6 @@ public class MainSceneController implements ActionListener {
 			gameController.mainFrame.setView(new CharacterScene());
 		}
 		if (e.getSource() == homeScreen.editCharacter) {
-			System.out.println("character editor fired");
 		}
 		if (e.getSource() == homeScreen.campaignCreator) {
 			gameController.mainFrame.setView(new CampaignView(new CampaignModel(),"create"));

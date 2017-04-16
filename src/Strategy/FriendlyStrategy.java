@@ -7,6 +7,7 @@ import java.util.Collections;
 import com.SOEN6441_DND.Controller.PathValidatorController;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.MapModel;
+import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.PlayArena;
 
 public class FriendlyStrategy implements Strategy,Runnable {
@@ -25,7 +26,8 @@ public class FriendlyStrategy implements Strategy,Runnable {
 	@Override
 	public void execute(MapModel mapModel, CharacterModel charModel) {
 		blockedPath = new ArrayList<Dimension>();
-		System.out.println("Execute Friendly Strategy");
+		System.out.println("Execute Friendly Behaviour Strategy");
+		LogWindow.setLogDisplay("Execute Friendly Behaviour Strategy");
 		this.mapModel = mapModel;
 		this.charModel = charModel;
 		if(toggle==1){

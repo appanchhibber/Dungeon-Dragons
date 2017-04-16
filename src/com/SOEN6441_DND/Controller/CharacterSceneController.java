@@ -30,6 +30,7 @@ import com.SOEN6441_DND.Model.ItemModel.itemTypeList;
 import com.SOEN6441_DND.Views.AbilityPanelView;
 import com.SOEN6441_DND.Views.CharacterScene;
 import com.SOEN6441_DND.Views.ItemAssignView;
+import com.SOEN6441_DND.Views.LogWindow;
 
 import Builder.BullyCharacterBuilder;
 import Builder.CharacterBuilder;
@@ -122,19 +123,26 @@ public class CharacterSceneController implements ActionListener {
 		}
 
 		else if (e.getSource() == characterScreen.bully) {
+			LogWindow.setLogDisplay("Character is now Bully");
 			createCharacter("bully");
+			LogWindow.setLogDisplay("Modifers for Bully is now set");
 			characterModel.calculateAbilityModifier();
 		} else if (e.getSource() == characterScreen.nimble) {
+			LogWindow.setLogDisplay("Character is now Nimble");
 			createCharacter("nimble");
+			LogWindow.setLogDisplay("Modifers for Nimble is now set");
 			characterModel.calculateAbilityModifier();
 		} else if (e.getSource() == characterScreen.tank) {
+			LogWindow.setLogDisplay("Character is now Tank");
 			createCharacter("tank");
+			LogWindow.setLogDisplay("Modifers for Tank is now set");
 			characterModel.calculateAbilityModifier();
 		}
 
 		else if (e.getSource() == abilityPanel.calculateButton) {
 			logger.info("Calulate button clicked !");
 			logger.info("Fetching dice result");
+			LogWindow.setLogDisplay("Fetching dice result");
 			abilityScore.setStrength(diceRoll.getDiceRollResult());
 			abilityScore.setDexterity(diceRoll.getDiceRollResult());
 			abilityScore.setConstitution(diceRoll.getDiceRollResult());
@@ -143,6 +151,7 @@ public class CharacterSceneController implements ActionListener {
 			abilityScore.setCharisma(diceRoll.getDiceRollResult());
 			characterModel.calculateAbilityModifier();
 			logger.info("Values fecthed and ability scoer generated");
+			LogWindow.setLogDisplay("Values fecthed and ability scoer generated");
 			
 		} else if (e.getSource() == characterScreen.levels) {
 			characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));

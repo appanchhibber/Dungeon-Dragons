@@ -73,6 +73,7 @@ public class PlayArenaController implements ActionListener {
 		playArena.playInfoPanel.character = playArena.playModel.characters
 				.get(playArena.playModel.getPlayOrder()[turnCounter]);
 		System.out.println(playArena.playInfoPanel.character.getName());
+		LogWindow.setLogDisplay("Now "+playArena.playInfoPanel.character.getName()+"'s turn with "+characterModel.getBehaviour());
 		playArena.playInfoPanel.setPanel();
 		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 		playArena.playInfoPanel.character.execute(mapModel);
@@ -118,7 +119,6 @@ public class PlayArenaController implements ActionListener {
 			for(int i=0;i<playArena.playModel.playOrder.length;i++){
 				LogWindow.setLogDisplay(playArena.playModel.playOrder[i]);
 			}
-			LogWindow.setLogDisplay(characterModel.getName()+"'s turn"+" with "+characterModel.getBehaviour()+" behaviour");
 			turn();
 
 		} else if (e.getSource() instanceof JButton) {

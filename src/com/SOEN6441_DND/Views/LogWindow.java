@@ -24,14 +24,13 @@ public class LogWindow extends JFrame{
 		 */
 		public LogWindow() {
 			logPanel = new JPanel();
-			heading = new JLabel("Welcome to DnD !"); 
+			heading = new JLabel("DnD Console :"); 
 			logArea.setLocation(10, 110);
 			heading.setVisible(true);
 			heading.setSize(110,110);
 			heading.setFont(new Font("calibri", Font.BOLD, 18));
 			logPanel.add(heading);
 			logArea.setEditable(false);
-			logArea.setBackground(Color.CYAN);
 			logArea.setText("Game logs - ");
 			logPanel.add(new JScrollPane(logArea));
 			this.add(logPanel);

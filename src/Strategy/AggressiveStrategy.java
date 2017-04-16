@@ -8,6 +8,7 @@ import java.util.Random;
 import com.SOEN6441_DND.Controller.PathValidatorController;
 import com.SOEN6441_DND.Model.CharacterModel;
 import com.SOEN6441_DND.Model.MapModel;
+import com.SOEN6441_DND.Views.LogWindow;
 
 public class AggressiveStrategy implements Strategy, Runnable {
 	ArrayList<Dimension> hostilePath;
@@ -26,10 +27,12 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		this.mapModel = mapModel;
 		Dimension playerLoc = mapModel.getCharacterLocations().get(mapModel.getCharacterName());
 		this.charModel = charModel;
-		System.out.println("Execute Hostile Strategy");
+		System.out.println("Executing Hostile Behaviour Strategy");
+		LogWindow.setLogDisplay("Executing Hostile Behaviour Strategy");
 		stepCount = 0;
 		if (charModel.isAttackFlag()) {
 			System.out.println("Aggresive calling Attack");
+			LogWindow.setLogDisplay("Aggresive calling Attack");
 			attack();			
 			charModel.setAttackFlag(false);
 			charModel.setMoveCompleted(true);
@@ -65,8 +68,11 @@ public class AggressiveStrategy implements Strategy, Runnable {
 		CharacterModel enemy=charModel.getEnemy();
 		int diceresult=rollDice()+charModel.getAttackBonus();
 		System.out.println("Attack Roll"+diceresult);
+		LogWindow.setLogDisplay("Getting Attack Roll dice result : "+diceresult);
 		if(enemy.getArmorClass()<diceresult){
 			System.out.println("Attack Started");
+			LogWindow.setLogDisplay("Armor class is less than dice result - Attack started !");
+			LogWindow.setLogDisplay(enemy.getArmorClass()+" < "+diceresult);
 			enemy.setHitPoints(enemy.getHitPoints()-charModel.getDamageBonus());
 		}
 	}
