@@ -122,19 +122,19 @@ public class GridView extends JPanel implements Observer {
 				} else {
 					value = 1 + j + (i * multiple);
 				}
-				if ((int) mapModel.getEntry().getWidth() == i && (int) mapModel.getEntry().getHeight() == j) {
+				if ((int) mapModel.getEntry().getHeight() == i && (int) mapModel.getEntry().getWidth() == j) {
 					mapButtonsGrid[i][j].setName("EntryDoor");
 					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
 					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/EntryDoor.jpg").getImage()
 							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getChest().getWidth() == i && (int) mapModel.getChest().getHeight() == j) {
+				} else if ((int) mapModel.getChest().getHeight() == i && (int) mapModel.getChest().getWidth() == j) {
 					mapButtonsGrid[i][j].setName("Chest");
 					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
 					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/Chest.jpg").getImage()
 							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getExit().getWidth() == i && (int) mapModel.getExit().getHeight() == j) {
+				} else if ((int) mapModel.getExit().getHeight() == i && (int) mapModel.getExit().getWidth() == j) {
 					mapButtonsGrid[i][j].setName("ExitDoor");
 					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
 					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/ExitDoor.jpg").getImage()
@@ -225,19 +225,19 @@ public class GridView extends JPanel implements Observer {
 				} else {
 					value = 1 + j + (i * multiple);
 				}
-				if ((int) mapModel.getEntry().getWidth() == i && (int) mapModel.getEntry().getHeight() == j) {
+				if ((int) mapModel.getEntry().getHeight() == i && (int) mapModel.getEntry().getWidth() == j) {
 					mapButtonsGrid[i][j].setName("EntryDoor");
 					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
 					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/EntryDoor.jpg").getImage()
 							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getChest().getWidth() == i && (int) mapModel.getChest().getHeight() == j) {
+				} else if ((int) mapModel.getChest().getHeight() == i && (int) mapModel.getChest().getWidth() == j) {
 					mapButtonsGrid[i][j].setName("Chest");
 					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
 					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/Chest.jpg").getImage()
 							.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
 					mapButtonsGrid[i][j].setText(i + "," + j);
-				} else if ((int) mapModel.getExit().getWidth() == i && (int) mapModel.getExit().getHeight() == j) {
+				} else if ((int) mapModel.getExit().getHeight() == i && (int) mapModel.getExit().getWidth() == j) {
 					mapButtonsGrid[i][j].setName("ExitDoor");
 					mapButtonsGrid[i][j].setFont(new Font("Calibri", Font.PLAIN, 0));
 					mapButtonsGrid[i][j].setIcon(new ImageIcon(new ImageIcon("image/ExitDoor.jpg").getImage()
