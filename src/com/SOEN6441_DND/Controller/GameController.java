@@ -69,7 +69,7 @@ public class GameController {
 		logScreen.setVisible(true);
 		logScreen.setSize(500, 700);
 		logScreen.setResizable(true);
-		logScreen.setLocationRelativeTo(mainFrame); // center window on the screen
+		logScreen.setLocation(mainFrame.getX()+mainFrame.getWidth(), mainFrame.getY()); // center window on the screen
 		logScreen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	

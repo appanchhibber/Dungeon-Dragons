@@ -55,7 +55,7 @@ public class CharacterSceneController implements ActionListener {
 	public FileOperationModel fileModel;
 	public Array backPackItems;
 	public CharacterBuilder characterBuilder;
-
+	
 	Logger logger = Logger.getLogger(CharacterSceneController.class);
 	// public String
 /**
