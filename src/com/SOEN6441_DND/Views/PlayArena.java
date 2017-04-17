@@ -52,7 +52,7 @@ public class PlayArena extends View implements Observer {
 	public boolean chestFlag;
 	public int charLocX = 0;
 	public int charLocY = 0;
-	public NavigationPanelView navigation;
+
 
 	public PlayerInfoPanelView playInfoPanel;
 	public CharacterInventoryView charInventory;
@@ -75,7 +75,7 @@ public class PlayArena extends View implements Observer {
 		navPanel.setLocation(5, 545);
 		navPanel.setVisible(true);
 		navPanel.setBackground(Color.BLACK);
-		navigation= new NavigationPanelView();
+		
 
 		startGame = new JButton("Start Game");
 		startGame.setSize(100, 30);
@@ -85,12 +85,17 @@ public class PlayArena extends View implements Observer {
 		playersAttack=new JButton("Attack");
 		playersAttack.setSize(100, 30);
 		playersAttack.setLocation(150, 10);
-		navPanel.add(playersAttack);
-		
 		playerMove=new JButton("Move");
 		playerMove.setSize(100, 30);
 		playerMove.setLocation(290, 10);
 		navPanel.add(playerMove);
+		navPanel.add(playersAttack);
+		
+		playerMove.setVisible(false);
+		playersAttack.setVisible(false);
+		
+		
+		
 		this.add(navPanel);
 
 	}
@@ -128,7 +133,6 @@ public class PlayArena extends View implements Observer {
 		gridView = new GridView(mapModel, this);
 		inputMap = this.gridView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
 		actionMap = this.gridView.getActionMap();
-		navigation.saveButton.addActionListener(playController);
 		for (Map.Entry<String, CharacterModel> charact : playModel.characters.entrySet()) {
 			charact.getValue().setLevel(charModel.getLevel());
 			charact.getValue().addObserver(gridView);

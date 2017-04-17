@@ -490,7 +490,7 @@ public class CharacterModel extends Observable {
 	public void setBeltFlag(String beltFlag) {
 		this.beltFlag = beltFlag;
 		message = "itemImage";
-		notifyCharacterView();
+		calculateChar();
 	}
 
 	/**
@@ -671,7 +671,9 @@ public class CharacterModel extends Observable {
 	public void calculateChar() {
 		if (getAbilityModifier() != null && getAbilityScore() != null) {
 			setHitPoints((getAbilityModifier().getConstitution() + getHitPointBase()) * getLevel());
+			if (getAttackBonus() == 0) {
 			setAttackBonus(getLevel());
+			}
 			if (getDamageBonus() == 0) {
 				setDamageBonus(0);
 			}

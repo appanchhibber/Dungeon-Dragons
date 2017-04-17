@@ -78,8 +78,17 @@ public class PlayArenaController implements ActionListener {
 		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 		playArena.playInfoPanel.character.execute(mapModel);
 	}
-
-	/**
+    /**
+     * Visible View
+     */
+	public void playerAction(){
+		playArena.playerMove.setVisible(true);
+		playArena.playersAttack.setVisible(true);
+	}
+	
+	
+	
+	/** 
 	 * method for executing the strategy
 	 * 
 	 * @param mapModel

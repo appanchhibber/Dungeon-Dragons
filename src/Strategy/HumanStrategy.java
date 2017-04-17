@@ -144,7 +144,7 @@ public class HumanStrategy implements Strategy {
 
 				Dimension nextLoc = new Dimension(nextX + xDelta, nextY + yDelta);
 				// Dimension validLoc=new Dimension(nextY+yDelta,nextX+xDelta);
-				
+				repaintTimer.stop();
 				switch(checkNext(nextLoc)){
 					case "Move":{
 						charLocX += xDelta;
@@ -163,7 +163,6 @@ public class HumanStrategy implements Strategy {
 						break;
 					}
 					case "ExitDoor":{
-						repaintTimer.stop();
 						if(chestFlag==true){
 							chestFlag=false;
 							mapModel.setLoadNextMap(true);

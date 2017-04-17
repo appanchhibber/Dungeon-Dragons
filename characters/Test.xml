@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Character>
+  <name id="1">Test</name>
+  <type>Human</type>
+  <level>1</level>
+  <image>image/Human.jpg</image>
+  <characteristics>
+    <hitPoint>3</hitPoint>
+    <armorClass>31</armorClass>
+    <attackBonus>12</attackBonus>
+    <damageBonus>9</damageBonus>
+  </characteristics>
+  <itemEquip>
+    <helmetFlag>Dukaan</helmetFlag>
+    <armorFlag>Lotus</armorFlag>
+    <shieldFlag>Dragon</shieldFlag>
+    <beltFlag>Hindsight</beltFlag>
+    <bootFlag>Steel</bootFlag>
+    <ringFlag>Magic</ringFlag>
+    <weaponFlag>Sword</weaponFlag>
+  </itemEquip>
+  <abilityScore>
+    <strength>18</strength>
+    <dexterity>11</dexterity>
+    <constitution>15</constitution>
+    <intelligence>11</intelligence>
+    <wisdom>5</wisdom>
+    <charisma>10</charisma>
+  </abilityScore>
+  <abilityModifier>
+    <strength>4</strength>
+    <dexterity>0</dexterity>
+    <constitution>7</constitution>
+    <intelligence>0</intelligence>
+    <wisdom>-3</wisdom>
+    <charisma>0</charisma>
+  </abilityModifier>
+  <backPackCounter>0</backPackCounter>
+  <backPackItems/>
+</Character>

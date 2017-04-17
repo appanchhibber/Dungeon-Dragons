@@ -37,6 +37,8 @@ public class FriendlyStrategy implements Strategy,Runnable {
 		
 		blockedPath.addAll(mapModel.getWalls());
 		blockedPath.add(mapModel.getChest());
+		blockedPath.add(mapModel.getExit());
+		blockedPath.add(mapModel.getEntry());
 		blockedPath.addAll(mapModel.getCharacterLocations().values());
 		blockedPath.remove(charModel.getCharLocation());
 		
@@ -69,10 +71,10 @@ public class FriendlyStrategy implements Strategy,Runnable {
 	@Override
 	public void run() {
 		int distance = friendlyPath.size();
-		if (distance <= 1) {
+		if (distance <= 0) {
 			for (int i = stepCount; i < 3; i++) {
-				charModel.setCharLocation(charModel.getCharLocation());
 				mapModel.treasurePresent=false;
+				charModel.setMoveCompleted(true);
 			}
 		}
 		for(Dimension d:friendlyPath){
@@ -82,9 +84,16 @@ public class FriendlyStrategy implements Strategy,Runnable {
 					//	mapModel.updateCharLocation(charModel.getName()+"-Hostile", new Dimension(charLocY,charLocX));
 						try {
 							 t1.sleep(500);
-					            charModel.setCharLocation(new Dimension(charLocX,charLocY));
-					            stepCount++;
+							 System.out.println("Distance:"+distance);
+							 if (distance <= 0)
+							 {
+								 mapModel.treasurePresent=false;
+								 charModel.setMoveCompleted(true);
+							 }
+							    stepCount++;
 					            distance--;
+					            charModel.setCharLocation(new Dimension(charLocX,charLocY));
+					           
 						}catch(Exception e){
 							e.printStackTrace();
 						}

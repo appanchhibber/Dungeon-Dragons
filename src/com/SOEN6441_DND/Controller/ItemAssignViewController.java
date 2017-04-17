@@ -105,13 +105,12 @@ public class ItemAssignViewController implements ActionListener {
 						break;
 					}
 					case "Belt": {
-						if (characterModel.getBeltFlag() == null) {
-							
-							characterModel.addOwnedItems("Belt", itemAssignView.fileIO.readSingleItem(item, "Belt"));
-							characterModel.setBeltFlag(item);
+						if (characterModel.getBeltFlag() == null) {	
+							characterModel.addOwnedItems("Belt", itemAssignView.fileIO.readSingleItem(item, "Belt"));	
 							characterModel.getAbilityModifier().setConstitution(characterModel.getAbilityModifier()
 									.getConstitution()
 									+ (characterModel.getOwnedItems().get("Belt").getEnchantValue()));
+							characterModel.setBeltFlag(item);
 						} else {
 							JOptionPane.showMessageDialog(null, "This Item is already assign");
 						}

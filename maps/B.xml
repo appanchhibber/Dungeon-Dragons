@@ -53,10 +53,15 @@
       <Y>2</Y>
     </character>
     <character name="Mia">
-      <Behavior>Hostile</Behavior>
+      <Behavior>Friendly</Behavior>
       <X>3</X>
       <Y>9</Y>
     </character>
   </Character>
-  <Treasure/>
+  <Treasure>
+    <treasure name="Mighty Sword">
+      <X>9</X>
+      <Y>0</Y>
+    </treasure>
+  </Treasure>
 </Map>

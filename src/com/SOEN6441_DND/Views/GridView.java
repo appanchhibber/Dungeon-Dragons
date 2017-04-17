@@ -392,7 +392,6 @@ public class GridView extends JPanel implements Observer {
 			this.stepCounter++;
 			if (this.stepCounter >= 3) {
 				System.out.println("Move Completed");
-				
 				this.stepCounter = 0;
 				playArena.playController.turn();
 			}
@@ -408,7 +407,7 @@ public class GridView extends JPanel implements Observer {
 		charLocX = (int) characterModel.getCharLocation().getWidth();
 		charLocY = (int) characterModel.getCharLocation().getHeight();
 		for (Map.Entry<String, CharacterModel> charact : playArena.playModel.characters.entrySet()) {
-			if(characterModel.getBehaviour()=="Hostile" && charact.getValue().getBehaviour()=="Friendly" || charact.getValue().getBehaviour()=="Hostile"){
+			if(characterModel.getBehaviour()=="Hostile" && charact.getValue().getBehaviour()=="Friendly" ){
 					continue;
 				}
 			if (characterModel.getBehaviour() != charact.getValue().getBehaviour()) {
@@ -417,12 +416,23 @@ public class GridView extends JPanel implements Observer {
 								(int) charact.getValue().getCharLocation().getWidth(),
 								(int) charact.getValue().getCharLocation().getHeight(), mapModel.getWalls())
 						.size() <= range) {
-					characterModel.setAttackFlag(true);
+					System.out.println(characterModel.getName()+": Attcking On :"+charact.getValue().getName());
 					characterModel.setEnemy(charact.getValue());
+					
+					if(characterModel.getBehaviour()=="Player"){
+						playArena.playController.playerAction();
+					}
+					else{
+					characterModel.setAttackFlag(true);
 					if(stepCounter==2){
-					playArena.playController.turnCounter--;
+						playArena.playController.turnCounter--;
 					}
 					playArena.playController.turn();
+					
+					}
+					characterModel.setEnemy(charact.getValue());
+					
+					
 				}
 			
 			}
