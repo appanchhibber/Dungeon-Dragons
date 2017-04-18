@@ -91,6 +91,11 @@ public class PlayArenaController implements ActionListener {
 				turn();
 			}
 		}
+		if (playArena.playInfoPanel.character.pacified) {
+			playArena.playInfoPanel.character.pacified=false;
+			mapModel.getCharacters().get(playArena.playInfoPanel.character.getName()).characterBehavior="Friendly";
+			playArena.playModel.setPlayOrder();
+		}
 		if (playArena.playInfoPanel.character.burned) {
 			if (playArena.playInfoPanel.character.burnedTimes == 0) {
 				playArena.playInfoPanel.character.burned = false;

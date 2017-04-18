@@ -479,8 +479,9 @@ public class GridView extends JPanel implements Observer {
 		charLocY = (int) characterModel.getCharLocation().getHeight();
 		for (Map.Entry<String, CharacterModel> charact : playArena.playModel.characters
 				.entrySet()) {
-			if (characterModel.getBehaviour() == "Hostile"
-					&& charact.getValue().getBehaviour() == "Friendly") {
+			if (characterModel.getBehaviour().equals("Hostile")
+					&& charact.getValue().getBehaviour().equals("Friendly")) {
+				
 				continue;
 			}
 			if (characterModel.getBehaviour() != charact.getValue()
@@ -495,7 +496,7 @@ public class GridView extends JPanel implements Observer {
 							+ ": Attcking On :" + charact.getValue().getName());
 					characterModel.setEnemy(charact.getValue());
 
-					if (characterModel.getBehaviour() == "Player") {
+					if (characterModel.getBehaviour().equals("Player")) {
 						playArena.playController.playerAction();
 					} else {
 						characterModel.setAttackFlag(true);
