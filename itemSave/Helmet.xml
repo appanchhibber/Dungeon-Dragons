@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Helmet>
-  <type id="1">
-    <itemTypeName>Dukaan Mask</itemTypeName>
-    <name>Dukaan</name>
+<Helmet> 
+  <type id="1"> 
+    <itemTypeName>Dukaan Mask</itemTypeName>  
+    <name>Dukaan</name>  
+    <enchantValue>3</enchantValue> 
+  </type>  
+  <type id="2">
+    <itemTypeName>Light Helm</itemTypeName>
+    <name>Helm</name>
     <enchantValue>3</enchantValue>
   </type>
 </Helmet>

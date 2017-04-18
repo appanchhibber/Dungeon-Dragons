@@ -142,6 +142,7 @@ public class ItemAssignViewController implements ActionListener {
 					}
 					case "Weapon": {
 						if (characterModel.getWeaponFlag() == null) {
+							System.out.println(item);
 							characterModel.addOwnedItems("Weapon", itemAssignView.fileIO.readSingleItem(item, "Weapon"));
 							characterModel.setWeaponFlag(item);
 							characterModel.setDamageBonus(characterModel.getOwnedItems().get("Weapon").getEnchantValue()+ characterModel.getAbilityModifier().getStrength());

@@ -566,6 +566,7 @@ public class CharacterModel extends Observable {
 	 */
 	public void setWeaponFlag(String weaponFlag) {
 		this.weaponFlag = weaponFlag;
+		System.out.println(this.weaponFlag );
 		if (getOwnedItems().get("Weapon").getWeaponRange() == 1) {
 			// Melee Weapon
 			setAttackBonus(getLevel() + abilityModifier.getStrength()

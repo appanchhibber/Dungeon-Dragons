@@ -305,6 +305,7 @@ public class ItemAssignView extends View implements Observer {
 				weaponButton.setText("Weapon");
 				weaponButton.setIcon(null);
 			} else {
+				System.out.println(items[6].get(characterModel.getWeaponFlag()).toArray()[2].toString());
 				weaponButton.setIcon(new ImageIcon((((new ImageIcon("image/"
 						+ items[6].get(characterModel.getWeaponFlag()).toArray()[2].toString().replaceAll("\\s+", "")
 						+ ".jpg")).getImage().getScaledInstance(weaponButton.getWidth(), weaponButton.getHeight(),
