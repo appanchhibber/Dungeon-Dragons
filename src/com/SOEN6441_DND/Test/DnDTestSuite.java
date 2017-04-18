@@ -16,7 +16,8 @@ import org.junit.runners.Suite.SuiteClasses;
 				DiceRollTest.class,
 				FileIOTest.class,
 				ItemControllerTest.class,
-				MapControllerTest.class})
+				MapControllerTest.class, 
+				InteractionAttackTest.class})
 public class DnDTestSuite {
 
 }

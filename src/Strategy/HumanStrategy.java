@@ -61,7 +61,14 @@ public class HumanStrategy implements Strategy {
 		}
 		
 	}
-	
+	public String checkAttackHit(){
+		int diceresult=rollDice()+characterModel.getAttackBonus();
+		if(characterModel.getArmorClass()<diceresult){
+			return "No attack";
+		}
+		return "attack successful";
+		
+	}
 	public void attack() {
 		CharacterModel enemy=characterModel.getEnemy();
 		int diceresult=rollDice()+characterModel.getAttackBonus();

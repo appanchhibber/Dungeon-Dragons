@@ -78,6 +78,8 @@ public class PlayArenaController implements ActionListener {
 		if (playArena.playInfoPanel.character.slayed) {
 			System.out.println(playArena.playInfoPanel.character.getName()
 					+ " is Dead.");
+			LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName()
+					+ " is Dead.");
 			slayed();
 			turn();
 		}
@@ -87,6 +89,7 @@ public class PlayArenaController implements ActionListener {
 				playArena.playInfoPanel.character.freezed = false;
 			} else {
 				System.out.println(playArena.playInfoPanel.character.getName()+" is Freezed");
+				LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName()+" is now Freezed");
 				freeze();
 				turn();
 			}
@@ -96,13 +99,14 @@ public class PlayArenaController implements ActionListener {
 				playArena.playInfoPanel.character.burned = false;
 			} else {
 				System.out.println(playArena.playInfoPanel.character.getName()+" is Burning");
+				LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName()+" is now Burning");
 				burn();
 			}
 
 		}
 		LogWindow.setLogDisplay("Now "
 				+ playArena.playInfoPanel.character.getName() + "'s turn with "
-				+ characterModel.getBehaviour());
+				+ characterModel.getBehaviour()+"'s behaviour.");
 		playArena.playInfoPanel.setPanel();
 		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 		playArena.playInfoPanel.character.execute(mapModel);
