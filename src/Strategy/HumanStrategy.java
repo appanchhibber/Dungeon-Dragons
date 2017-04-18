@@ -81,9 +81,11 @@ public class HumanStrategy implements Strategy {
 			 }
 			 if(weaponModel.isFreezing()){
 				 weapon=new Freezing(weapon);
+				 weapon.getEffectedEnemy();
 			 }
 			 if(weaponModel.isFrightening()){
 				 weapon=new Frightening(weapon);
+				 weapon.getEffectedEnemy();
 			 }
 			 if(weaponModel.isPacifying()){
 				 weapon=new Pacifying(weapon);
@@ -91,6 +93,7 @@ public class HumanStrategy implements Strategy {
 			 }
 			 if(weaponModel.isSlaying()) {
 				 weapon=new Slaying(weapon);
+				 weapon.getEffectedEnemy();
 			 }
 		}
 	}

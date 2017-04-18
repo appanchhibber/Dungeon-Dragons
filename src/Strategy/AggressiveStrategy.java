@@ -110,9 +110,11 @@ public class AggressiveStrategy implements Strategy, Runnable {
 			 }
 			 if(weaponModel.isFreezing()){
 				 weapon=new Freezing(weapon);
+				 weapon.getEffectedEnemy();
 			 }
 			 if(weaponModel.isFrightening()){
 				 weapon=new Frightening(weapon);
+				 weapon.getEffectedEnemy();
 			 }
 			 if(weaponModel.isPacifying()){
 				 weapon=new Pacifying(weapon);
@@ -120,6 +122,7 @@ public class AggressiveStrategy implements Strategy, Runnable {
 			 }
 			 if(weaponModel.isSlaying()) {
 				 weapon=new Slaying(weapon);
+				 weapon.getEffectedEnemy();
 			 }
 			 
 		}
