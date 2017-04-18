@@ -7,7 +7,7 @@
   <image>image/Dwarf.jpg</image>
   <characteristics>
     <hitPoint>36</hitPoint>
-    <armorClass>30</armorClass>
+    <armorClass>20</armorClass>
     <attackBonus>14</attackBonus>
     <damageBonus>8</damageBonus>
   </characteristics>

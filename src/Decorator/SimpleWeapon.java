@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import com.SOEN6441_DND.Model.CharacterModel;
 
 public class SimpleWeapon extends Weapon {
-
-	@Override
-	public ArrayList<String> getEffects() {
-		// TODO Auto-generated method stub
-		return new ArrayList<String>();
+	
+	public SimpleWeapon(CharacterModel enemy,int enchantedvalue){
+		this.enemyModel=enemy;
+		this.enchantedValue=enchantedvalue;
 	}
-
-
-
+	
+	@Override
+	public CharacterModel getEffectedEnemy() {
+		// TODO Auto-generated method stub
+		return enemyModel;
+	}
 }

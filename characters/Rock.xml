@@ -7,7 +7,7 @@
   <image>image/Elf.jpg</image>
   <characteristics>
     <hitPoint>10</hitPoint>
-    <armorClass>34</armorClass>
+    <armorClass>10</armorClass>
     <attackBonus>11</attackBonus>
     <damageBonus>8</damageBonus>
   </characteristics>

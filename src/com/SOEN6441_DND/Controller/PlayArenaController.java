@@ -16,6 +16,7 @@ import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.CharacterInventoryView;
 import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.PlayArena;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import javax.swing.JButton;
 
@@ -70,25 +71,75 @@ public class PlayArenaController implements ActionListener {
 		} else {
 			turnCounter++;
 		}
+
 		playArena.playInfoPanel.character = playArena.playModel.characters
 				.get(playArena.playModel.getPlayOrder()[turnCounter]);
 		System.out.println(playArena.playInfoPanel.character.getName());
-		LogWindow.setLogDisplay("Now "+playArena.playInfoPanel.character.getName()+"'s turn with "+characterModel.getBehaviour());
+		if (playArena.playInfoPanel.character.slayed) {
+			System.out.println(playArena.playInfoPanel.character.getName()
+					+ " is Dead.");
+			slayed();
+			turn();
+		}
+
+		if (playArena.playInfoPanel.character.freezed) {
+			if (playArena.playInfoPanel.character.freezeTimes == 0) {
+				playArena.playInfoPanel.character.freezed = false;
+			} else {
+				System.out.println(playArena.playInfoPanel.character.getName()+" is Freezed");
+				freeze();
+				turn();
+			}
+		}
+		if (playArena.playInfoPanel.character.burned) {
+			if (playArena.playInfoPanel.character.burnedTimes == 0) {
+				playArena.playInfoPanel.character.burned = false;
+			} else {
+				System.out.println(playArena.playInfoPanel.character.getName()+" is Burning");
+				burn();
+			}
+
+		}
+		LogWindow.setLogDisplay("Now "
+				+ playArena.playInfoPanel.character.getName() + "'s turn with "
+				+ characterModel.getBehaviour());
 		playArena.playInfoPanel.setPanel();
 		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 		playArena.playInfoPanel.character.execute(mapModel);
 	}
-    /**
-     * Visible View
-     */
-	public void playerAction(){
+
+	/**
+	 * Visible View
+	 */
+	public void playerAction() {
 		playArena.playerMove.setVisible(true);
 		playArena.playersAttack.setVisible(true);
 	}
-	
-	
-	
-	/** 
+
+	/**
+	 * method for freezing hostile
+	 */
+	public void freeze() {
+		playArena.playInfoPanel.character.freezeTimes--;
+	}
+
+	/**
+	 * method for burning hostile
+	 */
+	public void burn() {
+		playArena.playInfoPanel.character.burnedTimes--;
+		playArena.playInfoPanel.character
+				.setHitPoints(playArena.playInfoPanel.character.getHitPoints()
+						- playArena.playInfoPanel.character.burnedValue);
+	}
+
+	public void slayed() {
+		playArena.playModel.removeCharacter(playArena.playInfoPanel.character
+				.getName());
+		playArena.playModel.setPlayOrder();
+	}
+
+	/**
 	 * method for executing the strategy
 	 * 
 	 * @param mapModel
@@ -125,7 +176,7 @@ public class PlayArenaController implements ActionListener {
 			mapModel.setCharacterName(characterModel.getName() + "-"
 					+ characterModel.getBehaviour());
 			LogWindow.setLogDisplay("Below is the order of the turns");
-			for(int i=0;i<playArena.playModel.playOrder.length;i++){
+			for (int i = 0; i < playArena.playModel.playOrder.length; i++) {
 				LogWindow.setLogDisplay(playArena.playModel.playOrder[i]);
 			}
 			turn();

@@ -11,7 +11,16 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
+import Decorator.Burning;
+import Decorator.Freezing;
+import Decorator.Frightening;
+import Decorator.Pacifying;
+import Decorator.SimpleWeapon;
+import Decorator.Slaying;
+import Decorator.Weapon;
+
 import com.SOEN6441_DND.Model.CharacterModel;
+import com.SOEN6441_DND.Model.ItemModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.MainScene;
@@ -29,7 +38,7 @@ public class HumanStrategy implements Strategy {
 	public MapModel mapModel;
 	public CharacterModel characterModel;
 	static public boolean chestFlag=false;
-
+    private Weapon weapon;
 	@Override
 	public void execute(MapModel mapModel, CharacterModel charModel) {
 
@@ -56,6 +65,8 @@ public class HumanStrategy implements Strategy {
 	public void attack() {
 		CharacterModel enemy=characterModel.getEnemy();
 		int diceresult=rollDice()+characterModel.getAttackBonus();
+		ItemModel weaponModel=characterModel.getOwnedItems().get("Weapon");
+		int enchantmentValue=weaponModel.getEnchantValue();
 		System.out.println("Attack Roll"+diceresult);
 		LogWindow.setLogDisplay("Getting Attack Roll dice result : "+diceresult);
 		if(enemy.getArmorClass()<diceresult){
@@ -63,6 +74,24 @@ public class HumanStrategy implements Strategy {
 			LogWindow.setLogDisplay("Armor class is less than dice result - Attack started !");
 			LogWindow.setLogDisplay(enemy.getArmorClass()+" < "+diceresult);
 			enemy.setHitPoints(enemy.getHitPoints()-characterModel.getDamageBonus());
+			weapon=new SimpleWeapon(characterModel.getEnemy(),enchantmentValue);
+			 if(weaponModel.isBurning()){
+				 weapon=new Burning(weapon);
+				 weapon.getEffectedEnemy();
+			 }
+			 if(weaponModel.isFreezing()){
+				 weapon=new Freezing(weapon);
+			 }
+			 if(weaponModel.isFrightening()){
+				 weapon=new Frightening(weapon);
+			 }
+			 if(weaponModel.isPacifying()){
+				 weapon=new Pacifying(weapon);
+				 weapon.getEffectedEnemy();
+			 }
+			 if(weaponModel.isSlaying()) {
+				 weapon=new Slaying(weapon);
+			 }
 		}
 	}
 	public int rollDice(){

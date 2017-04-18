@@ -54,9 +54,20 @@ public class CharacterModel extends Observable {
 	public HashMap<String, ItemModel> ownedItems;
 	public String message;
 	private Strategy strategy;
-	private  ArrayList<String> weaponEffects;
+	private ArrayList<String> weaponEffects;
 	public ArrayList<String> backPackItems;
 	public boolean moveCompleted;
+
+	public boolean frightened;
+	public boolean freezed;
+	public boolean slayed;
+	public boolean burned;
+	public boolean pacified;
+	
+	public int burnedValue;
+	public int burnedTimes;
+	public int freezeTimes;
+	public int frightenTimes;
 	/**
 	 * constructor for character model
 	 */
@@ -65,9 +76,9 @@ public class CharacterModel extends Observable {
 		backPackCounter = 0;
 		ownedItems = new HashMap<String, ItemModel>();
 		hitPointBase = 1 + new Random().nextInt(10);
-		baseAttackBonus=1 + new Random().nextInt(8);
+		baseAttackBonus = 1 + new Random().nextInt(8);
 		attackFlag = false;
-		weaponEffects=new ArrayList<String>();
+		weaponEffects = new ArrayList<String>();
 		setAbilityModifier(new AbilityModel());
 		setAbilityScore(new AbilityModel());
 		levelListValues = new String[25];
@@ -75,9 +86,12 @@ public class CharacterModel extends Observable {
 			levelListValues[i] = String.valueOf(i + 1);
 		}
 	}
+	
+	
 
 	/**
 	 * getter for weapon effects
+	 * 
 	 * @return
 	 */
 	public ArrayList<String> getWeaponEffects() {
@@ -86,19 +100,21 @@ public class CharacterModel extends Observable {
 
 	/**
 	 * setter for weapon effects
+	 * 
 	 * @param weaponEffects
 	 */
 	public void setWeaponEffects(ArrayList<String> weaponEffect) {
-		this.weaponEffects=weaponEffect;
+		this.weaponEffects = weaponEffect;
 	}
+
 	/**
 	 * method to add weapon effects
+	 * 
 	 * @param weaponEffects
 	 */
 	public void addWeaponEffects(String weaponEffect) {
 		this.weaponEffects.add(weaponEffect);
 	}
-
 
 	/**
 	 * getter for character behavior
@@ -343,8 +359,9 @@ public class CharacterModel extends Observable {
 	 * @param item
 	 */
 	public void addOwnedItems(String itemName, ItemModel item) {
-		item.setEnchantValue(item.getEnchantValue() + calculateEnchanment(getLevel()));
-		if(backPackItems.contains(item.getName())){
+		item.setEnchantValue(item.getEnchantValue()
+				+ calculateEnchanment(getLevel()));
+		if (backPackItems.contains(item.getName())) {
 			backPackItems.remove(item.getName());
 			backPackCounter--;
 		}
@@ -550,11 +567,12 @@ public class CharacterModel extends Observable {
 	public void setWeaponFlag(String weaponFlag) {
 		this.weaponFlag = weaponFlag;
 		if (getOwnedItems().get("Weapon").getWeaponRange() == 1) {
-			//Melee Weapon
-			setAttackBonus(getLevel()+abilityModifier.getStrength()+baseAttackBonus);
-		}
-		else if (getOwnedItems().get("Weapon").getWeaponRange() == 2) {
-			setAttackBonus(getLevel()+abilityModifier.getDexterity()+baseAttackBonus);
+			// Melee Weapon
+			setAttackBonus(getLevel() + abilityModifier.getStrength()
+					+ baseAttackBonus);
+		} else if (getOwnedItems().get("Weapon").getWeaponRange() == 2) {
+			setAttackBonus(getLevel() + abilityModifier.getDexterity()
+					+ baseAttackBonus);
 		}
 		message = "itemImage";
 		notifyCharacterView();
@@ -649,18 +667,24 @@ public class CharacterModel extends Observable {
 		}
 		this.level = level;
 		enchanmentBonus = calculateEnchanment(level);
-		if (helmetFlag != null && armorFlag != null && bootFlag != null && shieldFlag != null && ringFlag != null) {
-			setArmorClass((getArmorClass() - (tempArmorBonus * 5)) + (enchanmentBonus * 5));
+		if (helmetFlag != null && armorFlag != null && bootFlag != null
+				&& shieldFlag != null && ringFlag != null) {
+			setArmorClass((getArmorClass() - (tempArmorBonus * 5))
+					+ (enchanmentBonus * 5));
 		}
 		if (weaponFlag != null) {
-			setDamageBonus((getDamageBonus() - tempDamageBonus) + enchanmentBonus);
+			setDamageBonus((getDamageBonus() - tempDamageBonus)
+					+ enchanmentBonus);
 			for (Map.Entry<String, ItemModel> item : getOwnedItems().entrySet()) {
 				item.getValue().setEnchantValue(-calculateEnchanment(oldLevel));
-				item.getValue().setEnchantValue(+calculateEnchanment(getLevel()));
+				item.getValue().setEnchantValue(
+						+calculateEnchanment(getLevel()));
 			}
 		}
 		if (beltFlag != null) {
-			abilityModifier.setConstitution((abilityModifier.getConstitution() - tempConstitution) + enchanmentBonus);
+			abilityModifier
+					.setConstitution((abilityModifier.getConstitution() - tempConstitution)
+							+ enchanmentBonus);
 		}
 		calculateChar();
 	}
@@ -670,9 +694,10 @@ public class CharacterModel extends Observable {
 	 */
 	public void calculateChar() {
 		if (getAbilityModifier() != null && getAbilityScore() != null) {
-			setHitPoints((getAbilityModifier().getConstitution() + getHitPointBase()) * getLevel());
+			setHitPoints((getAbilityModifier().getConstitution() + getHitPointBase())
+					* getLevel());
 			if (getAttackBonus() == 0) {
-			setAttackBonus(getLevel());
+				setAttackBonus(getLevel());
 			}
 			if (getDamageBonus() == 0) {
 				setDamageBonus(0);
@@ -705,17 +730,24 @@ public class CharacterModel extends Observable {
 	 */
 	public void calculateAbilityModifier() {
 		setModifer();
-		getAbilityModifier()
-				.setStrength(abilityModifier.getStrength() + modifierCalculator(abilityScore.getStrength()));
-		getAbilityModifier()
-				.setDexterity(abilityModifier.getDexterity() + modifierCalculator(abilityScore.getDexterity()));
+		getAbilityModifier().setStrength(
+				abilityModifier.getStrength()
+						+ modifierCalculator(abilityScore.getStrength()));
+		getAbilityModifier().setDexterity(
+				abilityModifier.getDexterity()
+						+ modifierCalculator(abilityScore.getDexterity()));
 		getAbilityModifier().setConstitution(
-				abilityModifier.getConstitution() + modifierCalculator(abilityScore.getConstitution()));
+				abilityModifier.getConstitution()
+						+ modifierCalculator(abilityScore.getConstitution()));
 		getAbilityModifier().setIntelligence(
-				abilityModifier.getIntelligence() + modifierCalculator(abilityScore.getIntelligence()));
-		getAbilityModifier().setWisdom(abilityModifier.getWisdom() + modifierCalculator(abilityScore.getWisdom()));
-		getAbilityModifier()
-				.setCharisma(abilityModifier.getCharisma() + modifierCalculator(abilityScore.getCharisma()));
+				abilityModifier.getIntelligence()
+						+ modifierCalculator(abilityScore.getIntelligence()));
+		getAbilityModifier().setWisdom(
+				abilityModifier.getWisdom()
+						+ modifierCalculator(abilityScore.getWisdom()));
+		getAbilityModifier().setCharisma(
+				abilityModifier.getCharisma()
+						+ modifierCalculator(abilityScore.getCharisma()));
 		calculateChar();
 	}
 
@@ -763,22 +795,26 @@ public class CharacterModel extends Observable {
 
 		}
 	}
+
 	/**
 	 * Get Move Complete flag
+	 * 
 	 * @return
 	 */
 
 	public boolean isMoveCompleted() {
 		return moveCompleted;
 	}
+
 	/**
 	 * Set Move Complete flag
+	 * 
 	 * @param moveCompleted
 	 */
 
 	public void setMoveCompleted(boolean moveCompleted) {
 		this.moveCompleted = moveCompleted;
-		message="Move Completed";
+		message = "Move Completed";
 		notifyCharacterView();
 	}
 
