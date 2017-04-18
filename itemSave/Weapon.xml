@@ -18,10 +18,10 @@
     <weaponType>Melee</weaponType>  
     <weaponRange>1</weaponRange>  
     <Burning>true</Burning>  
-    <Pacifying>true</Pacifying>  
-    <Frightening>true</Frightening>  
+    <Pacifying>false</Pacifying>  
+    <Frightening>false</Frightening>  
     <Slaying>false</Slaying>  
-    <Freezing>true</Freezing>  
+    <Freezing>false</Freezing>  
     <enchantValue>4</enchantValue> 
   </type>  
   <type id="3"> 
@@ -30,9 +30,9 @@
     <weaponType>Ranged weapon</weaponType>  
     <weaponRange>2</weaponRange>  
     <Burning>false</Burning>  
-    <Pacifying>true</Pacifying>  
-    <Frightening>true</Frightening>  
-    <Slaying>true</Slaying>  
+    <Pacifying>false</Pacifying>  
+    <Frightening>false</Frightening>  
+    <Slaying>false</Slaying>  
     <Freezing>true</Freezing>  
     <enchantValue>5</enchantValue> 
   </type>  

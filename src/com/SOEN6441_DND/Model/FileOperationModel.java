@@ -746,7 +746,28 @@ public class FileOperationModel {
 
 		}
 	}
+	/**
+	 * This Method is responsible for getting the item contained in the treasure
+	 * 
+	 * @author Appan Chhibber
+	 */
+	public ItemModel readTreasureItem(String itemName) {
+		this.file = new File("items/Treasure.xml");
+		
+		SAXReader reader = new SAXReader();
+		Document document = null;
+		try {
+			document = reader.read(file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		Element rootElement = document.getRootElement();
+		System.out.println(rootElement.selectSingleNode("/treasure/item[@name='"+itemName+"']"));
+		Element itemNode=(Element)rootElement.selectSingleNode("/treasure/item[@name='"+itemName+"']");
+		System.out.println();
+	return 	readSingleItem(itemName,itemNode.selectSingleNode("type").getText());
+	}
 	/**
 	 * Function is used to right the Created Items in File
 	 * 
