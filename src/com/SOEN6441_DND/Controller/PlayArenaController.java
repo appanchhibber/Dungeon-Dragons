@@ -57,7 +57,7 @@ public class PlayArenaController implements ActionListener {
 		ioModel = playArena.ioModel;
 		characterModel = playArena.charModel;
 		nextMapFlag = false;
-		turnCounter = 0;
+		turnCounter = -1;
 
 	}
 
@@ -66,62 +66,13 @@ public class PlayArenaController implements ActionListener {
 	 * 
 	 */
 	public void turn() {
-		if (turnCounter >= playArena.playModel.getPlayOrder().length - 1) {
-			turnCounter = 0;
-		} else {
-			turnCounter++;
-		}
-
-		playArena.playInfoPanel.character = playArena.playModel.characters
-				.get(playArena.playModel.getPlayOrder()[turnCounter]);
-		System.out.println(playArena.playInfoPanel.character.getName());
-		if (playArena.playInfoPanel.character.slayed) {
-			System.out.println(playArena.playInfoPanel.character.getName()
-					+ " is Dead.");
-			LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName()
-					+ " is Dead.");
-			slayed();
-			turn();
-		}
-
-		if (playArena.playInfoPanel.character.freezed) {
-			if (playArena.playInfoPanel.character.freezeTimes == 0) {
-				playArena.playInfoPanel.character.freezed = false;
-			} else {
-				System.out.println(playArena.playInfoPanel.character.getName()+" is Freezed");
-				LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName()+" is now Freezed");
-				freeze();
-				turn();
-			}
-		}
-		if (playArena.playInfoPanel.character.pacified) {
-			playArena.playInfoPanel.character.pacified=false;
-			mapModel.getCharacters().get(playArena.playInfoPanel.character.getName()).characterBehavior="Friendly";
-			playArena.playModel.setPlayOrder();
-		}
-		if (playArena.playInfoPanel.character.burned) {
-			if (playArena.playInfoPanel.character.burnedTimes == 0) {
-				playArena.playInfoPanel.character.burned = false;
-			} else {
-				System.out.println(playArena.playInfoPanel.character.getName()+" is Burning");
-				LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName()+" is now Burning");
-				burn();
-			}
-
-		}
-		LogWindow.setLogDisplay("Now "
-				+ playArena.playInfoPanel.character.getName() + "'s turn with "
-				+ characterModel.getBehaviour()+"'s behaviour.");
-		playArena.playInfoPanel.setPanel();
-		playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
-		playArena.playInfoPanel.character.execute(mapModel);
+		playArena.playerMove.setVisible(true);
 	}
 
 	/**
 	 * Visible View
 	 */
 	public void playerAction() {
-		playArena.playerMove.setVisible(true);
 		playArena.playersAttack.setVisible(true);
 	}
 
@@ -137,15 +88,11 @@ public class PlayArenaController implements ActionListener {
 	 */
 	public void burn() {
 		playArena.playInfoPanel.character.burnedTimes--;
-		playArena.playInfoPanel.character
-				.setHitPoints(playArena.playInfoPanel.character.getHitPoints()
-						- playArena.playInfoPanel.character.burnedValue);
-	}
-
-	public void slayed() {
-		playArena.playModel.removeCharacter(playArena.playInfoPanel.character
-				.getName());
-		playArena.playModel.setPlayOrder();
+		if(playArena.playInfoPanel.character.getHitPoints()<playArena.playInfoPanel.character.burnedValue){
+			playArena.playInfoPanel.character.setMoveCompleted(true);
+		}
+		playArena.playInfoPanel.character.setHitPoints(
+				playArena.playInfoPanel.character.getHitPoints() - playArena.playInfoPanel.character.burnedValue);
 	}
 
 	/**
@@ -176,14 +123,68 @@ public class PlayArenaController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == playArena.playInfoPanel.inventoryBtn) {
-			playArena.charInventory
-					.setcharModel(playArena.playInfoPanel.character);
+			playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 			playArena.charInventory.setInventory();
+		} else if (e.getSource() == playArena.playersAttack) {
+			System.out.println(playArena.playInfoPanel.character.getName() + ": Attcking On :"
+					+ playArena.playInfoPanel.character.getEnemy().getName());
+			playArena.playInfoPanel.character.setAttackFlag(true);
+			turnCounter--;
+			playArena.playersAttack.setVisible(false);
+			turn();
+		} else if (e.getSource() == playArena.playerMove) {
+			System.out.println("Button Clicked");
+			playArena.playerMove.setVisible(false);
+			if (turnCounter >= playArena.playModel.getPlayOrder().length - 1) {
+				turnCounter = 0;
+			} else {
+				turnCounter++;
+			}
+
+			playArena.playInfoPanel.character = playArena.playModel.characters
+					.get(playArena.playModel.getPlayOrder()[turnCounter]);
+			if (playArena.playInfoPanel.character.slayed) {
+				System.out.println(playArena.playInfoPanel.character.getName() + " is Dead.");
+				LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName() + " is Dead.");
+				turn();
+			}
+
+			if (playArena.playInfoPanel.character.freezed) {
+				if (playArena.playInfoPanel.character.freezeTimes == 0) {
+					playArena.playInfoPanel.character.freezed = false;
+				} else {
+					System.out.println(playArena.playInfoPanel.character.getName() + " is Freezed");
+					LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName() + " is now Freezed");
+					freeze();
+					turn();
+				}
+			}
+			if (playArena.playInfoPanel.character.pacified) {
+				playArena.playInfoPanel.character.pacified = false;
+				mapModel.getCharacters()
+						.get(playArena.playInfoPanel.character.getName()).characterBehavior = "Friendly";
+				playArena.playModel.setPlayOrder();
+			}
+			if (playArena.playInfoPanel.character.burned) {
+				if (playArena.playInfoPanel.character.burnedTimes == 0) {
+					playArena.playInfoPanel.character.burned = false;
+				} else {
+					System.out.println(playArena.playInfoPanel.character.getName() + " is Burning");
+					LogWindow.setLogDisplay(playArena.playInfoPanel.character.getName() + " is now Burning");
+					burn();
+				}
+
+			}
+			LogWindow.setLogDisplay("Now " + playArena.playInfoPanel.character.getName() + "'s turn with "
+					+ characterModel.getBehaviour() + "'s behaviour.");
+			playArena.playInfoPanel.setPanel();
+			playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
+			playArena.playInfoPanel.character.execute(mapModel);
+
 		} else if (e.getSource() == playArena.startGame) {
 			playArena.startGame.setVisible(false);
 			playArena.playModel.setPlayOrder();
-			mapModel.setCharacterName(characterModel.getName() + "-"
-					+ characterModel.getBehaviour());
+			mapModel.setCharacterName(characterModel.getName() + "-" + characterModel.getBehaviour());
 			LogWindow.setLogDisplay("Below is the order of the turns");
 			for (int i = 0; i < playArena.playModel.playOrder.length; i++) {
 				LogWindow.setLogDisplay(playArena.playModel.playOrder[i]);
@@ -191,22 +192,20 @@ public class PlayArenaController implements ActionListener {
 			turn();
 
 		} else if (e.getSource() instanceof JButton) {
+			System.out.println("Button Clicked Common");
 			JButton btn = (JButton) e.getSource();
 			String name;
 
 			if (btn.getName().contains("_") || btn.getName().contains("Player")) {
 				if (btn.getName().contains("_")) {
-					name = btn.getName().replace("_", "").trim() + "-"
-							+ btn.getToolTipText();
+					name = btn.getName().replace("_", "").trim() + "-" + btn.getToolTipText();
 
 				} else {
 					name = btn.getName();
 				}
-				playArena.playInfoPanel.character = playArena.playModel
-						.getCharacters().get(name);
+				playArena.playInfoPanel.character = playArena.playModel.getCharacters().get(name);
 				playArena.playInfoPanel.setPanel();
-				playArena.charInventory
-						.setcharModel(playArena.playInfoPanel.character);
+				playArena.charInventory.setcharModel(playArena.playInfoPanel.character);
 			}
 
 		}

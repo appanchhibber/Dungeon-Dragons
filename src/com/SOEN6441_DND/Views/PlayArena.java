@@ -85,17 +85,14 @@ public class PlayArena extends View implements Observer {
 		playersAttack=new JButton("Attack");
 		playersAttack.setSize(100, 30);
 		playersAttack.setLocation(150, 10);
-		playerMove=new JButton("Move");
+		
+		playerMove= new JButton("Next Turn");
 		playerMove.setSize(100, 30);
 		playerMove.setLocation(290, 10);
 		navPanel.add(playerMove);
 		navPanel.add(playersAttack);
-		
 		playerMove.setVisible(false);
 		playersAttack.setVisible(false);
-		
-		
-		
 		this.add(navPanel);
 
 	}
@@ -138,7 +135,8 @@ public class PlayArena extends View implements Observer {
 			charact.getValue().addObserver(gridView);
 		}
 		this.add(gridView);
-
+		playersAttack.addActionListener(playController);
+		playerMove.addActionListener(playController);
 		startGame.addActionListener(playController);
 	}
 

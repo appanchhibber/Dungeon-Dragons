@@ -145,7 +145,7 @@ public class AggressiveStrategy implements Strategy, Runnable {
 				System.out.println("Step Count:" + stepCount);
 				if (distance <= charModel.getOwnedItems().get("Weapon")
 						.getWeaponRange()) {
-					attack();
+					charModel.setCharLocation(charModel.getCharLocation());
 				}
 				charLocX = (int) d.getWidth();
 				charLocY = (int) d.getHeight();

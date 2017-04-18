@@ -48,4 +48,16 @@
     <Freezing>true</Freezing>
     <enchantValue>5</enchantValue>
   </type>
+  <type id="5">
+    <itemTypeName>Steel Sword</itemTypeName>
+    <name>Mighty Sword</name>
+    <weaponType>Ranged weapon</weaponType>
+    <weaponRange>1</weaponRange>
+    <Burning>false</Burning>
+    <Pacifying>true</Pacifying>
+    <Frightening>true</Frightening>
+    <Slaying>true</Slaying>
+    <Freezing>true</Freezing>
+    <enchantValue>5</enchantValue>
+  </type>
 </Weapon>

@@ -64,7 +64,6 @@ LogWindow.setLogDisplay(String.valueOf(character.getValue()
 		}
 
 		characterTurn = (HashMap<String, Integer>) sortByValue(characterTurn);
-		System.out.println(characterTurn.keySet());
 		playOrder = characterTurn.keySet().toArray(
 				new String[characterTurn.keySet().size()]);
 	}
