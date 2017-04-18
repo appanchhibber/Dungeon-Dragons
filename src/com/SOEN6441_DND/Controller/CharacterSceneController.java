@@ -83,7 +83,7 @@ public class CharacterSceneController implements ActionListener {
 		this.abilityPanel = view.abilityPanel;
 		abilityModifier = view.characterViewModel.getAbilityModifier();
 		abilityScore = view.characterViewModel.getAbilityScore();
-		logger.info("Dice 4D6 will be rolled.");
+		logger.info("Dice 4D6 will be rolled to determine ability scores.");
 		diceRoll = new DiceRollController(4, 6); // Dice type 4d6
 		itemAssignView = view.itemAssignView;
 	}
@@ -142,7 +142,7 @@ public class CharacterSceneController implements ActionListener {
 		else if (e.getSource() == abilityPanel.calculateButton) {
 			logger.info("Calulate button clicked !");
 			logger.info("Fetching dice result");
-			LogWindow.setLogDisplay("Fetching dice result");
+			LogWindow.setLogDisplay("Fetching dice result (4d6) for setting ability scores.");
 			abilityScore.setStrength(diceRoll.getDiceRollResult());
 			abilityScore.setDexterity(diceRoll.getDiceRollResult());
 			abilityScore.setConstitution(diceRoll.getDiceRollResult());
@@ -151,7 +151,7 @@ public class CharacterSceneController implements ActionListener {
 			abilityScore.setCharisma(diceRoll.getDiceRollResult());
 			characterModel.calculateAbilityModifier();
 			logger.info("Values fecthed and ability scoer generated");
-			LogWindow.setLogDisplay("Values fecthed and ability scoer generated");
+			LogWindow.setLogDisplay("Values fecthed and ability score generated");
 			
 		} else if (e.getSource() == characterScreen.levels) {
 			characterModel.setLevel(Integer.parseInt(characterScreen.levels.getSelectedItem().toString()));

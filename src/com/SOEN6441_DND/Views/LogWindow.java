@@ -1,7 +1,5 @@
 package com.SOEN6441_DND.Views;
 
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -32,7 +30,10 @@ public class LogWindow extends JFrame{
 			logPanel.add(heading);
 			logArea.setEditable(false);
 			logArea.setText("Game logs - ");
-			logPanel.add(new JScrollPane(logArea));
+			logArea.setLineWrap(true);
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setViewportView(logArea);
+			logPanel.add(scrollPane);
 			this.add(logPanel);
 		}
 	

@@ -64,8 +64,6 @@ public class GameController {
 		
 	
 		logScreen = new LogWindow();
-		int width1 = 20;
-		int height1 = 20;
 		logScreen.setVisible(true);
 		logScreen.setSize(500, 700);
 		logScreen.setResizable(true);

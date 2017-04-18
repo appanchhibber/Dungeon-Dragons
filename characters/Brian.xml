@@ -6,10 +6,10 @@
   <level>5</level>
   <image>image/Orc.jpg</image>
   <characteristics>
-    <hitPoint>50</hitPoint>
+    <hitPoint>85</hitPoint>
     <armorClass>10</armorClass>
-    <attackBonus>14</attackBonus>
-    <damageBonus>11</damageBonus>
+    <attackBonus>12</attackBonus>
+    <damageBonus>7</damageBonus>
   </characteristics>
   <itemEquip>
     <helmetFlag>Dukaan</helmetFlag>
@@ -18,7 +18,7 @@
     <beltFlag>Hindsight</beltFlag>
     <bootFlag>Steel</bootFlag>
     <ringFlag>Magic</ringFlag>
-    <weaponFlag>Sword</weaponFlag>
+    <weaponFlag>Bow</weaponFlag>
   </itemEquip>
   <abilityScore>
     <strength>17</strength>
@@ -36,6 +36,8 @@
     <wisdom>0</wisdom>
     <charisma>-2</charisma>
   </abilityModifier>
-  <backPackCounter>0</backPackCounter>
-  <backPackItems/>
+  <backPackCounter>1</backPackCounter>
+  <backPackItems>
+    <item>Sword</item>
+  </backPackItems>
 </Character>

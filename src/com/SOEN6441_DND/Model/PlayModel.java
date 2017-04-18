@@ -58,7 +58,9 @@ public class PlayModel {
 			// result);
 			characterTurn.put(character.getKey(), (character.getValue()
 					.getAbilityModifier().getDexterity() + result));
-
+			LogWindow.setLogDisplay(character.getKey());
+LogWindow.setLogDisplay(String.valueOf(character.getValue()
+					.getAbilityModifier().getDexterity() + result));
 		}
 
 		characterTurn = (HashMap<String, Integer>) sortByValue(characterTurn);

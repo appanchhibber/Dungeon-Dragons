@@ -49,3 +49,15 @@
 =5389 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.CharacterSceneController  - Dice 4D6 will be rolled.
 =0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
 =7198 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.CharacterSceneController  - Dice 4D6 will be rolled.
+=0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
+=9848 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=9848 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=9848 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
+=7815 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=7815 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=7831 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=0    [main] INFO  com.SOEN6441_DND.Controller.Game  - Singleton pattern - Game initiated !!
+=17576 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=17581 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!
+=17582 [AWT-EventQueue-0] INFO  com.SOEN6441_DND.Controller.DiceRollController  - Getting Dice Result !!

@@ -4,8 +4,12 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.JOptionPane;
+
 import com.SOEN6441_DND.Controller.PathValidatorController;
 import com.SOEN6441_DND.Model.CharacterModel;
+import com.SOEN6441_DND.Model.FileOperationModel;
+import com.SOEN6441_DND.Model.ItemModel;
 import com.SOEN6441_DND.Model.MapModel;
 import com.SOEN6441_DND.Views.LogWindow;
 import com.SOEN6441_DND.Views.PlayArena;
@@ -23,9 +27,12 @@ public class FriendlyStrategy implements Strategy,Runnable {
 	int stepCount=0;
 	int toggle=1;
 	Thread t1;
+	Object key;
+	FileOperationModel ioModel;
 	@Override
 	public void execute(MapModel mapModel, CharacterModel charModel) {
 		blockedPath = new ArrayList<Dimension>();
+		 ioModel=new FileOperationModel();
 		System.out.println("Execute Friendly Behaviour Strategy");
 		LogWindow.setLogDisplay("Execute Friendly Behaviour Strategy");
 		this.mapModel = mapModel;
@@ -45,7 +52,7 @@ public class FriendlyStrategy implements Strategy,Runnable {
 		//System.out.println(home);
 		if(mapModel.treasurePresent==true){	
 		
-			Object key=mapModel.getTreasures().keySet().toArray()[0];
+			 key=mapModel.getTreasures().keySet().toArray()[0];
 			 friendlyPath = PathValidatorController.friendlyPath(1, mapModel.getMapWidth(),
 						mapModel.getMapHeight(), (int)charModel.getCharLocation().getWidth(),
 						(int) charModel.getCharLocation().getHeight(),(int) mapModel.getTreasures().get(key).getWidth(),
@@ -54,13 +61,12 @@ public class FriendlyStrategy implements Strategy,Runnable {
 			 
 		}
 		else{
-			 Object key=mapModel.getTreasures().keySet().toArray()[0];
+			  key=mapModel.getTreasures().keySet().toArray()[0];
 			 friendlyPath = PathValidatorController.friendlyPath(1, mapModel.getMapWidth(),
 						mapModel.getMapHeight(),(int) charModel.getCharLocation().getWidth(),
 						(int) charModel.getCharLocation().getHeight(), (int)home.getWidth(),
 						(int) home.getHeight(), blockedPath);
 			 Collections.reverse(friendlyPath);
-			 toggle++;
 		 }
 		if(friendlyPath.size()>=1){
 			 friendlyPath.remove(0);
@@ -71,11 +77,10 @@ public class FriendlyStrategy implements Strategy,Runnable {
 	@Override
 	public void run() {
 		int distance = friendlyPath.size();
-		if (distance <= 0) {
-			for (int i = stepCount; i < 3; i++) {
-				mapModel.treasurePresent=false;
-				charModel.setMoveCompleted(true);
-			}
+		System.out.println(distance);
+		if(distance==0){
+			charModel.moveCompleted=true;
+			charModel.setCharLocation(home);
 		}
 		for(Dimension d:friendlyPath){
 			if(stepCount<3){
@@ -84,16 +89,43 @@ public class FriendlyStrategy implements Strategy,Runnable {
 					//	mapModel.updateCharLocation(charModel.getName()+"-Hostile", new Dimension(charLocY,charLocX));
 						try {
 							 t1.sleep(500);
-							 System.out.println("Distance:"+distance);
-							 if (distance <= 0)
-							 {
-								 mapModel.treasurePresent=false;
-								 charModel.setMoveCompleted(true);
-							 }
+								if (distance <3) {
+									System.out.println("distance is less than 3");
+									if(distance!=0) {
+										System.out.println("dis:"+distance);
+										distance--;
+										charModel.setCharLocation(new Dimension(charLocX,charLocY));
+										if(distance==0 && mapModel.treasurePresent==true){
+											mapModel.treasurePresent=false;
+											if(!charModel.getBackPackItems().contains(key.toString())&& charModel.getBackPackCounter()<10){
+												charModel.getBackPackItems().add(key.toString());
+												charModel.setBackPackCounter(charModel.getBackPackCounter()+1);
+												JOptionPane.showMessageDialog(null, "Item:"+key.toString()+"added to Backpack");
+												charModel.setMoveCompleted(true);
+												charModel.setCharLocation(mapModel.getTreasures().get(key));
+											}
+											else{
+												JOptionPane.showMessageDialog(null, "Item already in backpack");
+												charModel.setMoveCompleted(true);
+												charModel.setCharLocation(mapModel.getTreasures().get(key));
+											}
+
+										}
+										if(distance==0 && mapModel.treasurePresent==false){
+											charModel.setMoveCompleted(true);
+											charModel.setCharLocation(home);
+										}
+									}else{
+										mapModel.treasurePresent=false;
+										ioModel.readTreasureItem(key.toString());
+										charModel.setMoveCompleted(true);
+									}
+								}
+								else{
 							    stepCount++;
 					            distance--;
 					            charModel.setCharLocation(new Dimension(charLocX,charLocY));
-					           
+								}
 						}catch(Exception e){
 							e.printStackTrace();
 						}
